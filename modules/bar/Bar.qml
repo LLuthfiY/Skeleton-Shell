@@ -110,6 +110,21 @@ Scope {
                         anchors.bottomMargin: (barWindow.is_attached && barWindow.pos === "bottom") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "bottom" || barWindow.ver)) ? 0 : barWindow.bw
                     }
                 }
+                Rectangle {
+                    id: contentBackground
+                    anchors.fill: parent
+                    color: Color.colors[Config.options.bar.background]
+
+                    anchors.topMargin: (is_attached && barWindow.pos === "top") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "top" || barWindow.ver)) ? 0 : barWindow.bw
+                    anchors.leftMargin: (is_attached && barWindow.pos === "left") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "left" || !barWindow.ver)) ? 0 : barWindow.bw
+                    anchors.rightMargin: (is_attached && barWindow.pos === "right") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "right" || !barWindow.ver)) ? 0 : barWindow.bw
+                    anchors.bottomMargin: (is_attached && barWindow.pos === "bottom") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "bottom" || barWindow.ver)) ? 0 : barWindow.bw
+
+                    topLeftRadius: barWindow.is_attached && (barWindow.pos === "top" || barWindow.pos === "left") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0) ? 0 : barWindow.br
+                    topRightRadius: barWindow.is_attached && (barWindow.pos === "top" || barWindow.pos === "right") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0) ? 0 : barWindow.br
+                    bottomLeftRadius: barWindow.is_attached && (barWindow.pos === "bottom" || barWindow.pos === "left") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0) ? 0 : barWindow.br
+                    bottomRightRadius: barWindow.is_attached && (barWindow.pos === "bottom" || barWindow.pos === "right") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0) ? 0 : barWindow.br
+                }
 
                 Loader {
                     id: centerBox
