@@ -21,8 +21,8 @@ Scope {
         id: root
 
         color: "transparent"
-        implicitWidth: 500
-        implicitHeight: 142
+        implicitWidth: 476
+        implicitHeight: 112
         WlrLayershell.namespace: "quickshell:mediaPlayer"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
