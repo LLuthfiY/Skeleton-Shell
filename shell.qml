@@ -11,6 +11,7 @@ import qs.modules.common
 import qs.modules.common.functions
 import qs.modules.common.widgets
 import qs.modules.osd
+import qs.modules.overview
 
 ShellRoot {
 
@@ -41,5 +42,10 @@ ShellRoot {
     LazyLoader {
         active: Config.ready
         component: Notification {}
+    }
+
+    LazyLoader {
+        active: Config.ready && GlobalState.overviewOpen
+        component: Overview {}
     }
 }
