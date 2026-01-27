@@ -16,9 +16,8 @@ Item {
     property var notificationObject
     property bool pendingClose: notificationObject.pendingClose
     width: Variable.sizes.notificationPopupWidth - 100
-    implicitHeight: 0
+    implicitHeight: content.implicitHeight
 
-    opacity: 0
     onPendingCloseChanged: {
         opacity = 0;
         implicitHeight = 0;
@@ -31,11 +30,6 @@ Item {
         onTriggered: {
             notificationObject.popup = false;
         }
-    }
-
-    Component.onCompleted: {
-        opacity = 1;
-        implicitHeight = content.implicitHeight;
     }
 
     Rectangle {
@@ -122,18 +116,19 @@ Item {
                 Label {
                     id: summary
                     text: notificationObject.summary
-                    Layout.fillWidth: true
+                    elide: Text.ElideRight
                     Layout.alignment: Qt.AlignVCenter
                     font.pointSize: 12
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
+                    clip: true
                 }
 
                 Label {
                     id: body
                     text: notificationObject.body
-                    Layout.preferredWidth: parent.width
+                    Layout.preferredWidth: parent.width - 64
                     Layout.alignment: Qt.AlignVCenter
                     font.pointSize: 10
                     font.family: Variable.font.family.main

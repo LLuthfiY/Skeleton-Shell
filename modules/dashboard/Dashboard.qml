@@ -47,9 +47,6 @@ Scope {
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignTop
                             Layout.fillHeight: modelData.includes("--fill--")
-                            Component.onCompleted: {
-                                console.log(Layout.fillHeight);
-                            }
                             property string folder: modelData.startsWith("user--") ? "widget/user/" : "widget/"
                             source: folder + modelData.replace("user--", "").replace("--fill--", "")
                         }
