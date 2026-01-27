@@ -45,7 +45,9 @@ Scope {
                         delegate: Loader {
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignTop
-                            source: "widget/" + modelData
+                            Layout.fillHeight: modelData.contains("---fill")
+                            property string folder: modelData.startsWith("user--") ? "widget/user/" : "widget/"
+                            source: folder + modelData.replace("user--", "").replace("---fill", "")
                         }
                     }
                 }
