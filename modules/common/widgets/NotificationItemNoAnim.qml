@@ -18,20 +18,6 @@ Item {
     width: Variable.sizes.notificationPopupWidth - 100
     implicitHeight: content.implicitHeight
 
-    onPendingCloseChanged: {
-        opacity = 0;
-        implicitHeight = 0;
-        closeTimer.start();
-    }
-
-    Timer {
-        id: closeTimer
-        interval: 210
-        onTriggered: {
-            notificationObject.popup = false;
-        }
-    }
-
     Rectangle {
         id: background
         anchors.fill: parent
