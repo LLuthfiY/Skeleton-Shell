@@ -116,7 +116,7 @@ Item {
                 Label {
                     id: summary
                     text: notificationObject.summary
-                    elide: Text.ElideRight
+                    Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
                     font.pointSize: 12
                     font.family: Variable.font.family.main
