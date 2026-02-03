@@ -40,7 +40,9 @@ Singleton {
         }
     }
 
-    function setWM() {
+    function setWM(delay = 99000) {
+        delay = Math.min(delay, Config.options.windowManager.applyConfigDelay);
+        wmTimer.interval = delay;
         wmTimer.running = true;
     }
 }
