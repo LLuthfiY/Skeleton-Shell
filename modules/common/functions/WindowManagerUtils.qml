@@ -33,7 +33,7 @@ Singleton {
 
     Timer {
         id: wmTimer
-        interval: 50
+        interval: 100
         repeat: false
         onTriggered: {
             setBatch();
