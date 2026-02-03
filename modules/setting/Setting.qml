@@ -4,6 +4,7 @@ import QtQuick.Controls
 
 import Quickshell
 
+import qs.modules.setting.page
 import qs.modules.common
 import qs.modules.common.functions
 import qs.modules.common.widgets
@@ -12,7 +13,7 @@ Scope {
     Window {
         id: root
         property int section: 0
-        minimumWidth: 500
+        minimumWidth: 800
         minimumHeight: 500
         visible: GlobalState.settingsOpen
         title: "Settings"
@@ -43,12 +44,12 @@ Scope {
                     Repeater {
                         model: [
                             {
-                                icon: "layout-panel-left",
-                                text: "Bar"
-                            },
-                            {
                                 icon: "paint-roller",
                                 text: "Theme"
+                            },
+                            {
+                                icon: "layout-panel-left",
+                                text: "Bar"
                             },
                             {
                                 icon: "layout-dashboard",
@@ -80,6 +81,7 @@ Scope {
                                 anchors.left: parent.left
                                 anchors.margins: 8
                                 label: modelData.text
+                                font.weight: Font.Bold
                             }
                             MouseArea {
                                 anchors.fill: parent
@@ -101,7 +103,18 @@ Scope {
                     }
                 }
             }
-            Rectangle {}
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                color: "transparent"
+
+                StackLayout {
+                    anchors.fill: parent
+                    anchors.margins: 16
+                    currentIndex: root.section
+                    ThemeSetting {}
+                }
+            }
         }
     }
 }

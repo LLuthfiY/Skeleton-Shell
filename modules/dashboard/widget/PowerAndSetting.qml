@@ -119,7 +119,6 @@ RowLayout {
                     }
 
                     delegate: MenuItem {
-                        text: modelData.text
                         background: Rectangle {
                             radius: 8
                             property bool isHovered: false
@@ -140,10 +139,13 @@ RowLayout {
                                 }
                             }
                         }
-                        contentItem: LucideIcon {
-                            icon: modelData.icon
-                            label: modelData.text
-                            color: background.isHovered ? Color.colors.on_primary : Color.colors.primary
+                        contentItem: RowLayout {
+                            LucideIcon {
+                                Layout.fillWidth: true
+                                icon: modelData.icon
+                                label: modelData.text
+                                color: background.isHovered ? Color.colors.on_primary : Color.colors.primary
+                            }
                         }
                         onTriggered: modelData.action()
                     }

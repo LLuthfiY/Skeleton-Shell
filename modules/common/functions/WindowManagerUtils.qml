@@ -9,7 +9,7 @@ Singleton {
     property string position: Config.options.bar.position
     property int margin: Config.options.bar.margin
     property bool borderScreen: Config.options.bar.borderScreen
-    property int defaultMargin: Config.options.windowManager.gapsOut + (borderScreen ? Config.options.bar.border : 0)
+    property int defaultMargin: Config.options.windowManager.gapsOut + ((borderScreen && Config.options.modules.bar) ? Config.options.bar.border : 0)
     property real activeOpacity: Config.options.windowManager.activeOpacity
     property real inactiveOpacity: Config.options.windowManager.inactiveOpacity
     property real gapsIn: Config.options.windowManager.gapsIn
@@ -21,7 +21,7 @@ Singleton {
 
     function setBatch() {
         let gaps_out = `${topMargin + defaultMargin},${rightMargin + defaultMargin},${bottomMargin + defaultMargin},${leftMargin + defaultMargin}`;
-        if (!borderScreen) {
+        if (!(borderScreen & Config.options.modules.bar)) {
             gaps_out = `${defaultMargin},${defaultMargin},${defaultMargin},${defaultMargin}`;
         }
         let gaps_batch = `keyword general:gaps_out ${gaps_out}; keyword general:gaps_in ${Config.options.windowManager.gapsIn};`;
@@ -33,7 +33,7 @@ Singleton {
 
     Timer {
         id: wmTimer
-        interval: 200
+        interval: 300
         repeat: false
         onTriggered: {
             setBatch();
