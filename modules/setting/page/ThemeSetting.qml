@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import QtQuick.Dialogs
 import Quickshell
 import Quickshell.Io
@@ -10,9 +11,17 @@ import qs.modules.common.functions
 
 import Qt5Compat.GraphicalEffects
 
-ListView {
+Flickable {
+    id: flickable
+    clip: true
+    height: stackWrapper.height
+    width: stackWrapper.width
+    ScrollBar.vertical: ScrollBar {}
+    contentWidth: root.width - 16
+    contentHeight: root.height
     ColumnLayout {
         id: root
+        width: stackWrapper.width - 16
         spacing: 8
         function setTheme() {
             let palette = Config.options.appearance.palette.type;
@@ -172,12 +181,12 @@ ListView {
             icon: "palette"
             color: Color.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
-            font.weight: Font.Bold
-            font.family: Variable.font.fontFamily.main
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
             label: "Palette"
         }
         Flow {
-            Layout.preferredWidth: parent.width
+            Layout.preferredWidth: root.width
             spacing: 8
             Repeater {
                 model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]

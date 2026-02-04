@@ -110,10 +110,12 @@ Scope {
                 color: "transparent"
 
                 StackLayout {
+                    id: stackWrapper
                     anchors.fill: parent
                     anchors.margins: 16
                     currentIndex: root.section
                     ThemeSetting {}
+                    BarSetting {}
                 }
             }
         }
