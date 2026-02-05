@@ -62,12 +62,21 @@ ColumnLayout {
         }
     }
     ListView {
+        id: listView
         model: Notification.list
         clip: true
         Layout.fillWidth: true
         Layout.fillHeight: true
         width: parent.width
         spacing: 8
+        property real lastY: 0
+
+        onContentYChanged: {
+            if (!moving) {
+                listView.contentY = Math.max(0, Math.min(listView.lastY, listView.contentHeight - listView.height)) + listView.originY;
+            }
+            listView.lastY = listView.contentY - listView.originY;
+        }
         delegate: NotificationItemNoAnim {
             notificationObject: modelData
         }
