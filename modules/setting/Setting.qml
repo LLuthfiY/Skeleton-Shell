@@ -116,6 +116,7 @@ Scope {
                     currentIndex: root.section
                     ThemeSetting {}
                     BarSetting {}
+                    DashboardSetting {}
                 }
             }
         }

@@ -87,6 +87,7 @@ Singleton {
 
             property JsonObject dashboard: JsonObject {
                 property list<string> widgets: ["PowerAndSetting.qml"]
+                property string position: "right"
             }
 
             property JsonObject modules: JsonObject {

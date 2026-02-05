@@ -14,7 +14,7 @@ ColumnLayout {
     property list<string> widgetList: []
     Rectangle {
         color: Color.colors.surface_container
-        anchors.fill: parent
+        anchors.fill: parent.fill
         radius: Variable.radius.small
     }
 
@@ -48,7 +48,7 @@ ColumnLayout {
                 wl = wl.filter(item => item !== "");
                 wl = wl.forEach(item => {
                     const filename = item.split("/").pop();
-                    root.widgetList.push("user--" + filename);
+                    root.widgetList.push("user---" + filename);
                 });
                 wlm.open();
             }
@@ -144,7 +144,9 @@ ColumnLayout {
             id: list
             spacing: 4
             Repeater {
-                model: root.items
+                model: ScriptModel {
+                    values: root.items
+                }
                 delegate: Rectangle {
                     id: itemRoot
                     Layout.minimumWidth: 150
@@ -159,7 +161,7 @@ ColumnLayout {
                     }
                     Text {
                         id: text
-                        text: modelData.replace("user--", "")
+                        text: modelData.replace("user--", "").replace("--fill--", "")
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
                         color: Color.colors.on_surface
@@ -259,6 +261,31 @@ ColumnLayout {
                                     root.itemsChanged();
                                 }
                             }
+                        }
+                        StyledSwitch {
+                            checked: modelData.includes("--fill--")
+                            anchors.right: parent.right
+                            anchors.rightMargin: 80
+                            anchors.verticalCenter: parent.verticalCenter
+                            onClicked: {
+                                if (modelData.includes("--fill--")) {
+                                    root.items[index] = modelData.replace("--fill--", "");
+                                } else {
+                                    root.items[index] = modelData + "--fill--";
+                                }
+                                root.itemsChanged();
+                            }
+                        }
+
+                        Text {
+                            text: "Fill"
+                            font.family: Variable.font.family.main
+                            font.weight: Font.Normal
+                            color: Color.colors.on_surface
+                            font.pixelSize: Variable.font.pixelSize.smaller
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: 124
                         }
                     }
                 }

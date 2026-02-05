@@ -24,7 +24,8 @@ Scope {
         exclusionMode: ExclusionMode.Ignore
         implicitWidth: Variable.sizes.dashboardWidth
         anchors.top: true
-        anchors.right: true
+        anchors.right: Config.options.dashboard.position === "right"
+        anchors.left: Config.options.dashboard.position === "left"
         anchors.bottom: true
         color: "transparent"
         Rectangle {
