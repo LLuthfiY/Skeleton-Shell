@@ -8,17 +8,14 @@ import qs.modules.common
 import qs.modules.common.widgets
 import qs.modules.common.functions
 
-Flickable {
+ScrollView {
     clip: true
-    height: stackWrapper.height
-    width: stackWrapper.width
-    ScrollBar.vertical: ScrollBar {}
-    contentWidth: root.width - 16
-    contentHeight: root.height
+    height: parent.height
+    width: parent.width
     ColumnLayout {
         id: root
         spacing: 8
-        width: stackWrapper.width - 16
+        width: stackWrapper.width - 24
         LucideIcon {
             icon: "layout-panel-left"
             color: Color.colors.on_surface
@@ -292,6 +289,48 @@ Flickable {
                 onValueChanged: {
                     Config.options.bar.borderRadius = value;
                     WindowManagerUtils.setWM(100);
+                }
+            }
+        }
+        LucideIcon {
+            icon: "layout-panel-left"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Bar Widgets"
+        }
+
+        RowLayout {
+            spacing: 8
+            WidgetList {
+                id: startWidgets
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+                items: Config.options.bar.startWidgets
+                path: Directory.shell + "/modules/bar/widget"
+                onItemsChanged: {
+                    Config.options.bar.startWidgets = items;
+                }
+            }
+            WidgetList {
+                id: centerWidgets
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+                items: Config.options.bar.centerWidgets
+                path: Directory.shell + "/modules/bar/widget"
+                onItemsChanged: {
+                    Config.options.bar.centerWidgets = items;
+                }
+            }
+            WidgetList {
+                id: endWidgets
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+                items: Config.options.bar.endWidgets
+                path: Directory.shell + "/modules/bar/widget"
+                onItemsChanged: {
+                    Config.options.bar.endWidgets = items;
                 }
             }
         }

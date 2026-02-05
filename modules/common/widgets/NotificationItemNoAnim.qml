@@ -15,7 +15,7 @@ Item {
     id: root
     property var notificationObject
     property bool pendingClose: notificationObject.pendingClose
-    width: Variable.sizes.notificationPopupWidth - 100
+    width: parent.width
     implicitHeight: content.implicitHeight
 
     Rectangle {
@@ -29,11 +29,12 @@ Item {
     ColumnLayout {
         id: content
         spacing: 8
+        width: parent.width
         Rectangle {
             id: appNameBackground
 
             color: Color.colors.surface_container
-            Layout.preferredWidth: Variable.sizes.notificationPopupWidth - 100 - 16
+            Layout.preferredWidth: parent.width - 16
             Layout.alignment: Qt.AlignTop
             Layout.leftMargin: 8
             Layout.rightMargin: 8

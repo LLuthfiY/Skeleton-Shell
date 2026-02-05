@@ -52,23 +52,7 @@ RowLayout {
                 background: Rectangle {
                     id: backgroundMenu
                     radius: 12
-                    property bool isHovered: false
                     color: Color.colors.surface_container
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            backgroundMenu.isHovered = true;
-                        }
-                        onExited: {
-                            backgroundMenu.isHovered = false;
-                        }
-                    }
                 }
 
                 Instantiator {
