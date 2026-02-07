@@ -14,8 +14,8 @@ import qs.services
 Scope {
     id: root
     property var application: ScriptModel {
-        // values: AppSearch.fuzzyQuery(searchInput.text)
-        values: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+        values: AppSearch.fuzzyQuery(searchInput.text)
+        // values: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
     }
     PanelWindow {
         id: launcherWindow
@@ -98,10 +98,7 @@ Scope {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 clip: true
-                model: ScriptModel {
-                    // values: AppSearch.fuzzyQuery(searchInput.text)
-                    values: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
-                }
+                model: root.application
                 delegate: Rectangle {
                     id: appDelegate
                     required property DesktopEntry modelData
