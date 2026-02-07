@@ -23,9 +23,6 @@ Item {
         id: background
         anchors.fill: parent
         color: Color.colors.surface
-        border.color: Color.colors.primary_container
-        border.width: 2
-        radius: Variable.radius.small
         TapHandler {
             acceptedButtons: Qt.RightButton
             onTapped: {
@@ -33,6 +30,14 @@ Item {
                 root.implicitHeight = 0;
                 closeTimer.start();
             }
+        }
+        Rectangle {
+            anchors.right: parent.right
+            width: 2
+            height: parent.height - 48
+            radius: Variable.radius.smallest
+            anchors.verticalCenter: parent.verticalCenter
+            color: Color.colors.primary_container
         }
     }
     Behavior on opacity {

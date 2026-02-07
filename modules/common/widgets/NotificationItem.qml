@@ -55,7 +55,7 @@ Item {
         anchors.fill: parent
         color: Color.colors.surface
         border.color: Color.colors.primary_container
-        border.width: 2
+        border.width: 1
         radius: Variable.radius.small
         TapHandler {
             acceptedButtons: Qt.RightButton
