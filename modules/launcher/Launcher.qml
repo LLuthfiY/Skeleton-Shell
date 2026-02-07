@@ -17,10 +17,11 @@ Scope {
     //     values: AppSearch.fuzzyQuery(searchInput.text)
     //     // values: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
     // }
-    property var application: AppSearch.fuzzyQuery(searchInput.text)
+    // property var application: AppSearch.fuzzyQuery(searchInput.text)
     // onApplicationChanged: {
     //     launcherList.currentIndex = 0
     // }
+    property var application: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
     PanelWindow {
         id: launcherWindow
         screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
