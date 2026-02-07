@@ -68,11 +68,16 @@ Scope {
                             Layout.fillWidth: true
                             color: "transparent"
                             Rectangle {
-                                width: 2
+                                anchors.left: parent.left
+                                width: root.section === index ? parent.width : parent.hovered ? parent.width : 2
+                                color: root.section === index ? Color.colors.primary : Color.colors.primary_container
                                 height: parent.height
-                                radius: 2
-                                color: root.section === index ? Color.colors.primary : hovered ? Color.colors.primary : "transparent"
-                                anchors.verticalCenter: parent.verticalCenter
+                                radius: Variable.radius.smallest
+                                Behavior on width {
+                                    NumberAnimation {
+                                        duration: 200
+                                    }
+                                }
                                 Behavior on color {
                                     ColorAnimation {
                                         duration: 200
@@ -82,7 +87,7 @@ Scope {
 
                             LucideIcon {
                                 icon: modelData.icon
-                                color: Color.colors.on_surface
+                                color: root.section === index ? Color.colors.on_primary : Color.colors.on_surface
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.margins: 8
