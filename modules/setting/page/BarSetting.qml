@@ -165,7 +165,7 @@ ScrollView {
         RowLayout {
             spacing: 8
             Repeater {
-                model: ["left", "right", "top", "bottom"]
+                model: ["left", "top", "right", "bottom"]
                 delegate: Rectangle {
                     property bool hovered: false
                     width: textPosition.width + 16

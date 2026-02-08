@@ -287,6 +287,7 @@ GridLayout {
                     text: model.weekNumber
                     font.pixelSize: 14
                     font.family: Variable.font.family.main
+                    font.weight: Font.Bold
                     color: Color.colors.on_surface
                     anchors.centerIn: parent
                 }
@@ -317,7 +318,7 @@ GridLayout {
                 height: root.size
                 radius: Variable.radius.small
                 property bool isCurrent: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
-                property bool sameMonth: model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
+                property bool sameMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
                 border.color: isCurrent ? Color.colors.primary : "transparent"
                 border.width: 2
                 color: "transparent"

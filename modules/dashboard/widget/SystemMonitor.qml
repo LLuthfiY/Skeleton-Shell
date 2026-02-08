@@ -28,12 +28,13 @@ Rectangle {
         id: col
         anchors.fill: parent
         anchors.margins: 16
+        spacing: 8
         RowLayout {
             spacing: 8
             LucideIcon {
                 icon: "cpu"
                 color: Color.colors.on_surface_variant
-                font.pixelSize: 24
+                font.pixelSize: 20
             }
             Rectangle {
                 Layout.fillWidth: true
@@ -61,7 +62,7 @@ Rectangle {
             LucideIcon {
                 icon: "memory-stick"
                 color: Color.colors.on_surface_variant
-                font.pixelSize: 24
+                font.pixelSize: 20
             }
             Rectangle {
                 Layout.fillWidth: true
