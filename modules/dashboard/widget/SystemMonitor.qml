@@ -10,12 +10,20 @@ import qs.services
 Rectangle {
     id: root
     color: "transparent"
-    border.color: Color.colors.primary_container
-    border.width: 2
+    // border.color: Color.colors.primary_container
+    // border.width: 2
     width: parent.width
     height: 82
     radius: Variable.radius.small
     Layout.fillWidth: true
+    Rectangle {
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        width: 2
+        height: parent.height / 2
+        color: Color.colors.primary_container
+        radius: Variable.radius.small
+    }
     ColumnLayout {
         id: col
         anchors.fill: parent

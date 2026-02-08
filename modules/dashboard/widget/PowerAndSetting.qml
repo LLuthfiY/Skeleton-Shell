@@ -20,8 +20,15 @@ RowLayout {
             implicitHeight: 32
             radius: Variable.radius.small
             property bool isHovered: false
-            color: isHovered ? Color.colors.primary : Color.colors.primary_container
+            border.color: isHovered ? Color.colors.primary : Color.colors.primary_container
+            border.width: 2
+            color: isHovered ? Color.colors.primary : "transparent"
             Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
+            Behavior on border.color {
                 ColorAnimation {
                     duration: 200
                 }
@@ -142,8 +149,15 @@ RowLayout {
             implicitHeight: 32
             radius: Variable.radius.small
             property bool isHovered: false
-            color: isHovered ? Color.colors.primary : Color.colors.primary_container
+            color: isHovered ? Color.colors.primary : "transparent"
+            border.color: isHovered ? Color.colors.primary : Color.colors.primary_container
+            border.width: 2
             Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
+            Behavior on border.color {
                 ColorAnimation {
                     duration: 200
                 }
