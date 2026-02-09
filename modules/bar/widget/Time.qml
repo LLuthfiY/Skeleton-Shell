@@ -11,8 +11,8 @@ Text {
     property bool hovered: false
     text: Qt.formatTime(systemClock.date, vertical ? "hh\nmm" : "hh:mm")
     color: Color.colors[Config.options.bar.foreground]
-    font.weight: 900
-    font.pixelSize: 20
+    font.weight: Font.Bold
+    font.pixelSize: Variable.font.pixelSize.huge
     font.family: "Open Sans"
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter

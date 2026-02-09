@@ -56,7 +56,7 @@ ColumnLayout {
     }
     ColumnLayout {
         id: column
-        spacing: 4
+        spacing: Variable.margin.smallest
         Layout.margins: Variable.margin.smallest
         Rectangle {
             id: addButton
@@ -69,11 +69,11 @@ ColumnLayout {
                 }
             }
             radius: Variable.radius.small
-            width: addIcon.width + 16
-            height: addIcon.height + 8
+            width: addIcon.width + 16 * Config.options.appearance.uiScale
+            height: addIcon.height + 8 * Config.options.appearance.uiScale
             color: "transparent"
             Rectangle {
-                width: addHoverHandler.hovered ? parent.width : 2
+                width: addHoverHandler.hovered ? parent.width : 2 * Config.options.appearance.uiScale
                 height: parent.height
                 radius: Variable.radius.smallest
                 anchors.verticalCenter: parent.verticalCenter
@@ -89,7 +89,7 @@ ColumnLayout {
                     }
                 }
             }
-            Layout.minimumWidth: 150
+            Layout.minimumWidth: 150 * Config.options.appearance.uiScale
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -107,11 +107,11 @@ ColumnLayout {
             }
             Menu {
                 id: wlm
-                implicitWidth: 200
-                padding: 8
+                implicitWidth: 200 * Config.options.appearance.uiScale
+                padding: Variable.margin.small
                 background: Rectangle {
                     id: backgroundMenu
-                    radius: 12
+                    radius: Variable.radius.small
                     color: Color.colors.surface_container
                 }
                 Instantiator {
@@ -124,7 +124,7 @@ ColumnLayout {
                     }
                     delegate: MenuItem {
                         background: Rectangle {
-                            radius: 8
+                            radius: Variable.radius.small
                             property bool isHovered: false
                             color: isHovered ? Color.colors.primary : "transparent"
                             Behavior on color {
@@ -161,23 +161,23 @@ ColumnLayout {
         }
         ColumnLayout {
             id: list
-            spacing: 4
+            spacing: Variable.margin.small
             Repeater {
                 model: ScriptModel {
                     values: root.items
                 }
                 delegate: Rectangle {
                     id: itemRoot
-                    Layout.minimumWidth: 150
+                    Layout.minimumWidth: 150 * Config.options.appearance.uiScale
                     Layout.fillWidth: true
-                    Layout.preferredHeight: text.height + 8
+                    Layout.preferredHeight: text.height + Variable.margin.normal
                     color: "transparent"
                     radius: Variable.radius.small
                     property bool hovered: false
                     clip: true
                     Rectangle {
                         width: parent.width
-                        height: 1
+                        height: 1 * Config.options.appearance.uiScale
                         radius: Variable.radius.smallest
                         anchors.bottom: parent.bottom
                         color: Color.colors.surface_container_high
@@ -194,7 +194,7 @@ ColumnLayout {
                         font.pixelSize: Variable.font.pixelSize.smaller
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
-                        anchors.leftMargin: 8
+                        anchors.leftMargin: Variable.margin.small
                     }
                     Rectangle {
                         opacity: itemRootHoverHandler.hovered ? 1 : 0
@@ -206,8 +206,9 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 22
-                            height: 22
+                            width: 22 * Config.options.appearance.uiScale
+                            height: 22 * Config.options.appearance.uiScale
+
                             LucideIcon {
                                 icon: "x"
                                 color: closeHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
@@ -229,8 +230,9 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 22
-                            height: 22
+                            width: 22 * Config.options.appearance.uiScale
+                            height: 22 * Config.options.appearance.uiScale
+
                             LucideIcon {
                                 icon: "chevron-down"
                                 color: downHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
@@ -238,7 +240,7 @@ ColumnLayout {
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
-                            anchors.rightMargin: 28
+                            anchors.rightMargin: 28 * Config.options.appearance.uiScale
                             color: downHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
@@ -259,8 +261,9 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 22
-                            height: 22
+                            width: 22 * Config.options.appearance.uiScale
+                            height: 22 * Config.options.appearance.uiScale
+
                             LucideIcon {
                                 icon: "chevron-up"
                                 color: upHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
@@ -268,7 +271,7 @@ ColumnLayout {
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
-                            anchors.rightMargin: 56
+                            anchors.rightMargin: 56 * Config.options.appearance.uiScale
                             color: upHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
@@ -291,7 +294,7 @@ ColumnLayout {
                         StyledSwitch {
                             checked: modelData.includes("--fill--")
                             anchors.right: parent.right
-                            anchors.rightMargin: 94
+                            anchors.rightMargin: 94 * Config.options.appearance.uiScale
                             anchors.verticalCenter: parent.verticalCenter
                             onClicked: {
                                 if (modelData.includes("--fill--")) {
@@ -311,7 +314,7 @@ ColumnLayout {
                             font.pixelSize: Variable.font.pixelSize.smaller
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: 148
+                            anchors.rightMargin: 148 * Config.options.appearance.uiScale
                         }
                     }
                 }

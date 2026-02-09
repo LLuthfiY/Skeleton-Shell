@@ -16,9 +16,9 @@ Item {
 
     Rectangle {
         id: background
-        color: Color.colors.primary
-        width: Variable.sizes.notificationAppIconSize
-        height: Variable.sizes.notificationAppIconSize
+        color: Color.colors.primary_container
+        width: Variable.size.notificationAppIconSize
+        height: Variable.size.notificationAppIconSize
         radius: 100
         Loader {
             id: iconLoader
@@ -32,8 +32,8 @@ Item {
         Image {
             id: image
             source: notificationObject.image
-            Layout.preferredWidth: Variable.sizes.notificationAppIconSize
-            Layout.preferredHeight: Variable.sizes.notificationAppIconSize
+            Layout.preferredWidth: Variable.size.notificationAppIconSize
+            Layout.preferredHeight: Variable.size.notificationAppIconSize
             Layout.alignment: Qt.AlignVCenter
         }
     }
@@ -43,8 +43,8 @@ Item {
         Image {
             id: appIcon
             source: notificationObject.appIcon
-            Layout.preferredWidth: Variable.sizes.notificationAppIconSize
-            Layout.preferredHeight: Variable.sizes.notificationAppIconSize
+            Layout.preferredWidth: Variable.size.notificationAppIconSize
+            Layout.preferredHeight: Variable.size.notificationAppIconSize
             Layout.alignment: Qt.AlignVCenter
         }
     }
@@ -52,13 +52,13 @@ Item {
     Component {
         id: emptyComponent
         Rectangle {
-            width: Variable.sizes.notificationAppIconSize
-            height: Variable.sizes.notificationAppIconSize
+            width: Variable.size.notificationAppIconSize
+            height: Variable.size.notificationAppIconSize
             color: "transparent"
             LucideIcon {
                 id: icon
                 icon: "message-circle"
-                color: Color.colors.on_primary
+                color: Color.colors.primary
                 font.pixelSize: Variable.font.pixelSize.huge
                 anchors.centerIn: parent
             }

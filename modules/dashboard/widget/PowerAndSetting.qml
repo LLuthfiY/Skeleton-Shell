@@ -9,19 +9,19 @@ import qs.modules.common.widgets
 
 RowLayout {
     id: root
-    spacing: 8
+    spacing: Variable.margin.small
     property string uptime: "uptime"
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
 
         Rectangle {
             id: powerButton
-            implicitWidth: 32
-            implicitHeight: 32
+            implicitWidth: Variable.size.larger
+            implicitHeight: Variable.size.larger
             radius: Variable.radius.small
             property bool isHovered: false
             border.color: isHovered ? Color.colors.primary : Color.colors.primary_container
-            border.width: 2
+            border.width: 2 * Config.options.appearance.uiScale
             color: isHovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
@@ -54,11 +54,11 @@ RowLayout {
             }
             Menu {
                 id: powerMenu
-                padding: 8
-                implicitWidth: 200
+                padding: Variable.margin.small
+                implicitWidth: 200 * Config.options.appearance.uiScale
                 background: Rectangle {
                     id: backgroundMenu
-                    radius: 12
+                    radius: Variable.radius.normal
                     color: Color.colors.surface_container
                 }
 
@@ -99,7 +99,7 @@ RowLayout {
                                 Quickshell.execDetached(["hyprlock"]);
                             }
                         }
-                    ]
+                    ].reverse()
 
                     onObjectAdded: function (index, item) {
                         powerMenu.addItem(item);
@@ -111,7 +111,7 @@ RowLayout {
 
                     delegate: MenuItem {
                         background: Rectangle {
-                            radius: 8
+                            radius: Variable.radius.small
                             property bool isHovered: false
                             color: isHovered ? Color.colors.primary : "transparent"
                             Behavior on color {
@@ -145,13 +145,14 @@ RowLayout {
         }
         Rectangle {
             id: settingsButton
-            implicitWidth: 32
-            implicitHeight: 32
+            implicitWidth: Variable.size.larger
+            implicitHeight: Variable.size.larger
+
             radius: Variable.radius.small
             property bool isHovered: false
             color: isHovered ? Color.colors.primary : "transparent"
             border.color: isHovered ? Color.colors.primary : Color.colors.primary_container
-            border.width: 2
+            border.width: 2 * Config.options.appearance.uiScale
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -193,7 +194,8 @@ RowLayout {
             color: Color.colors.on_surface ?? "#FFFFFF"
             Layout.alignment: Qt.AlignRight
             horizontalAlignment: Text.AlignRight
-            font.weight: 900
+            font.weight: Font.Bold
+            font.pixelSize: Variable.font.pixelSize.small
         }
 
         SystemClock {

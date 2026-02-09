@@ -36,7 +36,7 @@ Scope {
                 property int barW: Config.options.bar.width
                 property int mg: Config.options.bar.margin
                 property int br: Config.options.bar.borderRadius
-                property int spacing: 8
+                property int spacing: Variable.size.small
                 property bool fw: Config.options.bar.fullWidth
                 property int bw: Config.options.bar.border
                 property bool borderScreen: Config.options.bar.borderScreen
@@ -137,7 +137,7 @@ Scope {
                     id: horizontalComp
                     CenterBox {
                         anchors.fill: parent
-                        anchors.margins: 8
+                        anchors.margins: Variable.size.small
                         vertical: barWindow.ver
                         startItem: RowLayout {
                             id: startWidgets
@@ -194,7 +194,7 @@ Scope {
                     id: verticalComp
                     CenterBox {
                         anchors.fill: parent
-                        anchors.margins: 8
+                        anchors.margins: Variable.size.small
                         vertical: barWindow.ver
                         startItem: ColumnLayout {
                             id: startWidgets

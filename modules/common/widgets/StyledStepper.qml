@@ -6,6 +6,7 @@ import qs.modules.common
 
 Rectangle {
     id: root
+    property real scale: Config.options.appearance.uiScale
     property real value: 0
     property real min: -100000
     property real max: 100000
@@ -19,12 +20,12 @@ Rectangle {
 
     RowLayout {
         id: wrapper
-        spacing: 2
+        spacing: Variable.margin.normal
         Rectangle {
             id: minusButton
             property bool hovered: false
-            width: 24
-            height: 24
+            width: Variable.size.large
+            height: Variable.size.large
             radius: Variable.radius.small
             color: hovered ? Color.colors.primary : "transparent"
             MouseArea {
@@ -59,7 +60,7 @@ Rectangle {
             color: Color.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             horizontalAlignment: Text.AlignHCenter
-            Layout.preferredWidth: 80
+            Layout.preferredWidth: 80 * root.scale
             readOnly: !root.editable
             validator: IntValidator {
                 bottom: root.min
@@ -72,8 +73,8 @@ Rectangle {
         Rectangle {
             id: plusButton
             property bool hovered: false
-            width: 24
-            height: 24
+            width: Variable.size.large
+            height: Variable.size.large
             radius: Variable.radius.small
             color: hovered ? Color.colors.primary : "transparent"
             MouseArea {

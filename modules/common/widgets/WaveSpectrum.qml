@@ -13,6 +13,7 @@ Canvas { // Visualizer
     property bool live: true
     property color color: Color.colors.primary
     property int scale: 50
+    property real uiScale: Config.options.appearance.uiScale
 
     onPointsChanged: () => {
         root.requestPaint();

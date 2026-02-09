@@ -62,6 +62,7 @@ Singleton {
                 property JsonObject palette: JsonObject {
                     property string type: "scheme-tonal-spot" // Allowed: scheme-content, scheme-expressive, scheme-fidelity, scheme-fruit-salad, scheme-monochrome, scheme-neutral, scheme-rainbow, scheme-tonal-spot
                 }
+                property real uiScale: 1
             }
             property JsonObject background: JsonObject {
                 property string wallpaperPath: Directory.config + "/config/wallpaper"

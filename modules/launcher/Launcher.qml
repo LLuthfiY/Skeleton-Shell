@@ -32,8 +32,8 @@ Scope {
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
 
-        implicitWidth: 500
-        implicitHeight: 500
+        implicitWidth: 500 * Config.options.appearance.uiScale
+        implicitHeight: 500 * Config.options.appearance.uiScale
         color: "transparent"
 
         // HyprlandFocusGrab {
@@ -49,8 +49,8 @@ Scope {
         }
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: 16
-            spacing: 8
+            anchors.margins: Variable.margin.normal
+            spacing: Variable.margin.small
             RowLayout {
                 LucideIcon {
                     icon: "search"
@@ -58,10 +58,10 @@ Scope {
                 TextField {
                     id: searchInput
                     Layout.fillWidth: true
-                    height: 40
+                    height: 40 * Config.options.appearance.uiScale
                     width: parent.width
-                    padding: 10
-                    font.pixelSize: 18
+                    padding: Variable.margin.small
+                    font.pixelSize: Variable.font.pixelSize.normal
                     font.family: Variable.font.family.main
                     font.weight: Font.Normal
                     focus: true
@@ -112,7 +112,7 @@ Scope {
                     color: "transparent"
                     height: row.height
                     width: parent?.parent.width ?? 0
-                    radius: 8
+                    radius: Variable.radius.small
                     function execute() {
                         GlobalState.launcherOpen = false;
                         if (modelData.runInTerminal) {
@@ -123,7 +123,7 @@ Scope {
                     }
                     Rectangle {
                         anchors.left: parent.left
-                        width: 2
+                        width: 2 * Config.options.appearance.uiScale
                         height: parent.height / 2
                         anchors.verticalCenter: parent.verticalCenter
                         color: launcherList.currentIndex === index || parent.hovered ? Color.colors.primary : "transparent"
@@ -137,19 +137,19 @@ Scope {
                         id: row
                         spacing: 0
                         width: parent.width
-                        height: 48
+                        height: Variable.size.huge
 
                         IconImage {
-                            Layout.margins: 8
-                            Layout.leftMargin: 16
+                            Layout.margins: Variable.margin.small
+                            Layout.leftMargin: Variable.margin.normal
                             Layout.fillHeight: true
-                            Layout.preferredWidth: 32
+                            Layout.preferredWidth: Variable.size.larger
                             source: Quickshell.iconPath(appDelegate.modelData.icon, "image-missing")
                         }
                         Text {
                             text: appDelegate.modelData.name
                             Layout.fillWidth: true
-                            Layout.leftMargin: 8
+                            Layout.leftMargin: Variable.margin.small
                             font.family: Variable.font.family.main
                             font.weight: Font.Normal
                             color: ListView.isCurrentItem ? Color.colors.on_primary : Color.colors.on_surface

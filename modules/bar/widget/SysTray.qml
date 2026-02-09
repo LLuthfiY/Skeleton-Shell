@@ -20,7 +20,7 @@ Item {
     Component {
         id: horizontalComp
         RowLayout {
-            spacing: 4
+            spacing: Variable.margin.smallest
             anchors.fill: parent
             Repeater {
                 model: SystemTray.items
@@ -35,7 +35,7 @@ Item {
         id: verticalComp
         ColumnLayout {
             anchors.fill: parent
-            spacing: 4
+            spacing: Variable.margin.smallest
             Repeater {
                 model: SystemTray.items
                 SysTrayItem {

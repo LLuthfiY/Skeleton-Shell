@@ -17,12 +17,12 @@ Flickable {
     height: stackWrapper.height
     width: stackWrapper.width
     ScrollBar.vertical: ScrollBar {}
-    contentWidth: root.width - 16
+    contentWidth: root.width - 16 * Config.options.appearance.uiScale
     contentHeight: root.height
     ColumnLayout {
         id: root
-        width: stackWrapper.width - 16
-        spacing: 8
+        width: stackWrapper.width - 16 * Config.options.appearance.uiScale
+        spacing: Variable.margin.small
         function setTheme() {
             let palette = Config.options.appearance.palette.type;
             let darkMode = Config.options.appearance.darkMode ? "dark" : "light";
@@ -41,8 +41,8 @@ Flickable {
         Rectangle {
             color: "transparent"
             radius: Variable.radius.normal
-            width: 500
-            height: 250
+            width: 500 * Config.options.appearance.uiScale
+            height: 250 * Config.options.appearance.uiScale
             Rectangle {
                 id: wallpaperWrapper
                 anchors.fill: parent
@@ -66,10 +66,10 @@ Flickable {
                 Rectangle {
                     anchors.left: parent.left
                     anchors.bottom: parent.bottom
-                    anchors.margins: 8
+                    anchors.margins: Variable.margin.small
                     radius: Variable.radius.small
-                    width: selectWallpaperIcon.width + 16
-                    height: selectWallpaperIcon.height + 8
+                    width: selectWallpaperIcon.width + Variable.size.normal
+                    height: selectWallpaperIcon.height + Variable.size.small
                     property bool hovered: false
                     color: hovered ? Color.colors.primary : Color.colors.surface
                     Behavior on color {
@@ -97,6 +97,7 @@ Flickable {
                         anchors.centerIn: parent
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
+                        font.pixelSize: Variable.font.pixelSize.normal
                         label: "Select Wallpaper"
                     }
                     FileDialog {
@@ -113,12 +114,12 @@ Flickable {
             }
         }
         RowLayout {
-            spacing: 8
+            spacing: Variable.margin.small
             Rectangle {
                 id: lightModeButton
                 property bool hovered: false
-                width: lightModeIcon.width + 16
-                height: lightModeIcon.height + 8
+                width: lightModeIcon.width + Variable.size.normal
+                height: lightModeIcon.height + Variable.size.small
                 radius: Variable.radius.small
                 color: "transparent"
                 Rectangle {
@@ -146,6 +147,7 @@ Flickable {
                     label: "Light Mode"
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
+                    font.pixelSize: Variable.font.pixelSize.normal
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -170,8 +172,8 @@ Flickable {
             Rectangle {
                 id: darkModeButton
                 property bool hovered: false
-                width: darkModeIcon.width + 16
-                height: darkModeIcon.height + 8
+                width: darkModeIcon.width + Variable.size.normal
+                height: darkModeIcon.height + Variable.size.small
                 radius: Variable.radius.small
                 color: "transparent"
                 Rectangle {
@@ -199,6 +201,7 @@ Flickable {
                     label: "Dark Mode"
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
+                    font.pixelSize: Variable.font.pixelSize.normal
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -236,8 +239,8 @@ Flickable {
                 model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
                 delegate: Rectangle {
                     property bool hovered: false
-                    width: text.width + 16
-                    height: text.height + 8
+                    width: text.width + Variable.size.normal
+                    height: text.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     MouseArea {
@@ -282,6 +285,7 @@ Flickable {
                         anchors.centerIn: parent
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
+                        font.pixelSize: Variable.font.pixelSize.normal
                         color: Config.options.appearance.palette.type === modelData ? Color.colors.on_primary : Color.colors.on_surface
                     }
                 }

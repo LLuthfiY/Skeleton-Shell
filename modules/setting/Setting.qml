@@ -13,7 +13,7 @@ Scope {
     Window {
         id: root
         property int section: 0
-        minimumWidth: 800
+        minimumWidth: 800 
         minimumHeight: 500
         visible: GlobalState.settingsOpen
         title: "Settings"
@@ -29,18 +29,18 @@ Scope {
 
         RowLayout {
             anchors.fill: parent
-            spacing: 8
+            spacing: Variable.margin.small
             anchors.margins: Variable.margin.normal
 
             Rectangle {
-                implicitWidth: 200
+                implicitWidth: 200 * Config.options.appearance.uiScale
                 Layout.fillHeight: true
                 color: Color.colors.surface
                 radius: Variable.radius.small
                 ColumnLayout {
-                    spacing: 8
+                    spacing: Variable.margin.small
                     anchors.fill: parent
-                    anchors.margins: 8
+                    anchors.margins: Variable.margin.small
                     Repeater {
                         model: [
                             {
@@ -63,8 +63,8 @@ Scope {
 
                         delegate: Rectangle {
                             property bool hovered: false
-                            Layout.preferredHeight: 32
-                            Layout.preferredWidth: 200
+                            Layout.preferredHeight: Variable.size.larger
+                            Layout.preferredWidth: 200 * Config.options.appearance.uiScale
                             Layout.fillWidth: true
                             color: "transparent"
                             Rectangle {
@@ -90,10 +90,11 @@ Scope {
                                 color: root.section === index ? Color.colors.on_primary : Color.colors.on_surface
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
-                                anchors.margins: 8
+                                anchors.margins: Variable.margin.small
                                 label: modelData.text
                                 font.weight: Font.Normal
                                 font.family: Variable.font.family.main
+                                font.pixelSize: Variable.font.pixelSize.normal
                             }
                             MouseArea {
                                 anchors.fill: parent
@@ -128,7 +129,7 @@ Scope {
                 StackLayout {
                     id: stackWrapper
                     anchors.fill: parent
-                    anchors.margins: 16
+                    anchors.margins: Variable.margin.normal
                     currentIndex: root.section
                     ThemeSetting {}
                     BarSetting {}

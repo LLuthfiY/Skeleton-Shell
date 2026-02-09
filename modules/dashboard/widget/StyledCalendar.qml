@@ -11,7 +11,7 @@ import qs.services
 
 GridLayout {
     id: root
-    property int size: 24
+    property int size: Variable.size.large
     columns: 2
     rows: 3
     property var date: systemClock.date
@@ -25,6 +25,7 @@ GridLayout {
         Layout.row: 0
         Layout.column: 0
         Layout.columnSpan: 2
+        spacing: Variable.margin.small
         Rectangle {
             id: prevMonthButton
             property bool isHovered: false
@@ -59,7 +60,7 @@ GridLayout {
         Rectangle {
             id: currentMonthButton
             property bool isHovered: false
-            width: 80
+            width: 80 * Config.options.appearance.uiScale
             height: root.size
             radius: Variable.radius.small
             color: isHovered ? Color.colors.primary : "transparent"
@@ -89,6 +90,7 @@ GridLayout {
                 font.weight: Font.Bold
                 color: currentMonthButton.isHovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
+                font.pixelSize: Variable.font.pixelSize.small
             }
         }
         Rectangle {
@@ -159,7 +161,7 @@ GridLayout {
         Rectangle {
             id: currentYearButton
             property bool isHovered: false
-            width: 48
+            width: 48 * Config.options.appearance.uiScale
             height: root.size
             radius: Variable.radius.small
             color: isHovered ? Color.colors.primary : "transparent"
@@ -189,6 +191,7 @@ GridLayout {
                 font.weight: Font.Bold
                 color: currentYearButton.isHovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
+                font.pixelSize: Variable.font.pixelSize.small
             }
         }
         Rectangle {
@@ -242,8 +245,8 @@ GridLayout {
             id: dayOfWeekRow
             locale: Qt.locale("en_US")
             anchors.fill: parent
-            anchors.leftMargin: 8
-            anchors.rightMargin: 8
+            anchors.leftMargin: Variable.margin.small
+            anchors.rightMargin: Variable.margin.small
 
             delegate: Rectangle {
                 width: root.size
@@ -252,7 +255,7 @@ GridLayout {
                 color: "transparent"
                 Text {
                     text: model.shortName
-                    font.pixelSize: 14
+                    font.pixelSize: Variable.font.pixelSize.small
                     color: Color.colors.on_surface
                     font.weight: Font.Bold
                     font.family: Variable.font.family.main
@@ -265,7 +268,7 @@ GridLayout {
         Layout.column: 0
         Layout.row: 2
         width: root.size
-        height: dayOfWeekRow.implicitWidth + 16
+        height: dayOfWeekRow.implicitWidth + 16 * Config.options.appearance.uiScale
         // Layout.preferredHeight: dayOfWeekRow.implicitWidth * 6 / 7
         color: "transparent"
         clip: true
@@ -273,8 +276,8 @@ GridLayout {
             id: weekNumberColumn
             locale: Qt.locale("en_US")
             anchors.fill: parent
-            anchors.topMargin: 8
-            anchors.bottomMargin: 8
+            anchors.topMargin: Variable.margin.small
+            anchors.bottomMargin: Variable.margin.small
             month: root.date.getMonth()
             year: root.date.getFullYear()
 
@@ -285,7 +288,7 @@ GridLayout {
                 color: "transparent"
                 Text {
                     text: model.weekNumber
-                    font.pixelSize: 14
+                    font.pixelSize: Variable.font.pixelSize.small
                     font.family: Variable.font.family.main
                     font.weight: Font.Bold
                     color: Color.colors.on_surface
@@ -298,7 +301,7 @@ GridLayout {
         implicitWidth: dayOfWeekRow.implicitWidth
         height: weekNumberColumn.parent.height
         border.color: Color.colors.primary_container
-        border.width: 2
+        border.width: 2 * Config.options.appearance.uiScale
         color: "transparent"
         radius: Variable.radius.small
         Layout.column: 1
@@ -309,7 +312,7 @@ GridLayout {
             id: monthGrid
             locale: Qt.locale("en_US")
             anchors.fill: parent
-            anchors.margins: 8
+            anchors.margins: Variable.margin.small
             month: root.date.getMonth()
             year: root.date.getFullYear()
 
@@ -320,11 +323,11 @@ GridLayout {
                 property bool isCurrent: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                 property bool sameMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
                 border.color: isCurrent ? Color.colors.primary : "transparent"
-                border.width: 2
+                border.width: 2 * Config.options.appearance.uiScale
                 color: "transparent"
                 Text {
                     text: model.day
-                    font.pixelSize: 14
+                    font.pixelSize: Variable.font.pixelSize.small
                     color: parent.sameMonth ? Color.colors.on_surface : "#77" + Color.colors.on_surface.slice(1)
                     font.weight: Font.Bold
                     font.family: Variable.font.family.main

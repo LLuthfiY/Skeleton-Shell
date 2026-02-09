@@ -11,11 +11,11 @@ import qs.modules.common.functions
 ScrollView {
     clip: true
     height: parent.height
-    width: parent.width
+    width: parent.width * Config.options.appearance.uiScale
     ColumnLayout {
         id: root
-        spacing: 8
-        width: stackWrapper.width - 24
+        spacing: Variable.margin.small
+        width: stackWrapper.width - 32 // jangan diubah
         LucideIcon {
             icon: "layout-panel-left"
             color: Color.colors.on_surface
@@ -32,14 +32,14 @@ ScrollView {
             label: "Background"
         }
         Flow {
-            spacing: 8
+            spacing: Variable.margin.small
             Layout.preferredWidth: root.width
             Repeater {
                 model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
                 delegate: Rectangle {
                     property bool hovered: false
-                    width: text.width + 16
-                    height: text.height + 8
+                    width: text.width + Variable.size.normal
+                    height: text.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
@@ -78,6 +78,7 @@ ScrollView {
                         anchors.centerIn: parent
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
+                        font.pixelSize: Variable.font.pixelSize.normal
                         color: Config.options.bar.background === modelData ? Color.colors.on_primary : Color.colors.on_surface
                     }
                     Behavior on color {
@@ -98,14 +99,14 @@ ScrollView {
         }
 
         Flow {
-            spacing: 8
+            spacing: Variable.margin.small
             Layout.preferredWidth: root.width
             Repeater {
                 model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
                 delegate: Rectangle {
                     property bool hovered: false
-                    width: textForeground.width + 16
-                    height: textForeground.height + 8
+                    width: textForeground.width + Variable.size.normal
+                    height: textForeground.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
@@ -145,6 +146,7 @@ ScrollView {
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
                         color: Config.options.bar.foreground === modelData ? Color.colors.on_primary : Color.colors.on_surface
+                        font.pixelSize: Variable.font.pixelSize.normal
                     }
                     Behavior on color {
                         ColorAnimation {
@@ -163,13 +165,13 @@ ScrollView {
             label: "Position"
         }
         RowLayout {
-            spacing: 8
+            spacing: Variable.margin.small
             Repeater {
                 model: ["left", "top", "right", "bottom"]
                 delegate: Rectangle {
                     property bool hovered: false
-                    width: textPosition.width + 16
-                    height: textPosition.height + 8
+                    width: textPosition.width + Variable.size.normal
+                    height: textPosition.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
@@ -214,6 +216,9 @@ ScrollView {
                         icon: modelData === "left" ? "arrow-left" : modelData === "right" ? "arrow-right" : modelData === "top" ? "arrow-up" : modelData === "bottom" ? "arrow-down" : ""
                         anchors.centerIn: parent
                         color: Config.options.bar.position === modelData ? Color.colors.on_primary : Color.colors.on_surface
+                        font.pixelSize: Variable.font.pixelSize.normal
+                        font.weight: Font.Normal
+                        font.family: Variable.font.family.main
                     }
                 }
             }

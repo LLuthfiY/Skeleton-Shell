@@ -37,8 +37,8 @@ ScrollView {
                 model: ["left", "right"]
                 delegate: Rectangle {
                     property bool hovered: false
-                    width: textPosition.width + 16
-                    height: textPosition.height + 8
+                    width: textPosition.width + Variable.size.normal
+                    height: textPosition.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
@@ -78,6 +78,7 @@ ScrollView {
                         anchors.centerIn: parent
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
+                        font.pixelSize: Variable.font.pixelSize.normal
                         color: Config.options.dashboard.position === modelData ? Color.colors.on_primary : Color.colors.on_surface
                     }
                 }

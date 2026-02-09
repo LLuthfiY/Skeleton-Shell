@@ -22,7 +22,7 @@ Scope {
         WlrLayershell.layer: WlrLayer.Overlay
         // exclusiveZone: 0
         exclusionMode: ExclusionMode.Ignore
-        implicitWidth: Variable.sizes.dashboardWidth
+        implicitWidth: Variable.size.dashboardWidth
         anchors.top: true
         anchors.right: Config.options.dashboard.position === "right"
         anchors.left: Config.options.dashboard.position === "left"
@@ -49,7 +49,7 @@ Scope {
                             Layout.alignment: Qt.AlignTop
                             Layout.fillHeight: modelData.includes("--fill--")
                             property bool isFirst: index === 0
-                            Layout.preferredHeight: ("active" in item) ? item.active ? (implicitHeight || height) : 0 : (implicitHeight || height )
+                            Layout.preferredHeight: ("active" in item) ? item.active ? (implicitHeight || height) : 0 : (implicitHeight || height)
                             Layout.topMargin: isFirst ? 0 : ("active" in item) ? item.active ? Variable.margin.normal : 0 : Variable.margin.normal
                             clip: true
                             property string folder: modelData.startsWith("user--") ? "widget/user/" : "widget/"
@@ -57,8 +57,8 @@ Scope {
                                 NumberAnimation {
                                     duration: 200
                                 }
-                              }
-                              Behavior on Layout.topMargin {
+                            }
+                            Behavior on Layout.topMargin {
                                 NumberAnimation {
                                     duration: 200
                                 }

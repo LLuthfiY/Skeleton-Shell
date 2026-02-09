@@ -22,7 +22,7 @@ Loader {
     Component {
         id: horizontalComp
         ColumnLayout {
-            spacing: 4
+            spacing: Variable.margin.smallest
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Repeater {
                 model: Mpris.players
@@ -30,7 +30,7 @@ Loader {
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     required property MprisPlayer modelData
                     text: modelData.trackTitle.length > 35 ? modelData.trackTitle.substring(0, 32) + "..." : modelData.trackTitle
-                    font.pixelSize: 14
+                    font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Medium
                     color: Color.colors[Config.options.bar.foreground]
                     visible: modelData.isPlaying
@@ -42,7 +42,7 @@ Loader {
     Component {
         id: verticalComp
         RowLayout {
-            spacing: 4
+            spacing: Variable.margin.smallest
             implicitHeight: musicTitleRepeater.item ? musicTitleRepeater.item.height : 0
             implicitWidth: musicTitleRepeater.item ? musicTitleRepeater.item.width : 0
             Repeater {
@@ -60,7 +60,7 @@ Loader {
                     Text {
                         id: textItem
                         text: modelData.trackTitle.length > 35 ? modelData.trackTitle.trim().substring(0, 32) + "..." : modelData.trackTitle.trim()
-                        font.pixelSize: 14
+                        font.pixelSize: Variable.font.pixelSize.small
 
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.centerIn: parent

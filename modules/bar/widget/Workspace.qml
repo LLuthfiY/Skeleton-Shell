@@ -24,23 +24,23 @@ Item {
     Component {
         id: horizontalComp
         RowLayout {
-            spacing: 4
+            spacing: Variable.margin.smallest
             Repeater {
                 model: root.workspaces
                 Rectangle {
                     id: buttonWorkspace
                     property bool occupied: Hyprland.toplevels.values.some(toplevel => toplevel.workspace ? toplevel.workspace.id === modelData : false)
                     color: occupied ? "#77" + Color.colors[Config.options.bar.foreground].substring(1) : "transparent"
-                    implicitWidth: 24
-                    implicitHeight: 24
+                    implicitWidth: Variable.size.large
+                    implicitHeight: Variable.size.large
                     radius: Config.options.bar.borderRadius
 
                     Rectangle {
                         property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === modelData : false
                         anchors.centerIn: parent
                         color: Color.colors[Config.options.bar.foreground]
-                        implicitWidth: active ? 12 : 6
-                        implicitHeight: active ? 12 : 6
+                        implicitWidth: active ? Variable.size.normal : Variable.size.smallest
+                        implicitHeight: active ? Variable.size.normal : Variable.size.smallest
                         radius: Config.options.bar.borderRadius
 
                         Behavior on implicitWidth {
@@ -80,16 +80,16 @@ Item {
                     id: buttonWorkspace
                     property bool occupied: Hyprland.toplevels.values.some(toplevel => toplevel.workspace ? toplevel.workspace.id === modelData : false)
                     color: occupied ? "#77" + Color.colors[Config.options.bar.foreground].substring(1) : "transparent"
-                    implicitWidth: 24
-                    implicitHeight: 24
+                    implicitWidth: 24 * Config.options.appearance.uiScale
+                    implicitHeight: 24 * Config.options.appearance.uiScale
                     radius: Config.options.bar.borderRadius
 
                     Rectangle {
                         property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === modelData : false
                         anchors.centerIn: parent
                         color: Color.colors[Config.options.bar.foreground]
-                        implicitWidth: active ? 12 : 6
-                        implicitHeight: active ? 12 : 6
+                        implicitWidth: active ? 14 * Config.options.appearance.uiScale : 6 * Config.options.appearance.uiScale
+                        implicitHeight: active ? 14 * Config.options.appearance.uiScale : 6 * Config.options.appearance.uiScale
                         radius: Config.options.bar.borderRadius
 
                         Behavior on implicitWidth {

@@ -32,14 +32,14 @@ Item {
         id: horizontalSpectrum
         RowLayout {
             anchors.centerIn: parent
-            spacing: 2
+            spacing: Variable.margin.smallest
             Repeater {
                 model: values
                 Rectangle {
-                    width: 2
-                    height: modelData * 1.8
+                    width: Variable.size.smallest
+                    height: modelData * 2
                     Layout.alignment: Qt.AlignVCenter
-                    radius: 2
+                    radius: Variable.radius.smallest
                     color: Color.colors[Config.options.bar.foreground]
                 }
             }
@@ -50,14 +50,14 @@ Item {
         id: verticalSpectrum
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: 2
+            spacing: Variable.margin.smallest
             Repeater {
                 model: values
                 Rectangle {
                     width: modelData * 2
-                    height: 2
+                    height: Variable.size.smallest
                     Layout.alignment: Qt.AlignHCenter
-                    radius: 2
+                    radius: Variable.radius.smallest
                     color: Color.colors[Config.options.bar.foreground]
                 }
             }

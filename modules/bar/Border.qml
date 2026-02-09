@@ -36,7 +36,7 @@ Scope {
                 property int borderRadius: Config.options.bar.borderRadius
                 property bool borderScreen: Config.options.bar.borderScreen
 
-                property int defaultMargin: 16
+                property int defaultMargin: Variable.margin.normal
 
                 property int topMargin: position === "top" ? 0 : margin
                 property int rightMargin: position === "right" ? 0 : margin

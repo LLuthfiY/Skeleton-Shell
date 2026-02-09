@@ -51,11 +51,11 @@ Scope {
             // when the window is created. Most compositors pick the current active monitor.
 
             anchors.bottom: true
-            margins.bottom: 24
+            margins.bottom: Variable.margin.large
             exclusiveZone: 0
 
-            implicitWidth: 150
-            implicitHeight: 150
+            implicitWidth: 150 * Config.options.appearance.uiScale
+            implicitHeight: 150 * Config.options.appearance.uiScale
 
             color: "transparent"
             Rectangle {
@@ -68,13 +68,13 @@ Scope {
 
             CircularProgress {
                 anchors.centerIn: parent
-                anchors.margins: 24
-                lineWidth: 8
-                implicitSize: 100
+                anchors.margins: Variable.margin.large
+                lineWidth: Variable.size.small
+                implicitSize: 100 * Config.options.appearance.uiScale
                 value: Pipewire.defaultAudioSink?.audio.volume ?? 0
                 inside: LucideIcon {
                     icon: root.muted ? "volume-off" : root.percentage > 50 ? "volume-2" : root.percentage > 0 ? "volume-1" : "volume-x"
-                    font.pixelSize: 48
+                    font.pixelSize: 48 * Config.options.appearance.uiScale
                     color: Color.colors.primary
                 }
             }

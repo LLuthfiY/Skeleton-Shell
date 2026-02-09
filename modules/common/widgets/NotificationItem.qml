@@ -13,9 +13,10 @@ import qs.modules.common.widgets
 
 Item {
     id: root
+    property real uiScale: Config.options.appearance.uiScale
     property var notificationObject
     property bool pendingClose: notificationObject.pendingClose
-    width: Variable.sizes.notificationPopupWidth
+    width: Variable.size.notificationPopupWidth
     implicitHeight: 0
     clip: true
 
@@ -55,7 +56,7 @@ Item {
         anchors.fill: parent
         color: Color.colors.surface
         border.color: Color.colors.primary_container
-        border.width: 1
+        border.width: 1 * root.uiScale
         radius: Variable.radius.small
         TapHandler {
             acceptedButtons: Qt.RightButton
@@ -74,38 +75,38 @@ Item {
             id: appNameBackground
 
             color: "transparent"
-            Layout.preferredWidth: Variable.sizes.notificationPopupWidth - 16
+            Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
             Layout.alignment: Qt.AlignTop
-            Layout.leftMargin: 8
-            Layout.rightMargin: 8
-            Layout.topMargin: 8
-            radius: 8
-            Layout.preferredHeight: appName.implicitHeight + 8
+            Layout.leftMargin: Variable.margin.normal
+            Layout.rightMargin: Variable.margin.normal
+            Layout.topMargin: Variable.margin.normal
+            radius: Variable.radius.normal
+            Layout.preferredHeight: appName.implicitHeight + (8 * root.uiScale)
             Text {
                 id: appName
                 text: notificationObject.appName ?? "System"
                 color: Color.colors.on_surface
-                font.pixelSize: 12
+                font.pixelSize: Variable.font.pixelSize.normal
                 font.family: Variable.font.family.main
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                anchors.margins: 8
+                anchors.margins: Variable.margin.normal
             }
         }
 
         RowLayout {
-            spacing: 16
+            spacing: Variable.margin.normal
             Layout.fillWidth: true
-            Layout.leftMargin: 16
-            Layout.rightMargin: 16
+            Layout.leftMargin: Variable.margin.normal
+            Layout.rightMargin: Variable.margin.normal
             Layout.topMargin: Variable.margin.small
 
             NotificationAppIcon {
                 id: appIcon
                 notificationObject: root.notificationObject
-                Layout.preferredWidth: Variable.sizes.notificationAppIconSize
-                Layout.preferredHeight: Variable.sizes.notificationAppIconSize
+                Layout.preferredWidth: Variable.size.notificationAppIconSize
+                Layout.preferredHeight: Variable.size.notificationAppIconSize
                 Layout.alignment: Qt.AlignTop
             }
             ColumnLayout {
@@ -117,12 +118,12 @@ Item {
                     text: notificationObject.summary
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: 12
+                    font.pixelSize: Variable.font.pixelSize.normal
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
                     clip: true
-                    Layout.preferredWidth: 250
+                    Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
                     wrapMode: Text.Wrap
                 }
 
@@ -131,7 +132,7 @@ Item {
                     text: notificationObject.body
                     Layout.preferredWidth: parent.width
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: 12
+                    font.pixelSize: Variable.font.pixelSize.normal
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
                     wrapMode: Text.Wrap
@@ -157,11 +158,11 @@ Item {
         Flow {
             id: actionsFlow
             Layout.fillWidth: true
-            Layout.preferredWidth: Variable.sizes.notificationPopupWidth - 16
+            Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
 
-            Layout.margins: 8
+            Layout.margins: Variable.margin.normal
             Layout.preferredHeight: childrenRect.height
-            spacing: 8
+            spacing: Variable.margin.normal
             clip: true
             onWidthChanged: {
                 actionsFlow.forceLayout();
@@ -171,12 +172,12 @@ Item {
                 delegate: Rectangle {
                     property bool hovered: false
 
-                    width: buttonText.implicitWidth + 16
-                    height: buttonText.implicitHeight + 8
-                    radius: 8
+                    width: buttonText.implicitWidth + (16 * root.uiScale)
+                    height: buttonText.implicitHeight + (8 * root.uiScale)
+                    radius: Variable.radius.normal
                     color: hovered ? Color.colors.primary_container : Color.colors.surface
                     border.color: Color.colors.primary_container
-                    border.width: 1
+                    border.width: 1 * root.uiScale
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
@@ -186,7 +187,7 @@ Item {
                         id: buttonText
                         text: modelData.text
                         color: Color.colors.on_surface
-                        font.pixelSize: 12
+                        font.pixelSize: Variable.font.pixelSize.normal
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
                         anchors.centerIn: parent

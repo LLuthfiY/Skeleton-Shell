@@ -10,17 +10,17 @@ import qs.services
 ColumnLayout {
     id: root
     anchors.fill: parent
-    spacing: 8
+    spacing: Variable.margin.small
     Rectangle {
         Layout.fillWidth: true
-        height: 32
+        height: Variable.size.larger
         color: "transparent"
         RowLayout {
             anchors.fill: parent
-            spacing: 8
+            spacing: Variable.margin.small
             Text {
                 text: "Notifications"
-                font.pixelSize: 16
+                font.pixelSize: Variable.font.pixelSize.normal
                 color: Color.colors.on_surface
                 font.weight: Font.Bold
                 font.family: Variable.font.family.main
@@ -31,8 +31,8 @@ ColumnLayout {
             Rectangle {
                 id: clearButton
                 property bool isHovered: false
-                width: 32
-                height: 32
+                width: Variable.size.larger
+                height: Variable.size.larger
                 radius: Variable.radius.small
                 color: isHovered ? Color.colors.primary : "transparent"
                 Behavior on color {
@@ -68,7 +68,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         width: parent.width
-        spacing: 8
+        spacing: Variable.margin.small
         property real lastY: 0
 
         onContentYChanged: {

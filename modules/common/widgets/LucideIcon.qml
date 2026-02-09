@@ -21,7 +21,7 @@ RowLayout {
     required property string icon
     Layout.alignment: Qt.AlignLeft
     property string label: ""
-    property int space: 8
+    property int space: Variable.margin.small
     spacing: label !== "" ? space : 0
     property font font: ({
             family: Variable.font.family.main,

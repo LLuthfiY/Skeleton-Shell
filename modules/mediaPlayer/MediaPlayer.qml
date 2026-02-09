@@ -17,12 +17,13 @@ import Qt5Compat.GraphicalEffects
 Scope {
     id: mediaPlayerRoot
     property var players: Mpris.players.values
+    property real uiScale: Config.options.appearance.uiScale
     PanelWindow {
         id: root
 
         color: "transparent"
-        implicitWidth: 476
-        implicitHeight: 112
+        implicitWidth: 476 * uiScale
+        implicitHeight: 112 * uiScale
         WlrLayershell.namespace: "quickshell:mediaPlayer"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
@@ -36,10 +37,10 @@ Scope {
         }
 
         margins {
-            top: WindowManagerUtils.topMargin + 16
-            bottom: WindowManagerUtils.bottomMargin + 16
-            left: WindowManagerUtils.leftMargin + 16
-            right: WindowManagerUtils.rightMargin + 16
+            top: WindowManagerUtils.topMargin + Variable.margin.normal
+            bottom: WindowManagerUtils.bottomMargin + Variable.margin.normal
+            left: WindowManagerUtils.leftMargin + Variable.margin.normal
+            right: WindowManagerUtils.rightMargin + Variable.margin.normal
         }
         Rectangle {
             anchors.fill: parent
@@ -82,13 +83,14 @@ Scope {
                     property bool afterOpen: true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.rightMargin: 16
+                    Layout.rightMargin: Variable.margin.normal
                     property real pos: 0
-                    spacing: 24
+                    spacing: Variable.margin.large
                     Rectangle {
                         id: art
-                        width: 92
-                        height: 92
+                        width: 92 * uiScale
+                        height: 92 * uiScale
+
                         radius: Variable.radius.normal
                         Image {
                             anchors.fill: parent
@@ -130,7 +132,7 @@ Scope {
                                         id: artIcon
                                         anchors.centerIn: parent
                                         icon: "x"
-                                        font.pixelSize: 48
+                                        font.pixelSize: 48 * uiScale
                                         color: Color.colors.on_surface
                                         visible: artMouseArea.isHovered
                                     }
@@ -139,15 +141,16 @@ Scope {
                         }
                     }
                     ColumnLayout {
-                        Layout.minimumWidth: 340
-                        Layout.maximumWidth: 340
-                        spacing: 8
+                        Layout.minimumWidth: 340 * uiScale
+                        Layout.maximumWidth: 340 * uiScale
+                        spacing: Variable.margin.small
                         Text {
                             Layout.alignment: Qt.AlignVCenter
                             text: modelData.trackTitle
                             elide: Text.ElideRight
-                            font.pixelSize: 16
-                            Layout.maximumWidth: 340
+                            font.pixelSize: Variable.font.pixelSize.normal
+                            Layout.maximumWidth: 340 * uiScale
+
                             font.family: Variable.font.family.main
                             font.weight: Font.Medium
                             color: Color.colors.on_surface
@@ -162,15 +165,15 @@ Scope {
                             Layout.alignment: Qt.AlignVCenter
                             text: modelData.trackArtist
                             elide: Text.ElideRight
-                            font.pixelSize: 12
+                            font.pixelSize: Variable.font.pixelSize.small
                             font.family: Variable.font.family.main
-                            Layout.maximumWidth: 340
+                            Layout.maximumWidth: 340 * uiScale
 
                             font.weight: Font.Medium
                             color: Color.colors.on_surface
                         }
                         RowLayout {
-                            spacing: 4
+                            spacing: Variable.margin.small
                             // RippleButton {
                             //     implicitWidth: 32
                             //     implicitHeight: 32
@@ -241,8 +244,8 @@ Scope {
                             // }
                             Rectangle {
                                 id: playButton
-                                implicitWidth: 32
-                                implicitHeight: 32
+                                implicitWidth: Variable.size.larger
+                                implicitHeight: Variable.size.larger
                                 visible: modelData.canPlay
                                 radius: Variable.radius.small
                                 property bool isHovered: false
@@ -275,10 +278,10 @@ Scope {
                             Rectangle {
                                 id: previousButton
                                 property bool isHovered: false
-                                implicitWidth: 24
-                                implicitHeight: 24
+                                implicitWidth: Variable.size.large
+                                implicitHeight: Variable.size.large
                                 visible: modelData.canGoPrevious
-                                radius: 12
+                                radius: Variable.radius.small
                                 color: "transparent"
                                 Behavior on color {
                                     ColorAnimation {
@@ -309,10 +312,11 @@ Scope {
                             Rectangle {
                                 id: nextButton
                                 property bool isHovered: false
-                                implicitWidth: 24
-                                implicitHeight: 24
+                                implicitWidth: Variable.size.large
+                                implicitHeight: Variable.size.large
+
                                 visible: modelData.canGoNext
-                                radius: 12
+                                radius: Variable.radius.small
                                 color: "transparent"
                                 Behavior on color {
                                     ColorAnimation {

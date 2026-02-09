@@ -8,7 +8,9 @@ import qs.modules.common.functions
 
 Singleton {
     id: root
-    property QtObject sizes
+
+    property real scale: Config.options.appearance.uiScale
+    property QtObject size
     property QtObject font
     property QtObject margin
     property QtObject radius
@@ -24,10 +26,19 @@ Singleton {
     }
     readonly property var lucideJson: JSON.parse(lucideJsonFile.text())
 
-    sizes: QtObject {
-        property int notificationPopupWidth: 400
-        property int notificationAppIconSize: 48
-        property int dashboardWidth: 400
+    size: QtObject {
+        property int notificationPopupWidth: 400 * root.scale
+        property int notificationHistoryWidth: 200 * root.scale
+        property int notificationAppIconSize: 48 * root.scale
+        property int dashboardWidth: 400 * root.scale
+
+        property int smallest: 4 * root.scale
+        property int small: 8 * root.scale
+        property int normal: 16 * root.scale
+        property int large: 24 * root.scale
+        property int larger: 32 * root.scale
+        property int huge: 48 * root.scale
+        property int hugeass: 64 * root.scale
     }
     font: QtObject {
         property QtObject family: QtObject {
@@ -35,35 +46,35 @@ Singleton {
             property string iconLucide: lucide.font.family
         }
         property QtObject pixelSize: QtObject {
-            property int smallest: 10
-            property int smaller: 12
-            property int small: 14
-            property int normal: 16
-            property int large: 17
-            property int larger: 19
-            property int huge: 22
-            property int hugeass: 23
-            property int title: huge
+            property int smallest: 10 * root.scale
+            property int smaller: 12 * root.scale
+            property int small: 14 * root.scale
+            property int normal: 16 * root.scale
+            property int large: 17 * root.scale
+            property int larger: 19 * root.scale
+            property int huge: 22 * root.scale
+            property int hugeass: 23 * root.scale
+            property int title: huge * root.scale
         }
     }
 
     margin: QtObject {
-        property int smallest: 4
-        property int small: 8
-        property int normal: 16
-        property int large: 24
-        property int larger: 32
-        property int huge: 48
-        property int hugeass: 64
+        property int smallest: 4 * root.scale
+        property int small: 8 * root.scale
+        property int normal: 16 * root.scale
+        property int large: 24 * root.scale
+        property int larger: 32 * root.scale
+        property int huge: 48 * root.scale
+        property int hugeass: 64 * root.scale
     }
 
     radius: QtObject {
-        property int smallest: 4
-        property int small: 8
-        property int normal: 16
-        property int large: 24
-        property int larger: 32
-        property int huge: 48
-        property int hugeass: 64
+        property int smallest: 4 * root.scale
+        property int small: 8 * root.scale
+        property int normal: 16 * root.scale
+        property int large: 24 * root.scale
+        property int larger: 32 * root.scale
+        property int huge: 48 * root.scale
+        property int hugeass: 64 * root.scale
     }
 }
