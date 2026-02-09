@@ -22,6 +22,7 @@ ShellRoot {
 
     Component.onCompleted: {
         WindowManagerUtils.setWM();
+        let app = DesktopEntries.applications;
     }
 
     LazyLoader {
