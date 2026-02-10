@@ -33,7 +33,7 @@ Item {
         }
         Rectangle {
             anchors.right: parent.right
-            width: Variable.size.smallest
+            width: Variable.size.smallest / 2
             height: parent.height - (48 * Config.options.appearance.uiScale)
             radius: Variable.radius.smallest
             anchors.verticalCenter: parent.verticalCenter
