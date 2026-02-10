@@ -36,7 +36,7 @@ Item {
             Repeater {
                 model: values
                 Rectangle {
-                    width: Variable.size.smallest
+                    width: Variable.size.smallest / 2
                     height: modelData * 2
                     Layout.alignment: Qt.AlignVCenter
                     radius: Variable.radius.smallest
@@ -55,7 +55,7 @@ Item {
                 model: values
                 Rectangle {
                     width: modelData * 2
-                    height: Variable.size.smallest
+                    height: Variable.size.smallest / 2
                     Layout.alignment: Qt.AlignHCenter
                     radius: Variable.radius.smallest
                     color: Color.colors[Config.options.bar.foreground]
