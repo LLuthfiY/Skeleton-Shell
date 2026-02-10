@@ -79,7 +79,7 @@ Item {
             Layout.alignment: Qt.AlignTop
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
-            Layout.topMargin: Variable.margin.normal
+            Layout.topMargin: Variable.margin.small
             radius: Variable.radius.normal
             Layout.preferredHeight: appName.implicitHeight + (8 * root.uiScale)
             Text {
@@ -117,7 +117,7 @@ Item {
                     text: notificationObject.summary
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: Variable.font.pixelSize.normal
+                    font.pixelSize: Variable.font.pixelSize.small
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
@@ -131,27 +131,11 @@ Item {
                     text: notificationObject.body
                     Layout.preferredWidth: parent.width
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: Variable.font.pixelSize.normal
+                    font.pixelSize: Variable.font.pixelSize.small
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
                     wrapMode: Text.Wrap
                 }
-
-                // Loader {
-                //     id: imageLoader
-                //     active: notificationObject.appName === "grimblast"
-                //     sourceComponent: imageComponent
-                // }
-                // Component {
-                //     id: imageComponent
-                //     Image {
-                //         id: image
-                //         source: notificationObject.image
-                //         width: 300
-                //         height: 200
-                //         fillMode: Image.PreserveAspectCrop
-                //     }
-                // }
             }
         }
         Flow {
@@ -159,8 +143,7 @@ Item {
             Layout.fillWidth: true
             Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
 
-            Layout.margins: notificationObject.actions.length > 0 ? Variable.margin.small : 0
-            Layout.bottomMargin: notificationObject.actions.length > 0 ? Variable.margin.small : Variable.margin.small
+            Layout.margins: Variable.margin.small
             Layout.preferredHeight: childrenRect.height
             spacing: Variable.margin.normal
             clip: true

@@ -85,6 +85,16 @@ Item {
                 anchors.left: parent.left
                 anchors.margins: Variable.margin.normal
             }
+            Text {
+                id: time
+                text: Time.formatTime(notificationObject.time)
+                color: Color.colors.on_surface_variant
+                font.pixelSize: Variable.font.pixelSize.smaller
+                font.family: Variable.font.family.main
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.margins: Variable.margin.normal
+            }
         }
 
         RowLayout {
