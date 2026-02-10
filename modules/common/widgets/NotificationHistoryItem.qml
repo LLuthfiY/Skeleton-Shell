@@ -92,7 +92,6 @@ Item {
             Layout.fillWidth: true
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
-            Layout.topMargin: Variable.margin.small
 
             NotificationAppIcon {
                 id: appIcon
@@ -150,7 +149,7 @@ Item {
 
                     width: buttonText.implicitWidth + (16 * Config.options.appearance.uiScale)
                     height: buttonText.implicitHeight + (8 * Config.options.appearance.uiScale)
-                    radius: Variable.radius.normal
+                    radius: Variable.radius.small
                     color: hovered ? Color.colors.primary_container : Color.colors.surface
                     border.color: Color.colors.primary_container
                     Behavior on color {
@@ -162,7 +161,7 @@ Item {
                         id: buttonText
                         text: modelData.text
                         color: Color.colors.on_surface
-                        font.pixelSize: Variable.font.pixelSize.normal
+                        font.pixelSize: Variable.font.pixelSize.smallest
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
                         anchors.centerIn: parent
