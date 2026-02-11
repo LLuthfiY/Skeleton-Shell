@@ -9,7 +9,7 @@ import Quickshell.Io
 import qs.modules.common
 
 Singleton {
-
+    property var monitorsWithoutBar: Config.options.bar.screenList.length > 0 ? Quickshell.screens.filter(screen => !Config.options.bar.screenList.includes(screen.name)) : []
     property string position: Config.options.bar.position
     property int margin: Config.options.bar.margin
     property bool borderScreen: Config.options.bar.borderScreen
@@ -22,6 +22,10 @@ Singleton {
     property int rightMargin: position === "right" ? 0 : margin
     property int bottomMargin: position === "bottom" ? 0 : margin
     property int leftMargin: position === "left" ? 0 : margin
+
+    onMonitorsWithoutBarChanged: {
+        setWM();
+    }
 
     function setBatch() {
         let gaps_out = `${topMargin + defaultMargin},${rightMargin + defaultMargin},${bottomMargin + defaultMargin},${leftMargin + defaultMargin}`;
@@ -37,12 +41,16 @@ Singleton {
     }
 
     function setOtherMonitor() {
-        let other_monitor = Quickshell.screens.filter(screen => !Config.options.bar.screenList.includes(screen.name));
+        let other_monitor = Config.options.bar.screenList.length > 0 ? Quickshell.screens.filter(screen => !Config.options.bar.screenList.includes(screen.name)) : [];
         let other_monitor_batch = "";
         other_monitor.forEach(screen => {
             other_monitor_batch += `keyword workspace 'm[${screen.name}], gapsout:${defaultMargin}';`;
         });
-        Quickshell.execDetached(["bash", "-c", "hyprctl " + "--batch " + other_monitor_batch]);
+
+        console.log(other_monitor_batch);
+        if (other_monitor_batch !== "") {
+            Quickshell.execDetached(["bash", "-c", "hyprctl " + "--batch " + other_monitor_batch]);
+        }
     }
     Timer {
         id: wmTimer
@@ -64,6 +72,7 @@ Singleton {
 
     function setWM(delay = 99000) {
         delay = Math.min(delay, Config.options.windowManager.applyConfigDelay);
+        Quickshell.execDetached(["hyprctl", "reload"]);
         wmTimer.interval = delay;
         wmTimer.running = true;
     }
