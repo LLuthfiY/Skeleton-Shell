@@ -84,6 +84,7 @@ Singleton {
                 property list<string> startWidgets: []
                 property list<string> endWidgets: []
                 property list<string> centerWidgets: []
+                property list<string> screenList: []
             }
 
             property JsonObject dashboard: JsonObject {

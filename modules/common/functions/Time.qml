@@ -7,7 +7,6 @@ Singleton {
 
     function formatTime(time) {
         const diff = Math.floor((Date.now() - time) / 1000);
-        console.log(diff, diff / 60, diff / 3600, diff / 86400);
         if (diff < 10)
             return "just now";
         if (diff < 60)

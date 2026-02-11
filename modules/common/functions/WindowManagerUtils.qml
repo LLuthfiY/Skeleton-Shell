@@ -2,6 +2,10 @@ pragma Singleton
 import Quickshell
 import QtQuick
 
+import Quickshell.Wayland
+
+import Quickshell.Io
+
 import qs.modules.common
 
 Singleton {
@@ -29,14 +33,32 @@ Singleton {
         let border_batch = `keyword general:border_size ${Config.options.windowManager.windowBorderSize}; keyword decoration:rounding ${Config.options.windowManager.windowBorderRadius};`;
 
         Quickshell.execDetached(["hyprctl", "--batch", gaps_batch + opacity_batch + border_batch]);
+        setOtherMonitorTimer.running = true;
     }
 
+    function setOtherMonitor() {
+        let other_monitor = Quickshell.screens.filter(screen => !Config.options.bar.screenList.includes(screen.name));
+        let other_monitor_batch = "";
+        other_monitor.forEach(screen => {
+            other_monitor_batch += `keyword workspace 'm[${screen.name}], gapsout:${defaultMargin}';`;
+        });
+        Quickshell.execDetached(["bash", "-c", "hyprctl " + "--batch " + other_monitor_batch]);
+    }
     Timer {
         id: wmTimer
         interval: Config.options.windowManager.applyConfigDelay
         repeat: false
         onTriggered: {
             setBatch();
+        }
+    }
+
+    Timer {
+        id: setOtherMonitorTimer
+        interval: 100
+        repeat: false
+        onTriggered: {
+            setOtherMonitor();
         }
     }
 

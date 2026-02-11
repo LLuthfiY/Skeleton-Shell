@@ -91,7 +91,6 @@ ScrollView {
             Layout.preferredWidth: 300
             onItemsChanged: {
                 Config.options.dashboard.widgets = items;
-                console.log(items);
             }
         }
     }
