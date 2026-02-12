@@ -193,27 +193,5 @@ ScrollView {
                 }
             }
         }
-        RowLayout {
-            Layout.preferredWidth: root.width
-            Text {
-                text: "Setup Delay"
-                font.family: Variable.font.family.main
-                font.weight: Font.Normal
-                color: Color.colors.on_surface
-                font.pixelSize: Variable.font.pixelSize.smaller
-            }
-            Item {
-                Layout.fillWidth: true
-            }
-            StyledStepper {
-                value: Config.options.windowManager.applyConfigDelay
-                min: 0
-                max: 10000
-                step: 50
-                onValueChanged: {
-                    Config.options.windowManager.applyConfigDelay = value;
-                }
-            }
-        }
     }
 }

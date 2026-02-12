@@ -31,4 +31,5 @@ Singleton {
     readonly property string configFile: config + "/Skeleton-Shell/config.json"
     readonly property string colorFile: config + "/Skeleton-Shell/colors.json"
     readonly property string notificationsPath: trimFileProtocol(`${Directory.cache}/notifications/notifications.json`)
+    readonly property string hyprlandConfig: trimFileProtocol(`${Directory.config}/hypr/Skeleton-Shell/config.conf`)
 }

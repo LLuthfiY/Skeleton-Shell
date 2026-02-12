@@ -27,53 +27,34 @@ Singleton {
         setWM();
     }
 
-    function setBatch() {
+    FileView {
+        id: wmFile
+        path: Directory.hyprlandConfig
+    }
+
+    function setWM() {
         let gaps_out = `${topMargin + defaultMargin},${rightMargin + defaultMargin},${bottomMargin + defaultMargin},${leftMargin + defaultMargin}`;
         if (!(borderScreen & Config.options.modules.bar)) {
             gaps_out = `${defaultMargin},${defaultMargin},${defaultMargin},${defaultMargin}`;
         }
-        let gaps_batch = `keyword general:gaps_out ${gaps_out}; keyword general:gaps_in ${Config.options.windowManager.gapsIn};`;
-        let opacity_batch = `keyword decoration:active_opacity ${Config.options.windowManager.activeOpacity}; keyword decoration:inactive_opacity ${Config.options.windowManager.inactiveOpacity};`;
-        let border_batch = `keyword general:border_size ${Config.options.windowManager.windowBorderSize}; keyword decoration:rounding ${Config.options.windowManager.windowBorderRadius};`;
+        let config = `
+      general {
+        border_size = ${Config.options.windowManager.windowBorderSize}
+        gaps_in = ${Config.options.windowManager.gapsIn}
+        gaps_out = ${gaps_out}
+      }
+      decoration {
+        rounding = ${Config.options.windowManager.windowBorderRadius}
+        active_opacity = ${Config.options.windowManager.activeOpacity}
+        inactive_opacity = ${Config.options.windowManager.inactiveOpacity}
+      }
 
-        Quickshell.execDetached(["hyprctl", "--batch", gaps_batch + opacity_batch + border_batch]);
-        setOtherMonitorTimer.running = true;
-    }
+      `;
 
-    function setOtherMonitor() {
-        let other_monitor = Config.options.bar.screenList.length > 0 ? Quickshell.screens.filter(screen => !Config.options.bar.screenList.includes(screen.name)) : [];
-        let other_monitor_batch = "";
-        other_monitor.forEach(screen => {
-            other_monitor_batch += `keyword workspace 'm[${screen.name}], gapsout:${defaultMargin}';`;
+        monitorsWithoutBar.forEach(screen => {
+            config += `workspace = m[${screen.name}], gapsout:${defaultMargin}`;
         });
 
-        console.log(other_monitor_batch);
-        if (other_monitor_batch !== "") {
-            Quickshell.execDetached(["bash", "-c", "hyprctl " + "--batch " + other_monitor_batch]);
-        }
-    }
-    Timer {
-        id: wmTimer
-        interval: Config.options.windowManager.applyConfigDelay
-        repeat: false
-        onTriggered: {
-            setBatch();
-        }
-    }
-
-    Timer {
-        id: setOtherMonitorTimer
-        interval: 100
-        repeat: false
-        onTriggered: {
-            setOtherMonitor();
-        }
-    }
-
-    function setWM(delay = 99000) {
-        delay = Math.min(delay, Config.options.windowManager.applyConfigDelay);
-        Quickshell.execDetached(["hyprctl", "reload"]);
-        wmTimer.interval = delay;
-        wmTimer.running = true;
+        wmFile.setText(config);
     }
 }

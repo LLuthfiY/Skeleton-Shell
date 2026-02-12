@@ -64,8 +64,8 @@ Singleton {
     IpcHandler {
         target: "setupWindowManager"
 
-        function setup(delay: real) {
-            WindowManagerUtils.setWM(delay);
+        function setup() {
+            WindowManagerUtils.setWM();
         }
     }
 }
