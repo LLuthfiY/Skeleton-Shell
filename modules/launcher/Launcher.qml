@@ -65,6 +65,7 @@ Scope {
                         color: Color.colors.surface
                         radius: Variable.radius.small
                     }
+                    color: Color.colors.on_surface_variant
 
                     onAccepted: {
                         launcherList.currentItem.execute();
