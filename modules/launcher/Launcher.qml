@@ -74,7 +74,7 @@ Scope {
                     // onTextChanged: {
                     //     launcherList.currentIndex = 0;
                     // }
-                    Keys.onPressed: {
+                    Keys.onPressed: event => {
                         if (event.key === Qt.Key_Escape) {
                             GlobalState.launcherOpen = false;
                         }

@@ -104,38 +104,31 @@ Scope {
                                     radius: Variable.radius.normal
                                 }
                             }
-                            MouseArea {
-                                id: artMouseArea
+                            Rectangle {
                                 anchors.fill: parent
-                                property bool isHovered: false
-                                hoverEnabled: true
-                                onClicked: {
-                                    Config.options.mediaPlayer.enable = false;
-                                }
-                                onEntered: {
-                                    isHovered = true;
-                                }
-                                onExited: {
-                                    isHovered = false;
-                                }
-                                Rectangle {
-                                    anchors.fill: parent
-                                    color: artMouseArea.isHovered ? ColorUtils.transparentize(Color.colors.surface, 0.5) : "transparent"
-                                    radius: Variable.radius.normal
-                                    Behavior on color {
-                                        ColorAnimation {
-                                            duration: 200
-                                        }
+                                color: artHoverHandler.hovered ? ColorUtils.transparentize(Color.colors.surface, 0.5) : "transparent"
+                                radius: Variable.radius.normal
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: 200
                                     }
+                                }
+                                TapHandler {
+                                    onTapped: {
+                                        Config.options.mediaPlayer.enable = false;
+                                    }
+                                }
+                                HoverHandler {
+                                    id: artHoverHandler
+                                }
 
-                                    LucideIcon {
-                                        id: artIcon
-                                        anchors.centerIn: parent
-                                        icon: "x"
-                                        font.pixelSize: 48 * uiScale
-                                        color: Color.colors.on_surface
-                                        visible: artMouseArea.isHovered
-                                    }
+                                LucideIcon {
+                                    id: artIcon
+                                    anchors.centerIn: parent
+                                    icon: "x"
+                                    font.pixelSize: 48 * uiScale
+                                    color: Color.colors.on_surface
+                                    visible: artHoverHandler.hovered
                                 }
                             }
                         }
@@ -248,8 +241,7 @@ Scope {
                                 implicitHeight: Variable.size.larger
                                 visible: modelData.canPlay
                                 radius: Variable.radius.small
-                                property bool isHovered: false
-                                color: isHovered ? Color.colors.primary : Color.colors.primary_container
+                                color: playHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
                                 Behavior on color {
                                     ColorAnimation {
                                         duration: 200
@@ -259,25 +251,19 @@ Scope {
                                     id: playIcon
                                     anchors.centerIn: parent
                                     icon: modelData.isPlaying ? "pause" : "play"
-                                    color: playButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                                    color: playHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                                 }
-                                MouseArea {
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    onEntered: {
-                                        playButton.isHovered = true;
-                                    }
-                                    onExited: {
-                                        playButton.isHovered = false;
-                                    }
-                                    onClicked: {
+                                TapHandler {
+                                    onTapped: {
                                         modelData.togglePlaying();
                                     }
+                                }
+                                HoverHandler {
+                                    id: playHoverHandler
                                 }
                             }
                             Rectangle {
                                 id: previousButton
-                                property bool isHovered: false
                                 implicitWidth: Variable.size.large
                                 implicitHeight: Variable.size.large
                                 visible: modelData.canGoPrevious
@@ -288,30 +274,24 @@ Scope {
                                         duration: 200
                                     }
                                 }
-                                MouseArea {
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    onEntered: {
-                                        previousButton.isHovered = true;
-                                    }
-                                    onExited: {
-                                        previousButton.isHovered = false;
-                                    }
-                                    onClicked: {
+                                TapHandler {
+                                    onTapped: {
                                         modelData.previous();
                                         modelData.position = 0;
                                     }
+                                }
+                                HoverHandler {
+                                    id: previousHoverHandler
                                 }
                                 LucideIcon {
                                     id: previousIcon
                                     anchors.centerIn: parent
                                     icon: "skip-back"
-                                    color: previousButton.isHovered ? Color.colors.on_surface_variant : Color.colors.on_surface
+                                    color: previousHoverHandler.hovered ? Color.colors.on_surface_variant : Color.colors.on_surface
                                 }
                             }
                             Rectangle {
                                 id: nextButton
-                                property bool isHovered: false
                                 implicitWidth: Variable.size.large
                                 implicitHeight: Variable.size.large
 
@@ -327,18 +307,13 @@ Scope {
                                     id: nextIcon
                                     anchors.centerIn: parent
                                     icon: "skip-forward"
-                                    color: nextButton.isHovered ? Color.colors.on_surface_variant : Color.colors.on_surface
+                                    color: nextHoverHandler.hovered ? Color.colors.on_surface_variant : Color.colors.on_surface
                                 }
-                                MouseArea {
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    onEntered: {
-                                        nextButton.isHovered = true;
-                                    }
-                                    onExited: {
-                                        nextButton.isHovered = false;
-                                    }
-                                    onClicked: {
+                                HoverHandler {
+                                    id: nextHoverHandler
+                                }
+                                TapHandler {
+                                    onTapped: {
                                         modelData.next();
                                         modelData.position = 0;
                                     }

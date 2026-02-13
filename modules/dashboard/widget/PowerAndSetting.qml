@@ -139,9 +139,8 @@ RowLayout {
             implicitHeight: Variable.size.larger
 
             radius: Variable.radius.small
-            property bool isHovered: false
-            color: isHovered ? Color.colors.primary : "transparent"
-            border.color: isHovered ? Color.colors.primary : Color.colors.primary_container
+            color: settingsHoverHandler.hovered ? Color.colors.primary : "transparent"
+            border.color: settingsHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
             border.width: 2 * Config.options.appearance.uiScale
             Behavior on color {
                 ColorAnimation {
@@ -157,21 +156,16 @@ RowLayout {
                 id: settingsIcon
                 anchors.centerIn: parent
                 icon: "settings"
-                color: settingsButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: settingsHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    settingsButton.isHovered = true;
-                }
-                onExited: {
-                    settingsButton.isHovered = false;
-                }
-                onClicked: {
+            TapHandler {
+                onTapped: {
                     GlobalState.settingsOpen = true;
                     GlobalState.dashboardOpen = false;
                 }
+            }
+            HoverHandler {
+                id: settingsHoverHandler
             }
         }
         Item {

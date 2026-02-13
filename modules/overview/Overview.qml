@@ -63,7 +63,7 @@ Scope {
                         text: index + 1
                         font.pixelSize: 32
                         font.weight: 900
-                        font.family: Appearance.font.family.main
+                        font.family: Variable.font.family.main
                         color: Color.colors.on_surface_variant
                     }
                     DropArea {
@@ -94,6 +94,9 @@ Scope {
                     x: initX
                     y: initY
 
+                    Component.onCompleted: {
+                        console.log(windowData);
+                    }
                     onWindowDataChanged: {
                         x = col * overviewWindow.monitor.width * overviewWindow.scale + col * 8 + windowData.at[0] * overviewWindow.scale;
                         y = row * overviewWindow.monitor.height * overviewWindow.scale + row * 8 + windowData.at[1] * overviewWindow.scale;
@@ -140,41 +143,27 @@ Scope {
                             window.y = row * overviewWindow.monitor.height * overviewWindow.scale + row * 8 + windowData.at[1] * overviewWindow.scale;
                         }
                     }
-                    MouseArea {
-                        id: dragArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        // onEntered: hovered = true // For hover color change
-                        // onExited: hovered = false // For hover color change
-                        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
-                        drag.target: parent
-                        onPressed: mouse => {
-                            if (mouse.button === Qt.RightButton) {
-                                Hyprland.dispatch(`workspace ${windowData?.workspace.id}`);
-                            }
-                            window.pressed = true;
-                            window.Drag.active = true;
-                            window.Drag.source = window;
-                            window.Drag.hotSpot.x = mouse.x;
-                            window.Drag.hotSpot.y = mouse.y;
-                        // console.log(`[OverviewWindow] Dragging window ${windowData?.address} from position (${window.x}, ${window.y})`)
-                        }
-                        onReleased: mouse => {
-                            // const xOffset = Math.floor(mouse.x / ((overviewWindow.monitor.width * overviewWindow.scale) + overviewGrid.rowSpacing));
-                            // const yOffset = Math.floor(mouse.y / ((overviewWindow.monitor.height * overviewWindow.scale) + overviewGrid.columnSpacing));
-                            // const targetWorkspace = xOffset + (yOffset ? Math.ceil(Config.options.windowManager.workspaces / 2) : 0);
-                            //
-                            // console.log(mouse.x, mouse.y, xOffset, yOffset, targetWorkspace);
-                            // console.log(mouse.toItem(window));
-                            window.pressed = false;
-                            window.Drag.active = false;
-                            if (overviewRoot.targetWorkspace !== -1 && overviewRoot.targetWorkspace !== windowData?.workspace.id) {
-                                Hyprland.dispatch(`movetoworkspacesilent ${overviewRoot.targetWorkspace}, address:${window.address}`);
-                                updateWindowPosition.restart();
-                                HyprlandData.updateWindowList();
-                            } else {
-                                window.x = window.initX;
-                                window.y = window.initY;
+                    TapHandler {
+                        acceptedButtons: Qt.RightButton
+                        onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
+                    }
+                    Drag.active: dragHandler.active
+                    Drag.hotSpot.x: width / 2
+                    Drag.hotSpot.y: height / 2
+
+                    DragHandler {
+                        id: dragHandler
+                        target: parent
+                        onActiveChanged: {
+                            if (!active) {
+                                if (overviewRoot.targetWorkspace !== -1 && overviewRoot.targetWorkspace !== windowData?.workspace.id) {
+                                    Hyprland.dispatch(`movetoworkspacesilent ${overviewRoot.targetWorkspace}, address:${window.address}`);
+                                    updateWindowPosition.restart();
+                                    HyprlandData.updateWindowList();
+                                } else {
+                                    updateWindowPosition.restart();
+                                    HyprlandData.updateWindowList();
+                                }
                             }
                         }
                     }

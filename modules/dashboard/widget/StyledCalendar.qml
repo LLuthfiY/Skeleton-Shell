@@ -28,99 +28,80 @@ GridLayout {
         spacing: Variable.margin.small
         Rectangle {
             id: prevMonthButton
-            property bool isHovered: false
             width: root.size
             height: root.size
             radius: Variable.radius.small
-            color: isHovered ? Color.colors.primary : "transparent"
+            color: prevMonthHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    prevMonthButton.isHovered = true;
-                }
-                onExited: {
-                    prevMonthButton.isHovered = false;
-                }
-                onClicked: {
+            HoverHandler {
+                id: prevMonthHoverHandler
+            }
+            TapHandler {
+                onTapped: {
                     root.date = new Date(root.date.getFullYear(), root.date.getMonth() - 1, root.date.getDate());
                 }
             }
             LucideIcon {
                 icon: "chevron-left"
-                color: prevMonthButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: prevMonthHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
             }
         }
         Rectangle {
             id: currentMonthButton
-            property bool isHovered: false
             width: 80 * Config.options.appearance.uiScale
             height: root.size
             radius: Variable.radius.small
-            color: isHovered ? Color.colors.primary : "transparent"
+            color: currentMonthHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    currentMonthButton.isHovered = true;
-                }
-                onExited: {
-                    currentMonthButton.isHovered = false;
-                }
-                onClicked: {
+            HoverHandler {
+                id: currentMonthHoverHandler
+            }
+            TapHandler {
+                onTapped: {
                     root.date = systemClock.date;
                 }
             }
-
             Text {
                 id: currentMonthText
                 text: Qt.formatDate(root.date, "MMMM")
                 font.family: Variable.font.family.main
                 font.weight: Font.Bold
-                color: currentMonthButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: currentMonthHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
                 font.pixelSize: Variable.font.pixelSize.small
             }
         }
         Rectangle {
             id: nextMonthButton
-            property bool isHovered: false
             width: root.size
             height: root.size
             radius: Variable.radius.small
-            color: isHovered ? Color.colors.primary : "transparent"
+            color: nextMonthHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    nextMonthButton.isHovered = true;
-                }
-                onExited: {
-                    nextMonthButton.isHovered = false;
-                }
-                onClicked: {
+            TapHandler {
+                onTapped: {
                     root.date = new Date(root.date.getFullYear(), root.date.getMonth() + 1, root.date.getDate());
                 }
             }
+            HoverHandler {
+                id: nextMonthHoverHandler
+            }
             LucideIcon {
                 icon: "chevron-right"
-                color: nextMonthButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: nextMonthHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
             }
         }
@@ -129,57 +110,45 @@ GridLayout {
         }
         Rectangle {
             id: prevYearButton
-            property bool isHovered: false
             width: root.size
             height: root.size
             radius: Variable.radius.small
-            color: isHovered ? Color.colors.primary : "transparent"
+            color: prevYearHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    prevYearButton.isHovered = true;
-                }
-                onExited: {
-                    prevYearButton.isHovered = false;
-                }
-                onClicked: {
+            HoverHandler {
+                id: prevYearHoverHandler
+            }
+            TapHandler {
+                onTapped: {
                     root.date = new Date(root.date.getFullYear() - 1, root.date.getMonth(), root.date.getDate());
                 }
             }
             LucideIcon {
                 icon: "chevron-left"
-                color: prevYearButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: prevYearHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
             }
         }
         Rectangle {
             id: currentYearButton
-            property bool isHovered: false
             width: 48 * Config.options.appearance.uiScale
             height: root.size
             radius: Variable.radius.small
-            color: isHovered ? Color.colors.primary : "transparent"
+            color: currentYearHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    currentYearButton.isHovered = true;
-                }
-                onExited: {
-                    currentYearButton.isHovered = false;
-                }
-                onClicked: {
+            HoverHandler {
+                id: currentYearHoverHandler
+            }
+            TapHandler {
+                onTapped: {
                     root.date = new Date(root.date.getFullYear(), root.date.getMonth(), root.date.getDate());
                 }
             }
@@ -189,39 +158,33 @@ GridLayout {
                 text: Qt.formatDate(root.date, "yyyy")
                 font.family: Variable.font.family.main
                 font.weight: Font.Bold
-                color: currentYearButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: currentYearHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
                 font.pixelSize: Variable.font.pixelSize.small
             }
         }
         Rectangle {
             id: nextYearButton
-            property bool isHovered: false
             width: root.size
             height: root.size
             radius: Variable.radius.small
-            color: isHovered ? Color.colors.primary : "transparent"
+            color: nextYearHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    nextYearButton.isHovered = true;
-                }
-                onExited: {
-                    nextYearButton.isHovered = false;
-                }
-                onClicked: {
+            HoverHandler {
+                id: nextYearHoverHandler
+            }
+            TapHandler {
+                onTapped: {
                     root.date = new Date(root.date.getFullYear() + 1, root.date.getMonth(), root.date.getDate());
                 }
             }
             LucideIcon {
                 icon: "chevron-right"
-                color: nextYearButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                color: nextYearHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                 anchors.centerIn: parent
             }
         }
