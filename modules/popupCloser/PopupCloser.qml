@@ -17,9 +17,8 @@ Scope {
         WlrLayershell.layer: WlrLayer.Top
         WlrLayershell.namespace: "popupCloser"
         color: "transparent"
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
+        TapHandler {
+            onTapped: {
                 GlobalState.launcherOpen = false;
                 GlobalState.dashboardOpen = false;
                 GlobalState.overviewOpen = false;

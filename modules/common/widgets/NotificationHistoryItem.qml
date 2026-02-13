@@ -155,12 +155,11 @@ Item {
             Repeater {
                 model: notificationObject.actions
                 delegate: Rectangle {
-                    property bool hovered: false
 
                     width: buttonText.implicitWidth + (16 * Config.options.appearance.uiScale)
                     height: buttonText.implicitHeight + (8 * Config.options.appearance.uiScale)
                     radius: Variable.radius.small
-                    color: hovered ? Color.colors.primary_container : Color.colors.surface
+                    color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
                     border.color: Color.colors.primary_container
                     Behavior on color {
                         ColorAnimation {
@@ -176,18 +175,13 @@ Item {
                         font.weight: Font.Normal
                         anchors.centerIn: parent
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            hovered = true;
-                        }
-                        onExited: {
-                            hovered = false;
-                        }
-                        onClicked: {
+                    TapHandler {
+                        onTapped: {
                             Notification.attemptInvokeAction(notificationObject.notificationId, modelData.identifier);
                         }
+                    }
+                    HoverHandler {
+                        id: hoverHandler
                     }
                 }
             }

@@ -105,7 +105,6 @@ Scope {
                     id: appDelegate
                     required property DesktopEntry modelData
                     required property int index
-                    property bool hovered: false
                     color: "transparent"
                     height: row.height
                     width: parent?.parent.width ?? 0
@@ -123,7 +122,7 @@ Scope {
                         width: 2 * Config.options.appearance.uiScale
                         height: parent.height / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: launcherList.currentIndex === index || parent.hovered ? Color.colors.primary : "transparent"
+                        color: launcherList.currentIndex === index || hoverHandler.hovered ? Color.colors.primary : "transparent"
                         Behavior on color {
                             ColorAnimation {
                                 duration: 200
@@ -152,18 +151,14 @@ Scope {
                             color: ListView.isCurrentItem ? Color.colors.on_primary : Color.colors.on_surface
                         }
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
+                    TapHandler {
+                        onTapped: {
                             appDelegate.execute();
                         }
-                        onEntered: {
-                            appDelegate.hovered = true;
-                        }
-                        onExited: {
-                            appDelegate.hovered = false;
-                        }
+                    }
+
+                    HoverHandler {
+                        id: hoverHandler
                     }
                     Behavior on color {
                         ColorAnimation {

@@ -36,13 +36,12 @@ ScrollView {
             Repeater {
                 model: ["left", "right"]
                 delegate: Rectangle {
-                    property bool hovered: false
                     width: textPosition.width + Variable.size.normal
                     height: textPosition.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
-                        width: Config.options.dashboard.position === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        width: Config.options.dashboard.position === modelData ? parent.width : hoverHandler.hovered ? parent.width : 2
                         height: parent.height
                         radius: Variable.radius.smallest
                         anchors.verticalCenter: parent.verticalCenter
@@ -58,19 +57,14 @@ ScrollView {
                             }
                         }
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            hovered = true;
-                        }
-                        onExited: {
-                            hovered = false;
-                        }
-                        onClicked: {
+                    TapHandler {
+                        onTapped: {
                             Config.options.dashboard.position = modelData;
                             dashboardWindow.close();
                         }
+                    }
+                    HoverHandler {
+                        id: hoverHandler
                     }
                     Text {
                         id: textPosition

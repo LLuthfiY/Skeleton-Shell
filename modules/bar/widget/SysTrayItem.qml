@@ -22,29 +22,27 @@ Rectangle {
         anchors.margins: Variable.size.large * 0.1
     }
 
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onClicked: mouse => {
-            if (mouse.button === Qt.LeftButton) {
-                modelData.activate();
-            } else if (mouse.button === Qt.RightButton) {
-                let barPosition = Config.options.bar.position;
-                let vertical = barPosition === "left" || barPosition === "right";
+    TapHandler {
+        onTapped: {
+            modelData.activate();
+        }
+    }
+    TapHandler {
+        acceptedButtons: Qt.RightButton
+        onTapped: mouse => {
+            let barPosition = Config.options.bar.position;
+            let vertical = barPosition === "left" || barPosition === "right";
+            console.log(mouse);
+            let global = trayItem.mapToGlobal(mouse.globalPosition.x, mouse.globalPosition.y);
+            let anchorX = barPosition === "left" ? Variable.margin.large : barPosition === "right" ? -Variable.margin.large : 0;
+            let anchorY = barPosition === "top" ? Variable.margin.large : barPosition === "bottom" ? -Variable.margin.large : 0;
+            let w = global.x + anchorX;
+            let h = global.y + anchorY;
 
-                let global = trayItem.mapToGlobal(mouse.x, mouse.y);
-                let anchorX = barPosition === "left" ? Variable.margin.large : barPosition === "right" ? -Variable.margin.large : 0;
-                let anchorY = barPosition === "top" ? Variable.margin.large : barPosition === "bottom" ? -Variable.margin.large : 0;
-                let w = global.x + anchorX;
-                let h = global.y + anchorY;
-
-                // modelData.display(barWindow, w, h);
-
-                // styledMenu.x = global.x;
-                // styledMenu.y = global.y;
-                styledMenu.anchor.rect = Qt.rect(w, h, 0, 0);
-                styledMenu.open();
-            }
+            // modelData.display(barWindow, w, h);
+            console.log(global.x, global.y, anchorX, anchorY);
+            styledMenu.anchor.rect = Qt.rect(w, h, 0, 0);
+            styledMenu.open();
         }
     }
 

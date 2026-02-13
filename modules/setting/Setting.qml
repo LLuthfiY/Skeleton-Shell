@@ -13,7 +13,7 @@ Scope {
     Window {
         id: root
         property int section: 0
-        minimumWidth: 800 
+        minimumWidth: 800
         minimumHeight: 500
         visible: GlobalState.settingsOpen
         title: "Settings"
@@ -62,14 +62,13 @@ Scope {
                         ]
 
                         delegate: Rectangle {
-                            property bool hovered: false
                             Layout.preferredHeight: Variable.size.larger
                             Layout.preferredWidth: 200 * Config.options.appearance.uiScale
                             Layout.fillWidth: true
                             color: "transparent"
                             Rectangle {
                                 anchors.left: parent.left
-                                width: root.section === index ? parent.width : parent.hovered ? parent.width : 2
+                                width: root.section === index ? parent.width : hoverHandler.hovered ? parent.width : 2
                                 color: root.section === index ? Color.colors.primary : Color.colors.primary_container
                                 height: parent.height
                                 radius: Variable.radius.smallest
@@ -96,18 +95,13 @@ Scope {
                                 font.family: Variable.font.family.main
                                 font.pixelSize: Variable.font.pixelSize.normal
                             }
-                            MouseArea {
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                onEntered: {
-                                    hovered = true;
-                                }
-                                onExited: {
-                                    hovered = false;
-                                }
-                                onClicked: {
+                            TapHandler {
+                                onTapped: {
                                     root.section = index;
                                 }
+                            }
+                            HoverHandler {
+                                id: hoverHandler
                             }
                         }
                     }

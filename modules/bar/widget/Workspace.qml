@@ -62,9 +62,10 @@ Item {
                         }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: Hyprland.dispatch("workspace " + modelData)
+                    TapHandler {
+                        onTapped: {
+                            Hyprland.dispatch("workspace " + modelData);
+                        }
                     }
                 }
             }
@@ -110,9 +111,10 @@ Item {
                         }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: Hyprland.dispatch("workspace " + modelData)
+                    TapHandler {
+                        onTapped: {
+                            Hyprland.dispatch("workspace " + modelData);
+                        }
                     }
                 }
             }

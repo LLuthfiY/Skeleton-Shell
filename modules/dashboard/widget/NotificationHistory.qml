@@ -30,32 +30,33 @@ ColumnLayout {
             }
             Rectangle {
                 id: clearButton
-                property bool isHovered: false
                 width: Variable.size.larger
                 height: Variable.size.larger
                 radius: Variable.radius.small
-                color: isHovered ? Color.colors.primary : "transparent"
+                color: hoverHandler.hovered ? Color.colors.primary : "transparent"
+                border.color: hoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                border.width: 2 * Config.options.appearance.uiScale
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
                     }
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        clearButton.isHovered = true;
+                Behavior on border.color {
+                    ColorAnimation {
+                        duration: 200
                     }
-                    onExited: {
-                        clearButton.isHovered = false;
-                    }
-                    onClicked: {
+                }
+                TapHandler {
+                    onTapped: {
                         Notification.discardAllNotifications();
                     }
                 }
+                HoverHandler {
+                    id: hoverHandler
+                }
                 LucideIcon {
                     icon: "trash"
-                    color: clearButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+                    color: hoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                     anchors.centerIn: parent
                 }
             }

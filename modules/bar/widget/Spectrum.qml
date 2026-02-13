@@ -21,9 +21,8 @@ Item {
         sourceComponent: vertical ? verticalSpectrum : horizontalSpectrum
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
+    TapHandler {
+        onTapped: {
             Config.options.mediaPlayer.enable = !Config.options.mediaPlayer.enable;
         }
     }

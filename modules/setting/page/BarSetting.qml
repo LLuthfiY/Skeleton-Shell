@@ -37,13 +37,12 @@ ScrollView {
             Repeater {
                 model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
                 delegate: Rectangle {
-                    property bool hovered: false
                     width: text.width + Variable.size.normal
                     height: text.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
-                        width: Config.options.bar.background === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        width: Config.options.bar.background === modelData ? parent.width : backgroundHoverHandler.hovered ? parent.width : 2
                         height: parent.height
                         radius: Variable.radius.smallest
                         anchors.verticalCenter: parent.verticalCenter
@@ -59,18 +58,13 @@ ScrollView {
                             }
                         }
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            hovered = true;
-                        }
-                        onExited: {
-                            hovered = false;
-                        }
-                        onClicked: {
+                    TapHandler {
+                        onTapped: {
                             Config.options.bar.background = modelData;
                         }
+                    }
+                    HoverHandler {
+                        id: backgroundHoverHandler
                     }
                     Text {
                         id: text
@@ -104,13 +98,12 @@ ScrollView {
             Repeater {
                 model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
                 delegate: Rectangle {
-                    property bool hovered: false
                     width: textForeground.width + Variable.size.normal
                     height: textForeground.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
-                        width: Config.options.bar.foreground === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        width: Config.options.bar.foreground === modelData ? parent.width : foregroundHoverHandler.hovered ? parent.width : 2
                         height: parent.height
                         radius: Variable.radius.smallest
                         anchors.verticalCenter: parent.verticalCenter
@@ -126,18 +119,13 @@ ScrollView {
                             }
                         }
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            hovered = true;
-                        }
-                        onExited: {
-                            hovered = false;
-                        }
-                        onClicked: {
+                    TapHandler {
+                        onTapped: {
                             Config.options.bar.foreground = modelData;
                         }
+                    }
+                    HoverHandler {
+                        id: foregroundHoverHandler
                     }
                     Text {
                         id: textForeground
@@ -169,13 +157,12 @@ ScrollView {
             Repeater {
                 model: ["left", "top", "right", "bottom"]
                 delegate: Rectangle {
-                    property bool hovered: false
                     width: textPosition.width + Variable.size.normal
                     height: textPosition.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
                     Rectangle {
-                        width: Config.options.bar.position === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        width: Config.options.bar.position === modelData ? parent.width : positionHoverHandler.hovered ? parent.width : 2
                         height: parent.height
                         radius: Variable.radius.smallest
                         anchors.verticalCenter: parent.verticalCenter
@@ -191,19 +178,14 @@ ScrollView {
                             }
                         }
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            hovered = true;
-                        }
-                        onExited: {
-                            hovered = false;
-                        }
-                        onClicked: {
+                    TapHandler {
+                        onTapped: {
                             Config.options.bar.position = modelData;
-                            WindowManagerUtils.setWM(100);
+                            WindowManagerUtils.setWM();
                         }
+                    }
+                    HoverHandler {
+                        id: positionHoverHandler
                     }
                     Behavior on color {
                         ColorAnimation {

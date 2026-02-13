@@ -18,14 +18,21 @@ RowLayout {
             id: powerButton
             implicitWidth: Variable.size.larger
             implicitHeight: Variable.size.larger
-            radius: Variable.radius.small
-            property bool isHovered: false
-            border.color: isHovered ? Color.colors.primary : Color.colors.primary_container
             border.width: 2 * Config.options.appearance.uiScale
-            color: isHovered ? Color.colors.primary : "transparent"
+            border.color: powerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+            radius: Variable.radius.small
+            color: powerHoverHandler.hovered ? Color.colors.primary : "transparent"
             Behavior on color {
                 ColorAnimation {
                     duration: 200
+                }
+            }
+            HoverHandler {
+                id: powerHoverHandler
+            }
+            TapHandler {
+                onTapped: {
+                    powerMenu.open();
                 }
             }
             Behavior on border.color {
@@ -37,20 +44,7 @@ RowLayout {
                 id: powerIcon
                 anchors.centerIn: parent
                 icon: "power"
-                color: powerButton.isHovered ? Color.colors.on_primary : Color.colors.primary
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    powerButton.isHovered = true;
-                }
-                onExited: {
-                    powerButton.isHovered = false;
-                }
-                onClicked: {
-                    powerMenu.open();
-                }
+                color: powerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
             }
             Menu {
                 id: powerMenu
@@ -112,22 +106,18 @@ RowLayout {
                     delegate: MenuItem {
                         background: Rectangle {
                             radius: Variable.radius.small
-                            property bool isHovered: false
-                            color: isHovered ? Color.colors.primary : "transparent"
+                            color: menuHoverHandler.hovered ? Color.colors.primary : "transparent"
                             Behavior on color {
                                 ColorAnimation {
                                     duration: 200
                                 }
                             }
-                            MouseArea {
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                onEntered: {
-                                    background.isHovered = true;
-                                }
-                                onExited: {
-                                    background.isHovered = false;
-                                }
+                            TapHandler {
+                                onTapped: modelData.action()
+                            }
+
+                            HoverHandler {
+                                id: menuHoverHandler
                             }
                         }
                         contentItem: RowLayout {
@@ -135,7 +125,7 @@ RowLayout {
                                 Layout.fillWidth: true
                                 icon: modelData.icon
                                 label: modelData.text
-                                color: background.isHovered ? Color.colors.on_primary : Color.colors.primary
+                                color: menuHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
                             }
                         }
                         onTriggered: modelData.action()

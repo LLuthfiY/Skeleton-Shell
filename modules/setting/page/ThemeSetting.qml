@@ -70,30 +70,24 @@ Flickable {
                     radius: Variable.radius.small
                     width: selectWallpaperIcon.width + Variable.size.normal
                     height: selectWallpaperIcon.height + Variable.size.small
-                    property bool hovered: false
-                    color: hovered ? Color.colors.primary : Color.colors.surface
+                    color: selectWallpaperHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
                         }
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            parent.hovered = true;
-                        }
-                        onExited: {
-                            parent.hovered = false;
-                        }
-                        onClicked: {
+                    HoverHandler {
+                        id: selectWallpaperHoverHandler
+                    }
+                    TapHandler {
+                        onTapped: {
                             wallpaperDialog.open();
                         }
                     }
                     LucideIcon {
                         id: selectWallpaperIcon
                         icon: "image"
-                        color: parent.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                        color: selectWallpaperHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                         anchors.centerIn: parent
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
@@ -117,13 +111,12 @@ Flickable {
             spacing: Variable.margin.small
             Rectangle {
                 id: lightModeButton
-                property bool hovered: false
                 width: lightModeIcon.width + Variable.size.normal
                 height: lightModeIcon.height + Variable.size.small
                 radius: Variable.radius.small
                 color: "transparent"
                 Rectangle {
-                    width: !Config.options.appearance.darkMode ? parent.width : parent.hovered ? parent.width : 2
+                    width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 2
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter
@@ -149,24 +142,19 @@ Flickable {
                     font.family: Variable.font.family.main
                     font.pixelSize: Variable.font.pixelSize.normal
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        lightModeButton.hovered = true;
-                    }
-                    onExited: {
-                        lightModeButton.hovered = false;
-                    }
-                    onClicked: {
-                        Config.options.appearance.darkMode = false;
-                        root.setTheme();
-                    }
-                }
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
                     }
+                }
+                TapHandler {
+                    onTapped: {
+                        Config.options.appearance.darkMode = false;
+                        root.setTheme();
+                    }
+                }
+                HoverHandler {
+                    id: lightModeHoverHandler
                 }
             }
             Rectangle {
@@ -177,7 +165,7 @@ Flickable {
                 radius: Variable.radius.small
                 color: "transparent"
                 Rectangle {
-                    width: Config.options.appearance.darkMode ? parent.width : parent.hovered ? parent.width : 2
+                    width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 2
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter
@@ -203,17 +191,12 @@ Flickable {
                     font.family: Variable.font.family.main
                     font.pixelSize: Variable.font.pixelSize.normal
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        darkModeButton.hovered = true;
-                    }
-                    onExited: {
-                        darkModeButton.hovered = false;
-                    }
-                    onClicked: {
-                        Config.options.appearance.darkMode = true;
+                HoverHandler {
+                    id: darkModeHoverHandler
+                }
+                TapHandler {
+                    onTapped: {
+                        Config.options.appearance.darkMode = !Config.options.appearance.darkMode;
                         root.setTheme();
                     }
                 }
@@ -243,27 +226,22 @@ Flickable {
                     height: text.height + Variable.size.small
                     radius: Variable.radius.small
                     color: "transparent"
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            hovered = true;
-                        }
-                        onExited: {
-                            hovered = false;
-                        }
-                        onClicked: {
-                            Config.options.appearance.palette.type = modelData;
-                            root.setTheme();
-                        }
-                    }
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
                         }
                     }
+                    TapHandler {
+                        onTapped: {
+                            Config.options.appearance.palette.type = modelData;
+                            root.setTheme();
+                        }
+                    }
+                    HoverHandler {
+                        id: schemeHoverHandler
+                    }
                     Rectangle {
-                        width: Config.options.appearance.palette.type === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        width: Config.options.appearance.palette.type === modelData ? parent.width : schemeHoverHandler.hovered ? parent.width : 2
                         height: parent.height
                         radius: Variable.radius.smallest
                         anchors.verticalCenter: parent.verticalCenter

@@ -12,9 +12,8 @@ Loader {
     visible: Mpris.players.values.length > 0
     property bool vertical: Config.options.bar.position === "left" || Config.options.bar.position === "right"
     sourceComponent: vertical ? verticalComp : horizontalComp
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
+    TapHandler {
+        onTapped: {
             Config.options.mediaPlayer.enable = !Config.options.mediaPlayer.enable;
         }
     }

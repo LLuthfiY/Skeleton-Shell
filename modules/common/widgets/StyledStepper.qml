@@ -23,23 +23,17 @@ Rectangle {
         spacing: Variable.margin.normal
         Rectangle {
             id: minusButton
-            property bool hovered: false
             width: Variable.size.large
             height: Variable.size.large
             radius: Variable.radius.small
-            color: hovered ? Color.colors.primary : "transparent"
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    minusButton.hovered = true;
-                }
-                onExited: {
-                    minusButton.hovered = false;
-                }
-                onClicked: {
+            color: minHoverHandler.hovered ? Color.colors.primary : "transparent"
+            TapHandler {
+                onTapped: {
                     root.value = Math.max((root.value - root.step).toFixed(10), root.min);
                 }
+            }
+            HoverHandler {
+                id: minHoverHandler
             }
             Behavior on color {
                 ColorAnimation {
@@ -48,7 +42,7 @@ Rectangle {
             }
             LucideIcon {
                 icon: "minus"
-                color: parent.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                color: minHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }
@@ -72,23 +66,17 @@ Rectangle {
         }
         Rectangle {
             id: plusButton
-            property bool hovered: false
             width: Variable.size.large
             height: Variable.size.large
             radius: Variable.radius.small
-            color: hovered ? Color.colors.primary : "transparent"
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: {
-                    plusButton.hovered = true;
-                }
-                onExited: {
-                    plusButton.hovered = false;
-                }
-                onClicked: {
+            color: plusHoverHandler.hovered ? Color.colors.primary : "transparent"
+            TapHandler {
+                onTapped: {
                     root.value = Math.min((root.value + root.step).toFixed(10), root.max);
                 }
+            }
+            HoverHandler {
+                id: plusHoverHandler
             }
             Behavior on color {
                 ColorAnimation {
@@ -97,7 +85,7 @@ Rectangle {
             }
             LucideIcon {
                 icon: "plus"
-                color: parent.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                color: plusHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }
