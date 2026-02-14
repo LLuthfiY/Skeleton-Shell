@@ -389,21 +389,16 @@ ScrollView {
                 font.family: Variable.font.family.main
                 label: "Center Widgets"
             }
-            Rectangle {
-                width: root.width
-                height: centerWidgets.height
-                color: "transparent"
-                WidgetListWithFill {
-                    id: centerWidgets
-                    fill: true
-                    Layout.alignment: Qt.AlignTop
-                    Layout.fillWidth: true
-                    excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
-                    items: Config.options.bar.centerWidgets
-                    path: Directory.shell + "/modules/bar/widget"
-                    onItemsChanged: {
-                        Config.options.bar.centerWidgets = items;
-                    }
+            WidgetListWithFill {
+                id: centerWidgets
+                fill: true
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+                excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
+                items: Config.options.bar.centerWidgets
+                path: Directory.shell + "/modules/bar/widget"
+                onItemsChanged: {
+                    Config.options.bar.centerWidgets = items;
                 }
             }
             LucideIcon {
@@ -414,21 +409,16 @@ ScrollView {
                 font.family: Variable.font.family.main
                 label: "End Widgets"
             }
-            Rectangle {
-                width: root.width
-                height: endWidgets.height
-                color: "transparent"
-                WidgetListWithFill {
-                    id: endWidgets
-                    fill: true
-                    Layout.alignment: Qt.AlignTop
-                    Layout.fillWidth: true
-                    items: Config.options.bar.endWidgets
-                    excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
-                    path: Directory.shell + "/modules/bar/widget"
-                    onItemsChanged: {
-                        Config.options.bar.endWidgets = items;
-                    }
+            WidgetListWithFill {
+                id: endWidgets
+                fill: true
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+                items: Config.options.bar.endWidgets
+                excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
+                path: Directory.shell + "/modules/bar/widget"
+                onItemsChanged: {
+                    Config.options.bar.endWidgets = items;
                 }
             }
         }
