@@ -53,7 +53,7 @@ GridLayout {
         }
         Rectangle {
             id: currentMonthButton
-            width: 80 * Config.options.appearance.uiScale
+            width: Variable.uiScale(80)
             height: root.size
             radius: Variable.radius.small
             color: currentMonthHoverHandler.hovered ? Color.colors.primary : "transparent"
@@ -135,7 +135,7 @@ GridLayout {
         }
         Rectangle {
             id: currentYearButton
-            width: 48 * Config.options.appearance.uiScale
+            width: Variable.uiScale(48)
             height: root.size
             radius: Variable.radius.small
             color: currentYearHoverHandler.hovered ? Color.colors.primary : "transparent"
@@ -231,7 +231,7 @@ GridLayout {
         Layout.column: 0
         Layout.row: 2
         width: root.size
-        height: dayOfWeekRow.implicitWidth + 16 * Config.options.appearance.uiScale
+        height: dayOfWeekRow.implicitWidth + Variable.uiScale(16)
         // Layout.preferredHeight: dayOfWeekRow.implicitWidth * 6 / 7
         color: "transparent"
         clip: true
@@ -264,7 +264,7 @@ GridLayout {
         implicitWidth: dayOfWeekRow.implicitWidth
         height: weekNumberColumn.parent.height
         border.color: Color.colors.primary_container
-        border.width: 2 * Config.options.appearance.uiScale
+        border.width: Variable.uiScale(2)
         color: "transparent"
         radius: Variable.radius.small
         Layout.column: 1
@@ -286,7 +286,7 @@ GridLayout {
                 property bool isCurrent: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                 property bool sameMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
                 border.color: isCurrent ? Color.colors.primary : "transparent"
-                border.width: 2 * Config.options.appearance.uiScale
+                border.width: Variable.uiScale(2)
                 color: "transparent"
                 Text {
                     text: model.day

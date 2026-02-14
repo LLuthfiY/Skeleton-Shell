@@ -5,8 +5,8 @@ import qs.modules.common
 
 Switch {
     id: root
-    width: 44 * Config.options.appearance.uiScale
-    height: 22 * Config.options.appearance.uiScale
+    width: Variable.uiScale(44)
+    height: Variable.uiScale(22)
     implicitWidth: root.width
     implicitHeight: root.height
     property real scale: Config.options.appearance.uiScale

@@ -34,7 +34,7 @@ Item {
         Rectangle {
             anchors.right: parent.right
             width: Variable.size.smallest / 2
-            height: parent.height - (48 * Config.options.appearance.uiScale)
+            height: parent.height - (Variable.uiScale(48))
             radius: Variable.radius.smallest
             anchors.verticalCenter: parent.verticalCenter
             color: Color.colors.primary_container
@@ -68,12 +68,12 @@ Item {
             id: appNameBackground
 
             color: "transparent"
-            Layout.preferredWidth: parent.width - (16 * Config.options.appearance.uiScale)
+            Layout.preferredWidth: parent.width - (Variable.uiScale(16))
             Layout.alignment: Qt.AlignTop
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
             radius: Variable.radius.normal
-            Layout.preferredHeight: appName.implicitHeight + (8 * Config.options.appearance.uiScale)
+            Layout.preferredHeight: appName.implicitHeight + (Variable.uiScale(8))
             Text {
                 id: appName
                 text: notificationObject.appName ?? "System"
@@ -143,7 +143,7 @@ Item {
         Flow {
             id: actionsFlow
             Layout.fillWidth: true
-            Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * Config.options.appearance.uiScale)
+            Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
             Layout.margins: notificationObject.actions.length > 0 ? Variable.margin.small : 0
             Layout.bottomMargin: notificationObject.actions.length > 0 ? Variable.margin.small : Variable.margin.small
             Layout.preferredHeight: childrenRect.height
@@ -156,8 +156,8 @@ Item {
                 model: notificationObject.actions
                 delegate: Rectangle {
 
-                    width: buttonText.implicitWidth + (16 * Config.options.appearance.uiScale)
-                    height: buttonText.implicitHeight + (8 * Config.options.appearance.uiScale)
+                    width: buttonText.implicitWidth + (Variable.uiScale(16))
+                    height: buttonText.implicitHeight + (Variable.uiScale(8))
                     radius: Variable.radius.small
                     color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
                     border.color: Color.colors.primary_container

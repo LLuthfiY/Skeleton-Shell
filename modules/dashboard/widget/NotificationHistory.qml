@@ -35,7 +35,7 @@ ColumnLayout {
                 radius: Variable.radius.small
                 color: hoverHandler.hovered ? Color.colors.primary : "transparent"
                 border.color: hoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
-                border.width: 2 * Config.options.appearance.uiScale
+                border.width: Variable.uiScale(2)
                 Behavior on color {
                     ColorAnimation {
                         duration: 200

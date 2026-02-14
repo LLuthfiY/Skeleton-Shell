@@ -17,11 +17,11 @@ Flickable {
     height: stackWrapper.height
     width: stackWrapper.width
     ScrollBar.vertical: ScrollBar {}
-    contentWidth: root.width - 16 * Config.options.appearance.uiScale
+    contentWidth: root.width - Variable.uiScale(16)
     contentHeight: root.height
     ColumnLayout {
         id: root
-        width: stackWrapper.width - 16 * Config.options.appearance.uiScale
+        width: stackWrapper.width - Variable.uiScale(16)
         spacing: Variable.margin.small
         function setTheme() {
             let palette = Config.options.appearance.palette.type;
@@ -41,8 +41,8 @@ Flickable {
         Rectangle {
             color: "transparent"
             radius: Variable.radius.normal
-            width: 500 * Config.options.appearance.uiScale
-            height: 250 * Config.options.appearance.uiScale
+            width: Variable.uiScale(500)
+            height: Variable.uiScale(250)
             Rectangle {
                 id: wallpaperWrapper
                 anchors.fill: parent

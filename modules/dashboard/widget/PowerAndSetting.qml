@@ -18,7 +18,7 @@ RowLayout {
             id: powerButton
             implicitWidth: Variable.size.larger
             implicitHeight: Variable.size.larger
-            border.width: 2 * Config.options.appearance.uiScale
+            border.width: Variable.uiScale(2)
             border.color: powerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
             radius: Variable.radius.small
             color: powerHoverHandler.hovered ? Color.colors.primary : "transparent"
@@ -49,7 +49,7 @@ RowLayout {
             Menu {
                 id: powerMenu
                 padding: Variable.margin.small
-                implicitWidth: 200 * Config.options.appearance.uiScale
+                implicitWidth: Variable.uiScale(200)
                 background: Rectangle {
                     id: backgroundMenu
                     radius: Variable.radius.normal
@@ -141,7 +141,7 @@ RowLayout {
             radius: Variable.radius.small
             color: settingsHoverHandler.hovered ? Color.colors.primary : "transparent"
             border.color: settingsHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
-            border.width: 2 * Config.options.appearance.uiScale
+            border.width: Variable.uiScale(2)
             Behavior on color {
                 ColorAnimation {
                     duration: 200

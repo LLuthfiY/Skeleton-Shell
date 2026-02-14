@@ -6,7 +6,6 @@ Loader {
     property bool vertical: false
     property int spacing: 4
 
-
     sourceComponent: dynamicLayoutRoot.vertical ? colComp : rowComp
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 

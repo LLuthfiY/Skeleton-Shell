@@ -13,13 +13,13 @@ Rectangle {
     // border.color: Color.colors.primary_container
     // border.width: 2
     width: parent.width
-    height: 82 * Config.options.appearance.uiScale
+    height: Variable.uiScale(82)
     radius: Variable.radius.small
     Layout.fillWidth: true
     Rectangle {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        width: 2 * Config.options.appearance.uiScale
+        width: Variable.uiScale(2)
         height: parent.height / 2
         color: Color.colors.primary_container
         radius: Variable.radius.small
@@ -45,7 +45,7 @@ Rectangle {
                     color: Color.colors.primary_container
                     radius: Variable.radius.small
                     width: parent.width
-                    height: 2 * Config.options.appearance.uiScale
+                    height: Variable.uiScale(2)
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
@@ -73,7 +73,7 @@ Rectangle {
                     color: Color.colors.primary_container
                     radius: Variable.radius.small
                     width: parent.width
-                    height: 2 * Config.options.appearance.uiScale
+                    height: Variable.uiScale(2)
                     anchors.verticalCenter: parent.verticalCenter
                 }
 

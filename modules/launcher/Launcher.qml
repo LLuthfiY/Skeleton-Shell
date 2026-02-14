@@ -28,8 +28,8 @@ Scope {
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
 
-        implicitWidth: 500 * Config.options.appearance.uiScale
-        implicitHeight: 500 * Config.options.appearance.uiScale
+        implicitWidth: Variable.uiScale(500)
+        implicitHeight: Variable.uiScale(500)
         color: "transparent"
 
         // HyprlandFocusGrab {
@@ -54,7 +54,7 @@ Scope {
                 TextField {
                     id: searchInput
                     Layout.fillWidth: true
-                    height: 40 * Config.options.appearance.uiScale
+                    height: Variable.uiScale(40)
                     width: parent.width
                     padding: Variable.margin.small
                     font.pixelSize: Variable.font.pixelSize.normal
@@ -119,7 +119,7 @@ Scope {
                     }
                     Rectangle {
                         anchors.left: parent.left
-                        width: 2 * Config.options.appearance.uiScale
+                        width: Variable.uiScale(2)
                         height: parent.height / 2
                         anchors.verticalCenter: parent.verticalCenter
                         color: launcherList.currentIndex === index || hoverHandler.hovered ? Color.colors.primary : "transparent"

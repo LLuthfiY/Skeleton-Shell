@@ -33,7 +33,7 @@ Scope {
             anchors.margins: Variable.margin.normal
 
             Rectangle {
-                implicitWidth: 200 * Config.options.appearance.uiScale
+                implicitWidth: Variable.uiScale(200)
                 Layout.fillHeight: true
                 color: Color.colors.surface
                 radius: Variable.radius.small
@@ -63,7 +63,7 @@ Scope {
 
                         delegate: Rectangle {
                             Layout.preferredHeight: Variable.size.larger
-                            Layout.preferredWidth: 200 * Config.options.appearance.uiScale
+                            Layout.preferredWidth: Variable.uiScale(200)
                             Layout.fillWidth: true
                             color: "transparent"
                             Rectangle {

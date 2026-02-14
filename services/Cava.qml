@@ -12,7 +12,6 @@ Singleton {
     property var values: Array(barsCount).fill(0)
     property int barsCount: 16
 
-
     Process {
         id: process
         stdinEnabled: false

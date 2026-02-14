@@ -54,8 +54,8 @@ Scope {
             margins.bottom: Variable.margin.large
             exclusiveZone: 0
 
-            implicitWidth: 150 * Config.options.appearance.uiScale
-            implicitHeight: 150 * Config.options.appearance.uiScale
+            implicitWidth: Variable.uiScale(150)
+            implicitHeight: Variable.uiScale(150)
 
             color: "transparent"
             Rectangle {
@@ -70,11 +70,11 @@ Scope {
                 anchors.centerIn: parent
                 anchors.margins: Variable.margin.large
                 lineWidth: Variable.size.small
-                implicitSize: 100 * Config.options.appearance.uiScale
+                implicitSize: Variable.uiScale(100)
                 value: Pipewire.defaultAudioSink?.audio.volume ?? 0
                 inside: LucideIcon {
                     icon: root.muted ? "volume-off" : root.percentage > 50 ? "volume-2" : root.percentage > 0 ? "volume-1" : "volume-x"
-                    font.pixelSize: 48 * Config.options.appearance.uiScale
+                    font.pixelSize: Variable.uiScale(48)
                     color: Color.colors.primary
                 }
             }

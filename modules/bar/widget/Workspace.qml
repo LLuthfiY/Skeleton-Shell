@@ -81,16 +81,16 @@ Item {
                     id: buttonWorkspace
                     property bool occupied: Hyprland.toplevels.values.some(toplevel => toplevel.workspace ? toplevel.workspace.id === modelData : false)
                     color: occupied ? "#77" + Color.colors[Config.options.bar.foreground].substring(1) : "transparent"
-                    implicitWidth: 24 * Config.options.appearance.uiScale
-                    implicitHeight: 24 * Config.options.appearance.uiScale
+                    implicitWidth: Variable.uiScale(24)
+                    implicitHeight: Variable.uiScale(24)
                     radius: Config.options.bar.borderRadius
 
                     Rectangle {
                         property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === modelData : false
                         anchors.centerIn: parent
                         color: Color.colors[Config.options.bar.foreground]
-                        implicitWidth: active ? 14 * Config.options.appearance.uiScale : 6 * Config.options.appearance.uiScale
-                        implicitHeight: active ? 14 * Config.options.appearance.uiScale : 6 * Config.options.appearance.uiScale
+                        implicitWidth: active ? Variable.uiScale(14) : Variable.uiScale(6)
+                        implicitHeight: active ? Variable.uiScale(14) : Variable.uiScale(6)
                         radius: Config.options.bar.borderRadius
 
                         Behavior on implicitWidth {

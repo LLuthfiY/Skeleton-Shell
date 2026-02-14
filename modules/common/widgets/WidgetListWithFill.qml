@@ -69,11 +69,11 @@ ColumnLayout {
                 }
             }
             radius: Variable.radius.small
-            width: addIcon.width + 16 * Config.options.appearance.uiScale
-            height: addIcon.height + 8 * Config.options.appearance.uiScale
+            width: addIcon.width + Variable.uiScale(16)
+            height: addIcon.height + Variable.uiScale(8)
             color: "transparent"
             Rectangle {
-                width: addHoverHandler.hovered ? parent.width : 2 * Config.options.appearance.uiScale
+                width: addHoverHandler.hovered ? parent.width : Variable.uiScale(2)
                 height: parent.height
                 radius: Variable.radius.smallest
                 anchors.verticalCenter: parent.verticalCenter
@@ -89,7 +89,7 @@ ColumnLayout {
                     }
                 }
             }
-            Layout.minimumWidth: 150 * Config.options.appearance.uiScale
+            Layout.minimumWidth: Variable.uiScale(150)
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -107,7 +107,7 @@ ColumnLayout {
             }
             Menu {
                 id: wlm
-                implicitWidth: 200 * Config.options.appearance.uiScale
+                implicitWidth: Variable.uiScale(200)
                 padding: Variable.margin.small
                 background: Rectangle {
                     id: backgroundMenu
@@ -168,7 +168,7 @@ ColumnLayout {
                 }
                 delegate: Rectangle {
                     id: itemRoot
-                    Layout.minimumWidth: 150 * Config.options.appearance.uiScale
+                    Layout.minimumWidth: Variable.uiScale(150)
                     Layout.fillWidth: true
                     Layout.preferredHeight: text.height + Variable.margin.normal
                     color: "transparent"
@@ -177,7 +177,7 @@ ColumnLayout {
                     clip: true
                     Rectangle {
                         width: parent.width
-                        height: 1 * Config.options.appearance.uiScale
+                        height: Variable.uiScale(1)
                         radius: Variable.radius.smallest
                         anchors.bottom: parent.bottom
                         color: Color.colors.surface_container_high
@@ -206,8 +206,8 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 22 * Config.options.appearance.uiScale
-                            height: 22 * Config.options.appearance.uiScale
+                            width: Variable.uiScale(22)
+                            height: Variable.uiScale(22)
 
                             LucideIcon {
                                 icon: "x"
@@ -230,8 +230,8 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 22 * Config.options.appearance.uiScale
-                            height: 22 * Config.options.appearance.uiScale
+                            width: Variable.uiScale(22)
+                            height: Variable.uiScale(22)
 
                             LucideIcon {
                                 icon: "chevron-down"
@@ -240,7 +240,7 @@ ColumnLayout {
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
-                            anchors.rightMargin: 28 * Config.options.appearance.uiScale
+                            anchors.rightMargin: Variable.uiScale(28)
                             color: downHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
@@ -261,8 +261,8 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 22 * Config.options.appearance.uiScale
-                            height: 22 * Config.options.appearance.uiScale
+                            width: Variable.uiScale(22)
+                            height: Variable.uiScale(22)
 
                             LucideIcon {
                                 icon: "chevron-up"
@@ -271,7 +271,7 @@ ColumnLayout {
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
-                            anchors.rightMargin: 56 * Config.options.appearance.uiScale
+                            anchors.rightMargin: Variable.uiScale(56)
                             color: upHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
@@ -294,7 +294,7 @@ ColumnLayout {
                         StyledSwitch {
                             checked: modelData.includes("--fill--")
                             anchors.right: parent.right
-                            anchors.rightMargin: 94 * Config.options.appearance.uiScale
+                            anchors.rightMargin: Variable.uiScale(94)
                             anchors.verticalCenter: parent.verticalCenter
                             onClicked: {
                                 if (modelData.includes("--fill--")) {
@@ -314,7 +314,7 @@ ColumnLayout {
                             font.pixelSize: Variable.font.pixelSize.smaller
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: 148 * Config.options.appearance.uiScale
+                            anchors.rightMargin: Variable.uiScale(148)
                         }
                     }
                 }
