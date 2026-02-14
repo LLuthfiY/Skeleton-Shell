@@ -24,10 +24,6 @@ ListView {
         itemsUpdated();
     }
     function moveItem(from, to) {
-        if (from === to) {
-            itemsUpdated();
-            return;
-        }
         model.splice(to, 0, model.splice(from, 1)[0]);
         itemsUpdated();
     }
