@@ -87,7 +87,7 @@ ScrollView {
         //         Config.options.dashboard.widgets = items;
         //     }
         // }
-        DragableListView {
+        DraggableListView {
             items: Config.options.dashboard.widgets
         }
     }

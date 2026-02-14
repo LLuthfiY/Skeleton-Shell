@@ -13,7 +13,6 @@ Canvas { // Visualizer
     property bool live: true
     property color color: Color.colors.primary
     property int scale: 50
-    property real uiScale: Config.options.appearance.uiScale
 
     onPointsChanged: () => {
         root.requestPaint();
@@ -39,7 +38,7 @@ Canvas { // Visualizer
             var sum = 0, count = 0;
             for (var j = -smoothWindow; j <= smoothWindow; ++j) {
                 var idx = Math.max(0, Math.min(n - 1, i + j));
-                sum += points[idx] * root.scale;
+                sum += Variable.uiScale(points[idx]);
                 count++;
             }
             root.smoothPoints.push(sum / count);

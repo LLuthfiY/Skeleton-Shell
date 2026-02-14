@@ -29,9 +29,9 @@ Rectangle {
             required property var modelData
             required property int index
             color: Color.colors.surface
-            height: text.height + uiScale(16)
+            height: text.height + Variable.uiScale(16)
             width: parent?.parent.width ?? 0
-            border.width: uiScale(2)
+            border.width: Variable.uiScale(2)
             border.color: Color.colors.surface
             radius: Variable.radius.smallest
             Behavior on border.color {
@@ -40,7 +40,7 @@ Rectangle {
                 }
             }
             Rectangle {
-                width: uiScale(2)
+                width: Variable.uiScale(2)
                 height: parent.height * 0.6
                 radius: Variable.radius.smallest
                 anchors.verticalCenter: parent.verticalCenter
@@ -56,11 +56,11 @@ Rectangle {
                 color: "transparent"
                 RowLayout {
                     anchors.fill: wrapper
-                    anchors.leftMargin: uiScale(16)
-                    spacing: uiScale(8)
+                    anchors.leftMargin: Variable.uiScale(16)
+                    spacing: Variable.uiScale(8)
                     Rectangle {
-                        height: text.implicitHeight + uiScale(16)
-                        width: text.implicitHeight + uiScale(16)
+                        height: text.implicitHeight + Variable.uiScale(16)
+                        width: text.implicitHeight + Variable.uiScale(16)
                         color: "transparent"
                         DragHandler {
                             target: itemRoot

@@ -13,7 +13,6 @@ import qs.modules.common.widgets
 
 Item {
     id: root
-    property real uiScale: Config.options.appearance.uiScale
     property var notificationObject
     property bool pendingClose: notificationObject.pendingClose
     width: Variable.size.notificationPopupWidth
@@ -56,7 +55,7 @@ Item {
         anchors.fill: parent
         color: Color.colors.surface
         border.color: Color.colors.primary_container
-        border.width: 1 * root.uiScale
+        border.width: Variable.uiScale(1)
         radius: Variable.radius.small
         TapHandler {
             acceptedButtons: Qt.RightButton
@@ -75,13 +74,13 @@ Item {
             id: appNameBackground
 
             color: "transparent"
-            Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
+            Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
             Layout.alignment: Qt.AlignTop
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
             Layout.topMargin: Variable.margin.small
             radius: Variable.radius.normal
-            Layout.preferredHeight: appName.implicitHeight + (8 * root.uiScale)
+            Layout.preferredHeight: appName.implicitHeight + (Variable.uiScale(8))
             Text {
                 id: appName
                 text: notificationObject.appName ?? "System"
@@ -122,7 +121,7 @@ Item {
                     font.bold: true
                     color: Color.colors.on_surface
                     clip: true
-                    Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
+                    Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
                     wrapMode: Text.Wrap
                 }
 
@@ -141,7 +140,7 @@ Item {
         Flow {
             id: actionsFlow
             Layout.fillWidth: true
-            Layout.preferredWidth: Variable.size.notificationPopupWidth - (16 * root.uiScale)
+            Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
 
             Layout.margins: Variable.margin.small
             Layout.preferredHeight: childrenRect.height
@@ -154,12 +153,12 @@ Item {
                 model: notificationObject.actions
                 delegate: Rectangle {
 
-                    width: buttonText.implicitWidth + (16 * root.uiScale)
-                    height: buttonText.implicitHeight + (8 * root.uiScale)
+                    width: buttonText.implicitWidth + (Variable.uiScale(16))
+                    height: buttonText.implicitHeight + (Variable.uiScale(8))
                     radius: Variable.radius.small
                     color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
                     border.color: Color.colors.primary_container
-                    border.width: 1 * root.uiScale
+                    border.width: Variable.uiScale(1)
                     Behavior on color {
                         ColorAnimation {
                             duration: 200

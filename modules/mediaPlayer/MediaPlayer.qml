@@ -17,13 +17,12 @@ import Qt5Compat.GraphicalEffects
 Scope {
     id: mediaPlayerRoot
     property var players: Mpris.players.values
-    property real uiScale: Config.options.appearance.uiScale
     PanelWindow {
         id: root
 
         color: "transparent"
-        implicitWidth: 476 * uiScale
-        implicitHeight: 112 * uiScale
+        implicitWidth: Variable.uiScale(476)
+        implicitHeight: Variable.uiScale(112)
         WlrLayershell.namespace: "quickshell:mediaPlayer"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
@@ -88,8 +87,8 @@ Scope {
                     spacing: Variable.margin.large
                     Rectangle {
                         id: art
-                        width: 92 * uiScale
-                        height: 92 * uiScale
+                        width: Variable.uiScale(92)
+                        height: Variable.uiScale(92)
 
                         radius: Variable.radius.normal
                         Image {
@@ -126,7 +125,7 @@ Scope {
                                     id: artIcon
                                     anchors.centerIn: parent
                                     icon: "x"
-                                    font.pixelSize: 48 * uiScale
+                                    font.pixelSize: Variable.uiScale(48)
                                     color: Color.colors.on_surface
                                     visible: artHoverHandler.hovered
                                 }
@@ -134,15 +133,15 @@ Scope {
                         }
                     }
                     ColumnLayout {
-                        Layout.minimumWidth: 340 * uiScale
-                        Layout.maximumWidth: 340 * uiScale
+                        Layout.minimumWidth: Variable.uiScale(340)
+                        Layout.maximumWidth: Variable.uiScale(340)
                         spacing: Variable.margin.small
                         Text {
                             Layout.alignment: Qt.AlignVCenter
                             text: modelData.trackTitle
                             elide: Text.ElideRight
                             font.pixelSize: Variable.font.pixelSize.normal
-                            Layout.maximumWidth: 340 * uiScale
+                            Layout.maximumWidth: Variable.uiScale(340)
 
                             font.family: Variable.font.family.main
                             font.weight: Font.Medium
@@ -160,7 +159,7 @@ Scope {
                             elide: Text.ElideRight
                             font.pixelSize: Variable.font.pixelSize.small
                             font.family: Variable.font.family.main
-                            Layout.maximumWidth: 340 * uiScale
+                            Layout.maximumWidth: Variable.uiScale(340)
 
                             font.weight: Font.Medium
                             color: Color.colors.on_surface
