@@ -7,6 +7,8 @@ Switch {
     id: root
     width: 44 * Config.options.appearance.uiScale
     height: 22 * Config.options.appearance.uiScale
+    implicitWidth: root.width
+    implicitHeight: root.height
     property real scale: Config.options.appearance.uiScale
     background: Rectangle {
         id: backgroundSwitch
@@ -14,8 +16,8 @@ Switch {
         border.color: Color.colors.primary
         border.width: 2 * root.scale
         radius: 9999
-        implicitWidth: root.width
-        implicitHeight: root.height
+        width: root.width
+        height: root.height
         anchors.verticalCenter: parent.verticalCenter
         Behavior on color {
             ColorAnimation {

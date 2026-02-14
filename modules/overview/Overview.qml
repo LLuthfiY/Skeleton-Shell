@@ -94,9 +94,6 @@ Scope {
                     x: initX
                     y: initY
 
-                    Component.onCompleted: {
-                        console.log(windowData);
-                    }
                     onWindowDataChanged: {
                         x = col * overviewWindow.monitor.width * overviewWindow.scale + col * 8 + windowData.at[0] * overviewWindow.scale;
                         y = row * overviewWindow.monitor.height * overviewWindow.scale + row * 8 + windowData.at[1] * overviewWindow.scale;

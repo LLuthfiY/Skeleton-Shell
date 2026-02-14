@@ -15,6 +15,10 @@ Singleton {
     property QtObject margin
     property QtObject radius
 
+    function uiScale(size) {
+        return Math.round(size * root.scale);
+    }
+
     FontLoader {
         id: lucide
         source: Directory.shell + "/assets/fonts/lucide.ttf"

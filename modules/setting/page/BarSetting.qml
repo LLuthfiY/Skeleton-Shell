@@ -247,6 +247,10 @@ ScrollView {
             }
             StyledSwitch {
                 checked: Config.options.bar.borderScreen
+                implicitWidth: 40
+                implicitHeight: 20
+                Layout.preferredHeight: 20
+                height: 20
                 onCheckedChanged: {
                     Config.options.bar.borderScreen = checked;
                     WindowManagerUtils.setWM(100);
