@@ -34,6 +34,14 @@ ListView {
         model.splice(index, 1);
         itemsUpdated();
     }
+    function changeFill(index, fill) {
+        if (fill) {
+            model[index] = model[index] + "--fill--";
+        } else {
+            model[index] = model[index].replace("--fill--", "");
+        }
+        itemsUpdated();
+    }
     delegate: Rectangle {
         id: itemRoot
         required property var modelData
@@ -123,12 +131,7 @@ ListView {
                     visible: root.fill
                     checked: modelData.includes("--fill--")
                     onClicked: {
-                        if (modelData.includes("--fill--")) {
-                            root.items[index] = modelData.replace("--fill--", "");
-                        } else {
-                            root.items[index] = modelData + "--fill--";
-                        }
-                        root.itemsUpdated();
+                        root.changeFill(index, checked);
                     }
                 }
                 Rectangle {
