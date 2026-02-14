@@ -72,6 +72,7 @@ Singleton {
     property bool silent: false
     property var filePath: Directory.notificationsPath
     property list<Notif> list: []
+    property list<Notif> listSorted: list.sort((a, b) => b.time - a.time)
     property var popupList: list.filter(notif => notif.popup)
     property bool popupInhibited: (GlobalState?.sidebarRightOpen ?? false) || silent
     property var latestTimeForApp: ({})

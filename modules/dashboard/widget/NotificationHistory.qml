@@ -64,7 +64,7 @@ ColumnLayout {
     }
     ListView {
         id: listView
-        model: Notification.list.sort((a, b) => b.time - a.time)
+        model: Notification.listSorted
         clip: true
         Layout.fillWidth: true
         Layout.fillHeight: true
