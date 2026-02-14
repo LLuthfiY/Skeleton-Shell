@@ -13,11 +13,9 @@ ColumnLayout {
     required property string path
     property list<string> widgetList: []
     property list<string> excludedWidgetList: []
-    Rectangle {
-        color: Color.colors.surface_container
-        anchors.fill: parent.fill
-        radius: Variable.radius.small
-    }
+    property bool fill: false
+    Layout.fillWidth: true
+    width: parent.width
 
     Process {
         id: getWidgets
@@ -57,7 +55,6 @@ ColumnLayout {
     ColumnLayout {
         id: column
         spacing: Variable.margin.smallest
-        Layout.margins: Variable.margin.smallest
         Rectangle {
             id: addButton
             HoverHandler {
@@ -159,165 +156,14 @@ ColumnLayout {
                 }
             }
         }
-        ColumnLayout {
+        DraggableListView {
             id: list
-            spacing: Variable.margin.small
-            Repeater {
-                model: ScriptModel {
-                    values: root.items
-                }
-                delegate: Rectangle {
-                    id: itemRoot
-                    Layout.minimumWidth: Variable.uiScale(150)
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: text.height + Variable.margin.normal
-                    color: "transparent"
-                    radius: Variable.radius.small
-                    property bool hovered: false
-                    clip: true
-                    Rectangle {
-                        width: parent.width
-                        height: Variable.uiScale(1)
-                        radius: Variable.radius.smallest
-                        anchors.bottom: parent.bottom
-                        color: Color.colors.surface_container_high
-                    }
-                    HoverHandler {
-                        id: itemRootHoverHandler
-                    }
-                    Text {
-                        id: text
-                        text: modelData.replace("user--", "").replace("--fill--", "")
-                        font.family: Variable.font.family.main
-                        font.weight: Font.Normal
-                        color: Color.colors.on_surface
-                        font.pixelSize: Variable.font.pixelSize.smaller
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: Variable.margin.small
-                    }
-                    Rectangle {
-                        opacity: itemRootHoverHandler.hovered ? 1 : 0
-                        anchors.fill: parent
-                        color: "transparent"
-                        Behavior on opacity {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                        Rectangle {
-                            width: Variable.uiScale(22)
-                            height: Variable.uiScale(22)
-
-                            LucideIcon {
-                                icon: "x"
-                                color: closeHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                                font.pixelSize: Variable.font.pixelSize.small
-                                anchors.centerIn: parent
-                            }
-                            anchors.right: parent.right
-                            color: closeHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
-                            radius: Variable.radius.small
-                            anchors.verticalCenter: parent.verticalCenter
-                            HoverHandler {
-                                id: closeHoverHandler
-                            }
-                            TapHandler {
-                                onTapped: {
-                                    root.items.splice(index, 1);
-                                    root.itemsChanged();
-                                }
-                            }
-                        }
-                        Rectangle {
-                            width: Variable.uiScale(22)
-                            height: Variable.uiScale(22)
-
-                            LucideIcon {
-                                icon: "chevron-down"
-                                color: downHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                                font.pixelSize: Variable.font.pixelSize.small
-                                anchors.centerIn: parent
-                            }
-                            anchors.right: parent.right
-                            anchors.rightMargin: Variable.uiScale(28)
-                            color: downHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
-                            radius: Variable.radius.small
-                            anchors.verticalCenter: parent.verticalCenter
-                            HoverHandler {
-                                id: downHoverHandler
-                            }
-                            TapHandler {
-                                onTapped: {
-                                    // TODO: switch to the next widget
-                                    if (index < root.items.length - 1) {
-                                        let temp = root.items[index + 1];
-                                        let temp2 = root.items[index];
-                                        root.items[index + 1] = temp2;
-                                        root.items[index] = temp;
-                                    }
-                                    root.itemsChanged();
-                                }
-                            }
-                        }
-                        Rectangle {
-                            width: Variable.uiScale(22)
-                            height: Variable.uiScale(22)
-
-                            LucideIcon {
-                                icon: "chevron-up"
-                                color: upHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                                font.pixelSize: Variable.font.pixelSize.small
-                                anchors.centerIn: parent
-                            }
-                            anchors.right: parent.right
-                            anchors.rightMargin: Variable.uiScale(56)
-                            color: upHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
-                            radius: Variable.radius.small
-                            anchors.verticalCenter: parent.verticalCenter
-                            HoverHandler {
-                                id: upHoverHandler
-                            }
-                            TapHandler {
-                                onTapped: {
-                                    // TODO: switch to the previous widget
-                                    if (index > 0) {
-                                        let temp = root.items[index - 1];
-                                        let temp2 = root.items[index];
-                                        root.items[index - 1] = temp2;
-                                        root.items[index] = temp;
-                                    }
-                                    root.itemsChanged();
-                                }
-                            }
-                        }
-                        StyledSwitch {
-                            checked: modelData.includes("--fill--")
-                            anchors.right: parent.right
-                            anchors.rightMargin: Variable.uiScale(94)
-                            anchors.verticalCenter: parent.verticalCenter
-                            onClicked: {
-                                if (modelData.includes("--fill--")) {
-                                    root.items[index] = modelData.replace("--fill--", "");
-                                } else {
-                                    root.items[index] = modelData + "--fill--";
-                                }
-                                root.itemsChanged();
-                            }
-                        }
-
-                        Text {
-                            text: "Fill"
-                            font.family: Variable.font.family.main
-                            font.weight: Font.Normal
-                            color: Color.colors.on_surface
-                            font.pixelSize: Variable.font.pixelSize.smaller
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.right: parent.right
-                            anchors.rightMargin: Variable.uiScale(148)
-                        }
-                    }
-                }
+            model: root.items
+            Layout.fillWidth: true
+            Layout.preferredHeight: list.contentHeight
+            fill: root.fill
+            onItemsUpdated: {
+                root.items = list.model;
             }
         }
     }

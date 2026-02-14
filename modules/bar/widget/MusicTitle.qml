@@ -70,7 +70,7 @@ Loader {
                         // The rotation property rotates around the center by default
                         // so we don't need a separate Rotation transform unless
                         // we want to customize the origin.
-                        rotation: position === "left" ? -90 : 90
+                        rotation: Config.options.bar.position === "left" ? -90 : 90
 
                         onTextChanged: {
                             parent.implicitHeight = textItem.paintedWidth;

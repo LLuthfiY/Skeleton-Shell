@@ -78,17 +78,23 @@ ScrollView {
                 }
             }
         }
-        // WidgetListWithFill {
-        //     id: widgets
-        //     items: Config.options.dashboard.widgets
-        //     path: Directory.shell + "/modules/dashboard/widget"
-        //     Layout.preferredWidth: 300
-        //     onItemsChanged: {
-        //         Config.options.dashboard.widgets = items;
-        //     }
-        // }
-        DraggableListView {
-            items: Config.options.dashboard.widgets
+        Rectangle {
+            width: root.width
+            height: widgets.height
+            color: "transparent"
+            WidgetListWithFill {
+                id: widgets
+                fill: true
+                items: Config.options.dashboard.widgets
+                width: root.width
+                path: Directory.shell + "/modules/dashboard/widget"
+                onItemsChanged: {
+                    Config.options.dashboard.widgets = items;
+                }
+            }
         }
+        // DraggableListView {
+        //     items: Config.options.dashboard.widgets
+        // }
     }
 }

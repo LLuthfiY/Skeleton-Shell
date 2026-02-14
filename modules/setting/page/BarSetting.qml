@@ -358,12 +358,22 @@ ScrollView {
             label: "Bar Widgets"
         }
 
-        RowLayout {
+        ColumnLayout {
             spacing: 8
-            WidgetList {
+            LucideIcon {
+                icon: "layout-panel-left"
+                color: Color.colors.on_surface
+                font.pixelSize: Variable.font.pixelSize.small
+                font.weight: Font.DemiBold
+                font.family: Variable.font.family.main
+                label: "Start Widgets"
+            }
+            WidgetListWithFill {
                 id: startWidgets
+                fill: true
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
+                width: root.width
                 excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
                 items: Config.options.bar.startWidgets
                 path: Directory.shell + "/modules/bar/widget"
@@ -371,26 +381,54 @@ ScrollView {
                     Config.options.bar.startWidgets = items;
                 }
             }
-            WidgetList {
-                id: centerWidgets
-                Layout.alignment: Qt.AlignTop
-                Layout.fillWidth: true
-                excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
-                items: Config.options.bar.centerWidgets
-                path: Directory.shell + "/modules/bar/widget"
-                onItemsChanged: {
-                    Config.options.bar.centerWidgets = items;
+            LucideIcon {
+                icon: "layout-panel-left"
+                color: Color.colors.on_surface
+                font.pixelSize: Variable.font.pixelSize.small
+                font.weight: Font.DemiBold
+                font.family: Variable.font.family.main
+                label: "Center Widgets"
+            }
+            Rectangle {
+                width: root.width
+                height: centerWidgets.height
+                color: "transparent"
+                WidgetListWithFill {
+                    id: centerWidgets
+                    fill: true
+                    Layout.alignment: Qt.AlignTop
+                    Layout.fillWidth: true
+                    excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
+                    items: Config.options.bar.centerWidgets
+                    path: Directory.shell + "/modules/bar/widget"
+                    onItemsChanged: {
+                        Config.options.bar.centerWidgets = items;
+                    }
                 }
             }
-            WidgetList {
-                id: endWidgets
-                Layout.alignment: Qt.AlignTop
-                Layout.fillWidth: true
-                items: Config.options.bar.endWidgets
-                excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
-                path: Directory.shell + "/modules/bar/widget"
-                onItemsChanged: {
-                    Config.options.bar.endWidgets = items;
+            LucideIcon {
+                icon: "layout-panel-left"
+                color: Color.colors.on_surface
+                font.pixelSize: Variable.font.pixelSize.small
+                font.weight: Font.DemiBold
+                font.family: Variable.font.family.main
+                label: "End Widgets"
+            }
+            Rectangle {
+                width: root.width
+                height: endWidgets.height
+                color: "transparent"
+                WidgetListWithFill {
+                    id: endWidgets
+                    fill: true
+                    Layout.alignment: Qt.AlignTop
+                    Layout.fillWidth: true
+                    items: Config.options.bar.endWidgets
+                    excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
+                    path: Directory.shell + "/modules/bar/widget"
+                    onItemsChanged: {
+                        Config.options.bar.endWidgets = items;
+                    }
                 }
             }
         }
