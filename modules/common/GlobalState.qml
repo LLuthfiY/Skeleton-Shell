@@ -28,6 +28,7 @@ Singleton {
     property bool dashboardOpen: false
     property bool settingsOpen: false
     property bool mediaControlsOpen: true
+    property bool aiChatOpen: false
 
     IpcHandler {
         target: "launcher"
@@ -42,6 +43,7 @@ Singleton {
 
         function toggle() {
             dashboardOpen = !dashboardOpen;
+            aiChatOpen = false;
         }
     }
 
@@ -66,6 +68,15 @@ Singleton {
 
         function setup() {
             WindowManagerUtils.setWM();
+        }
+    }
+
+    IpcHandler {
+        target: "aiChat"
+
+        function toggle() {
+            aiChatOpen = !aiChatOpen;
+            dashboardOpen = false;
         }
     }
 }

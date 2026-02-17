@@ -14,6 +14,24 @@ Item {
     property bool hasAppIcon: notificationObject.appIcon !== ""
     property bool hasImage: notificationObject.image !== ""
 
+    function resolveIcon(icon) {
+        if (!icon || icon === "")
+            return "";
+
+        // Reject stale qsimage handles (session-only)
+        if (icon.startsWith("image://qsimage/"))
+            return "";
+
+        // Allow other providers
+        if (icon.startsWith("image://"))
+            return icon;
+
+        if (icon.startsWith("/"))
+            return "file://" + icon;
+
+        return "image://icon/" + icon;
+    }
+
     Rectangle {
         id: background
         color: Color.colors.primary_container
@@ -31,7 +49,7 @@ Item {
         id: imageComponent
         Image {
             id: image
-            source: notificationObject.image
+            source: root.resolveIcon(notificationObject.image)
             Layout.preferredWidth: Variable.size.notificationAppIconSize
             Layout.preferredHeight: Variable.size.notificationAppIconSize
             Layout.alignment: Qt.AlignVCenter
@@ -42,7 +60,7 @@ Item {
         id: appIconComponent
         Image {
             id: appIcon
-            source: notificationObject.appIcon
+            source: root.resolveIcon(notificationObject.appIcon)
             Layout.preferredWidth: Variable.size.notificationAppIconSize
             Layout.preferredHeight: Variable.size.notificationAppIconSize
             Layout.alignment: Qt.AlignVCenter

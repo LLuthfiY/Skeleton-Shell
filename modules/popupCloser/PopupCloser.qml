@@ -22,6 +22,7 @@ Scope {
                 GlobalState.launcherOpen = false;
                 GlobalState.dashboardOpen = false;
                 GlobalState.overviewOpen = false;
+                GlobalState.aiChatOpen = false;
             }
         }
     }

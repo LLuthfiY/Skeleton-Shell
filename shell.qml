@@ -17,6 +17,7 @@ import qs.modules.popupCloser
 import qs.modules.dashboard
 import qs.modules.setting
 import qs.modules.launcher
+import qs.modules.ai
 
 ShellRoot {
 
@@ -66,7 +67,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen)
+        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen || GlobalState.aiChatOpen)
         component: PopupCloser {}
     }
 
@@ -78,5 +79,10 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && GlobalState.launcherOpen
         component: Launcher {}
+    }
+
+    LazyLoader {
+        active: Config.ready && GlobalState.aiChatOpen
+        component: AIChat {}
     }
 }

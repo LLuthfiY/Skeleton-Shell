@@ -135,6 +135,14 @@ Singleton {
                     property int nightTemp: 4500
                     property int dayTemp: 5700
                 }
+                property JsonObject ai: JsonObject {
+                    property string provider: "Ollama"
+                    property JsonObject ollama: JsonObject {
+                        property string apiKey: "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                        property string model: "gemma3:1b"
+                        property string address: "http://localhost:11434"
+                    }
+                }
             }
         }
     }

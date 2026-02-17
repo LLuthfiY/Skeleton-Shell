@@ -23,7 +23,7 @@ Scope {
         screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
 
         WlrLayershell.namespace: "quickshell:launcher"
-        WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+        WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
         // WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
