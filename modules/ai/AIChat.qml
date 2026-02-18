@@ -237,10 +237,17 @@ Scope {
                         }
                     }
                     ListView {
+                        id: listView
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         model: root.provider.chatHistory
                         spacing: Variable.margin.small
+                        Connections {
+                            target: root.provider
+                            onChatUpdated: {
+                                Qt.callLater(listView.positionViewAtEnd);
+                            }
+                        }
                         delegate: ChatBox {
                             text: modelData.text
                             isUser: modelData.isUser
@@ -252,9 +259,7 @@ Scope {
                         }
 
                         onCountChanged: {
-                            if (count > 0) {
-                                Qt.callLater(positionViewAtEnd);
-                            }
+                            positionViewAtEnd();
                         }
                         clip: true
                     }
@@ -358,6 +363,7 @@ Scope {
                                     onTapped: {
                                         root.provider.sendMessage(inputField.text);
                                         inputField.text = "";
+                                        listView.positionViewAtEnd();
                                     }
                                 }
                             }

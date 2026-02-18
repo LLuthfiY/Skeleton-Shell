@@ -15,6 +15,8 @@ Singleton {
     property list<ChatObject> chatHistory: []
     property bool onTask: false
 
+    signal chatUpdated
+
     component ChatObject: QtObject {
         id: wrapper
         property string text
@@ -101,6 +103,7 @@ Singleton {
                 // console.log(this.text);
                 chatHistory[chatHistory.length - 1].text = JSON.parse(this.text).message.content;
                 root.onTask = false;
+                root.chatUpdated();
             }
         }
     }
