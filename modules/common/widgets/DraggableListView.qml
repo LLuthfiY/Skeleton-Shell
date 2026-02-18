@@ -55,19 +55,18 @@ ListView {
                 duration: 200
             }
         }
-        Rectangle {
-            width: Variable.uiScale(2)
-            height: parent.height * 0.6
-            radius: Variable.radius.smallest
-            anchors.verticalCenter: parent.verticalCenter
-            color: Color.colors.primary_container
-            anchors.left: parent.left
-            anchors.leftMargin: Variable.margin.small
-        }
+        // Rectangle {
+        //     width: Variable.uiScale(2)
+        //     height: parent.height * 0.6
+        //     radius: Variable.radius.smallest
+        //     anchors.verticalCenter: parent.verticalCenter
+        //     color: Color.colors.primary_container
+        //     anchors.left: parent.left
+        //     anchors.leftMargin: Variable.margin.small
+        // }
         Rectangle {
             id: wrapper
             anchors.fill: parent
-            anchors.leftMargin: Variable.margin.normal
             anchors.rightMargin: Variable.margin.normal
             color: "transparent"
             RowLayout {

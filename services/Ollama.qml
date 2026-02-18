@@ -13,6 +13,7 @@ Singleton {
     property bool active: false
     property list<string> models: []
     property list<ChatObject> chatHistory: []
+    property bool onTask: false
 
     component ChatObject: QtObject {
         id: wrapper
@@ -45,6 +46,65 @@ Singleton {
         }
     }
 
+    Process {
+        id: chatOllamaProcess
+        stdout: StdioCollector {
+            id: chatOllamaCollector
+            waitForEnd: true
+            // property string unCompletedMessage: ""
+            // property QtObject lastObject: null
+            // property string lastText: ""
+            // property int updateCount: 20
+            // onDataChanged: {
+            //     if (!lastObject) {
+            //         lastObject = chatObject.createObject(root, {
+            //             "text": "",
+            //             "isUser": false
+            //         });
+            //         chatHistory = [...chatHistory, lastObject];
+            //     }
+            //
+            //     const words = this.text.trim().split("\n");
+            //     for (let i = 0; i < words.length; i++) {
+            //         let json = JSON.parse(words[i]);
+            //         const content = words[i].match(/"content":"(.*?)"/)[1];
+            //         if (content) {
+            //             lastText += (lastObject.text.length > 0 ? " " : "") + content;
+            //         }
+            //         updateCount--;
+            //         if (updateCount <= 0) {
+            //             lastObject.text += lastText;
+            //             lastText = "";
+            //             updateCount = 20;
+            //         }
+            //     }
+            // }
+            // onTextChanged: {
+            //     const text = chatOllamaCollector.unCompletedMessage + this.text;
+            //     const words = text.trim().split("\n");
+            //     unCompletedMessage = "";
+            //     for (const word of words) {
+            //         if (word.endsWith("}")) {
+            //             const content = JSON.parse(word).message.content;
+            //             if (content) {
+            //                 chatHistory[chatHistory.length - 1].text += (chatHistory[chatHistory.length - 1].text.length > 0 ? " " : "") + content;
+            //             }
+            //         } else {
+            //             unCompletedMessage = word;
+            //         }
+            //     }
+            // }
+            onStreamFinished: {
+                // lastObject = null;
+                // lastText = "";
+                // updateCount = 20;
+                // console.log(this.text);
+                chatHistory[chatHistory.length - 1].text = JSON.parse(this.text).message.content;
+                root.onTask = false;
+            }
+        }
+    }
+
     Timer {
         id: checkActiveTimer
         running: true
@@ -62,10 +122,21 @@ Singleton {
     }
 
     function sendMessage(message) {
+        if (root.onTask) {
+            return;
+        }
+        root.onTask = true;
         const co = chatObject.createObject(root, {
             "text": message,
             "isUser": true
         });
         chatHistory = [...chatHistory, co];
+        chatOllamaProcess.command = ["bash", Directory.shell.replace("file://", "") + "/scripts/ollama/run.sh", Config.options.services.ai.ollama.model, message];
+        const co2 = chatObject.createObject(root, {
+            "text": "Thinking...",
+            "isUser": false
+        });
+        chatHistory = [...chatHistory, co2];
+        chatOllamaProcess.running = true;
     }
 }

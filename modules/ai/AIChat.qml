@@ -240,6 +240,23 @@ Scope {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         model: root.provider.chatHistory
+                        spacing: Variable.margin.small
+                        delegate: ChatBox {
+                            text: modelData.text
+                            isUser: modelData.isUser
+                        }
+                        Behavior on contentY {
+                            NumberAnimation {
+                                duration: 100
+                            }
+                        }
+
+                        onCountChanged: {
+                            if (count > 0) {
+                                Qt.callLater(positionViewAtEnd);
+                            }
+                        }
+                        clip: true
                     }
                     Rectangle {
                         property bool active: false
@@ -261,6 +278,7 @@ Scope {
                             placeholderTextColor: "#888888"
                             selectByMouse: true
                             wrapMode: TextEdit.Wrap
+                            focus: true
                             background: Rectangle {
                                 color: Color.colors.surface
                                 radius: Variable.radius.small
