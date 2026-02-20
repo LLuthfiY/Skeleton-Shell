@@ -14,6 +14,7 @@ Singleton {
     property list<string> models: []
     property list<ChatObject> chatHistory: []
     property bool onTask: false
+    property int numChats: Config.options.services.ai.ollama.maxChatForContext
 
     signal chatUpdated
 
@@ -137,18 +138,18 @@ Singleton {
 
         var data = {
             model: Config.options.services.ai.ollama.model,
-            messages: [
-                {
-                    role: "user",
-                    content: message
-                }
-            ],
+            messages: [...chatHistory.slice(1, root.numChats).reverse().map(c => {
+                    return {
+                        role: c.isUser ? "user" : "assistant",
+                        content: c.text
+                    };
+                })],
             stream: true,
             options: {
                 temperature: 0.5
             }
         };
-
+        console.log(JSON.stringify(data));
         xhr.send(JSON.stringify(data));
     }
 }

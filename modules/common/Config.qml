@@ -141,6 +141,7 @@ Singleton {
                         property string apiKey: "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                         property string model: "gemma3:1b"
                         property string address: "http://localhost:11434"
+                        property int maxChatForContext: 10
                     }
                 }
             }

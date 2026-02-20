@@ -64,7 +64,6 @@ Rectangle {
                         "onClicked": function () {
                             textEdit.selectAll();
                             textEdit.copy();
-                            console.log(textEdit.text);
                         }
                     }
                 ]
@@ -72,9 +71,6 @@ Rectangle {
                     id: textEdit
                     visible: false
                     text: root.text
-                    Component.onCompleted: {
-                        console.log(textEdit.text);
-                    }
                 }
                 Repeater {
                     model: buttonRow.buttons
