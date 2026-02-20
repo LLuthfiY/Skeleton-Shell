@@ -242,12 +242,12 @@ Scope {
                         Layout.fillHeight: true
                         model: root.provider.chatHistory
                         spacing: Variable.margin.small
-                        Connections {
-                            target: root.provider
-                            onChatUpdated: {
-                                Qt.callLater(listView.positionViewAtEnd);
-                            }
-                        }
+                        // Connections {
+                        //     target: root.provider
+                        //     onChatUpdated: {
+                        //         Qt.callLater(listView.positionViewAtEnd);
+                        //     }
+                        // }
                         delegate: ChatBox {
                             text: modelData.text
                             isUser: modelData.isUser
@@ -257,10 +257,16 @@ Scope {
                                 duration: 100
                             }
                         }
+                        // function toDown() {
+                        //     listView.contentY = Math.min(0, listView.contentY + listView.originY);
+                        // }
+                        //
+                        // onCountChanged: {
+                        //     // Qt.callLater(listView.positionViewAtEnd);
+                        //     Qt.callLater(toDown);
+                        // }
+                        verticalLayoutDirection: ListView.BottomToTop
 
-                        onCountChanged: {
-                            positionViewAtEnd();
-                        }
                         clip: true
                     }
                     Rectangle {

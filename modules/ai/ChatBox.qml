@@ -21,18 +21,54 @@ Rectangle {
         width: parent.width
         spacing: 0
         anchors.verticalCenter: parent.verticalCenter
-        Text {
-            id: message
-            text: root.text
-            Layout.maximumWidth: root.width - Variable.margin.normal * 4
-            font.family: Variable.font.family.main
-            font.weight: Font.Normal
-            font.pixelSize: Variable.font.pixelSize.small
-            color: root.text === "Thinking..." ? "#777777" : Color.colors.on_surface_variant
-            textFormat: Text.MarkdownText
-            wrapMode: Text.Wrap
-            Layout.alignment: root.isUser ? Qt.AlignRight : Qt.AlignLeft
-            Layout.margins: Variable.margin.normal
+        // Text {
+        //     id: message
+        //     text: root.text
+        //     Layout.maximumWidth: layout.width
+        //     font.family: Variable.font.family.main
+        //     font.weight: Font.Normal
+        //     font.pixelSize: Variable.font.pixelSize.smaller
+        //     color: root.text === "Thinking..." ? "#777777" : Color.colors.on_surface_variant
+        //     textFormat: Text.MarkdownText
+        //     wrapMode: Text.Wrap
+        //     Layout.alignment: root.isUser ? Qt.AlignRight : Qt.AlignLeft
+        //     Layout.margins: Variable.margin.normal
+        // }
+        ScrollView {
+            id: scrollView
+            Layout.fillWidth: true
+            Layout.preferredHeight: message.height
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+            ScrollBar.horizontal.policy: ScrollBar.AsNeeded
+            // WheelHandler {
+            //     acceptedDevices: PointerDevice.Mouse
+            //     onWheel: {
+            //         // delta.y is vertical wheel motion
+            //         // map it to horizontal scrolling
+            //         ListView.view.contentX -= wheel.angleDelta.y;
+            //         wheel.accepted = true;
+            //     }
+            // WheelHandler {
+            //     target: scrollView
+            //     acceptedDevices: PointerDevice.Mouse
+            //     onWheel: {
+            //         // delta.y is vertical wheel motion
+            //         // map it to horizontal scrolling
+            //         scrollView.contentX -= wheel.angleDelta.y;
+            //         wheel.accepted = true;
+            //     }
+            // }
+            Text {
+                id: message
+                text: root.text
+                width: layout.width - Variable.margin.normal * 2
+                font.family: Variable.font.family.main
+                font.weight: Font.Normal
+                font.pixelSize: Variable.font.pixelSize.smaller
+                color: root.text === "Thinking..." ? "#777777" : Color.colors.on_surface_variant
+                textFormat: Text.MarkdownText
+                wrapMode: Text.Wrap
+            }
         }
         RowLayout {
             id: buttonRow
@@ -82,14 +118,14 @@ Rectangle {
             }
         }
     }
-    Rectangle {
-        id: indicator
-        anchors.right: root.isUser ? parent.right : undefined
-        anchors.left: root.isUser ? undefined : parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        width: Variable.uiScale(2)
-        height: parent.height / 2
-        radius: width / 2
-        color: Color.colors.primary_container
-    }
+    // Rectangle {
+    //     id: indicator
+    //     anchors.right: root.isUser ? parent.right : undefined
+    //     anchors.left: root.isUser ? undefined : parent.left
+    //     anchors.verticalCenter: parent.verticalCenter
+    //     width: Variable.uiScale(2)
+    //     height: parent.height / 2
+    //     radius: width / 2
+    //     color: Color.colors.primary_container
+    // }
 }

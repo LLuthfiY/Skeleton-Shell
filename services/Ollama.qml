@@ -53,57 +53,9 @@ Singleton {
         stdout: StdioCollector {
             id: chatOllamaCollector
             waitForEnd: true
-            // property string unCompletedMessage: ""
-            // property QtObject lastObject: null
-            // property string lastText: ""
-            // property int updateCount: 20
-            // onDataChanged: {
-            //     if (!lastObject) {
-            //         lastObject = chatObject.createObject(root, {
-            //             "text": "",
-            //             "isUser": false
-            //         });
-            //         chatHistory = [...chatHistory, lastObject];
-            //     }
-            //
-            //     const words = this.text.trim().split("\n");
-            //     for (let i = 0; i < words.length; i++) {
-            //         let json = JSON.parse(words[i]);
-            //         const content = words[i].match(/"content":"(.*?)"/)[1];
-            //         if (content) {
-            //             lastText += (lastObject.text.length > 0 ? " " : "") + content;
-            //         }
-            //         updateCount--;
-            //         if (updateCount <= 0) {
-            //             lastObject.text += lastText;
-            //             lastText = "";
-            //             updateCount = 20;
-            //         }
-            //     }
-            // }
-            // onTextChanged: {
-            //     const text = chatOllamaCollector.unCompletedMessage + this.text;
-            //     const words = text.trim().split("\n");
-            //     unCompletedMessage = "";
-            //     for (const word of words) {
-            //         if (word.endsWith("}")) {
-            //             const content = JSON.parse(word).message.content;
-            //             if (content) {
-            //                 chatHistory[chatHistory.length - 1].text += (chatHistory[chatHistory.length - 1].text.length > 0 ? " " : "") + content;
-            //             }
-            //         } else {
-            //             unCompletedMessage = word;
-            //         }
-            //     }
-            // }
             onStreamFinished: {
-                // lastObject = null;
-                // lastText = "";
-                // updateCount = 20;
-                // console.log(this.text);
                 chatHistory[chatHistory.length - 1].text = JSON.parse(this.text).message.content;
                 root.onTask = false;
-                root.chatUpdated();
             }
         }
     }
@@ -133,13 +85,68 @@ Singleton {
             "text": message,
             "isUser": true
         });
-        chatHistory = [...chatHistory, co];
         chatOllamaProcess.command = ["bash", Directory.shell.replace("file://", "") + "/scripts/ollama/run.sh", Config.options.services.ai.ollama.model, message];
         const co2 = chatObject.createObject(root, {
             "text": "Thinking...",
             "isUser": false
         });
-        chatHistory = [...chatHistory, co2];
-        chatOllamaProcess.running = true;
+        chatHistory = [co2, co, ...chatHistory];
+        // chatOllamaProcess.running = true;
+        var xhr = new XMLHttpRequest();
+        var processedLength = 0;
+        var buffer = "";
+        xhr.open("POST", "http://localhost:11434/api/chat");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                // const json = JSON.parse(xhr.responseText);
+                // co2.text = json.message.content;
+                root.onTask = false;
+            }
+            if (xhr.readyState === XMLHttpRequest.LOADING) {
+                // Get only new data
+                if (co2.text === "Thinking...") {
+                    co2.text = "";
+                }
+                var newText = xhr.responseText.substring(processedLength);
+                processedLength = xhr.responseText.length;
+
+                buffer += newText;
+                var lines = buffer.split("\n");
+                buffer = lines.pop();  // keep incomplete line
+
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i].trim();
+                    if (!line)
+                        continue;
+                    try {
+                        var json = JSON.parse(line);
+
+                        if (json.message && json.message.content) {
+                            chatHistory[0].text += json.message.content;
+                        }
+                    } catch (e) {
+                        console.log("parse error", e);
+                    }
+                }
+            }
+        };
+
+        var data = {
+            model: Config.options.services.ai.ollama.model,
+            messages: [
+                {
+                    role: "user",
+                    content: message
+                }
+            ],
+            stream: true,
+            options: {
+                temperature: 0.5
+            }
+        };
+
+        xhr.send(JSON.stringify(data));
     }
 }

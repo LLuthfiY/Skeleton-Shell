@@ -35,7 +35,7 @@ Singleton {
         property int notificationHistoryWidth: root.uiScale(200)
         property int notificationAppIconSize: root.uiScale(48)
         property int dashboardWidth: root.uiScale(400)
-        property int aiChatWidth: root.uiScale(500)
+        property int aiChatWidth: root.uiScale(600)
 
         property int smallest: root.uiScale(4)
         property int small: root.uiScale(8)
