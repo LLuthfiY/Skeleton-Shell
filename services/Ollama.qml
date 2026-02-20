@@ -21,6 +21,8 @@ Singleton {
         id: wrapper
         property string text
         property bool isUser: false
+        property bool isLoading: false
+        property string model: "Gemma3:1b"
     }
 
     Component {
@@ -87,8 +89,10 @@ Singleton {
         });
         chatOllamaProcess.command = ["bash", Directory.shell.replace("file://", "") + "/scripts/ollama/run.sh", Config.options.services.ai.ollama.model, message];
         const co2 = chatObject.createObject(root, {
-            "text": "Thinking...",
-            "isUser": false
+            "text": "",
+            "isUser": false,
+            "isLoading": true,
+            "model": Config.options.services.ai.ollama.model.slice()
         });
         chatHistory = [co2, co, ...chatHistory];
         // chatOllamaProcess.running = true;
@@ -102,13 +106,11 @@ Singleton {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 // const json = JSON.parse(xhr.responseText);
                 // co2.text = json.message.content;
+                co2.isLoading = false;
                 root.onTask = false;
             }
             if (xhr.readyState === XMLHttpRequest.LOADING) {
                 // Get only new data
-                if (co2.text === "Thinking...") {
-                    co2.text = "";
-                }
                 var newText = xhr.responseText.substring(processedLength);
                 processedLength = xhr.responseText.length;
 

@@ -9,5 +9,5 @@ curl -s "http://localhost:11434/api/chat" \
                 \"role\": \"user\"
             }
         ],
-        \"stream\": false
+        \"stream\": true
     }"

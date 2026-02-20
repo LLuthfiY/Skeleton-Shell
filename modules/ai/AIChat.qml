@@ -246,7 +246,7 @@ Scope {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         model: root.provider.chatHistory
-                        spacing: Variable.margin.small
+                        spacing: Variable.margin.large
                         // Connections {
                         //     target: root.provider
                         //     onChatUpdated: {
@@ -257,6 +257,8 @@ Scope {
                             text: modelData.text
                             isUser: modelData.isUser
                             isFlickable: root.flickable
+                            isLoading: modelData.isLoading
+                            model: modelData.model
                         }
                         Behavior on contentY {
                             NumberAnimation {
@@ -304,12 +306,12 @@ Scope {
                                 root.provider.sendMessage(inputField.text);
                                 inputField.text = "";
                             }
-                            Keys.onPressed: {
+                            Keys.onPressed: function (event) {
                                 if (event.modifiers & Qt.ControlModifier) {
                                     root.flickable = true;
                                 }
                             }
-                            Keys.onReleased: {
+                            Keys.onReleased: function (event) {
                                 if (event.modifiers & Qt.ControlModifier) {
                                     root.flickable = false;
                                 }

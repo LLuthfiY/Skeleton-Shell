@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 
@@ -13,6 +14,8 @@ Rectangle {
     id: root
     property string text: ""
     property bool isUser: false
+    property string model: "Gemma3:1b"
+    property bool isLoading: false
     implicitHeight: layout.height
     width: ListView.view.width
     color: "transparent"
@@ -20,47 +23,14 @@ Rectangle {
     ColumnLayout {
         id: layout
         width: parent.width
-        spacing: 0
+        spacing: Variable.margin.smallest
         anchors.verticalCenter: parent.verticalCenter
-        // Text {
-        //     id: message
-        //     text: root.text
-        //     Layout.maximumWidth: layout.width
-        //     font.family: Variable.font.family.main
-        //     font.weight: Font.Normal
-        //     font.pixelSize: Variable.font.pixelSize.smaller
-        //     color: root.text === "Thinking..." ? "#777777" : Color.colors.on_surface_variant
-        //     textFormat: Text.MarkdownText
-        //     wrapMode: Text.Wrap
-        //     Layout.alignment: root.isUser ? Qt.AlignRight : Qt.AlignLeft
-        //     Layout.margins: Variable.margin.normal
-        // }
         Flickable {
             id: scrollView
             Layout.fillWidth: true
             Layout.preferredHeight: message.height
             flickableDirection: Flickable.HorizontalAndVerticalFlick
             interactive: root.isFlickable
-            // ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-            // ScrollBar.horizontal.policy: ScrollBar.AsNeeded
-            // WheelHandler {
-            //     acceptedDevices: PointerDevice.Mouse
-            //     onWheel: {
-            //         // delta.y is vertical wheel motion
-            //         // map it to horizontal scrolling
-            //         ListView.view.contentX -= wheel.angleDelta.y;
-            //         wheel.accepted = true;
-            //     }
-            // WheelHandler {
-            //     target: scrollView
-            //     acceptedDevices: PointerDevice.Mouse
-            //     onWheel: {
-            //         // delta.y is vertical wheel motion
-            //         // map it to horizontal scrolling
-            //         scrollView.contentX -= wheel.angleDelta.y;
-            //         wheel.accepted = true;
-            //     }
-            // }
             Text {
                 id: message
                 text: root.text
@@ -74,50 +44,98 @@ Rectangle {
             }
         }
         RowLayout {
-            id: buttonRow
-            spacing: Variable.margin.small
-            Layout.alignment: root.isUser ? Qt.AlignRight : Qt.AlignLeft
-            property var buttons: [
-                {
-                    "icon": "copy",
-                    "onClicked": function () {
-                        Clipboard.text = message.text;
+            id: infoRow
+            spacing: 0
+            Rectangle {
+                anchors.fill: parent
+                color: "transparent"
+                radius: Variable.radius.small
+                border.width: 1
+                border.color: Color.colors.primary_container
+                clip: true
+            }
+            RowLayout {
+                id: buttonRow
+                spacing: Variable.margin.small
+                Layout.fillWidth: true
+                property var buttons: [
+                    {
+                        "icon": "copy",
+                        "onClicked": function () {
+                            textEdit.selectAll();
+                            textEdit.copy();
+                            console.log(textEdit.text);
+                        }
+                    }
+                ]
+                TextEdit {
+                    id: textEdit
+                    visible: false
+                    text: root.text
+                    Component.onCompleted: {
+                        console.log(textEdit.text);
                     }
                 }
-            ]
-            Repeater {
-                model: buttonRow.buttons
-                delegate: Rectangle {
-                    width: buttonIcon.width + Variable.margin.normal
-                    height: buttonIcon.height + Variable.margin.normal
-                    color: buttonHoverHandler.hovered ? Color.colors.primary : "transparent"
-                    radius: Variable.radius.small
-                    Layout.margins: Variable.margin.normal
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                    HoverHandler {
-                        id: buttonHoverHandler
-                    }
-                    TapHandler {
-                        onTapped: {
-                            modelData.onClicked();
-                        }
-                    }
-                    LucideIcon {
-                        id: buttonIcon
-                        icon: modelData.icon
-                        color: buttonHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                        anchors.centerIn: parent
+                Repeater {
+                    model: buttonRow.buttons
+                    delegate: Rectangle {
+                        width: buttonIcon.width + Variable.margin.normal
+                        height: buttonIcon.height + Variable.margin.normal
+                        color: buttonHoverHandler.hovered ? Color.colors.primary : "transparent"
+                        radius: Variable.radius.small
+                        clip: true
+                        Layout.margins: Variable.margin.smallest
                         Behavior on color {
                             ColorAnimation {
                                 duration: 200
                             }
                         }
+                        HoverHandler {
+                            id: buttonHoverHandler
+                        }
+                        TapHandler {
+                            onTapped: {
+                                modelData.onClicked();
+                            }
+                        }
+                        // PointBackground {
+                        //     anchors.fill: parent
+                        //     dotRadius: 1
+                        //     dotSpacing: 4
+                        //     color: "transparent"
+                        // }
+                        LucideIcon {
+                            id: buttonIcon
+                            icon: modelData.icon
+                            color: buttonHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                            anchors.centerIn: parent
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 200
+                                }
+                            }
+                        }
                     }
                 }
+            }
+            Text {
+                font.family: Variable.font.family.main
+                font.weight: Font.Normal
+                font.pixelSize: Variable.font.pixelSize.smaller
+                text: root.isUser ? "by: You " : "by: " + root.model
+                color: Color.colors.on_surface_variant
+            }
+            Item {
+                Layout.fillWidth: true
+            }
+            Text {
+                visible: root.isLoading
+                font.family: Variable.font.family.main
+                font.weight: Font.Normal
+                font.pixelSize: Variable.font.pixelSize.smaller
+                text: "Thinking..."
+                color: "#777777"
+                Layout.rightMargin: Variable.margin.normal
             }
         }
     }
