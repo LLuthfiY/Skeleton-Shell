@@ -374,7 +374,7 @@ Scope {
                                 }
                                 LucideIcon {
                                     id: sendIcon
-                                    icon: "send"
+                                    icon: provider.onTask ? "square" : "send"
                                     color: sendHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                                     anchors.centerIn: parent
                                     Behavior on color {

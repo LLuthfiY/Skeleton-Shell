@@ -28,8 +28,10 @@ Singleton {
 
     readonly property string shell: StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0] + "/Skeleton-Shell"
 
-    readonly property string configFile: config + "/Skeleton-Shell/config.json"
-    readonly property string colorFile: config + "/Skeleton-Shell/colors.json"
+    // readonly property string configFile: config + "/Skeleton-Shell/config.json"
+    // readonly property string colorFile: config + "/Skeleton-Shell/colors.json"
+    readonly property string configFile: cache + "/Skeleton-Shell/ConfigFolder/config.json"
+    readonly property string colorFile: cache + "/Skeleton-Shell/ConfigFolder/colors.json"
     readonly property string notificationsPath: trimFileProtocol(`${Directory.cache}/notifications/notifications.json`)
     readonly property string hyprlandConfig: trimFileProtocol(`${Directory.config}/hypr/Skeleton-Shell/config.conf`)
 }

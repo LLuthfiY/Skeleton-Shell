@@ -9,7 +9,7 @@ Singleton {
     id: root
 
     property bool ready: false
-    property string configFile: Directory.configFile
+    property string configFile: MasterConfig.options.configFile
     property alias options: configOptionJsonAdapter
 
     function setNestedValue(nestedKey, value) {
@@ -43,7 +43,7 @@ Singleton {
     }
 
     FileView {
-        path: root.configFile
+        path: MasterConfig.ready ? root.configFile : ""
         watchChanges: true
         onFileChanged: reload()
         onAdapterUpdated: writeAdapter()

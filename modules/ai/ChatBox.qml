@@ -132,7 +132,7 @@ Rectangle {
                 font.weight: Font.Normal
                 font.pixelSize: Variable.font.pixelSize.smaller
                 text: "Thinking..."
-                color: "#777777"
+                color: Color.colors.on_surface_variant
                 Layout.rightMargin: Variable.margin.normal
             }
         }
