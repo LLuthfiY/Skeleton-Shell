@@ -50,7 +50,7 @@ Rectangle {
             spacing: 0
             Rectangle {
                 anchors.fill: parent
-                color: "transparent"
+                color: Color.colors.primary_container
                 radius: Variable.radius.small
                 border.width: 1
                 border.color: Color.colors.primary_container
