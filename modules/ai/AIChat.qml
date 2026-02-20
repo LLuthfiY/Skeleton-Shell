@@ -16,6 +16,11 @@ Scope {
     property list<string> providerList: ["ollama"]
     property string pv: Config.options.services.ai.provider
     property var provider: pv === "ollama" ? Ollama : null
+    property bool flickable: false
+
+    onFlickableChanged: {
+        console.log(flickable);
+    }
 
     property list<string> modelList: []
     PanelWindow {
@@ -251,6 +256,7 @@ Scope {
                         delegate: ChatBox {
                             text: modelData.text
                             isUser: modelData.isUser
+                            isFlickable: root.flickable
                         }
                         Behavior on contentY {
                             NumberAnimation {
@@ -297,6 +303,16 @@ Scope {
                             Keys.onReturnPressed: {
                                 root.provider.sendMessage(inputField.text);
                                 inputField.text = "";
+                            }
+                            Keys.onPressed: {
+                                if (event.modifiers & Qt.ControlModifier) {
+                                    root.flickable = true;
+                                }
+                            }
+                            Keys.onReleased: {
+                                if (event.modifiers & Qt.ControlModifier) {
+                                    root.flickable = false;
+                                }
                             }
                         }
                         RowLayout {

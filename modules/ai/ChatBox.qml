@@ -16,6 +16,7 @@ Rectangle {
     implicitHeight: layout.height
     width: ListView.view.width
     color: "transparent"
+    property bool isFlickable: false
     ColumnLayout {
         id: layout
         width: parent.width
@@ -34,12 +35,14 @@ Rectangle {
         //     Layout.alignment: root.isUser ? Qt.AlignRight : Qt.AlignLeft
         //     Layout.margins: Variable.margin.normal
         // }
-        ScrollView {
+        Flickable {
             id: scrollView
             Layout.fillWidth: true
             Layout.preferredHeight: message.height
-            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-            ScrollBar.horizontal.policy: ScrollBar.AsNeeded
+            flickableDirection: Flickable.HorizontalAndVerticalFlick
+            interactive: root.isFlickable
+            // ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+            // ScrollBar.horizontal.policy: ScrollBar.AsNeeded
             // WheelHandler {
             //     acceptedDevices: PointerDevice.Mouse
             //     onWheel: {
