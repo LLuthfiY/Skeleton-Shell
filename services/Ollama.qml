@@ -13,6 +13,13 @@ Singleton {
     property bool active: false
     property list<string> models: []
     property list<ChatObject> chatHistory: []
+    property list<ChatObject> chatHistoryWithDummy: [chatObject.createObject(root, {
+            "text": "",
+            "isUser": false,
+            "isLoading": true,
+            "model": Config.options.services.ai.ollama.model.slice(),
+            "isDummy": true
+        }), ...chatHistory]
     property bool onTask: false
     property int numChats: Config.options.services.ai.ollama.maxChatForContext
 
@@ -24,6 +31,7 @@ Singleton {
         property bool isUser: false
         property bool isLoading: false
         property string model: "Gemma3:1b"
+        property bool isDummy: false
     }
 
     Component {

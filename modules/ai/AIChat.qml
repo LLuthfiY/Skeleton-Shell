@@ -18,10 +18,6 @@ Scope {
     property var provider: pv === "ollama" ? Ollama : null
     property bool flickable: false
 
-    onFlickableChanged: {
-        console.log(flickable);
-    }
-
     property list<string> modelList: []
     PanelWindow {
         id: chatWindow
@@ -245,7 +241,7 @@ Scope {
                         id: listView
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        model: root.provider.chatHistory
+                        model: root.provider.chatHistoryWithDummy
                         spacing: Variable.margin.large
                         // Connections {
                         //     target: root.provider
@@ -253,18 +249,23 @@ Scope {
                         //         Qt.callLater(listView.positionViewAtEnd);
                         //     }
                         // }
+                        Component.onCompleted: {
+                            listView.positionViewAtIndex(0, ListView.Beginning);
+                        }
                         delegate: ChatBox {
                             text: modelData.text
                             isUser: modelData.isUser
                             isFlickable: root.flickable
                             isLoading: modelData.isLoading
                             model: modelData.model
+                            isDummy: modelData.isDummy
                         }
                         Behavior on contentY {
                             NumberAnimation {
                                 duration: 100
                             }
                         }
+                        highlightRangeMode: ListView.NoHighlightRange
                         // function toDown() {
                         //     listView.contentY = Math.min(0, listView.contentY + listView.originY);
                         // }

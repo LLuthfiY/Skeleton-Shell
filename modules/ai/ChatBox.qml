@@ -16,12 +16,14 @@ Rectangle {
     property bool isUser: false
     property string model: "Gemma3:1b"
     property bool isLoading: false
-    implicitHeight: layout.height
+    property bool isDummy: false
+    implicitHeight: isDummy ? 0 : layout.height
     width: ListView.view.width
     color: "transparent"
     property bool isFlickable: false
     ColumnLayout {
         id: layout
+        visible: !root.isDummy
         width: parent.width
         spacing: Variable.margin.smallest
         anchors.verticalCenter: parent.verticalCenter
