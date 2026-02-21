@@ -48,7 +48,7 @@ Singleton {
 
     Process {
         id: createConfigFolder
-        command: ["bash", "-c", "ln -sf " + Directory.trimFileProtocol(Directory.config + "/Skeleton-Shell") + ' ' + Directory.trimFileProtocol(Directory.cache + "/Skeleton-Shell/ConfigFolder")]
+        command: ["bash", "-c", "ln -sfn " + Directory.trimFileProtocol(Directory.config + "/Skeleton-Shell") + ' ' + Directory.trimFileProtocol(Directory.cache + "/Skeleton-Shell/ConfigFolder")]
         stdout: StdioCollector {
             onStreamFinished: {
                 configFolderReady = true;
