@@ -9,11 +9,19 @@ import qs.modules.common
 import qs.modules.common.widgets
 import qs.services
 
-GridLayout {
+// Rectangle {
+// height: (root.size) * 3 + month.height + (Variable.margin.normal * 2 * Config.options.appearance.uiScale ^ 2)
+// height: root.implicitHeight
+ColumnLayout {
     id: root
+    // columnSpacing: 0
+    // rowSpacing: 0
+    // anchors.fill: parent
     property int size: Variable.size.large
-    columns: 2
-    rows: 3
+    width: parent.width
+
+    // columns: 2
+    // rows: 3
     property var date: systemClock.date
 
     SystemClock {
@@ -22,6 +30,7 @@ GridLayout {
     }
 
     RowLayout {
+        id: calendarButtons
         Layout.row: 0
         Layout.column: 0
         Layout.columnSpan: 2
@@ -189,114 +198,120 @@ GridLayout {
             }
         }
     }
-    Rectangle {
-        Layout.column: 0
-        Layout.row: 1
-        width: root.size
-        height: root.size
-        color: "transparent"
-    }
-    Rectangle {
-        id: rowOfWeekdays
-        Layout.column: 1
-        Layout.row: 1
-        implicitHeight: root.size
-        Layout.fillWidth: true
-        color: "transparent"
-        clip: true
-        DayOfWeekRow {
-            id: dayOfWeekRow
-            locale: Qt.locale("en_US")
-            anchors.fill: parent
-            anchors.leftMargin: Variable.margin.small
-            anchors.rightMargin: Variable.margin.small
+    RowLayout {
+        spacing: 0
+        Rectangle {
+            Layout.column: 0
+            Layout.row: 1
+            width: root.size
+            height: root.size
+            color: "transparent"
+        }
 
-            delegate: Rectangle {
-                width: root.size
-                height: root.size
-                radius: Variable.radius.small
-                color: "transparent"
-                Text {
-                    text: model.shortName
-                    font.pixelSize: Variable.font.pixelSize.small
-                    color: Color.colors.on_surface
-                    font.weight: Font.Bold
-                    font.family: Variable.font.family.main
-                    anchors.centerIn: parent
+        Rectangle {
+            id: rowOfWeekdays
+            Layout.column: 1
+            Layout.row: 1
+            Layout.preferredHeight: root.size
+            // Layout.preferredWidth: root.size * 7
+            Layout.fillWidth: true
+            color: "transparent"
+            clip: true
+            DayOfWeekRow {
+                id: dayOfWeekRow
+                locale: Qt.locale("en_US")
+                anchors.fill: parent
+                anchors.leftMargin: Variable.margin.small
+                anchors.rightMargin: Variable.margin.small
+
+                delegate: Rectangle {
+                    width: root.size
+                    height: root.size
+                    radius: Variable.radius.small
+                    color: "transparent"
+                    Text {
+                        text: model.shortName
+                        font.pixelSize: Variable.font.pixelSize.small
+                        color: Color.colors.on_surface
+                        font.weight: Font.Bold
+                        font.family: Variable.font.family.main
+                        anchors.centerIn: parent
+                    }
                 }
             }
         }
     }
-    Rectangle {
-        Layout.column: 0
-        Layout.row: 2
-        width: root.size
-        height: dayOfWeekRow.implicitWidth + Variable.uiScale(16)
-        // Layout.preferredHeight: dayOfWeekRow.implicitWidth * 6 / 7
-        color: "transparent"
-        clip: true
-        WeekNumberColumn {
-            id: weekNumberColumn
-            locale: Qt.locale("en_US")
-            anchors.fill: parent
-            anchors.topMargin: Variable.margin.small
-            anchors.bottomMargin: Variable.margin.small
-            month: root.date.getMonth()
-            year: root.date.getFullYear()
-
-            delegate: Rectangle {
-                width: root.size
-                height: root.size
-                radius: Variable.radius.small
-                color: "transparent"
-                Text {
-                    text: model.weekNumber
-                    font.pixelSize: Variable.font.pixelSize.small
-                    font.family: Variable.font.family.main
-                    font.weight: Font.Bold
-                    color: Color.colors.on_surface
-                    anchors.centerIn: parent
+    RowLayout {
+        spacing: 0
+        Layout.preferredHeight: root.implicitWidth
+        Rectangle {
+            Layout.column: 0
+            Layout.row: 2
+            Layout.preferredHeight: rowOfWeekdays.width / 7 * 6
+            Layout.preferredWidth: root.size
+            Layout.topMargin: Variable.margin.small
+            Layout.bottomMargin: Variable.margin.small
+            color: "transparent"
+            WeekNumberColumn {
+                id: weekNumberColumn
+                year: root.date.getFullYear()
+                month: root.date.getMonth()
+                clip: true
+                anchors.fill: parent
+                anchors.topMargin: Variable.margin.small
+                anchors.bottomMargin: Variable.margin.small
+                delegate: Rectangle {
+                    radius: Variable.radius.small
+                    color: "transparent"
+                    Text {
+                        text: model.weekNumber
+                        font.pixelSize: Variable.font.pixelSize.small
+                        color: Color.colors.on_surface
+                        font.weight: Font.Bold
+                        font.family: Variable.font.family.main
+                        anchors.centerIn: parent
+                    }
                 }
             }
         }
-    }
-    Rectangle {
-        implicitWidth: dayOfWeekRow.implicitWidth
-        height: weekNumberColumn.parent.height
-        border.color: Color.colors.primary_container
-        border.width: Variable.uiScale(2)
-        color: "transparent"
-        radius: Variable.radius.small
-        Layout.column: 1
-        Layout.row: 2
-        Layout.fillWidth: true
-
-        MonthGrid {
-            id: monthGrid
-            locale: Qt.locale("en_US")
-            anchors.fill: parent
-            anchors.margins: Variable.margin.small
-            month: root.date.getMonth()
-            year: root.date.getFullYear()
-
-            delegate: Rectangle {
-                width: root.size
-                height: root.size
-                radius: Variable.radius.small
-                property bool isCurrent: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
-                property bool sameMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
-                border.color: isCurrent ? Color.colors.primary : "transparent"
-                border.width: Variable.uiScale(2)
-                color: "transparent"
-                Text {
-                    text: model.day
-                    font.pixelSize: Variable.font.pixelSize.small
-                    color: parent.sameMonth ? Color.colors.on_surface : "#77" + Color.colors.on_surface.slice(1)
-                    font.weight: Font.Bold
-                    font.family: Variable.font.family.main
-                    anchors.centerIn: parent
+        Rectangle {
+            Layout.preferredWidth: Variable.uiScale(2)
+            Layout.preferredHeight: month.height
+            color: Color.colors.primary_container
+        }
+        Rectangle {
+            id: month
+            Layout.fillWidth: true
+            Layout.preferredHeight: width / 7 * 6
+            Layout.margins: 0
+            color: "transparent"
+            radius: Variable.radius.normal
+            clip: true
+            MonthGrid {
+                id: monthGrid
+                anchors.fill: parent
+                anchors.margins: Variable.margin.small
+                year: root.date.getFullYear()
+                month: root.date.getMonth()
+                padding: 0
+                delegate: Rectangle {
+                    width: root.size
+                    height: root.size
+                    radius: Variable.radius.smallest
+                    property bool isCurrentDay: model.day === root.date.getDate() && model.month === root.date.getMonth() && model.year === root.date.getFullYear()
+                    property bool isCurrentMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
+                    color: isCurrentDay ? Color.colors.primary : "transparent"
+                    Text {
+                        text: model.day
+                        font.pixelSize: Variable.font.pixelSize.small
+                        color: isCurrentDay ? Color.colors.on_primary : isCurrentMonth ? Color.colors.on_surface : "#777777"
+                        font.weight: Font.Bold
+                        font.family: Variable.font.family.main
+                        anchors.centerIn: parent
+                    }
                 }
             }
         }
     }
 }
+// }

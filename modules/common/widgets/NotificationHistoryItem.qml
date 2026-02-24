@@ -31,14 +31,14 @@ Item {
                 closeTimer.start();
             }
         }
-        Rectangle {
-            anchors.right: parent.right
-            width: Variable.size.smallest / 2
-            height: parent.height - (Variable.uiScale(48))
-            radius: Variable.radius.smallest
-            anchors.verticalCenter: parent.verticalCenter
-            color: Color.colors.primary_container
-        }
+        // Rectangle {
+        //     anchors.right: parent.right
+        //     width: Variable.size.smallest / 2
+        //     height: parent.height - (Variable.uiScale(48))
+        //     radius: Variable.radius.smallest
+        //     anchors.verticalCenter: parent.verticalCenter
+        //     color: Color.colors.primary_container
+        // }
     }
     Behavior on opacity {
         OpacityAnimator {

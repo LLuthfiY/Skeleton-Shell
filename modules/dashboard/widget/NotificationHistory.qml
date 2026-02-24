@@ -33,19 +33,19 @@ ColumnLayout {
                 width: Variable.size.larger
                 height: Variable.size.larger
                 radius: Variable.radius.small
-                color: hoverHandler.hovered ? Color.colors.primary : "transparent"
-                border.color: hoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
-                border.width: Variable.uiScale(2)
+                color: hoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface
+                // border.color: hoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                // border.width: Variable.uiScale(2)
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
                     }
                 }
-                Behavior on border.color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
+                // Behavior on border.color {
+                //     ColorAnimation {
+                //         duration: 200
+                //     }
+                // }
                 TapHandler {
                     onTapped: {
                         Notification.discardAllNotifications();
@@ -56,7 +56,8 @@ ColumnLayout {
                 }
                 LucideIcon {
                     icon: "trash"
-                    color: hoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                    // color: hoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                    color: Color.colors.error
                     anchors.centerIn: parent
                 }
             }

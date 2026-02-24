@@ -18,10 +18,10 @@ RowLayout {
             id: powerButton
             implicitWidth: Variable.size.larger
             implicitHeight: Variable.size.larger
-            border.width: Variable.uiScale(2)
-            border.color: powerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+            // border.width: Variable.uiScale(2)
+            // border.color: powerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
             radius: Variable.radius.small
-            color: powerHoverHandler.hovered ? Color.colors.primary : "transparent"
+            color: powerHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -35,16 +35,17 @@ RowLayout {
                     powerMenu.open();
                 }
             }
-            Behavior on border.color {
-                ColorAnimation {
-                    duration: 200
-                }
-            }
+            // Behavior on border.color {
+            //     ColorAnimation {
+            //         duration: 200
+            //     }
+            // }
             LucideIcon {
                 id: powerIcon
                 anchors.centerIn: parent
                 icon: "power"
-                color: powerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                // color: powerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                color: Color.colors.primary
             }
             Menu {
                 id: powerMenu
@@ -139,24 +140,25 @@ RowLayout {
             implicitHeight: Variable.size.larger
 
             radius: Variable.radius.small
-            color: settingsHoverHandler.hovered ? Color.colors.primary : "transparent"
-            border.color: settingsHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
-            border.width: Variable.uiScale(2)
+            color: settingsHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface
+            // border.color: settingsHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+            // border.width: Variable.uiScale(2)
             Behavior on color {
                 ColorAnimation {
                     duration: 200
                 }
             }
-            Behavior on border.color {
-                ColorAnimation {
-                    duration: 200
-                }
-            }
+            // Behavior on border.color {
+            //     ColorAnimation {
+            //         duration: 200
+            //     }
+            // }
             LucideIcon {
                 id: settingsIcon
                 anchors.centerIn: parent
                 icon: "settings"
-                color: settingsHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                // color: settingsHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                color: Color.colors.primary
             }
             TapHandler {
                 onTapped: {
