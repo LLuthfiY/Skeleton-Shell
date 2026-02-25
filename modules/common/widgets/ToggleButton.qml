@@ -10,8 +10,9 @@ Rectangle {
         pixelSize: Variable.font.pixelSize.normal,
         weight: Font.Normal
     })
+    property bool toggleOpacity: false
     property bool toggleSize: false
-    property string textColor: Color.colors.on_surface
+    property string textColor: Color.colors.on_surface_variant
     property string label: "Toggle"
     property string icon: ""
     radius: Variable.radius.smallest
@@ -22,6 +23,7 @@ Rectangle {
         id: hoverHandler
     }
     Rectangle {
+        opacity: root.toggleOpacity ? root.toggled ? 1 : hoverHandler.hovered ? 1 : 0.6 : 1
         width: loader.width + Variable.size.normal
         height: loader.height + Variable.size.small
         color: toggled ? Color.colors.primary : hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
@@ -29,6 +31,11 @@ Rectangle {
         anchors.centerIn: parent
         Behavior on color {
             ColorAnimation {
+                duration: 200
+            }
+        }
+        Behavior on opacity {
+            NumberAnimation {
                 duration: 200
             }
         }

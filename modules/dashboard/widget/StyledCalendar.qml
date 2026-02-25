@@ -255,7 +255,7 @@ Rectangle {
             Rectangle {
                 // Layout.column: 0
                 // Layout.row: 2
-                Layout.preferredHeight: Variable.uiScale(260)
+                Layout.preferredHeight: Variable.uiScale(240)
                 Layout.preferredWidth: root.size
                 Layout.topMargin: Variable.margin.small
                 Layout.bottomMargin: Variable.margin.small
@@ -290,7 +290,7 @@ Rectangle {
             }
             Rectangle {
                 id: month
-                Layout.preferredHeight: Variable.uiScale(260)
+                Layout.preferredHeight: Variable.uiScale(240)
                 Layout.fillWidth: true
                 Layout.margins: 0
                 color: "transparent"

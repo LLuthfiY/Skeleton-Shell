@@ -43,6 +43,7 @@ ScrollView {
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
+                    toggleOpacity: true
                     TapHandler {
                         onTapped: {
                             Config.options.bar.background = modelData;
@@ -72,6 +73,7 @@ ScrollView {
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
+                    toggleOpacity: true
                     TapHandler {
                         onTapped: {
                             Config.options.bar.foreground = modelData;
@@ -99,6 +101,7 @@ ScrollView {
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
+                    toggleOpacity: true
                     TapHandler {
                         onTapped: {
                             Config.options.bar.position = modelData;

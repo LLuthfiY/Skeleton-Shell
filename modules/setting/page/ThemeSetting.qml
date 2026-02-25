@@ -226,6 +226,7 @@ ScrollView {
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
+                    toggleOpacity: true
                     TapHandler {
                         onTapped: {
                             Config.options.appearance.palette.type = modelData;
