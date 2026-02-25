@@ -89,7 +89,7 @@ Rectangle {
                     id: currentMonthText
                     text: Qt.formatDate(root.date, "MMMM yyyy")
                     font.family: Variable.font.family.main
-                    font.weight: Font.Normal
+                    font.weight: Font.Bold
                     color: Color.colors.on_surface
                     anchors.centerIn: parent
                     font.pixelSize: Variable.font.pixelSize.small
@@ -307,12 +307,12 @@ Rectangle {
                         width: root.size
                         height: root.size
                         radius: Variable.radius.smallest
-                        property bool isCurrentDay: model.day === root.date.getDate() && model.month === root.date.getMonth() && model.year === root.date.getFullYear()
+                        property bool isCurrentDay: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                         property bool isCurrentMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
                         color: isCurrentDay ? Color.colors.primary : "transparent"
                         Text {
                             text: model.day
-                            font.pixelSize: Variable.font.pixelSize.small
+                            font.pixelSize: isCurrentMonth ? Variable.font.pixelSize.small : Variable.font.pixelSize.smallest
                             color: isCurrentDay ? Color.colors.on_primary : isCurrentMonth ? Color.colors.on_surface : "#777777"
                             font.weight: Font.Normal
                             font.family: Variable.font.family.main
