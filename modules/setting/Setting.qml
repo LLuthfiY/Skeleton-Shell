@@ -70,7 +70,10 @@ Scope {
                                 anchors.left: parent.left
                                 // width: root.section === index ? parent.width : hoverHandler.hovered ? parent.width : 2
                                 width: parent.width
-                                color: root.section === index ? Color.colors.primary : Color.colors.surface
+                                color: root.section === index ? Color.colors.primary : sidebarHoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
+                                HoverHandler {
+                                    id: sidebarHoverHandler
+                                }
                                 height: parent.height
                                 radius: Variable.radius.large
                                 Behavior on width {
