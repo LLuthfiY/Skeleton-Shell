@@ -36,48 +36,17 @@ ScrollView {
             Layout.preferredWidth: root.width
             Repeater {
                 model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
-                delegate: Rectangle {
-                    width: text.width + Variable.size.normal
-                    height: text.height + Variable.size.small
-                    radius: Variable.radius.small
-                    color: "transparent"
-                    Rectangle {
-                        width: Config.options.bar.background === modelData ? parent.width : backgroundHoverHandler.hovered ? parent.width : 2
-                        height: parent.height
-                        radius: Variable.radius.smallest
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: Config.options.bar.background === modelData ? Color.colors.primary : Color.colors.primary_container
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
-                        }
-                        Behavior on width {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                    }
+
+                delegate: ToggleButton {
+                    toggled: Config.options.bar.background === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
                     TapHandler {
                         onTapped: {
                             Config.options.bar.background = modelData;
-                        }
-                    }
-                    HoverHandler {
-                        id: backgroundHoverHandler
-                    }
-                    Text {
-                        id: text
-                        text: modelData
-                        anchors.centerIn: parent
-                        font.family: Variable.font.family.main
-                        font.weight: Font.Normal
-                        font.pixelSize: Variable.font.pixelSize.normal
-                        color: Config.options.bar.background === modelData ? Color.colors.on_primary : Color.colors.on_surface
-                    }
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
+                            WindowManagerUtils.setWM();
                         }
                     }
                 }
@@ -97,48 +66,15 @@ ScrollView {
             Layout.preferredWidth: root.width
             Repeater {
                 model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
-                delegate: Rectangle {
-                    width: textForeground.width + Variable.size.normal
-                    height: textForeground.height + Variable.size.small
-                    radius: Variable.radius.small
-                    color: "transparent"
-                    Rectangle {
-                        width: Config.options.bar.foreground === modelData ? parent.width : foregroundHoverHandler.hovered ? parent.width : 2
-                        height: parent.height
-                        radius: Variable.radius.smallest
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: Config.options.bar.foreground === modelData ? Color.colors.primary : Color.colors.primary_container
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
-                        }
-                        Behavior on width {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                    }
+                delegate: ToggleButton {
+                    toggled: Config.options.bar.foreground === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
                     TapHandler {
                         onTapped: {
                             Config.options.bar.foreground = modelData;
-                        }
-                    }
-                    HoverHandler {
-                        id: foregroundHoverHandler
-                    }
-                    Text {
-                        id: textForeground
-                        text: modelData
-                        anchors.centerIn: parent
-                        font.family: Variable.font.family.main
-                        font.weight: Font.Normal
-                        color: Config.options.bar.foreground === modelData ? Color.colors.on_primary : Color.colors.on_surface
-                        font.pixelSize: Variable.font.pixelSize.normal
-                    }
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
                         }
                     }
                 }
@@ -156,51 +92,18 @@ ScrollView {
             spacing: Variable.margin.small
             Repeater {
                 model: ["left", "top", "right", "bottom"]
-                delegate: Rectangle {
-                    width: textPosition.width + Variable.size.normal
-                    height: textPosition.height + Variable.size.small
-                    radius: Variable.radius.small
-                    color: "transparent"
-                    Rectangle {
-                        width: Config.options.bar.position === modelData ? parent.width : positionHoverHandler.hovered ? parent.width : 2
-                        height: parent.height
-                        radius: Variable.radius.smallest
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: Config.options.bar.position === modelData ? Color.colors.primary : Color.colors.primary_container
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
-                        }
-                        Behavior on width {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                    }
+                delegate: ToggleButton {
+                    toggled: Config.options.bar.position === modelData
+                    label: modelData
+                    icon: modelData === "left" ? "arrow-left" : modelData === "right" ? "arrow-right" : modelData === "top" ? "arrow-up" : modelData === "bottom" ? "arrow-down" : ""
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
                     TapHandler {
                         onTapped: {
                             Config.options.bar.position = modelData;
                             WindowManagerUtils.setWM();
                         }
-                    }
-                    HoverHandler {
-                        id: positionHoverHandler
-                    }
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                    LucideIcon {
-                        id: textPosition
-                        label: modelData
-                        icon: modelData === "left" ? "arrow-left" : modelData === "right" ? "arrow-right" : modelData === "top" ? "arrow-up" : modelData === "bottom" ? "arrow-down" : ""
-                        anchors.centerIn: parent
-                        color: Config.options.bar.position === modelData ? Color.colors.on_primary : Color.colors.on_surface
-                        font.pixelSize: Variable.font.pixelSize.normal
-                        font.weight: Font.Normal
-                        font.family: Variable.font.family.main
                     }
                 }
             }
@@ -227,9 +130,13 @@ ScrollView {
             }
             StyledSwitch {
                 checked: Config.options.bar.fullWidth
+                implicitWidth: 40
+                implicitHeight: 20
+                Layout.preferredHeight: 20
+                height: 20
                 onCheckedChanged: {
                     Config.options.bar.fullWidth = checked;
-                    WindowManagerUtils.setWM(100);
+                    WindowManagerUtils.setWM();
                 }
             }
         }
@@ -253,7 +160,7 @@ ScrollView {
                 height: 20
                 onCheckedChanged: {
                     Config.options.bar.borderScreen = checked;
-                    WindowManagerUtils.setWM(100);
+                    WindowManagerUtils.setWM();
                 }
             }
         }
@@ -276,7 +183,7 @@ ScrollView {
                 step: 10
                 onValueChanged: {
                     Config.options.bar.width = value;
-                    WindowManagerUtils.setWM(100);
+                    WindowManagerUtils.setWM();
                 }
             }
         }
@@ -299,7 +206,7 @@ ScrollView {
                 step: 1
                 onValueChanged: {
                     Config.options.bar.margin = value;
-                    WindowManagerUtils.setWM(100);
+                    WindowManagerUtils.setWM();
                 }
             }
         }
@@ -322,7 +229,7 @@ ScrollView {
                 step: 1
                 onValueChanged: {
                     Config.options.bar.border = value;
-                    WindowManagerUtils.setWM(100);
+                    WindowManagerUtils.setWM();
                 }
             }
         }
@@ -345,7 +252,7 @@ ScrollView {
                 step: 1
                 onValueChanged: {
                     Config.options.bar.borderRadius = value;
-                    WindowManagerUtils.setWM(100);
+                    WindowManagerUtils.setWM();
                 }
             }
         }
@@ -370,7 +277,7 @@ ScrollView {
             }
             WidgetListWithFill {
                 id: startWidgets
-                fill: true
+                fill: false
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 width: root.width
@@ -391,7 +298,7 @@ ScrollView {
             }
             WidgetListWithFill {
                 id: centerWidgets
-                fill: true
+                fill: false
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
@@ -411,7 +318,7 @@ ScrollView {
             }
             WidgetListWithFill {
                 id: endWidgets
-                fill: true
+                fill: false
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 items: Config.options.bar.endWidgets

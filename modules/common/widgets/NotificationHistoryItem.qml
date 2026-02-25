@@ -54,7 +54,7 @@ Item {
 
     Timer {
         id: closeTimer
-        interval: 210
+        interval: 201
         onTriggered: {
             Notification.discardNotification(notificationObject.notificationId);
         }

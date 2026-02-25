@@ -11,14 +11,14 @@ import qs.modules.common.functions
 
 import Qt5Compat.GraphicalEffects
 
-Flickable {
+ScrollView {
     id: flickable
     clip: true
     height: stackWrapper.height
     width: stackWrapper.width
-    ScrollBar.vertical: ScrollBar {}
+    // ScrollBar.vertical: ScrollBar {}
     contentWidth: root.width - Variable.uiScale(16)
-    contentHeight: root.height
+    contentHeight: root.height + Variable.uiScale(16)
     ColumnLayout {
         id: root
         width: stackWrapper.width - Variable.uiScale(16)
@@ -220,51 +220,17 @@ Flickable {
             spacing: 8
             Repeater {
                 model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
-                delegate: Rectangle {
-                    property bool hovered: false
-                    width: text.width + Variable.size.normal
-                    height: text.height + Variable.size.small
-                    radius: Variable.radius.small
-                    color: "transparent"
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
+                delegate: ToggleButton {
+                    toggled: Config.options.appearance.palette.type === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
                     TapHandler {
                         onTapped: {
                             Config.options.appearance.palette.type = modelData;
                             root.setTheme();
                         }
-                    }
-                    HoverHandler {
-                        id: schemeHoverHandler
-                    }
-                    Rectangle {
-                        width: Config.options.appearance.palette.type === modelData ? parent.width : schemeHoverHandler.hovered ? parent.width : 2
-                        height: parent.height
-                        radius: Variable.radius.smallest
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: Config.options.appearance.palette.type === modelData ? Color.colors.primary : Color.colors.primary_container
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
-                        }
-                        Behavior on width {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                    }
-                    Text {
-                        id: text
-                        text: modelData
-                        anchors.centerIn: parent
-                        font.family: Variable.font.family.main
-                        font.weight: Font.Normal
-                        font.pixelSize: Variable.font.pixelSize.normal
-                        color: Config.options.appearance.palette.type === modelData ? Color.colors.on_primary : Color.colors.on_surface
                     }
                 }
             }

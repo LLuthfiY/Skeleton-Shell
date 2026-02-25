@@ -68,10 +68,11 @@ Scope {
                             color: "transparent"
                             Rectangle {
                                 anchors.left: parent.left
-                                width: root.section === index ? parent.width : hoverHandler.hovered ? parent.width : 2
-                                color: root.section === index ? Color.colors.primary : Color.colors.primary_container
+                                // width: root.section === index ? parent.width : hoverHandler.hovered ? parent.width : 2
+                                width: parent.width
+                                color: root.section === index ? Color.colors.primary : Color.colors.surface
                                 height: parent.height
-                                radius: Variable.radius.smallest
+                                radius: Variable.radius.large
                                 Behavior on width {
                                     NumberAnimation {
                                         duration: 200
