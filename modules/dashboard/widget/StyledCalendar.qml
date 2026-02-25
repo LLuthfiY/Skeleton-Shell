@@ -89,7 +89,7 @@ Rectangle {
                     id: currentMonthText
                     text: Qt.formatDate(root.date, "MMMM yyyy")
                     font.family: Variable.font.family.main
-                    font.weight: Font.Bold
+                    font.weight: Font.Normal
                     color: Color.colors.on_surface
                     anchors.centerIn: parent
                     font.pixelSize: Variable.font.pixelSize.small
@@ -240,7 +240,7 @@ Rectangle {
                             text: model.shortName
                             font.pixelSize: Variable.font.pixelSize.small
                             color: Color.colors.on_surface
-                            font.weight: Font.Bold
+                            font.weight: Font.Normal
                             font.family: Variable.font.family.main
                             anchors.centerIn: parent
                         }
@@ -275,7 +275,7 @@ Rectangle {
                             text: model.weekNumber
                             font.pixelSize: Variable.font.pixelSize.small
                             color: Color.colors.on_surface
-                            font.weight: Font.Bold
+                            font.weight: Font.Normal
                             font.family: Variable.font.family.main
                             anchors.centerIn: parent
                         }
@@ -314,7 +314,7 @@ Rectangle {
                             text: model.day
                             font.pixelSize: Variable.font.pixelSize.small
                             color: isCurrentDay ? Color.colors.on_primary : isCurrentMonth ? Color.colors.on_surface : "#777777"
-                            font.weight: Font.Bold
+                            font.weight: Font.Normal
                             font.family: Variable.font.family.main
                             anchors.centerIn: parent
                         }
