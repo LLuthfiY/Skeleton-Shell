@@ -51,6 +51,7 @@ RowLayout {
                 id: powerMenu
                 padding: Variable.margin.small
                 implicitWidth: Variable.uiScale(200)
+                y: powerButton.height + Variable.margin.small
                 background: Rectangle {
                     id: backgroundMenu
                     radius: Variable.radius.normal
@@ -126,7 +127,7 @@ RowLayout {
                                 Layout.fillWidth: true
                                 icon: modelData.icon
                                 label: modelData.text
-                                color: menuHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                                color: menuHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                             }
                         }
                         onTriggered: modelData.action()

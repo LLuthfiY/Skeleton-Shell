@@ -50,10 +50,10 @@ Rectangle {
             spacing: 0
             Rectangle {
                 anchors.fill: parent
-                color: Color.colors.primary_container
+                color: Color.colors.surface_container
                 radius: Variable.radius.small
-                border.width: 1
-                border.color: Color.colors.primary_container
+                // border.width: 1
+                // border.color: Color.colors.primary_container
                 clip: true
             }
             RowLayout {

@@ -12,6 +12,7 @@ Singleton {
     id: root
     property bool active: false
     property list<string> models: []
+    property var xhr: null
     property list<ChatObject> chatHistory: []
     property list<ChatObject> chatHistoryWithDummy: [chatObject.createObject(root, {
             "text": "",
@@ -87,6 +88,13 @@ Singleton {
         getModelsProcess.running = true;
     }
 
+    function stop() {
+        if (xhr) {
+            xhr.abort();
+        }
+        root.onTask = false;
+    }
+
     function sendMessage(message) {
         if (root.onTask) {
             return;
@@ -105,7 +113,7 @@ Singleton {
         });
         chatHistory = [co2, co, ...chatHistory];
         // chatOllamaProcess.running = true;
-        var xhr = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
         var processedLength = 0;
         var buffer = "";
         xhr.open("POST", "http://localhost:11434/api/chat");
@@ -157,7 +165,6 @@ Singleton {
                 temperature: 0.5
             }
         };
-        console.log(JSON.stringify(data));
         xhr.send(JSON.stringify(data));
     }
 }

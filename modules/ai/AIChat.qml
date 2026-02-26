@@ -53,12 +53,14 @@ Scope {
                     RowLayout {
                         spacing: Variable.margin.normal
                         Rectangle {
-                            border.color: providerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
-                            border.width: Variable.uiScale(0)
+                            id: providerButton
+                            // border.color: providerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                            // border.width: Variable.uiScale(0)
                             radius: Variable.radius.small
                             width: providerIcon.width + Variable.margin.normal
                             height: providerIcon.height + Variable.margin.normal
-                            color: providerHoverHandler.hovered ? Color.colors.primary : "transparent"
+                            // color: providerHoverHandler.hovered ? Color.colors.primary : "transparent"
+                            color: providerHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
                             HoverHandler {
                                 id: providerHoverHandler
                             }
@@ -75,7 +77,7 @@ Scope {
                             LucideIcon {
                                 id: providerIcon
                                 icon: root.provider.active ? "brain" : "circle-slash"
-                                color: providerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                // color: providerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                                 label: Config.options.services.ai.provider
                                 anchors.centerIn: parent
                                 Behavior on color {
@@ -94,6 +96,7 @@ Scope {
                                 id: providerMenu
                                 implicitWidth: Variable.uiScale(200)
                                 padding: Variable.margin.small
+                                y: providerButton.height + Variable.margin.small
                                 background: Rectangle {
                                     id: backgroundMenu
                                     radius: Variable.radius.small
@@ -111,7 +114,7 @@ Scope {
                                         background: Rectangle {
                                             radius: Variable.radius.small
                                             property bool isHovered: false
-                                            color: isHovered ? Color.colors.primary : "transparent"
+                                            color: isHovered ? Color.colors.primary : Color.colors.surface_container
                                             Behavior on color {
                                                 ColorAnimation {
                                                     duration: 200
@@ -143,14 +146,18 @@ Scope {
                                 }
                             }
                         }
+                        LucideIcon {
+                            icon: "chevron-right"
+                        }
                         Rectangle {
                             id: modelButton
-                            border.color: modelHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
-                            border.width: Variable.uiScale(0)
+                            // border.color: modelHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                            // border.width: Variable.uiScale(0)
                             radius: Variable.radius.small
                             width: modelIcon.width + Variable.margin.normal
                             height: modelIcon.height + Variable.margin.normal
-                            color: modelHoverHandler.hovered ? Color.colors.primary : "transparent"
+                            color: modelHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                            // color: modelHoverHandler.hovered ? Color.colors.primary : "transparent"
                             HoverHandler {
                                 id: modelHoverHandler
                             }
@@ -173,7 +180,8 @@ Scope {
                             LucideIcon {
                                 id: modelIcon
                                 icon: "package"
-                                color: modelHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                // color: modelHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                color: Color.colors.on_surface
                                 label: Config.options.services.ai[Config.options.services.ai.provider].model
                                 anchors.centerIn: parent
                                 Behavior on color {
@@ -191,6 +199,7 @@ Scope {
                                     radius: Variable.radius.small
                                     color: Color.colors.surface_container
                                 }
+                                y: modelButton.height + Variable.margin.small
 
                                 Instantiator {
                                     model: root.modelList
@@ -243,15 +252,6 @@ Scope {
                         Layout.fillHeight: true
                         model: root.provider.chatHistoryWithDummy
                         spacing: Variable.margin.large
-                        // Connections {
-                        //     target: root.provider
-                        //     onChatUpdated: {
-                        //         Qt.callLater(listView.positionViewAtEnd);
-                        //     }
-                        // }
-                        Component.onCompleted: {
-                            listView.positionViewAtIndex(0, ListView.Beginning);
-                        }
                         delegate: ChatBox {
                             text: modelData.text
                             isUser: modelData.isUser
@@ -265,25 +265,28 @@ Scope {
                                 duration: 100
                             }
                         }
+                        Rectangle {
+                            anchors.fill: parent
+                            color: "transparent"
+                            visible: listView.count < 2
+                            LucideIcon {
+                                icon: "brain"
+                                color: Color.colors.on_surface_variant
+                                anchors.centerIn: parent
+                                font.pixelSize: Variable.uiScale(100)
+                            }
+                        }
                         highlightRangeMode: ListView.NoHighlightRange
-                        // function toDown() {
-                        //     listView.contentY = Math.min(0, listView.contentY + listView.originY);
-                        // }
-                        //
-                        // onCountChanged: {
-                        //     // Qt.callLater(listView.positionViewAtEnd);
-                        //     Qt.callLater(toDown);
-                        // }
                         verticalLayoutDirection: ListView.BottomToTop
 
                         clip: true
                     }
                     Rectangle {
                         property bool active: false
-                        border.color: active ? Color.colors.primary : Color.colors.primary_container
-                        border.width: Variable.uiScale(2)
+                        // border.color: active ? Color.colors.primary : Color.colors.primary_container
+                        // border.width: Variable.uiScale(2)
                         radius: Variable.radius.small
-                        color: "transparent"
+                        color: Color.colors.surface_container
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: inputField.contentHeight + buttonLayout.height + Variable.margin.normal * 2
                         TextArea {
@@ -300,7 +303,7 @@ Scope {
                             wrapMode: TextEdit.Wrap
                             focus: true
                             background: Rectangle {
-                                color: Color.colors.surface
+                                color: Color.colors.surface_container
                                 radius: Variable.radius.small
                             }
                             Keys.onReturnPressed: {
@@ -308,12 +311,12 @@ Scope {
                                 inputField.text = "";
                             }
                             Keys.onPressed: function (event) {
-                                if (event.modifiers & Qt.ControlModifier) {
+                                if (event.key === Qt.Key_Control) {
                                     root.flickable = true;
                                 }
                             }
                             Keys.onReleased: function (event) {
-                                if (event.modifiers & Qt.ControlModifier) {
+                                if (event.key === Qt.Key_Control) {
                                     root.flickable = false;
                                 }
                             }
@@ -386,9 +389,13 @@ Scope {
 
                                 TapHandler {
                                     onTapped: {
-                                        root.provider.sendMessage(inputField.text);
-                                        inputField.text = "";
-                                        listView.positionViewAtEnd();
+                                        if (root.provider.onTask) {
+                                            root.provider.stop();
+                                        } else {
+                                            root.provider.sendMessage(inputField.text);
+                                            inputField.text = "";
+                                            listView.positionViewAtEnd();
+                                        }
                                     }
                                 }
                             }
