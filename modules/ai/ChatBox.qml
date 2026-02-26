@@ -43,6 +43,7 @@ Rectangle {
                 color: root.text === "Thinking..." ? "#777777" : Color.colors.on_surface_variant
                 textFormat: Text.MarkdownText
                 wrapMode: Text.Wrap
+                onLinkActivated: Qt.openUrlExternally(link)
             }
         }
         RowLayout {

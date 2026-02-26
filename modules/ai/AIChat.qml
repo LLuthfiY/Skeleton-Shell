@@ -255,10 +255,10 @@ Scope {
                         delegate: ChatBox {
                             text: modelData.text
                             isUser: modelData.isUser
-                            isFlickable: root.flickable
                             isLoading: modelData.isLoading
                             model: modelData.model
                             isDummy: modelData.isDummy
+                            isFlickable: root.flickable
                         }
                         Behavior on contentY {
                             NumberAnimation {
@@ -267,6 +267,7 @@ Scope {
                         }
                         Rectangle {
                             anchors.fill: parent
+                            enabled: false
                             color: "transparent"
                             visible: listView.count < 2
                             LucideIcon {

@@ -125,6 +125,7 @@ Singleton {
                 // co2.text = json.message.content;
                 co2.isLoading = false;
                 root.onTask = false;
+                chatHistory[chatHistory.length - 1].text = chatHistory[chatHistory.length - 1].text.replace(/<img data-src=/g, "<img src=");
             }
             if (xhr.readyState === XMLHttpRequest.LOADING) {
                 // Get only new data
@@ -143,6 +144,7 @@ Singleton {
                         var json = JSON.parse(line);
 
                         if (json.message && json.message.content) {
+                            json.message.content = json.message.content.replace(/<img src=/g, "<img data-src=");
                             chatHistory[0].text += json.message.content;
                         }
                     } catch (e) {
@@ -154,7 +156,13 @@ Singleton {
 
         var data = {
             model: Config.options.services.ai.ollama.model,
-            messages: [...chatHistory.slice(1, root.numChats).reverse().map(c => {
+            messages: [
+                {
+                    role: "user",
+                    // content: "Respond using HTML Formatting not markdown, if you need to show image use link from internet as source not base64, also all background color become " + Color.colors.surface
+                    content: "respond in Markdown format, if you need to show image show it as link not image. show image with width not more than 500"
+                },
+                ...chatHistory.slice(1, root.numChats).reverse().map(c => {
                     return {
                         role: c.isUser ? "user" : "assistant",
                         content: c.text
