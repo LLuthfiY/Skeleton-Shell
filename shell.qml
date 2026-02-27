@@ -20,6 +20,7 @@ import qs.modules.launcher
 import qs.modules.ai
 
 ShellRoot {
+    id: root
 
     LazyLoader {
         active: Config.ready && Config.options.modules.bar
@@ -79,5 +80,18 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && GlobalState.aiChatOpen
         component: AIChat {}
+    }
+
+    Item {
+        Repeater {
+            model: Config.options.modules.enabled || []
+
+            delegate: Item {
+                LazyLoader {
+                    active: Config.ready
+                    source: Qt.resolvedUrl("./modules/user/" + modelData)
+                }
+            }
+        }
     }
 }

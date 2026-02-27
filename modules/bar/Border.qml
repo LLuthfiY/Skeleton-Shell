@@ -43,30 +43,6 @@ Scope {
                 property int bottomMargin: position === "bottom" ? 0 : margin
                 property int leftMargin: position === "left" ? 0 : margin
 
-                // function setGaps() {
-                //     let gaps_out = `${topMargin + defaultMargin},${rightMargin + defaultMargin},${bottomMargin + defaultMargin},${leftMargin + defaultMargin}`;
-                //     if (!borderScreen) {
-                //         gaps_out = `${defaultMargin},${defaultMargin},${defaultMargin},${defaultMargin}`;
-                //     }
-                //     console.log(borderScreen, margin, position)
-                //     Quickshell.execDetached(["hyprctl", "keyword", "general:gaps_out", gaps_out]);
-                // }
-                //
-                // Timer {
-                //     id: gapsTimer
-                //     interval: 500
-                //     repeat: false
-                //     onTriggered: setGaps()
-                // }
-                //
-                // onPositionChanged: gapsTimer.running = true
-                //
-                // onMarginChanged: gapsTimer.running = true
-                //
-                // onBorderScreenChanged: gapsTimer.running = true
-                //
-                // Component.onCompleted: gapsTimer.running = true
-
                 WlrLayershell.layer: WlrLayer.Top
                 mask: Region {}
                 color: "#00000000"
