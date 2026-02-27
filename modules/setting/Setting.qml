@@ -59,6 +59,10 @@ Scope {
                                 icon: "app-window",
                                 text: "Window Manager"
                             },
+                            {
+                                icon: "component",
+                                text: "Modules"
+                            }
                         ]
 
                         delegate: Rectangle {
@@ -133,6 +137,7 @@ Scope {
                     BarSetting {}
                     DashboardSetting {}
                     WindowManagerSetting {}
+                    ModulesSetting {}
                 }
             }
         }

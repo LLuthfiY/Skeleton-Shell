@@ -35,7 +35,7 @@ ScrollView {
             spacing: Variable.margin.small
             Layout.preferredWidth: root.width
             Repeater {
-                model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
+                model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "secondary", "secondary_container", "on_secondary", "tertiary", "tertiary_container", "on_tertiary", "error", "error_container", "on_error", "transparent"]
 
                 delegate: ToggleButton {
                     toggled: Config.options.bar.background === modelData
@@ -66,7 +66,7 @@ ScrollView {
             spacing: Variable.margin.small
             Layout.preferredWidth: root.width
             Repeater {
-                model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "transparent"]
+                model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "secondary", "secondary_container", "on_secondary", "tertiary", "tertiary_container", "on_tertiary", "error", "error_container", "on_error"]
                 delegate: ToggleButton {
                     toggled: Config.options.bar.foreground === modelData
                     label: modelData

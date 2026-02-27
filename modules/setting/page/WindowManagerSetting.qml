@@ -24,6 +24,64 @@ ScrollView {
             label: "Window Manager"
         }
         LucideIcon {
+            icon: "paintbrush"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Active Border Color"
+        }
+        Flow {
+            spacing: Variable.margin.small
+            Layout.preferredWidth: root.width
+            Repeater {
+                model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "secondary", "secondary_container", "on_secondary", "tertiary", "tertiary_container", "on_tertiary", "error", "error_container", "on_error"]
+                delegate: ToggleButton {
+                    toggled: Config.options.windowManager.activeWindowBorderColor === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    toggleOpacity: true
+                    TapHandler {
+                        onTapped: {
+                            Config.options.windowManager.activeWindowBorderColor = modelData;
+                            WindowManagerUtils.setWM();
+                        }
+                    }
+                }
+            }
+        }
+        LucideIcon {
+            icon: "paintbrush"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Inactive Border Color"
+        }
+        Flow {
+            spacing: Variable.margin.small
+            Layout.preferredWidth: root.width
+            Repeater {
+                model: ["surface", "surface_container", "surface_container_high", "on_surface", "primary", "primary_container", "on_primary", "secondary", "secondary_container", "on_secondary", "tertiary", "tertiary_container", "on_tertiary", "error", "error_container", "on_error"]
+                delegate: ToggleButton {
+                    toggled: Config.options.windowManager.inactiveWindowBorderColor === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    toggleOpacity: true
+                    TapHandler {
+                        onTapped: {
+                            Config.options.windowManager.inactiveWindowBorderColor = modelData;
+                            WindowManagerUtils.setWM();
+                        }
+                    }
+                }
+            }
+        }
+        LucideIcon {
             icon: "layout-panel-left"
             color: Color.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small

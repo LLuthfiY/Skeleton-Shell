@@ -42,6 +42,8 @@ Singleton {
         border_size = ${Config.options.windowManager.windowBorderSize}
         gaps_in = ${Config.options.windowManager.gapsIn}
         gaps_out = ${gaps_out}
+        col.active_border = $${Config.options.windowManager.activeWindowBorderColor}
+        col.inactive_border = $${Config.options.windowManager.inactiveWindowBorderColor}
       }
       decoration {
         rounding = ${Config.options.windowManager.windowBorderRadius}

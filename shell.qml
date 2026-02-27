@@ -21,53 +21,48 @@ import qs.modules.ai
 
 ShellRoot {
 
-    Component.onCompleted: {
-        WindowManagerUtils.setWM();
-        let app = DesktopEntries.applications;
-    }
-
     LazyLoader {
-        active: Config.ready
+        active: Config.ready && Config.options.modules.bar
         component: Bar {}
     }
 
     LazyLoader {
-        active: Config.ready && Config.options.bar.borderScreen
+        active: Config.ready && Config.options.bar.borderScreen && Config.options.modules.bar
         component: Border {}
     }
 
     LazyLoader {
-        active: Config.ready
+        active: Config.ready && Config.options.modules.background
         component: Background {}
     }
 
     LazyLoader {
-        active: Config.ready
+        active: Config.ready && Config.options.modules.osd
         component: VolumeOsd {}
     }
 
     LazyLoader {
-        active: Config.ready
+        active: Config.ready && Config.options.modules.notification
         component: Notification {}
     }
 
     LazyLoader {
-        active: Config.ready && GlobalState.overviewOpen
+        active: Config.ready && GlobalState.overviewOpen && Config.options.modules.overview
         component: Overview {}
     }
 
     LazyLoader {
-        active: Config.ready && Config.options.mediaPlayer.enable
+        active: Config.ready && Config.options.mediaPlayer.enable && Config.options.modules.mediaPlayer
         component: MediaPlayer {}
     }
 
     LazyLoader {
-        active: Config.ready && GlobalState.dashboardOpen
+        active: Config.ready && GlobalState.dashboardOpen && Config.options.modules.dashboard
         component: Dashboard {}
     }
 
     LazyLoader {
-        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen || GlobalState.aiChatOpen)
+        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen || GlobalState.aiChatOpen) && Config.options.modules.popupCloser
         component: PopupCloser {}
     }
 

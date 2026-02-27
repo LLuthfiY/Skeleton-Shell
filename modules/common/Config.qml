@@ -5,6 +5,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+import qs.modules.common.functions
+
 Singleton {
     id: root
 
@@ -40,6 +42,13 @@ Singleton {
         }
 
         obj[keys[keys.length - 1]] = convertedValue;
+    }
+
+    onReadyChanged: {
+        if (ready) {
+            WindowManagerUtils.setWM();
+            let apps = DesktopEntries.applications;
+        }
     }
 
     FileView {
@@ -97,10 +106,12 @@ Singleton {
                 property bool bar: true
                 property bool background: true
                 property bool dashboard: true
+                property bool launcher: true
                 property bool mediaPlayer: true
                 property bool notification: true
                 property bool osd: true
                 property bool overview: true
+                property bool aiChat: true
                 property bool popupCloser: true
             }
 
@@ -113,6 +124,8 @@ Singleton {
                 property int windowBorderSize: 0
                 property int windowBorderRadius: 16
                 property int applyConfigDelay: 1000
+                property string activeWindowBorderColor: "primary"
+                property string inactiveWindowBorderColor: "surface"
             }
             property JsonObject notification: JsonObject {
                 property string position: "topRight"

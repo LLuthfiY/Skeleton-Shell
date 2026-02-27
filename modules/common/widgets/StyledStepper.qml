@@ -26,7 +26,7 @@ Rectangle {
             width: Variable.size.large
             height: Variable.size.large
             radius: Variable.radius.small
-            color: minHoverHandler.hovered ? Color.colors.primary : "transparent"
+            color: minHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
             TapHandler {
                 onTapped: {
                     root.value = Math.max((root.value - root.step).toFixed(10), root.min);
@@ -42,7 +42,8 @@ Rectangle {
             }
             LucideIcon {
                 icon: "minus"
-                color: minHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                // color: minHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                color: Color.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }
@@ -69,7 +70,8 @@ Rectangle {
             width: Variable.size.large
             height: Variable.size.large
             radius: Variable.radius.small
-            color: plusHoverHandler.hovered ? Color.colors.primary : "transparent"
+            // color: plusHoverHandler.hovered ? Color.colors.primary : "transparent"
+            color: plusHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
             TapHandler {
                 onTapped: {
                     root.value = Math.min((root.value + root.step).toFixed(10), root.max);
@@ -85,7 +87,8 @@ Rectangle {
             }
             LucideIcon {
                 icon: "plus"
-                color: plusHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                // color: plusHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                color: Color.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }
