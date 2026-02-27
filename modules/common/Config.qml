@@ -116,6 +116,7 @@ Singleton {
             }
 
             property JsonObject windowManager: JsonObject {
+                property string windowManager: "hyprland"
                 property int workspaces: 8
                 property int gapsOut: 16
                 property int gapsIn: 8

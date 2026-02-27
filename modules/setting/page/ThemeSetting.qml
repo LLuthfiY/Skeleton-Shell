@@ -101,7 +101,7 @@ ScrollView {
                         nameFilters: ["Images (*.png *.jpg *.jpeg)"]
                         onAccepted: {
                             Config.options.background.wallpaperPath = selectedFile;
-                            root.setTheme();
+                            Matugen.setTheme();
                         }
                     }
                 }
@@ -150,7 +150,7 @@ ScrollView {
                 TapHandler {
                     onTapped: {
                         Config.options.appearance.darkMode = false;
-                        root.setTheme();
+                        Matugen.setTheme();
                     }
                 }
                 HoverHandler {
@@ -197,7 +197,7 @@ ScrollView {
                 TapHandler {
                     onTapped: {
                         Config.options.appearance.darkMode = !Config.options.appearance.darkMode;
-                        root.setTheme();
+                        Matugen.setTheme();
                     }
                 }
                 Behavior on color {
@@ -230,7 +230,7 @@ ScrollView {
                     TapHandler {
                         onTapped: {
                             Config.options.appearance.palette.type = modelData;
-                            root.setTheme();
+                            Matugen.setTheme();
                         }
                     }
                 }
