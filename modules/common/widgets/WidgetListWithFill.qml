@@ -11,6 +11,7 @@ ColumnLayout {
     id: root
     required property var items
     required property string path
+    property bool listUserPath: false
     property list<string> widgetList: []
     property list<string> excludedWidgetList: []
     property bool fill: false
@@ -33,7 +34,11 @@ ColumnLayout {
                     return !(root.excludedWidgetList.includes(item));
                 });
                 root.widgetList = wl;
-                getUserWidgets.running = true;
+                if (root.listUserPath) {
+                    getUserWidgets.running = true;
+                } else {
+                    wlm.open();
+                }
             }
         }
     }

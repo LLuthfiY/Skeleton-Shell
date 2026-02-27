@@ -283,10 +283,10 @@ ScrollView {
                 fill: false
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                width: root.width
                 excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
                 items: Config.options.bar.startWidgets
                 path: Directory.shell + "/modules/bar/widget"
+                listUserPath: true
                 onItemsChanged: {
                     Config.options.bar.startWidgets = items;
                 }
@@ -307,6 +307,7 @@ ScrollView {
                 excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
                 items: Config.options.bar.centerWidgets
                 path: Directory.shell + "/modules/bar/widget"
+                listUserPath: true
                 onItemsChanged: {
                     Config.options.bar.centerWidgets = items;
                 }
@@ -327,6 +328,7 @@ ScrollView {
                 items: Config.options.bar.endWidgets
                 excludedWidgetList: ["CustomTrayMenu.qml", "DynamicLayout.qml", "SysTrayItem.qml"]
                 path: Directory.shell + "/modules/bar/widget"
+                listUserPath: true
                 onItemsChanged: {
                     Config.options.bar.endWidgets = items;
                 }

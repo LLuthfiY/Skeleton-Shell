@@ -84,6 +84,7 @@ ScrollView {
             items: Config.options.dashboard.widgets
             width: root.width
             path: Directory.shell + "/modules/dashboard/widget"
+            listUserPath: true
             onItemsChanged: {
                 Config.options.dashboard.widgets = items;
             }

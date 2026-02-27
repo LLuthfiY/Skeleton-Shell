@@ -208,5 +208,24 @@ ScrollView {
                 }
             }
         }
+        LucideIcon {
+            icon: "package"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Custom Modules"
+        }
+        WidgetListWithFill {
+            id: customModules
+            fill: false
+            items: Config.options.modules.enabled
+            width: root.width
+            path: Directory.shell + "/modules/user"
+            listUserPath: false
+            onItemsChanged: {
+                Config.options.modules.enabled = items;
+            }
+        }
     }
 }

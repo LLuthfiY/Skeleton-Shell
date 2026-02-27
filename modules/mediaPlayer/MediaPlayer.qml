@@ -54,8 +54,7 @@ Scope {
                     points: Cava.values
                     live: true
                     smoothing: 2
-                    maxVisualizerValue: 1000
-                    scale: 120
+                    maxVisualizerValue: 10
                     color: Color.colors.primary
                     layer.enabled: true
 
