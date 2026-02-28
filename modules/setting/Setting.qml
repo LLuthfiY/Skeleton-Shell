@@ -18,6 +18,13 @@ Scope {
         visible: GlobalState.settingsOpen
         title: "Settings"
 
+        LsCommand {
+            id: userPageList
+            path: Directory.trimFileProtocol(Directory.shell + "/modules/setting/page/user")
+            filter: "*.qml"
+            interval: 3000
+        }
+
         onClosing: {
             GlobalState.settingsOpen = false;
         }
@@ -37,84 +44,46 @@ Scope {
                 Layout.fillHeight: true
                 color: Color.colors.surface
                 radius: Variable.radius.small
-                ColumnLayout {
-                    spacing: Variable.margin.small
+                ScrollView {
+                    clip: true
                     anchors.fill: parent
-                    anchors.margins: Variable.margin.small
-                    Repeater {
-                        model: [
-                            {
-                                icon: "paint-roller",
-                                text: "Theme"
-                            },
-                            {
-                                icon: "layout-panel-left",
-                                text: "Bar"
-                            },
-                            {
-                                icon: "layout-dashboard",
-                                text: "Dashboard"
-                            },
-                            {
-                                icon: "app-window",
-                                text: "Window Manager"
-                            },
-                            {
-                                icon: "component",
-                                text: "Modules"
-                            }
-                        ]
-
-                        delegate: Rectangle {
-                            Layout.preferredHeight: Variable.size.larger
-                            Layout.preferredWidth: Variable.uiScale(200)
-                            Layout.fillWidth: true
-                            color: "transparent"
-                            Rectangle {
-                                anchors.left: parent.left
-                                // width: root.section === index ? parent.width : hoverHandler.hovered ? parent.width : 2
-                                width: parent.width
-                                color: root.section === index ? Color.colors.primary : sidebarHoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
-                                HoverHandler {
-                                    id: sidebarHoverHandler
-                                }
-                                height: parent.height
-                                radius: Variable.radius.large
-                                Behavior on width {
-                                    NumberAnimation {
-                                        duration: 200
-                                    }
-                                }
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: 200
-                                    }
-                                }
-                            }
-
-                            LucideIcon {
-                                icon: modelData.icon
-                                color: root.section === index ? Color.colors.on_primary : Color.colors.on_surface
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: parent.left
-                                anchors.margins: Variable.margin.small
-                                label: modelData.text
-                                font.weight: Font.Normal
-                                font.family: Variable.font.family.main
-                                font.pixelSize: Variable.font.pixelSize.normal
-                            }
-                            TapHandler {
-                                onTapped: {
-                                    root.section = index;
-                                }
-                            }
-                            HoverHandler {
-                                id: hoverHandler
-                            }
+                    ColumnLayout {
+                        spacing: Variable.margin.small
+                        anchors.fill: parent
+                        anchors.margins: Variable.margin.small
+                        Repeater {
+                            model: [
+                                {
+                                    icon: "paint-roller",
+                                    text: "Theme"
+                                },
+                                {
+                                    icon: "layout-panel-left",
+                                    text: "Bar"
+                                },
+                                {
+                                    icon: "layout-dashboard",
+                                    text: "Dashboard"
+                                },
+                                {
+                                    icon: "app-window",
+                                    text: "Window Manager"
+                                },
+                                {
+                                    icon: "component",
+                                    text: "Modules"
+                                },
+                                ...userPageList.items.map(item => {
+                                    let match = item.match(/\+\+(.+?)\+\+/);
+                                    let icon = match ? match[1] : "package";
+                                    let text = item.replace(/\+\+(.+?)\+\+/, "").replace("_", " ").replace(".qml", "");
+                                    return {
+                                        icon: icon,
+                                        text: text
+                                    };
+                                })]
+                            delegate: SidebarButton {}
                         }
-                    }
-                    Item {
-                        Layout.fillHeight: true
                     }
                 }
             }
@@ -148,6 +117,16 @@ Scope {
                             width: parent.width
                             Loader {
                                 sourceComponent: modelData
+                            }
+                        }
+                    }
+                    Repeater {
+                        model: userPageList.items
+                        delegate: ScrollView {
+                            height: stackWrapper.height
+                            width: parent.width
+                            Loader {
+                                source: "page/user/" + modelData
                             }
                         }
                     }

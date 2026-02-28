@@ -11,7 +11,7 @@ Singleton {
     id: root
 
     property bool ready: false
-    property string configFile: MasterConfig.options.configFile
+    property string configFile: Directory.configFile
     property alias options: configOptionJsonAdapter
 
     function setNestedValue(nestedKey, value) {

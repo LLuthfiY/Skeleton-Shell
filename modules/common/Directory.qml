@@ -28,6 +28,7 @@ Singleton {
 
     readonly property string shell: StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0] + "/Skeleton-Shell"
 
+    readonly property string configFolder: cache + "/Skeleton-Shell/ConfigFolder"
     readonly property string configFile: cache + "/Skeleton-Shell/ConfigFolder/config.json"
     readonly property string colorFile: cache + "/Skeleton-Shell/ConfigFolder/colors.json"
     readonly property string notificationsPath: trimFileProtocol(`${Directory.cache}/notifications/notifications.json`)

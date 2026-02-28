@@ -73,7 +73,7 @@ Singleton {
         JsonAdapter {
             id: configOptionJsonAdapter
             property bool defaultConfig: true
-            property string configFile: Directory.configFile
+            property string configFolder: Directory.cache + "/Skeleton-Shell/ConfigFolder"
         }
     }
 }
