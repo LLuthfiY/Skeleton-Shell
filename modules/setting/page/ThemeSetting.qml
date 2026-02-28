@@ -11,230 +11,231 @@ import qs.modules.common.functions
 
 import Qt5Compat.GraphicalEffects
 
-ScrollView {
-    id: flickable
-    clip: true
-    height: stackWrapper.height
-    width: stackWrapper.width
-    // ScrollBar.vertical: ScrollBar {}
-    contentWidth: root.width - Variable.uiScale(16)
-    contentHeight: root.height + Variable.uiScale(16)
-    ColumnLayout {
-        id: root
-        width: stackWrapper.width - Variable.uiScale(16)
-        spacing: Variable.margin.small
-        function setTheme() {
-            let palette = Config.options.appearance.palette.type;
-            let darkMode = Config.options.appearance.darkMode ? "dark" : "light";
-            let wallpaperPath = Config.options.background.wallpaperPath.toString().replace("file://", "");
-            Quickshell.execDetached(["matugen", "-t", palette, "-m", darkMode, "image", wallpaperPath]);
-            Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${palette}`]);
-            WindowManagerUtils.setWM();
+// ScrollView {
+//     id: flickable
+//     clip: true
+//     height: stackWrapper.height
+//     width: stackWrapper.width
+//     // ScrollBar.vertical: ScrollBar {}
+//     contentWidth: root.width - Variable.uiScale(16)
+//     contentHeight: root.height + Variable.uiScale(16)
+ColumnLayout {
+    id: root
+    width: stackWrapper.width - Variable.uiScale(50)
+    height: implicitHeight + Variable.uiScale(52)
+    spacing: Variable.margin.small
+    function setTheme() {
+        let palette = Config.options.appearance.palette.type;
+        let darkMode = Config.options.appearance.darkMode ? "dark" : "light";
+        let wallpaperPath = Config.options.background.wallpaperPath.toString().replace("file://", "");
+        Quickshell.execDetached(["matugen", "-t", palette, "-m", darkMode, "image", wallpaperPath]);
+        Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${palette}`]);
+        WindowManagerUtils.setWM();
+    }
+    LucideIcon {
+        icon: "paint-roller"
+        color: Color.colors.on_surface
+        font.pixelSize: Variable.font.pixelSize.title
+        font.weight: Font.Bold
+        label: "Theme"
+    }
+    Rectangle {
+        color: "transparent"
+        radius: Variable.radius.normal
+        width: Variable.uiScale(500)
+        height: Variable.uiScale(250)
+        Rectangle {
+            id: wallpaperWrapper
+            anchors.fill: parent
+            color: Color.colors.surface_container
+            radius: Variable.radius.normal
+            clip: true
+            Image {
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: Rectangle {
+                        width: wallpaperWrapper.width
+                        height: wallpaperWrapper.height
+                        radius: Variable.radius.normal
+                        color: "black"
+                    }
+                }
+                anchors.fill: parent
+                source: Config.options.background.wallpaperPath.toString().replace("file://", "")
+                fillMode: Image.PreserveAspectCrop
+            }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                anchors.margins: Variable.margin.small
+                radius: Variable.radius.small
+                width: selectWallpaperIcon.width + Variable.size.normal
+                height: selectWallpaperIcon.height + Variable.size.small
+                color: selectWallpaperHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+                HoverHandler {
+                    id: selectWallpaperHoverHandler
+                }
+                TapHandler {
+                    onTapped: {
+                        wallpaperDialog.open();
+                    }
+                }
+                LucideIcon {
+                    id: selectWallpaperIcon
+                    icon: "image"
+                    color: selectWallpaperHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                    anchors.centerIn: parent
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    font.pixelSize: Variable.font.pixelSize.normal
+                    label: "Select Wallpaper"
+                }
+                FileDialog {
+                    id: wallpaperDialog
+                    title: "Select Wallpaper"
+                    currentFolder: Directory.home
+                    nameFilters: ["Images (*.png *.jpg *.jpeg)"]
+                    onAccepted: {
+                        Config.options.background.wallpaperPath = selectedFile;
+                        Matugen.setTheme();
+                    }
+                }
+            }
         }
-        LucideIcon {
-            icon: "paint-roller"
-            color: Color.colors.on_surface
-            font.pixelSize: Variable.font.pixelSize.title
-            font.weight: Font.Bold
-            label: "Theme"
+    }
+    RowLayout {
+        spacing: Variable.margin.small
+        Rectangle {
+            id: lightModeButton
+            width: lightModeIcon.width + Variable.size.normal
+            height: lightModeIcon.height + Variable.size.small
+            radius: Variable.radius.small
+            color: "transparent"
+            Rectangle {
+                width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 2
+                height: parent.height
+                radius: Variable.radius.smallest
+                anchors.verticalCenter: parent.verticalCenter
+                color: !Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 200
+                    }
+                }
+            }
+            LucideIcon {
+                id: lightModeIcon
+                icon: "sun"
+                color: !Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
+                anchors.centerIn: parent
+                label: "Light Mode"
+                font.weight: Font.Normal
+                font.family: Variable.font.family.main
+                font.pixelSize: Variable.font.pixelSize.normal
+            }
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
+            TapHandler {
+                onTapped: {
+                    Config.options.appearance.darkMode = false;
+                    Matugen.setTheme();
+                }
+            }
+            HoverHandler {
+                id: lightModeHoverHandler
+            }
         }
         Rectangle {
+            id: darkModeButton
+            property bool hovered: false
+            width: darkModeIcon.width + Variable.size.normal
+            height: darkModeIcon.height + Variable.size.small
+            radius: Variable.radius.small
             color: "transparent"
-            radius: Variable.radius.normal
-            width: Variable.uiScale(500)
-            height: Variable.uiScale(250)
             Rectangle {
-                id: wallpaperWrapper
-                anchors.fill: parent
-                color: Color.colors.surface_container
-                radius: Variable.radius.normal
-                clip: true
-                Image {
-                    layer.enabled: true
-                    layer.effect: OpacityMask {
-                        maskSource: Rectangle {
-                            width: wallpaperWrapper.width
-                            height: wallpaperWrapper.height
-                            radius: Variable.radius.normal
-                            color: "black"
-                        }
-                    }
-                    anchors.fill: parent
-                    source: Config.options.background.wallpaperPath.toString().replace("file://", "")
-                    fillMode: Image.PreserveAspectCrop
-                }
-                Rectangle {
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    anchors.margins: Variable.margin.small
-                    radius: Variable.radius.small
-                    width: selectWallpaperIcon.width + Variable.size.normal
-                    height: selectWallpaperIcon.height + Variable.size.small
-                    color: selectWallpaperHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                    HoverHandler {
-                        id: selectWallpaperHoverHandler
-                    }
-                    TapHandler {
-                        onTapped: {
-                            wallpaperDialog.open();
-                        }
-                    }
-                    LucideIcon {
-                        id: selectWallpaperIcon
-                        icon: "image"
-                        color: selectWallpaperHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                        anchors.centerIn: parent
-                        font.weight: Font.Normal
-                        font.family: Variable.font.family.main
-                        font.pixelSize: Variable.font.pixelSize.normal
-                        label: "Select Wallpaper"
-                    }
-                    FileDialog {
-                        id: wallpaperDialog
-                        title: "Select Wallpaper"
-                        currentFolder: Directory.home
-                        nameFilters: ["Images (*.png *.jpg *.jpeg)"]
-                        onAccepted: {
-                            Config.options.background.wallpaperPath = selectedFile;
-                            Matugen.setTheme();
-                        }
-                    }
-                }
-            }
-        }
-        RowLayout {
-            spacing: Variable.margin.small
-            Rectangle {
-                id: lightModeButton
-                width: lightModeIcon.width + Variable.size.normal
-                height: lightModeIcon.height + Variable.size.small
-                radius: Variable.radius.small
-                color: "transparent"
-                Rectangle {
-                    width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 2
-                    height: parent.height
-                    radius: Variable.radius.smallest
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: !Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                    Behavior on width {
-                        NumberAnimation {
-                            duration: 200
-                        }
-                    }
-                }
-                LucideIcon {
-                    id: lightModeIcon
-                    icon: "sun"
-                    color: !Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
-                    anchors.centerIn: parent
-                    label: "Light Mode"
-                    font.weight: Font.Normal
-                    font.family: Variable.font.family.main
-                    font.pixelSize: Variable.font.pixelSize.normal
-                }
+                width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 2
+                height: parent.height
+                radius: Variable.radius.smallest
+                anchors.verticalCenter: parent.verticalCenter
+                color: Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
                     }
                 }
-                TapHandler {
-                    onTapped: {
-                        Config.options.appearance.darkMode = false;
-                        Matugen.setTheme();
-                    }
-                }
-                HoverHandler {
-                    id: lightModeHoverHandler
-                }
-            }
-            Rectangle {
-                id: darkModeButton
-                property bool hovered: false
-                width: darkModeIcon.width + Variable.size.normal
-                height: darkModeIcon.height + Variable.size.small
-                radius: Variable.radius.small
-                color: "transparent"
-                Rectangle {
-                    width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 2
-                    height: parent.height
-                    radius: Variable.radius.smallest
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                    Behavior on width {
-                        NumberAnimation {
-                            duration: 200
-                        }
-                    }
-                }
-                LucideIcon {
-                    id: darkModeIcon
-                    icon: "moon"
-                    color: Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
-                    anchors.centerIn: parent
-                    label: "Dark Mode"
-                    font.weight: Font.Normal
-                    font.family: Variable.font.family.main
-                    font.pixelSize: Variable.font.pixelSize.normal
-                }
-                HoverHandler {
-                    id: darkModeHoverHandler
-                }
-                TapHandler {
-                    onTapped: {
-                        Config.options.appearance.darkMode = !Config.options.appearance.darkMode;
-                        Matugen.setTheme();
-                    }
-                }
-                Behavior on color {
-                    ColorAnimation {
+                Behavior on width {
+                    NumberAnimation {
                         duration: 200
                     }
                 }
             }
+            LucideIcon {
+                id: darkModeIcon
+                icon: "moon"
+                color: Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
+                anchors.centerIn: parent
+                label: "Dark Mode"
+                font.weight: Font.Normal
+                font.family: Variable.font.family.main
+                font.pixelSize: Variable.font.pixelSize.normal
+            }
+            HoverHandler {
+                id: darkModeHoverHandler
+            }
+            TapHandler {
+                onTapped: {
+                    Config.options.appearance.darkMode = !Config.options.appearance.darkMode;
+                    Matugen.setTheme();
+                }
+            }
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
         }
-        LucideIcon {
-            icon: "palette"
-            color: Color.colors.on_surface
-            font.pixelSize: Variable.font.pixelSize.small
-            font.weight: Font.DemiBold
-            font.family: Variable.font.family.main
-            label: "Palette"
-        }
-        Flow {
-            Layout.preferredWidth: root.width
-            spacing: 8
-            Repeater {
-                model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
-                delegate: ToggleButton {
-                    toggled: Config.options.appearance.palette.type === modelData
-                    label: modelData
-                    font.pixelSize: Variable.font.pixelSize.small
-                    font.weight: Font.Normal
-                    font.family: Variable.font.family.main
-                    toggleOpacity: true
-                    TapHandler {
-                        onTapped: {
-                            Config.options.appearance.palette.type = modelData;
-                            Matugen.setTheme();
-                        }
+    }
+    LucideIcon {
+        icon: "palette"
+        color: Color.colors.on_surface
+        font.pixelSize: Variable.font.pixelSize.small
+        font.weight: Font.DemiBold
+        font.family: Variable.font.family.main
+        label: "Palette"
+    }
+    Flow {
+        Layout.preferredWidth: root.width
+        spacing: 8
+        Repeater {
+            model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
+            delegate: ToggleButton {
+                toggled: Config.options.appearance.palette.type === modelData
+                label: modelData
+                font.pixelSize: Variable.font.pixelSize.small
+                font.weight: Font.Normal
+                font.family: Variable.font.family.main
+                toggleOpacity: true
+                TapHandler {
+                    onTapped: {
+                        Config.options.appearance.palette.type = modelData;
+                        Matugen.setTheme();
                     }
                 }
             }
         }
     }
 }
+// }

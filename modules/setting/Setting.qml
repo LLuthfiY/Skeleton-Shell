@@ -127,16 +127,50 @@ Scope {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 color: "transparent"
-
                 StackLayout {
                     id: stackWrapper
                     anchors.fill: parent
                     anchors.margins: Variable.margin.normal
                     currentIndex: root.section
+
+                    Repeater {
+                        model: [themeComponent, barComponent, dashboardComponent, windowManagerComponent, modulesComponent]
+                        // model: [ThemeSetting, BarSetting, DashboardSetting, WindowManagerSetting, ModulesSetting]
+
+                        // delegate: Loader {
+                        //     Layout.fillWidth: true
+                        //     Layout.fillHeight: true
+                        //
+                        //     sourceComponent: modelData
+                        // }
+                        delegate: ScrollView {
+                            height: stackWrapper.height
+                            width: parent.width
+                            Loader {
+                                sourceComponent: modelData
+                            }
+                        }
+                    }
+                }
+
+                Component {
+                    id: themeComponent
                     ThemeSetting {}
+                }
+                Component {
+                    id: barComponent
                     BarSetting {}
+                }
+                Component {
+                    id: dashboardComponent
                     DashboardSetting {}
+                }
+                Component {
+                    id: windowManagerComponent
                     WindowManagerSetting {}
+                }
+                Component {
+                    id: modulesComponent
                     ModulesSetting {}
                 }
             }
