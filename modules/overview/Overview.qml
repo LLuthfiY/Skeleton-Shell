@@ -78,7 +78,9 @@ Scope {
             anchors.fill: parent
             anchors.margins: 16
             Repeater {
-                model: Hyprland.toplevels
+                model: ScriptModel {
+                    values: Hyprland.toplevels.values
+                }
                 delegate: Rectangle {
                     id: window
                     opacity: 0.7
@@ -105,20 +107,35 @@ Scope {
                     Behavior on x {
                         enabled: true
                         SmoothedAnimation {
-                            duration: 200
+                            duration: 100
                             easing.type: Easing.OutQuad
                         }
                     }
                     Behavior on y {
                         enabled: true
                         SmoothedAnimation {
-                            duration: 200
+                            duration: 100
                             easing.type: Easing.OutQuad
                         }
                     }
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 100
+                            easing.type: Easing.OutQuad
+                        }
+                    }
+
+                    Behavior on height {
+                        NumberAnimation {
+                            duration: 100
+                            easing.type: Easing.OutQuad
+                        }
+                    }
+
                     ScreencopyView {
-                        captureSource: modelData.wayland
-                        constraintSize: Qt.size(window.width, window.height)
+                        id: screencopy
+                        captureSource: (modelData && modelData.wayland) ? modelData.wayland : null
+                        // constraintSize: Qt.size(window.width, window.height)
                         anchors.fill: parent
                         live: true
                         layer.enabled: true
@@ -127,6 +144,14 @@ Scope {
                                 width: window.width
                                 height: window.height
                                 radius: 8
+                            }
+                        }
+                        onStopped: {
+                            modelData.wayland.close();
+                        }
+                        onCaptureSourceChanged: {
+                            if (!captureSource) {
+                                modelData.wayland.close();
                             }
                         }
                     }
@@ -142,6 +167,17 @@ Scope {
                     }
                     TapHandler {
                         acceptedButtons: Qt.RightButton
+                        onTapped: {
+                            // updateWindowFrame.interval = 1000;
+                            // updateWindowFrame.running = false;
+                            // Hyprland.dispatch(`closewindow address:${window.address}`);
+                            // screencopy.captureSource = null;
+                            // modelData.wayland.close();
+                            screencopy.captureSource = null;
+                        }
+                    }
+                    TapHandler {
+                        acceptedButtons: Qt.LeftButton
                         onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
                     }
                     Drag.active: dragHandler.active

@@ -13,8 +13,8 @@ Scope {
     Window {
         id: root
         property int section: 0
-        minimumWidth: 800
-        minimumHeight: 500
+        minimumWidth: Variable.uiScale(800)
+        minimumHeight: Variable.uiScale(600)
         visible: GlobalState.settingsOpen
         title: "Settings"
 
