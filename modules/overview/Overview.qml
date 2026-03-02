@@ -168,11 +168,6 @@ Scope {
                     TapHandler {
                         acceptedButtons: Qt.RightButton
                         onTapped: {
-                            // updateWindowFrame.interval = 1000;
-                            // updateWindowFrame.running = false;
-                            // Hyprland.dispatch(`closewindow address:${window.address}`);
-                            // screencopy.captureSource = null;
-                            // modelData.wayland.close();
                             screencopy.captureSource = null;
                         }
                     }
