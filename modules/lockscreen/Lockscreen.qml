@@ -99,14 +99,19 @@ Scope {
                                 color: "transparent"
                             }
                         }
-                        Spectrum {
-                            id: spectrum
+                        Rectangle {
                             Layout.alignment: Qt.AlignHCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            width: parent.width
-                            implicitHeight: 100
-                            vertical: false
-                            scale: 8
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: Variable.uiScale(120)
+                            color: "transparent"
+                            Spectrum {
+                                id: spectrum
+                                anchors.centerIn: parent
+                                width: parent.width
+                                vertical: false
+                                visible: true
+                                scale: 8
+                            }
                         }
                     }
                 }
