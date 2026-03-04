@@ -72,18 +72,8 @@ Scope {
             id: controls
             anchors.centerIn: parent
             // currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
-            property int activePlayer: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
-            property int lastPlayer: activePlayer
-            currentIndex: lastPlayer
-            onActivePlayerChanged: {
-                if (activePlayer === 0) {
-                    if (Mpris.players.values[0].isPlaying) {
-                        lastPlayer = 0;
-                    }
-                } else {
-                    lastPlayer = activePlayer;
-                }
-            }
+            currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
+            // currentIndex: 0
             Repeater {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -180,74 +170,6 @@ Scope {
                         }
                         RowLayout {
                             spacing: Variable.margin.small
-                            // RippleButton {
-                            //     implicitWidth: 32
-                            //     implicitHeight: 32
-                            //     visible: modelData.canPlay
-                            //     colBackground: Color.colors.primary_container
-                            //     colBackgroundHover: "transparent"
-                            //     buttonText: modelData.isPlaying ? "" : ""
-                            //     textColor: Color.colors.on_surface
-                            //     contentItem: Text {
-                            //         text: modelData.isPlaying ? "" : ""
-                            //         font.family: "Material Icons"
-                            //         font.pixelSize: 16
-                            //         horizontalAlignment: Text.AlignHCenter
-                            //         verticalAlignment: Text.AlignVCenter
-                            //         color: Color.colors.on_primary_container
-                            //     }
-                            //     Behavior on buttonColor {
-                            //         ColorAnimation {
-                            //             duration: 200
-                            //         }
-                            //     }
-                            //
-                            //     onClicked: {
-                            //         modelData.togglePlaying();
-                            //     }
-                            // }
-                            // RippleButton {
-                            //     implicitWidth: 24
-                            //     implicitHeight: 24
-                            //     visible: modelData.canGoPrevious
-                            //     buttonText: ""
-                            //     colBackground: "transparent"
-                            //     colBackgroundHover: "transparent"
-                            //     textColor: Color.colors.on_surface
-                            //     contentItem: Text {
-                            //         text: ""
-                            //         font.family: "Material Icons"
-                            //         font.pixelSize: 16
-                            //         verticalAlignment: Text.AlignVCenter
-                            //         horizontalAlignment: Text.AlignHCenter
-                            //         color: Color.colors.on_primary_container
-                            //     }
-                            //     onClicked: {
-                            //         modelData.previous();
-                            //         modelData.position = 0;
-                            //     }
-                            // }
-                            // RippleButton {
-                            //     implicitWidth: 24
-                            //     implicitHeight: 24
-                            //     visible: modelData.canGoNext
-                            //     colBackground: "transparent"
-                            //     colBackgroundHover: "transparent"
-                            //     buttonText: ""
-                            //     textColor: Color.colors.on_surface
-                            //     contentItem: Text {
-                            //         text: ""
-                            //         font.family: "Material Icons"
-                            //         font.pixelSize: 16
-                            //         verticalAlignment: Text.AlignVCenter
-                            //         horizontalAlignment: Text.AlignHCenter
-                            //         color: Color.colors.on_primary_container
-                            //     }
-                            //     onClicked: {
-                            //         modelData.next();
-                            //         modelData.position = 0;
-                            //     }
-                            // }
                             Rectangle {
                                 id: playButton
                                 implicitWidth: Variable.size.larger
@@ -268,6 +190,27 @@ Scope {
                                 }
                                 TapHandler {
                                     onTapped: {
+                                        if (modelData.isPlaying) {
+                                            console.log(modelData.isPlaying);
+                                            const activePlayers = Mpris.players.values.reduce((a, b, i) => {
+                                                if (i === index) {
+                                                    return a;
+                                                } else {
+                                                    return a + b.isPlaying ? 1 : 0;
+                                                }
+                                            }, 0);
+                                            const lastActivePlayer = Mpris.players.values.reduce((a, b, i) => {
+                                                if (i === index) {
+                                                    return a;
+                                                } else {
+                                                    return b.isPlaying ? i : a;
+                                                }
+                                            }, 0);
+                                            if (activePlayers !== 0) {
+                                                controls.currentIndex = lastActivePlayer;
+                                            }
+                                        }
+                                        controls.currentIndex = controls.currentIndex;
                                         modelData.togglePlaying();
                                     }
                                 }

@@ -138,18 +138,8 @@ Scope {
                         id: mediaPlayer
                         anchors.centerIn: parent
                         padding: Variable.margin.normal
-                        property int activePlayer: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
-                        property int lastPlayer: activePlayer
-                        currentIndex: lastPlayer
-                        onActivePlayerChanged: {
-                            if (activePlayer === 0) {
-                                if (Mpris.players.values[0].isPlaying) {
-                                    lastPlayer = 0;
-                                }
-                            } else {
-                                lastPlayer = activePlayer;
-                            }
-                        }
+                        orientation: Qt.Vertical
+                        currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
                         Repeater {
                             model: ScriptModel {
                                 values: Mpris.players.values
@@ -209,6 +199,26 @@ Scope {
                                         }
                                         TapHandler {
                                             onTapped: {
+                                                if (modelData.isPlaying) {
+                                                    const activePlayers = Mpris.players.values.reduce((a, b, i) => {
+                                                        if (i == index) {
+                                                            return a;
+                                                        } else {
+                                                            return a + b.isPlaying ? 1 : 0;
+                                                        }
+                                                    }, 0);
+                                                    const lastActivePlayer = Mpris.players.values.reduce((a, b, i) => {
+                                                        if (i == index) {
+                                                            return a;
+                                                        } else {
+                                                            return b.isPlaying ? i : a;
+                                                        }
+                                                    }, 0);
+                                                    if (activePlayers !== 0) {
+                                                        mediaPlayer.currentIndex = lastActivePlayer;
+                                                    }
+                                                }
+                                                mediaPlayer.currentIndex = mediaPlayer.currentIndex;
                                                 modelData.togglePlaying();
                                             }
                                         }
