@@ -18,6 +18,7 @@ import qs.modules.dashboard
 import qs.modules.setting
 import qs.modules.launcher
 import qs.modules.ai
+import qs.modules.lockscreen
 
 ShellRoot {
     id: root
@@ -30,6 +31,11 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && Config.options.bar.borderScreen && Config.options.modules.bar
         component: Border {}
+    }
+
+    LazyLoader {
+        active: Config.ready && Config.options.modules.lockscreen && GlobalState.screenLocked
+        component: Lockscreen {}
     }
 
     LazyLoader {

@@ -92,7 +92,10 @@ RowLayout {
                             "icon": "lock",
                             "text": "Lock",
                             "action": function () {
-                                Quickshell.execDetached(["hyprlock"]);
+                                // Quickshell.execDetached(["hyprlock"]);
+                                if (Config.options.modules.lockscreen) {
+                                    GlobalState.screenLocked = true;
+                                }
                             }
                         }
                     ].reverse()

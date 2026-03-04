@@ -11,6 +11,7 @@ Item {
     property int barsCount: 16
     property bool vertical: Config.options.bar.position === "left" || Config.options.bar.position === "right"
     property list<var> values: Cava.values
+    property int scale: 2
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     implicitWidth: spectrumLoader.implicitWidth
     implicitHeight: spectrumLoader.implicitHeight
@@ -36,7 +37,7 @@ Item {
                 model: values
                 Rectangle {
                     width: Variable.size.smallest / 2
-                    height: modelData * 2
+                    height: modelData * spectrumRoot.scale
                     Layout.alignment: Qt.AlignVCenter
                     radius: Variable.radius.smallest
                     color: Color.colors[Config.options.bar.foreground]
@@ -53,7 +54,7 @@ Item {
             Repeater {
                 model: values
                 Rectangle {
-                    width: modelData * 2
+                    width: modelData * spectrumRoot.scale
                     height: Variable.size.smallest / 2
                     Layout.alignment: Qt.AlignHCenter
                     radius: Variable.radius.smallest

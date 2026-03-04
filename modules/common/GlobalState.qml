@@ -8,20 +8,6 @@ import Quickshell.Io
 
 Singleton {
     id: root
-    property bool barOpen: true
-    property bool sidebarLeftOpen: false
-    property bool sidebarRightOpen: false
-    property bool osdBrightnessOpen: false
-    property bool osdVolumeOpen: false
-    property bool oskOpen: false
-    property bool wallpaperSelectorOpen: false
-    property bool screenLocked: false
-    property bool screenLockContainsCharacters: false
-    property bool screenUnlockFailed: false
-    property bool sessionOpen: false
-    property bool superDown: false
-    property bool superReleaseMightTrigger: true
-    property bool workspaceShowNumbers: false
 
     property bool overviewOpen: false
     property bool launcherOpen: false
@@ -29,6 +15,15 @@ Singleton {
     property bool settingsOpen: false
     property bool mediaControlsOpen: true
     property bool aiChatOpen: false
+    property bool screenLocked: false
+
+    IpcHandler {
+        target: "screenLock"
+
+        function actived() {
+            screenLocked = true;
+        }
+    }
 
     IpcHandler {
         target: "launcher"

@@ -36,10 +36,10 @@ Scope {
         }
 
         margins {
-            top: WindowManagerUtils.topMargin + Variable.margin.normal
-            bottom: WindowManagerUtils.bottomMargin + Variable.margin.normal
-            left: WindowManagerUtils.leftMargin + Variable.margin.normal
-            right: WindowManagerUtils.rightMargin + Variable.margin.normal
+            top: (Config.options.bar.position === "top" ? 0 : Config.options.bar.margin) + Variable.margin.normal
+            bottom: (Config.options.bar.position === "bottom" ? 0 : Config.options.bar.margin) + Variable.margin.normal
+            left: (Config.options.bar.position === "left" ? 0 : Config.options.bar.margin) + Variable.margin.normal
+            right: (Config.options.bar.position === "right" ? 0 : Config.options.bar.margin) + Variable.margin.normal
         }
         Rectangle {
             anchors.fill: parent
@@ -71,10 +71,25 @@ Scope {
         SwipeView {
             id: controls
             anchors.centerIn: parent
+            // currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
+            property int activePlayer: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
+            property int lastPlayer: activePlayer
+            currentIndex: lastPlayer
+            onActivePlayerChanged: {
+                if (activePlayer === 0) {
+                    if (Mpris.players.values[0].isPlaying) {
+                        lastPlayer = 0;
+                    }
+                } else {
+                    lastPlayer = activePlayer;
+                }
+            }
             Repeater {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                model: Mpris.players
+                model: ScriptModel {
+                    values: Mpris.players.values
+                }
                 delegate: RowLayout {
                     opacity: controls.currentIndex == index ? 1 : 0.2
                     property bool needUpdate: false

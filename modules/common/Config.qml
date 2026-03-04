@@ -113,6 +113,7 @@ Singleton {
                 property bool overview: true
                 property bool aiChat: true
                 property bool popupCloser: true
+                property bool lockscreen: true
             }
 
             property JsonObject windowManager: JsonObject {

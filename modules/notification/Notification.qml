@@ -30,10 +30,10 @@ Scope {
         }
 
         margins {
-            top: WindowManagerUtils.topMargin
-            bottom: WindowManagerUtils.bottomMargin
-            left: WindowManagerUtils.leftMargin
-            right: WindowManagerUtils.rightMargin
+            top: Config.options.bar.position === "top" ? 0 : Config.options.bar.margin
+            bottom: Config.options.bar.position === "bottom" ? 0 : Config.options.bar.margin
+            left: Config.options.bar.position === "left" ? 0 : Config.options.bar.margin
+            right: Config.options.bar.position === "right" ? 0 : Config.options.bar.margin
         }
 
         mask: Region {
