@@ -73,6 +73,10 @@ Scope {
                                     icon: "component",
                                     text: "Modules"
                                 },
+                                {
+                                    icon: "download",
+                                    text: "Import Config"
+                                },
                                 ...userPageList.items.map(item => {
                                     let match = item.match(/\+\+(.+?)\+\+/);
                                     let icon = match ? match[1] : "package";
@@ -103,7 +107,7 @@ Scope {
                     currentIndex: root.section
 
                     Repeater {
-                        model: [themeComponent, barComponent, dashboardComponent, windowManagerComponent, modulesComponent]
+                        model: [themeComponent, barComponent, dashboardComponent, windowManagerComponent, modulesComponent, userPageComponent]
                         // model: [ThemeSetting, BarSetting, DashboardSetting, WindowManagerSetting, ModulesSetting]
 
                         // delegate: Loader {
@@ -151,6 +155,10 @@ Scope {
                 Component {
                     id: modulesComponent
                     ModulesSetting {}
+                }
+                Component {
+                    id: userPageComponent
+                    ImportConfig {}
                 }
             }
         }

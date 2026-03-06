@@ -22,6 +22,7 @@ ColumnLayout {
         color: Color.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
+        font.family: Variable.font.family.main
         label: "Bar"
     }
     LucideIcon {

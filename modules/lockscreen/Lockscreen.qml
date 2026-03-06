@@ -32,6 +32,7 @@ Scope {
         locked: GlobalState.screenLocked && Config.options.modules.lockscreen
 
         WlSessionLockSurface {
+            color: Color.colors.surface
             Rectangle {
                 color: Color.colors.surface
                 anchors.fill: parent
@@ -77,6 +78,7 @@ Scope {
                             Layout.alignment: Qt.AlignHCenter
                             implicitWidth: Variable.uiScale(500)
                             font.pixelSize: Variable.font.pixelSize.large
+                            font.letterSpacing: Variable.uiScale(4)
                             padding: 16
                             focus: true
                             enabled: !lockContext.unlockInProgress
