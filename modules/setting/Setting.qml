@@ -18,10 +18,11 @@ Scope {
         visible: GlobalState.settingsOpen
         title: "Settings"
 
-        LsCommand {
+        FindCommand {
             id: userPageList
             path: Directory.trimFileProtocol(Directory.shell + "/modules/setting/page/user")
-            filter: "*.qml"
+            searchFolder: false
+            filter: ["*.qml"]
             interval: 3000
         }
 
@@ -78,6 +79,7 @@ Scope {
                                     text: "Import Config"
                                 },
                                 ...userPageList.items.map(item => {
+                                    item = item.split("/").pop();
                                     let match = item.match(/\+\+(.+?)\+\+/);
                                     let icon = match ? match[1] : "package";
                                     let text = item.replace(/\+\+(.+?)\+\+/, "").replace("_", " ").replace(".qml", "");
@@ -130,7 +132,7 @@ Scope {
                             height: stackWrapper.height
                             width: parent.width
                             Loader {
-                                source: "page/user/" + modelData
+                                source: "page/user/" + modelData.split("/").pop()
                             }
                         }
                     }

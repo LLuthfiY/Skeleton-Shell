@@ -2,24 +2,24 @@ import QtQuick
 
 import Quickshell.Io
 
-import qs.modules.common
-
 Item {
     id: root
     property string path
     property list<string> items: []
-    property string filter: ""
-    property string options: ""
+    property list<string> filter: []
+    property bool caseSensitive: false
+    property bool searchFile: true
+    property bool searchFolder: true
+    property int maxDepth: 1
+    property int minDepth: 1
     property int interval: 3000
 
     Process {
         id: listFiles
-        command: ["bash", "-c", `ls -1 ${root.options} ${root.path}${root.path.endsWith("/") ? "" : "/"}${root.filter}`]
         stdout: StdioCollector {
             onStreamFinished: {
                 let ls = this.text.split("\n");
                 ls = ls.filter(item => item !== "");
-                console.log(path);
                 if (ls !== root.items) {
                     root.items = ls;
                 }
@@ -34,6 +34,9 @@ Item {
         repeat: true
         running: true
         onTriggered: {
+            const filter = root.filter.length !== 0 ? '\\( ' + root.filter.map(item => `-${root.caseSensitive ? "" : "i"}name "${item}"`).join(" -o ") + ' \\)' : "";
+            const type = ["", "-type d", "-type f", ""][root.searchFolder + (2 * root.searchFile)];
+            listFiles.command = ["bash", "-c", `find ${root.path}${root.path.endsWith("/") ? "" : "/"} -mindepth ${root.minDepth} -maxdepth ${root.maxDepth} ${type} ${filter}`];
             listFiles.running = true;
         }
     }

@@ -14,6 +14,12 @@ ColumnLayout {
     id: root
     spacing: 8
     width: stackWrapper.width - 24
+    FindCommand {
+        id: lsCommand
+        path: Directory.trimFileProtocol(Directory.repos)
+        minDepth: 3
+        maxDepth: 3
+    }
     LucideIcon {
         icon: "download"
         color: Color.colors.on_surface
@@ -32,12 +38,12 @@ ColumnLayout {
     }
     RowLayout {
         TextField {
-            id: importConfigFieldText
+            id: importConfigTextField
             Layout.fillWidth: true
             background: Rectangle {
                 color: Color.colors.surface
                 radius: Variable.radius.small
-                border.color: importConfigFieldText.focus ? Color.colors.primary : Color.colors.surface_container
+                border.color: importConfigTextField.focus ? Color.colors.primary : Color.colors.surface_container
                 border.width: 2
             }
         }
@@ -53,9 +59,10 @@ ColumnLayout {
             }
             HoverHandler {
                 id: importConfigButtonHoverHandler
+                cursorShape: Git.onProgress ? Qt.BusyCursor : Qt.PointingHandCursor
             }
             LucideIcon {
-              id: importConfigButtonIcon
+                id: importConfigButtonIcon
                 anchors.centerIn: parent
                 font.family: Variable.font.family.main
                 font.weight: Font.Normal
@@ -63,6 +70,26 @@ ColumnLayout {
                 color: Color.colors.on_surface
                 icon: "download"
                 label: "Import"
+            }
+            TapHandler {
+                enabled: !Git.onProgress
+                onTapped: {
+                    Git.cloneRepo(importConfigTextField.text);
+                }
+            }
+        }
+    }
+    ScrollView {
+        ColumnLayout {
+            spacing: 8
+            Repeater {
+                model: lsCommand.items
+                Loader {
+                    sourceComponent: Text {
+                        text: modelData
+                        color: Color.colors.on_surface
+                    }
+                }
             }
         }
     }
