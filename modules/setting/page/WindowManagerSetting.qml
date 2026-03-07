@@ -14,7 +14,7 @@ import qs.modules.common.functions
 //     width: parent.width
 ColumnLayout {
     id: root
-    spacing: 8
+    spacing: Variable.margin.small
     width: stackWrapper.width - 24
     LucideIcon {
         icon: "app-window"

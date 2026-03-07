@@ -52,6 +52,38 @@ Scope {
                         spacing: Variable.margin.small
                         anchors.fill: parent
                         anchors.margins: Variable.margin.small
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: reloadIcon.implicitHeight + Variable.margin.normal
+                            HoverHandler {
+                                id: reloadHoverHandler
+                                cursorShape: Qt.PointingHandCursor
+                            }
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 200
+                                }
+                            }
+                            TapHandler {
+                                onTapped: {
+                                    Quickshell.reload(true);
+                                }
+                            }
+                            radius: Variable.radius.small
+                            color: reloadHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                            LucideIcon {
+                                id: reloadIcon
+                                anchors.centerIn: parent
+                                icon: "rotate-ccw"
+                                label: "Reload"
+                                color: Color.colors.on_surface
+                                font.pixelSize: Variable.font.pixelSize.normal
+                                font.weight: Font.Bold
+                                font.family: Variable.font.family.main
+                                Layout.alignment: Qt.AlignVCenter
+                                Layout.rightMargin: Variable.margin.small
+                            }
+                        }
                         Repeater {
                             model: [
                                 {

@@ -14,7 +14,7 @@ import qs.modules.common.functions
 //     width: parent.width
 ColumnLayout {
     id: root
-    spacing: 8
+    spacing: Variable.margin.small
     width: stackWrapper.width - 24
     LucideIcon {
         icon: "layout-dashboard"
@@ -33,7 +33,7 @@ ColumnLayout {
         label: "Position"
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         Repeater {
             model: ["left", "right"]
             delegate: Rectangle {

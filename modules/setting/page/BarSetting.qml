@@ -271,7 +271,7 @@ ColumnLayout {
     }
 
     ColumnLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "layout-panel-left"
             color: Color.colors.on_surface

@@ -45,7 +45,7 @@ Scope {
 
         ListView {
             id: listview
-            spacing: 8
+            spacing: Variable.margin.small
             anchors.fill: parent
             anchors.margins: 0
 

@@ -4,7 +4,7 @@ import Quickshell.Io
 
 Item {
     id: root
-    property string path
+    required property string path
     property string link: ""
     property int interval: 3000
 
@@ -14,7 +14,7 @@ Item {
         stdout: StdioCollector {
             onStreamFinished: {
                 if (this.text !== root.link) {
-                    root.link = this.text;
+                    root.link = this.text.trim();
                 }
             }
         }

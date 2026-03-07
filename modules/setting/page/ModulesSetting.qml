@@ -15,7 +15,7 @@ import qs.modules.common.functions
 //     width: parent.width
 ColumnLayout {
     id: root
-    spacing: 8
+    spacing: Variable.margin.small
     width: stackWrapper.width - 24
     LucideIcon {
         icon: "component"
@@ -34,7 +34,7 @@ ColumnLayout {
         label: "Default Modules"
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "dock"
             color: Color.colors.on_surface_variant
@@ -59,7 +59,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "image"
             color: Color.colors.on_surface_variant
@@ -84,7 +84,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "message-circle"
             color: Color.colors.on_surface_variant
@@ -109,7 +109,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "music"
             color: Color.colors.on_surface_variant
@@ -134,7 +134,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "monitor"
             color: Color.colors.on_surface_variant
@@ -159,7 +159,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "circle-x"
             color: Color.colors.on_surface_variant
@@ -184,7 +184,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "layout-dashboard"
             color: Color.colors.on_surface_variant
@@ -209,7 +209,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        spacing: 8
+        spacing: Variable.margin.small
         LucideIcon {
             icon: "lock"
             color: Color.colors.on_surface_variant

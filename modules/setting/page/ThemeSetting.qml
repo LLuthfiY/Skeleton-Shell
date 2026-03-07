@@ -219,7 +219,7 @@ ColumnLayout {
     }
     Flow {
         Layout.preferredWidth: root.width
-        spacing: 8
+        spacing: Variable.margin.small
         Repeater {
             model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
             delegate: ToggleButton {
