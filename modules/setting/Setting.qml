@@ -66,6 +66,7 @@ Scope {
                             }
                             TapHandler {
                                 onTapped: {
+                                    Quickshell.execDetached(["hyprctl", "reload"]);
                                     Quickshell.reload(true);
                                 }
                             }

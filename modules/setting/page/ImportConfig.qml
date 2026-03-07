@@ -149,6 +149,7 @@ ColumnLayout {
                             onTapped: {
                                 MasterConfig.options.defaultConfig = true;
                                 SoftLink.create(Directory.trimFileProtocol(Directory.config + "/Skeleton-Shell"), Directory.trimFileProtocol(Directory.configFolder));
+                                Quickshell.execDetached(["hyprctl", "reload"]);
                                 Quickshell.reload(true);
                             }
                         }
@@ -241,6 +242,7 @@ ColumnLayout {
                                 onTapped: {
                                     MasterConfig.options.defaultConfig = false;
                                     SoftLink.create(modelData, Directory.trimFileProtocol(Directory.configFolder));
+                                    Quickshell.execDetached(["hyprctl", "reload"]);
                                     Quickshell.reload(true);
                                 }
                             }
@@ -276,7 +278,10 @@ ColumnLayout {
                                 Layout.alignment: Qt.AlignVCenter
                             }
                             TapHandler {
-                                onTapped: {}
+                                enabled: modelData !== readLinkCommand.link
+                                onTapped: {
+                                    Quickshell.execDetached(["rm", "-rf", modelData]);
+                                }
                             }
                         }
                     }
