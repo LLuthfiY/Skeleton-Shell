@@ -10,7 +10,7 @@ Item {
     property bool caseSensitive: false
     property bool searchFile: true
     property bool searchFolder: true
-    property int maxDepth: 1
+    property int maxDepth: 0
     property int minDepth: 1
     property int interval: 3000
 
@@ -36,7 +36,8 @@ Item {
         onTriggered: {
             const filter = root.filter.length !== 0 ? '\\( ' + root.filter.map(item => `-${root.caseSensitive ? "" : "i"}name "${item}"`).join(" -o ") + ' \\)' : "";
             const type = ["", "-type d", "-type f", ""][root.searchFolder + (2 * root.searchFile)];
-            listFiles.command = ["bash", "-c", `find ${root.path}${root.path.endsWith("/") ? "" : "/"} -mindepth ${root.minDepth} -maxdepth ${root.maxDepth} ${type} ${filter}`];
+            const maxDepthString = root.maxDepth === 0 ? "" : `-maxdepth ${root.maxDepth}`;
+            listFiles.command = ["bash", "-c", `find ${root.path}${root.path.endsWith("/") ? "" : "/"} -mindepth ${root.minDepth} ${maxDepthString} ${type} ${filter}`];
             listFiles.running = true;
         }
     }
