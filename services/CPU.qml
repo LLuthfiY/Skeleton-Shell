@@ -6,8 +6,11 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+import qs.modules.common
+
 Singleton {
     id: root
+    property int interval: Config.options.services.systemMonitor.interval
     property string cpuUsage: "0"
     property string cpuTemp: "0"
     property string cpuFreq: "0"
@@ -17,10 +20,12 @@ Singleton {
 
     property var _lastStat: null
 
+    signal cpuUpdated
+
     Timer {
         id: cpuTimer
         running: true
-        interval: 3000
+        interval: root.interval
         repeat: true
         triggeredOnStart: true
         onTriggered: {
@@ -42,6 +47,7 @@ Singleton {
                 if (_lastStat) {
                     let usage = 100 * (1 - (idle - _lastStat.idle) / (total - _lastStat.total));
                     cpuUsage = usage.toFixed(1);
+                    root.cpuUpdated();
                 }
 
                 _lastStat = {

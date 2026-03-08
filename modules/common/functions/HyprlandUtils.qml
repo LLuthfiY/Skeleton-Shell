@@ -59,4 +59,8 @@ Singleton {
 
         wmFile.setText(config);
     }
+
+    function reloadWM() {
+        Quickshell.execDetached(["hyprctl", "reload"]);
+    }
 }

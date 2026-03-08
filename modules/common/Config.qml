@@ -159,6 +159,9 @@ Singleton {
                         property int maxChatForContext: 10
                     }
                 }
+                property JsonObject systemMonitor: JsonObject {
+                    property int interval: 1000
+                }
             }
         }
     }

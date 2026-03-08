@@ -14,4 +14,7 @@ Singleton {
     function setWM() {
         provider.setWM();
     }
+    function reloadWM() {
+        provider.reloadWM();
+    }
 }

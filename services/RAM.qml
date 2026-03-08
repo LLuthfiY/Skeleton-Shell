@@ -6,8 +6,11 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+import qs.modules.common
+
 Singleton {
     id: root
+    property int interval: Config.options.services.systemMonitor.interval
     property string ramUsage: "0"
     property string ramTotal: "0"
     property string ramUsed: "0"
@@ -15,10 +18,12 @@ Singleton {
 
     property var _lastStat: null
 
+    signal ramUpdated
+
     Timer {
         id: ramTimer
         running: true
-        interval: 3000
+        interval: root.interval
         repeat: true
         triggeredOnStart: true
         onTriggered: {
@@ -41,6 +46,7 @@ Singleton {
                 root.ramFree = ramFree;
                 root.ramUsed = ramUsed;
                 root.ramUsage = (100 * (ramUsed / ramTotal)).toFixed(1);
+                root.ramUpdated();
             }
         }
     }

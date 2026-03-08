@@ -102,7 +102,7 @@ ColumnLayout {
                     LucideIcon {
                         icon: "folder"
                         color: Color.colors.on_surface
-                        font.pixelSize: Variable.font.pixelSize.title
+                        font.pixelSize: Variable.font.pixelSize.normal
                         font.weight: Font.Bold
                         font.family: Variable.font.family.main
                         Layout.alignment: Qt.AlignVCenter
@@ -149,7 +149,7 @@ ColumnLayout {
                             onTapped: {
                                 MasterConfig.options.defaultConfig = true;
                                 SoftLink.create(Directory.trimFileProtocol(Directory.config + "/Skeleton-Shell"), Directory.trimFileProtocol(Directory.configFolder));
-                                Quickshell.execDetached(["hyprctl", "reload"]);
+                                WindowManagerUtils.reloadWM();
                                 Quickshell.reload(true);
                             }
                         }
@@ -177,7 +177,7 @@ ColumnLayout {
                         LucideIcon {
                             icon: modelData.includes("github.com") ? "github" : modelData.includes("gitlab.com") ? "gitlab" : "git-branch"
                             color: Color.colors.on_surface
-                            font.pixelSize: Variable.font.pixelSize.title
+                            font.pixelSize: Variable.font.pixelSize.normal
                             font.weight: Font.Bold
                             font.family: Variable.font.family.main
                             Layout.alignment: Qt.AlignVCenter
@@ -242,7 +242,7 @@ ColumnLayout {
                                 onTapped: {
                                     MasterConfig.options.defaultConfig = false;
                                     SoftLink.create(modelData, Directory.trimFileProtocol(Directory.configFolder));
-                                    Quickshell.execDetached(["hyprctl", "reload"]);
+                                    WindowManagerUtils.reloadWM();
                                     Quickshell.reload(true);
                                 }
                             }

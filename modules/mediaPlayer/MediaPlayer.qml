@@ -45,28 +45,19 @@ Scope {
             anchors.fill: parent
             color: Color.colors.surface
             radius: Config.options.bar.borderRadius
-            Loader {
-                active: Config.options.mediaPlayer.enable
-                anchors.fill: parent
-                WaveSpectrum {
-                    id: waveSpectrum
-                    anchors.fill: parent
-                    points: Cava.values
-                    live: true
-                    smoothing: 2
-                    maxVisualizerValue: 10
-                    color: Color.colors.primary
-                    layer.enabled: true
-
-                    layer.effect: OpacityMask {
-                        maskSource: Rectangle {
-                            width: waveSpectrum.width
-                            height: waveSpectrum.height
-                            radius: Variable.radius.normal
-                        }
-                    }
-                }
-            }
+            // Loader {
+            //     active: Config.options.mediaPlayer.enable
+            //     anchors.fill: parent
+            //     LineChart {
+            //         color: Color.colors.primary
+            //         anchors.fill: parent
+            //         points: Cava.values
+            //         drawBottomLine: true
+            //         fill: true
+            //         maxValue: 10
+            //         fillColor: "#55" + Color.colors.primary.replace("#", "")
+            //     }
+            // }
         }
         SwipeView {
             id: controls
