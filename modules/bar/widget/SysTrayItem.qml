@@ -44,6 +44,7 @@ Rectangle {
             //
             // styledMenu.anchor.rect = Qt.rect(w, h, 0, 0);
             // styledMenu.open();
+            menuOpener.menu = modelData.menu;
             GlobalState.barMenuComponent = menuComponent;
             GlobalState.barMenuOpen = true;
         }
@@ -77,7 +78,11 @@ Rectangle {
                     TapHandler {
                         enabled: modelData.enabled
                         onTapped: {
-                            modelData.triggered();
+                            if (modelData.hasChildren) {
+                                menuOpener.menu = modelData.menu;
+                            } else {
+                                modelData.triggered();
+                            }
                         }
                     }
                     RowLayout {
