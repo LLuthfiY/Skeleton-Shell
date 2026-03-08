@@ -23,6 +23,7 @@ Scope {
                 GlobalState.dashboardOpen = false;
                 GlobalState.overviewOpen = false;
                 GlobalState.aiChatOpen = false;
+                GlobalState.barMenuOpen = false;
             }
         }
     }

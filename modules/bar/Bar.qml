@@ -142,6 +142,13 @@ Scope {
                         startItem: RowLayout {
                             id: startWidgets
                             spacing: barWindow.spacing
+                            HoverHandler {
+                                onHoveredChanged: {
+                                    if (hovered) {
+                                        GlobalState.barMenuPosition = "start";
+                                    }
+                                }
+                            }
                             // vertical: barWindow.vertical
                             // flow: horizontal ? Flow.LeftToRight : Flow.TopToBottom
                             Repeater {
@@ -158,6 +165,13 @@ Scope {
                         centerItem: RowLayout {
                             id: centerWidgets
                             spacing: barWindow.spacing
+                            HoverHandler {
+                                onHoveredChanged: {
+                                    if (hovered) {
+                                        GlobalState.barMenuPosition = "center";
+                                    }
+                                }
+                            }
                             // vertical: barWindow.vertical
                             // flow: horizontal ? Flow.LeftToRight : Flow.TopToBottom
                             Repeater {
@@ -174,6 +188,13 @@ Scope {
                         endItem: RowLayout {
                             id: endWidgets
                             spacing: barWindow.spacing
+                            HoverHandler {
+                                onHoveredChanged: {
+                                    if (hovered) {
+                                        GlobalState.barMenuPosition = "end";
+                                    }
+                                }
+                            }
                             // vertical: barWindow.vertical
                             // flow: horizontal ? Flow.LeftToRight : Flow.TopToBottom
                             Repeater {
@@ -199,6 +220,13 @@ Scope {
                         startItem: ColumnLayout {
                             id: startWidgets
                             spacing: barWindow.spacing
+                            HoverHandler {
+                                onHoveredChanged: {
+                                    if (hovered) {
+                                        GlobalState.barMenuPosition = "start";
+                                    }
+                                }
+                            }
                             // vertical: barWindow.vertical
                             // flow: horizontal ? Flow.LeftToRight : Flow.TopToBottom
                             Repeater {
@@ -215,6 +243,13 @@ Scope {
                         centerItem: ColumnLayout {
                             id: centerWidgets
                             spacing: barWindow.spacing
+                            HoverHandler {
+                                onHoveredChanged: {
+                                    if (hovered) {
+                                        GlobalState.barMenuPosition = "center";
+                                    }
+                                }
+                            }
                             // vertical: barWindow.vertical
                             // flow: horizontal ? Flow.LeftToRight : Flow.TopToBottom
                             Repeater {
@@ -231,6 +266,13 @@ Scope {
                         endItem: ColumnLayout {
                             id: endWidgets
                             spacing: barWindow.spacing
+                            HoverHandler {
+                                onHoveredChanged: {
+                                    if (hovered) {
+                                        GlobalState.barMenuPosition = "end";
+                                    }
+                                }
+                            }
                             // vertical: barWindow.vertical
                             // flow: horizontal ? Flow.LeftToRight : Flow.TopToBottom
                             Repeater {

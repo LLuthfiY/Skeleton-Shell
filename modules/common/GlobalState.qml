@@ -1,9 +1,9 @@
 pragma Singleton
 pragma ComponentBehavior: Bound
+
 import qs.modules.common
 import QtQuick
 import Quickshell
-import Quickshell.Hyprland
 import Quickshell.Io
 
 Singleton {
@@ -16,6 +16,10 @@ Singleton {
     property bool mediaControlsOpen: true
     property bool aiChatOpen: false
     property bool screenLocked: false
+    property bool barMenuOpen: false
+
+    property var barMenuComponent: null
+    property string barMenuPosition: "end"
 
     IpcHandler {
         target: "screenLock"

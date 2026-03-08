@@ -19,6 +19,7 @@ import qs.modules.setting
 import qs.modules.launcher
 import qs.modules.ai
 import qs.modules.lockscreen
+import qs.modules.barMenu
 
 ShellRoot {
     id: root
@@ -26,6 +27,11 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && Config.options.modules.bar
         component: Bar {}
+    }
+
+    LazyLoader {
+        active: Config.ready && Config.options.modules.bar && GlobalState.barMenuOpen
+        component: BarMenu {}
     }
 
     LazyLoader {
@@ -69,7 +75,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen || GlobalState.aiChatOpen) && Config.options.modules.popupCloser
+        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen || GlobalState.aiChatOpen || GlobalState.barMenuOpen) && Config.options.modules.popupCloser
         component: PopupCloser {}
     }
 
