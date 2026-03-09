@@ -38,7 +38,7 @@ Scope {
                     id: image
                     Image {
                         anchors.fill: parent
-                        source: Config.options.background.wallpaperPath
+                        source: GlobalState.wallapaperPath
                         fillMode: Image.PreserveAspectCrop
                     }
                 }

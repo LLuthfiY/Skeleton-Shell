@@ -9,6 +9,8 @@ import Quickshell.Io
 Singleton {
     id: root
 
+    property string wallapaperPath: Directory.configFolder + "/wallpaper"
+
     property bool overviewOpen: false
     property bool launcherOpen: false
     property bool dashboardOpen: false
@@ -76,6 +78,15 @@ Singleton {
         function toggle() {
             aiChatOpen = !aiChatOpen;
             dashboardOpen = false;
+        }
+    }
+
+    IpcHandler {
+        target: "wallpaper"
+        function update() {
+            const temp = wallapaperPath;
+            wallapaperPath = "";
+            wallapaperPath = temp;
         }
     }
 }

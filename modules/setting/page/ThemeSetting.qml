@@ -52,6 +52,7 @@ ColumnLayout {
             radius: Variable.radius.normal
             clip: true
             Image {
+                id: wallpaperImage
                 layer.enabled: true
                 layer.effect: OpacityMask {
                     maskSource: Rectangle {
@@ -62,7 +63,8 @@ ColumnLayout {
                     }
                 }
                 anchors.fill: parent
-                source: Config.options.background.wallpaperPath.toString().replace("file://", "")
+                // source: Config.options.background.wallpaperPath.toString().replace("file://", "")
+                source: GlobalState.wallapaperPath
                 fillMode: Image.PreserveAspectCrop
             }
             Rectangle {

@@ -59,12 +59,14 @@ Rectangle {
         id: menuComponent
         ColumnLayout {
             id: col
+            spacing: 0
             Repeater {
                 model: menuOpener.children
                 delegate: Rectangle {
                     height: modelData.isSeparator ? 2 : row.height + Variable.margin.small
                     width: row.width + Variable.margin.small
                     Layout.fillWidth: true
+                    Layout.margins: modelData.isSeparator ? Variable.margin.small : 0
                     HoverHandler {
                         id: menuItemHover
                     }
@@ -83,6 +85,7 @@ Rectangle {
                             } else {
                                 modelData.triggered();
                             }
+                            GlobalState.barMenuOpen = false;
                         }
                     }
                     RowLayout {
