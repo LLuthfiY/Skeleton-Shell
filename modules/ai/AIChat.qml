@@ -27,7 +27,7 @@ Scope {
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
-        exclusionMode: ExclusionMode.Ignore
+        exclusionMode: ExclusionMode.Normal
         implicitWidth: Variable.size.aiChatWidth
         color: "transparent"
 
