@@ -19,6 +19,5 @@ use [Installer](https://github.com/LLuthfiY/Skeleton-Shell-Installer.git)
 
 ## Showcase
 
-[![Import Video](https://raw.githubusercontent.com/LLuthfiY/Skeleton-Shell/main/assets/Video/import.png)](https://raw.githubusercontent.com/LLuthfiY/Skeleton-Shell/main/assets/Video/import.mp4)
-
+https://github.com/user-attachments/assets/720395fe-8715-4f8c-ba83-e4070ab45247
 
