@@ -103,10 +103,5 @@ Singleton {
     }
     Process {
         id: matugenProcess
-        stdout: StdioCollector {
-            onStreamFinished: {
-                console.log(this.text);
-            }
-        }
     }
 }

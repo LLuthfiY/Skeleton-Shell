@@ -167,12 +167,16 @@ ColumnLayout {
             delegate: Rectangle {
                 width: root.width
                 height: colorName.height + Variable.size.small
-                color: modelData === Config.options.appearance.colorPath ? Color.colors.surface_container : Color.colors.surface
+                color: modelData === Config.options.appearance.colorPath || colorHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
                 radius: Variable.radius.small
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
                     }
+                }
+                HoverHandler {
+                    id: colorHoverHandler
+                    cursorShape: Qt.PointingHandCursor
                 }
                 TapHandler {
                     onTapped: {
