@@ -21,17 +21,8 @@ import Qt5Compat.GraphicalEffects
 //     contentHeight: root.height + Variable.uiScale(16)
 ColumnLayout {
     id: root
-    width: stackWrapper.width - Variable.uiScale(50)
-    height: implicitHeight + Variable.uiScale(52)
+    width: stackWrapper.width - Variable.uiScale(32)
     spacing: Variable.margin.small
-    function setTheme() {
-        let palette = Config.options.appearance.palette.type;
-        let darkMode = Config.options.appearance.darkMode ? "dark" : "light";
-        let wallpaperPath = Config.options.background.wallpaperPath.toString().replace("file://", "");
-        Quickshell.execDetached(["matugen", "-t", palette, "-m", darkMode, "image", wallpaperPath]);
-        Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${palette}`]);
-        WindowManagerUtils.setWM();
-    }
     LucideIcon {
         icon: "paint-roller"
         color: Color.colors.on_surface
@@ -105,136 +96,233 @@ ColumnLayout {
                     nameFilters: ["Images (*.png *.jpg *.jpeg)"]
                     onAccepted: {
                         Config.options.background.wallpaperPath = selectedFile;
-                        Matugen.setTheme();
+                        Quickshell.execDetached(["cp", Directory.trimFileProtocol(selectedFile.toString()), Directory.trimFileProtocol(Directory.configFolder + "/wallpaper")]);
+                        if (Config.options.appearance.colorFromWallpaper) {
+                            Matugen.fromWallpaper();
+                        }
                     }
                 }
             }
         }
     }
     RowLayout {
-        spacing: Variable.margin.small
-        Rectangle {
-            id: lightModeButton
-            width: lightModeIcon.width + Variable.size.normal
-            height: lightModeIcon.height + Variable.size.small
-            radius: Variable.radius.small
-            color: "transparent"
-            Rectangle {
-                width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 2
-                height: parent.height
-                radius: Variable.radius.smallest
-                anchors.verticalCenter: parent.verticalCenter
-                color: !Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
-                Behavior on width {
-                    NumberAnimation {
-                        duration: 200
-                    }
-                }
-            }
-            LucideIcon {
-                id: lightModeIcon
-                icon: "sun"
-                color: !Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
-                anchors.centerIn: parent
-                label: "Light Mode"
-                font.weight: Font.Normal
-                font.family: Variable.font.family.main
-                font.pixelSize: Variable.font.pixelSize.normal
-            }
-            Behavior on color {
-                ColorAnimation {
-                    duration: 200
-                }
-            }
-            TapHandler {
-                onTapped: {
-                    Config.options.appearance.darkMode = false;
-                    Matugen.setTheme();
-                }
-            }
-            HoverHandler {
-                id: lightModeHoverHandler
-            }
-        }
-        Rectangle {
-            id: darkModeButton
-            property bool hovered: false
-            width: darkModeIcon.width + Variable.size.normal
-            height: darkModeIcon.height + Variable.size.small
-            radius: Variable.radius.small
-            color: "transparent"
-            Rectangle {
-                width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 2
-                height: parent.height
-                radius: Variable.radius.smallest
-                anchors.verticalCenter: parent.verticalCenter
-                color: Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
-                Behavior on width {
-                    NumberAnimation {
-                        duration: 200
-                    }
-                }
-            }
-            LucideIcon {
-                id: darkModeIcon
-                icon: "moon"
-                color: Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
-                anchors.centerIn: parent
-                label: "Dark Mode"
-                font.weight: Font.Normal
-                font.family: Variable.font.family.main
-                font.pixelSize: Variable.font.pixelSize.normal
-            }
-            HoverHandler {
-                id: darkModeHoverHandler
-            }
-            TapHandler {
-                onTapped: {
-                    Config.options.appearance.darkMode = !Config.options.appearance.darkMode;
-                    Matugen.setTheme();
-                }
-            }
-            Behavior on color {
-                ColorAnimation {
-                    duration: 200
-                }
-            }
-        }
-    }
-    LucideIcon {
-        icon: "palette"
-        color: Color.colors.on_surface
-        font.pixelSize: Variable.font.pixelSize.small
-        font.weight: Font.DemiBold
-        font.family: Variable.font.family.main
-        label: "Palette"
-    }
-    Flow {
         Layout.preferredWidth: root.width
+        LucideIcon {
+            icon: "palette"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Dynamic Colors"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledSwitch {
+            id: dynamicColors
+            checked: Config.options.appearance.colorFromWallpaper
+            onCheckedChanged: {
+                Config.options.appearance.colorFromWallpaper = checked;
+                if (checked) {
+                    Matugen.fromWallpaper();
+                } else {
+                    Matugen.fromJsonFile();
+                }
+            }
+        }
+    }
+    ColumnLayout {
+        id: colorSelector
         spacing: Variable.margin.small
+        visible: !Config.options.appearance.colorFromWallpaper
+        FindCommand {
+            id: findColor
+            filter: ["*.json"]
+            path: Directory.trimFileProtocol(Directory.shell) + "/colors"
+        }
+        FindCommand {
+            id: findColorUser
+            filter: ["*.json"]
+            path: Directory.trimFileProtocol(Directory.shell) + "/colors/user"
+        }
+        property list<string> colors: findColor.items || []
+        property list<string> colorsUser: findColorUser.items || []
+        property list<string> colorsAll: [...colors, ...colorsUser]
+        TextField {
+            id: searchColor
+            placeholderText: "Search Color ..."
+            placeholderTextColor: ColorUtils.transparentize(Color.colors.on_surface, 0.5)
+            Layout.fillWidth: true
+            background: Rectangle {
+                color: Color.colors.surface_container
+                radius: Variable.radius.small
+                border.color: searchColor.focus ? Color.colors.primary : Color.colors.surface_variant
+                border.width: 1
+            }
+        }
         Repeater {
-            model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
-            delegate: ToggleButton {
-                toggled: Config.options.appearance.palette.type === modelData
-                label: modelData
-                font.pixelSize: Variable.font.pixelSize.small
-                font.weight: Font.Normal
-                font.family: Variable.font.family.main
-                toggleOpacity: true
+            model: ScriptModel {
+                values: colorSelector.colorsAll.filter(item => item.split("/").pop().replace(".json", "").toLowerCase().includes(searchColor.text.toLowerCase()))
+            }
+            delegate: Rectangle {
+                width: root.width
+                height: colorName.height + Variable.size.small
+                color: modelData === Config.options.appearance.colorPath ? Color.colors.surface_container : Color.colors.surface
+                radius: Variable.radius.small
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
                 TapHandler {
                     onTapped: {
-                        Config.options.appearance.palette.type = modelData;
-                        Matugen.setTheme();
+                        console.log(modelData);
+                        Config.options.appearance.colorPath = modelData;
+                        Matugen.fromJsonFile();
+                    }
+                }
+                Text {
+                    id: colorName
+                    text: modelData.split("/").pop().replace(".json", "")
+                    color: Color.colors.on_surface
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Variable.margin.small
+                }
+            }
+        }
+    }
+    ColumnLayout {
+        spacing: Variable.margin.small
+        visible: Config.options.appearance.colorFromWallpaper
+        RowLayout {
+            spacing: Variable.margin.small
+            Rectangle {
+                id: lightModeButton
+                width: lightModeIcon.width + Variable.size.normal
+                height: lightModeIcon.height + Variable.size.small
+                radius: Variable.radius.small
+                color: "transparent"
+                Rectangle {
+                    width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 2
+                    height: parent.height
+                    radius: Variable.radius.smallest
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: !Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 200
+                        }
+                    }
+                }
+                LucideIcon {
+                    id: lightModeIcon
+                    icon: "sun"
+                    color: !Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
+                    anchors.centerIn: parent
+                    label: "Light Mode"
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    font.pixelSize: Variable.font.pixelSize.normal
+                }
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+                TapHandler {
+                    onTapped: {
+                        Config.options.appearance.darkMode = false;
+                        Matugen.fromWallpaper();
+                    }
+                }
+                HoverHandler {
+                    id: lightModeHoverHandler
+                }
+            }
+            Rectangle {
+                id: darkModeButton
+                property bool hovered: false
+                width: darkModeIcon.width + Variable.size.normal
+                height: darkModeIcon.height + Variable.size.small
+                radius: Variable.radius.small
+                color: "transparent"
+                Rectangle {
+                    width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 2
+                    height: parent.height
+                    radius: Variable.radius.smallest
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 200
+                        }
+                    }
+                }
+                LucideIcon {
+                    id: darkModeIcon
+                    icon: "moon"
+                    color: Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
+                    anchors.centerIn: parent
+                    label: "Dark Mode"
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    font.pixelSize: Variable.font.pixelSize.normal
+                }
+                HoverHandler {
+                    id: darkModeHoverHandler
+                }
+                TapHandler {
+                    onTapped: {
+                        Config.options.appearance.darkMode = !Config.options.appearance.darkMode;
+                        Matugen.fromWallpaper();
+                    }
+                }
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+            }
+        }
+        LucideIcon {
+            icon: "palette"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Palette"
+        }
+        Flow {
+            Layout.preferredWidth: root.width
+            spacing: Variable.margin.small
+            Repeater {
+                model: ["scheme-tonal-spot", "scheme-content", "scheme-expressive", "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow"]
+                delegate: ToggleButton {
+                    toggled: Config.options.appearance.palette.type === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    toggleOpacity: true
+                    TapHandler {
+                        onTapped: {
+                            Config.options.appearance.palette.type = modelData;
+                            Matugen.fromWallpaper();
+                        }
                     }
                 }
             }
