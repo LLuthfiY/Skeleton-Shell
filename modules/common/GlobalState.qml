@@ -20,9 +20,6 @@ Singleton {
     property bool screenLocked: false
     property bool barMenuOpen: false
 
-    property var barMenuComponent: null
-    property string barMenuPosition: "end"
-
     IpcHandler {
         target: "screenLock"
 

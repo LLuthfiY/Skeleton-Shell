@@ -30,7 +30,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && Config.options.modules.bar && GlobalState.barMenuOpen
+        active: Config.ready && Config.options.modules.barMenu
         component: BarMenu {}
     }
 

@@ -106,6 +106,7 @@ Singleton {
             property JsonObject modules: JsonObject {
                 property list<string> enabled: ["TimeDesktop.qml"]
                 property bool bar: true
+                property bool barMenu: true
                 property bool background: true
                 property bool dashboard: true
                 property bool launcher: true

@@ -7,6 +7,7 @@ import QtQuick.Layouts
 
 import qs.modules.common
 import qs.modules.common.widgets
+import qs.modules.common.functions
 
 Rectangle {
     id: trayItem
@@ -15,6 +16,8 @@ Rectangle {
     radius: Variable.radius.small
     width: Variable.size.large
     height: Variable.size.large
+
+    Component.onCompleted: BarMenuUtils.barWindow = barWindow
 
     IconImage {
         id: trayIcon
@@ -32,21 +35,23 @@ Rectangle {
     TapHandler {
         acceptedButtons: Qt.RightButton
         onTapped: mouse => {
-            let barPosition = Config.options.bar.position;
-            let vertical = barPosition === "left" || barPosition === "right";
-            console.log(mouse);
-            let global = trayItem.mapToGlobal(mouse.globalPosition.x, mouse.globalPosition.y);
-            let anchorX = barPosition === "left" ? Variable.margin.large : barPosition === "right" ? -Variable.margin.large : 0;
-            let anchorY = barPosition === "top" ? Variable.margin.large : barPosition === "bottom" ? -Variable.margin.large : 0;
-            let w = global.x + anchorX;
-            let h = global.y + anchorY;
-            console.log(w, h);
+            // let barPosition = Config.options.bar.position;
+            // let vertical = barPosition === "left" || barPosition === "right";
+            // console.log(mouse);
+            // let global = trayItem.mapToGlobal(mouse.globalPosition.x, mouse.globalPosition.y);
+            // let anchorX = barPosition === "left" ? Variable.margin.large : barPosition === "right" ? -Variable.margin.large : 0;
+            // let anchorY = barPosition === "top" ? Variable.margin.large : barPosition === "bottom" ? -Variable.margin.large : 0;
+            // let w = global.x + anchorX;
+            // let h = global.y + anchorY;
+            // console.log(w, h);
             //
             // styledMenu.anchor.rect = Qt.rect(w, h, 0, 0);
             // styledMenu.open();
-            menuOpener.menu = modelData.menu;
-            GlobalState.barMenuComponent = menuComponent;
             GlobalState.barMenuOpen = true;
+            menuOpener.menu = modelData.menu;
+            BarMenuUtils.barWindow = barWindow;
+            BarMenuUtils.item = trayItem;
+            BarMenuUtils.barMenuComponent = menuComponent;
         }
     }
 

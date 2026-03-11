@@ -18,47 +18,49 @@ import Qt5Compat.GraphicalEffects
 Scope {
     id: root
     property int targetWorkspace: -1
-    PanelWindow {
 
+    PanelWindow {
+        id: barMenuWindow
+        visible: GlobalState.barMenuOpen
+        property bool ready: init()
         property string barPosition: Config.options.bar.position
         property int barMargin: Config.options.bar.margin
         property int gapsOut: Config.options.windowManager.gapsOut
         property bool borderScreen: Config.options.bar.borderScreen
-        property string barMenuPosition: GlobalState.barMenuPosition
 
         implicitWidth: barMenu.width
         implicitHeight: barMenu.height
+
+        function init() {
+            BarMenuUtils.barMenuWindow = barMenuWindow;
+            true;
+        }
 
         WlrLayershell.namespace: "quickshell:barMenu"
         WlrLayershell.layer: WlrLayer.Overlay
         color: "transparent"
         exclusionMode: ExclusionMode.Normal
 
-        anchors {
-            top: barPosition === "top" || ((barPosition === "left" || barPosition === "right") && barMenuPosition === "start")
-            left: barPosition === "left" || ((barPosition === "top" || barPosition === "bottom") && barMenuPosition === "start")
-            right: barPosition === "right" || ((barPosition === "top" || barPosition === "bottom") && barMenuPosition === "end")
-            bottom: barPosition === "bottom" || ((barPosition === "left" || barPosition === "right") && barMenuPosition === "end")
-        }
-
+        anchors: BarMenuUtils.getAnchor()
+        property var tempMargins: BarMenuUtils.getMargins()
         margins {
-            top: barPosition === "top" ? gapsOut : borderScreen ? barMargin + gapsOut : gapsOut
-            bottom: barPosition === "bottom" ? gapsOut : borderScreen ? barMargin + gapsOut : gapsOut
-            left: barPosition === "left" ? gapsOut : borderScreen ? barMargin + gapsOut : gapsOut
-            right: barPosition === "right" ? gapsOut : borderScreen ? barMargin + gapsOut : gapsOut
+            top: tempMargins.top
+            bottom: tempMargins.bottom
+            left: tempMargins.left
+            right: tempMargins.right
         }
 
         Rectangle {
             anchors.fill: parent
-
             color: Color.colors.surface
             radius: Variable.radius.small
         }
+
         ColumnLayout {
             id: barMenu
             Loader {
                 Layout.margins: Variable.margin.small
-                sourceComponent: GlobalState.barMenuComponent
+                sourceComponent: BarMenuUtils.barMenuComponent
             }
         }
     }

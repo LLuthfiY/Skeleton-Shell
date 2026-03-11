@@ -10,6 +10,7 @@ import QtQuick.Effects
 
 import qs.modules.common
 import qs.modules.bar.widget
+import qs.modules.barMenu
 
 import qs.services
 
@@ -42,6 +43,7 @@ Scope {
                 property bool borderScreen: Config.options.bar.borderScreen
                 property bool ver: pos === "left" || pos === "right"
                 property bool is_attached: mg == 0 && !fw
+                property var hyprlandData: HyprlandData
 
                 WlrLayershell.namespace: "quickshell:bar"
 

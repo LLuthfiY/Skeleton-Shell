@@ -16,7 +16,7 @@ Scope {
     PanelWindow {
         id: dashboardWindow
         visible: Config.ready && GlobalState.dashboardOpen
-        screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
+        // screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
         WlrLayershell.namespace: "quickshell:dashboard"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
         WlrLayershell.layer: WlrLayer.Overlay

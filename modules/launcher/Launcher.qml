@@ -20,7 +20,7 @@ Scope {
     property var application: AppSearch.fuzzyQuery(searchInput.text)
     PanelWindow {
         id: launcherWindow
-        screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
+        // screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
 
         WlrLayershell.namespace: "quickshell:launcher"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
