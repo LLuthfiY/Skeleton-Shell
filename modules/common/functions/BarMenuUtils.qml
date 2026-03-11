@@ -39,10 +39,10 @@ Singleton {
         bottom: minimalMargins.bottom
     }
     property Margins minimalMargins: Margins {
-        left: (position.left ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut
-        top: (position.top ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut
-        right: (position.right ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut
-        bottom: (position.bottom ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut
+        left: (position.left ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut + Config.options.bar.border
+        top: (position.top ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut + Config.options.bar.border
+        right: (position.right ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut + Config.options.bar.border
+        bottom: (position.bottom ? 0 : Config.options.bar.margin) + Config.options.windowManager.gapsOut + Config.options.bar.border
     }
 
     function getAnchor() {
