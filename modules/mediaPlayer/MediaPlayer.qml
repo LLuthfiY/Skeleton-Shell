@@ -84,6 +84,7 @@ Scope {
                         id: art
                         width: Variable.uiScale(92)
                         height: Variable.uiScale(92)
+                        color: Color.colors.primary_container
 
                         radius: Variable.radius.normal
                         Image {

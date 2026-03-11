@@ -111,7 +111,7 @@ RowLayout {
                     delegate: MenuItem {
                         background: Rectangle {
                             radius: Variable.radius.small
-                            color: menuHoverHandler.hovered ? Color.colors.primary : "transparent"
+                            color: menuHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
                             Behavior on color {
                                 ColorAnimation {
                                     duration: 200
@@ -130,7 +130,8 @@ RowLayout {
                                 Layout.fillWidth: true
                                 icon: modelData.icon
                                 label: modelData.text
-                                color: menuHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                // color: menuHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                color: Color.colors.on_surface
                             }
                         }
                         onTriggered: modelData.action()
