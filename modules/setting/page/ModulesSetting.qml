@@ -61,6 +61,31 @@ ColumnLayout {
     RowLayout {
         spacing: Variable.margin.small
         LucideIcon {
+            icon: "square-menu"
+            color: Color.colors.on_surface_variant
+            font.pixelSize: Variable.font.pixelSize.smaller
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            label: "Bar Menu"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledSwitch {
+            checked: Config.options.modules.barMenu
+            implicitWidth: 40
+            implicitHeight: 20
+            Layout.preferredHeight: 20
+            height: 20
+            onCheckedChanged: {
+                Config.options.modules.barMenu = checked;
+                WindowManagerUtils.setWM();
+            }
+        }
+    }
+    RowLayout {
+        spacing: Variable.margin.small
+        LucideIcon {
             icon: "image"
             color: Color.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
