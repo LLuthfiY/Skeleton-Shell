@@ -78,7 +78,6 @@ Singleton {
         let global = item.mapToGlobal(item.width / 2, item.height / 2);
         let anchorX = pos.top || pos.bottom ? Math.max(global.x + root.hyprlandFocusedMonitorBar.x - barMenuWindow.width / 2, minimalMargins.left) : minimalMargins.left;
         let anchorY = pos.left || pos.right ? Math.max(global.y + root.hyprlandFocusedMonitorBar.y - barMenuWindow.height / 2, minimalMargins.top) : minimalMargins.top;
-        console.log(anchorY, hyprlandFocusedMonitor.height - barMenuWindow.height - minimalMargins.bottom, Config.options.bar.margin, Config.options.windowManager.gapsOut);
         return {
             "left": Math.min(anchorX, hyprlandFocusedMonitor.width - barMenuWindow.width - minimalMargins.right),
             "top": Math.min(anchorY, hyprlandFocusedMonitor.height - barMenuWindow.height - minimalMargins.bottom),

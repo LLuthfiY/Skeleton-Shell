@@ -99,6 +99,8 @@ ColumnLayout {
                         Quickshell.execDetached(["cp", Directory.trimFileProtocol(selectedFile.toString()), Directory.trimFileProtocol(Directory.configFolder + "/wallpaper")]);
                         if (Config.options.appearance.colorFromWallpaper) {
                             Matugen.fromWallpaper();
+                        } else {
+                            GlobalState.themeReload();
                         }
                     }
                 }

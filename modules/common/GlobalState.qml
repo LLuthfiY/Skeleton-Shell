@@ -21,6 +21,10 @@ Singleton {
     property bool screenLocked: false
     property bool barMenuOpen: false
 
+    function themeReload() {
+        themeReloader.running = true;
+    }
+
     IpcHandler {
         target: "screenLock"
 
