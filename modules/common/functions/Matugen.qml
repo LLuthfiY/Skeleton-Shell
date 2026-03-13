@@ -98,7 +98,6 @@ Singleton {
         matugenProcess.running = true;
         matugenProcess.command = ["bash", "-c", `matugen -c ${matugenPath} json ${matugenColorFormatPath}`];
         matugenProcess.running = true;
-        console.log(ColorUtils.isHexDark(colors["surface"].default.hex));
         Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${ColorUtils.isHexDark(colors["surface"].default.hex) ? "dark" : "light"}`]);
         WindowManagerUtils.setWM();
     }

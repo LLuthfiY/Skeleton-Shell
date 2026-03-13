@@ -2,6 +2,7 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import qs.modules.common
+import qs.modules.common.functions
 import QtQuick
 import Quickshell
 import Quickshell.Io
@@ -84,6 +85,7 @@ Singleton {
             const temp = wallapaperPath;
             wallapaperPath = "";
             wallapaperPath = temp;
+            Kitty.reload();
         }
     }
 }
