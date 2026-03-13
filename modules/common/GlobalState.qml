@@ -82,6 +82,18 @@ Singleton {
     IpcHandler {
         target: "wallpaper"
         function update() {
+            // const temp = wallapaperPath;
+            // wallapaperPath = "";
+            // wallapaperPath = temp;
+            // Kitty.reload();
+            themeReloader.running = true;
+        }
+    }
+
+    Timer {
+        id: themeReloader
+        interval: 200
+        onTriggered: {
             const temp = wallapaperPath;
             wallapaperPath = "";
             wallapaperPath = temp;
