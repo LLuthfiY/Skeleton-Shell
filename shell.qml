@@ -90,7 +90,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && GlobalState.aiChatOpen && Config.options.modules.ai
+        active: Config.ready && GlobalState.aiChatOpen && Config.options.modules.aiChat
         component: AIChat {}
     }
 
