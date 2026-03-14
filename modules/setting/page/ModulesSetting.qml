@@ -282,6 +282,31 @@ ColumnLayout {
             }
         }
     }
+    RowLayout {
+        spacing: Variable.margin.small
+        LucideIcon {
+            icon: "brain"
+            color: Color.colors.on_surface_variant
+            font.pixelSize: Variable.font.pixelSize.smaller
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            label: "AI Chat"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledSwitch {
+            checked: Config.options.modules.aiChat
+            implicitWidth: 40
+            implicitHeight: 20
+            Layout.preferredHeight: 20
+            height: 20
+            onCheckedChanged: {
+                Config.options.modules.aiChat = checked;
+                WindowManagerUtils.setWM();
+            }
+        }
+    }
     LucideIcon {
         icon: "package"
         color: Color.colors.on_surface
