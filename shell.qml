@@ -85,12 +85,12 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && GlobalState.launcherOpen
+        active: Config.ready && GlobalState.launcherOpen && Config.options.modules.launcher
         component: Launcher {}
     }
 
     LazyLoader {
-        active: Config.ready && GlobalState.aiChatOpen
+        active: Config.ready && GlobalState.aiChatOpen && Config.options.modules.ai
         component: AIChat {}
     }
 

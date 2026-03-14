@@ -32,6 +32,7 @@ Singleton {
     }
     function applyJson(json) {
         let colors = {};
+        let base16 = {};
         const isDark = ColorUtils.isHexDark(json["surface"]);
         for (let key in json) {
             if (json[key][0] === "#" && json[key].length !== 7) {
@@ -87,6 +88,22 @@ Singleton {
             };
             colors[key] = value;
         }
+        base16["base00"] = json["surface"];
+        base16["base01"] = json["surface_variant"];
+        base16["base02"] = json["surface_container"];
+        base16["base03"] = json["outline"];
+        base16["base04"] = json["on_surface_variant"];
+        base16["base05"] = json["on_surface"];
+        base16["base06"] = json["surface_bright"];
+        base16["base07"] = json["surface_container_lowest"];
+        base16["base08"] = json["error"];
+        base16["base09"] = json["tertiary"];
+        base16["base0a"] = json["secondary"];
+        base16["base0b"] = json["primary"];
+        base16["base0c"] = json["error_container"];
+        base16["base0d"] = json["tertiary_container"];
+        base16["base0e"] = json["secondary_container"];
+        base16["base0f"] = json["primary_container"];
         colors["image"] = Directory.trimFileProtocol(Config.options.background.wallpaperPath);
         const matugenValue = {
             colors: colors

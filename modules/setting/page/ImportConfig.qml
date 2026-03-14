@@ -40,6 +40,8 @@ ColumnLayout {
         TextField {
             id: importConfigTextField
             Layout.fillWidth: true
+            placeholderTextColor: Color.colors.on_surface_variant
+            color: Color.colors.on_surface
             background: Rectangle {
                 color: Color.colors.surface
                 radius: Variable.radius.small

@@ -86,6 +86,31 @@ ColumnLayout {
     RowLayout {
         spacing: Variable.margin.small
         LucideIcon {
+            icon: "rocket"
+            color: Color.colors.on_surface_variant
+            font.pixelSize: Variable.font.pixelSize.smaller
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            label: "Launcher"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledSwitch {
+            checked: Config.options.modules.launcher
+            implicitWidth: 40
+            implicitHeight: 20
+            Layout.preferredHeight: 20
+            height: 20
+            onCheckedChanged: {
+                Config.options.modules.launcher = checked;
+                WindowManagerUtils.setWM();
+            }
+        }
+    }
+    RowLayout {
+        spacing: Variable.margin.small
+        LucideIcon {
             icon: "image"
             color: Color.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
