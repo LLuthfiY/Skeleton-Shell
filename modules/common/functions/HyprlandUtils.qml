@@ -17,6 +17,7 @@ Singleton {
     property real activeOpacity: Config.options.windowManager.activeOpacity
     property real inactiveOpacity: Config.options.windowManager.inactiveOpacity
     property real gapsIn: Config.options.windowManager.gapsIn
+    property string layout: Config.options.windowManager.layout
 
     property int topMargin: position === "top" ? 0 : margin
     property int rightMargin: position === "right" ? 0 : margin
@@ -44,6 +45,7 @@ Singleton {
         gaps_out = ${gaps_out}
         col.active_border = $${Config.options.windowManager.activeWindowBorderColor}
         col.inactive_border = $${Config.options.windowManager.inactiveWindowBorderColor}
+        layout = ${layout}
       }
       decoration {
         rounding = ${Config.options.windowManager.windowBorderRadius}

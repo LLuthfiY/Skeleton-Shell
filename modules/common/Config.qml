@@ -133,6 +133,7 @@ Singleton {
                 property string activeWindowBorderColor: "primary"
                 property string inactiveWindowBorderColor: "surface"
                 property int shadow: 4
+                property string layout: "scrolling"
             }
             property JsonObject notification: JsonObject {
                 property string position: "topRight"

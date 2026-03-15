@@ -25,6 +25,35 @@ ColumnLayout {
         label: "Window Manager"
     }
     LucideIcon {
+        icon: "layout-dashboard"
+        color: Color.colors.on_surface
+        font.pixelSize: Variable.font.pixelSize.small
+        font.weight: Font.DemiBold
+        font.family: Variable.font.family.main
+        label: "Layout"
+    }
+    Flow {
+        spacing: Variable.margin.small
+        Layout.preferredWidth: root.width
+        Repeater {
+            model: ["dwindle", "master", "scrolling", "monocle"]
+            delegate: ToggleButton {
+                toggled: Config.options.windowManager.layout === modelData
+                label: modelData
+                font.pixelSize: Variable.font.pixelSize.small
+                font.weight: Font.Normal
+                font.family: Variable.font.family.main
+                toggleOpacity: true
+                TapHandler {
+                    onTapped: {
+                        Config.options.windowManager.layout = modelData;
+                        WindowManagerUtils.setWM();
+                    }
+                }
+            }
+        }
+    }
+    LucideIcon {
         icon: "paintbrush"
         color: Color.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
