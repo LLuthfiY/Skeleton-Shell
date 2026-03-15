@@ -116,7 +116,7 @@ Singleton {
         matugenProcess.running = true;
         matugenProcess.command = ["bash", "-c", `matugen -c ${matugenPath} json ${matugenColorFormatPath}`];
         matugenProcess.running = true;
-        Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${ColorUtils.isHexDark(colors["surface"].default.hex) ? "dark" : "light"}`]);
+        // Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${ColorUtils.isHexDark(colors["surface"].default.hex) ? "dark" : "light"}`]);
         WindowManagerUtils.setWM();
     }
     Process {

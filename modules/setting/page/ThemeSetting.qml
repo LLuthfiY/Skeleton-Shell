@@ -133,6 +133,43 @@ ColumnLayout {
             }
         }
     }
+    LucideIcon {
+        icon: "eclipse"
+        color: Color.colors.on_surface
+        font.pixelSize: Variable.font.pixelSize.small
+        font.weight: Font.DemiBold
+        font.family: Variable.font.family.main
+        label: "System UI Interface"
+    }
+    RowLayout {
+        spacing: Variable.margin.small
+        ToggleButton {
+            label: "Prefer Dark"
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            toggled: Config.options.appearance.darkMode
+            TapHandler {
+                onTapped: {
+                    Config.options.appearance.darkMode = true;
+                    Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-dark"]);
+                }
+            }
+        }
+        ToggleButton {
+            label: "Prefer Light"
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            toggled: !Config.options.appearance.darkMode
+            TapHandler {
+                onTapped: {
+                    Config.options.appearance.darkMode = false;
+                    Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-light"]);
+                }
+            }
+        }
+    }
     ColumnLayout {
         id: colorSelector
         spacing: Variable.margin.small
