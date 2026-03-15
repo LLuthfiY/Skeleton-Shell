@@ -19,6 +19,7 @@ Rectangle {
     width: loader.width + Variable.size.small * 2
     height: font.pixelSize + Variable.size.small
     color: "transparent"
+    property int buttonRadius: Variable.radius.large
     HoverHandler {
         id: hoverHandler
     }
@@ -27,7 +28,7 @@ Rectangle {
         width: loader.width + Variable.size.normal
         height: loader.height + Variable.size.small
         color: toggled ? Color.colors.primary : hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
-        radius: Variable.radius.large
+        radius: root.buttonRadius
         anchors.centerIn: parent
         Behavior on color {
             ColorAnimation {

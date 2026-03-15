@@ -68,6 +68,7 @@ Singleton {
 
             property JsonObject appearance: JsonObject {
                 property bool darkMode: true
+                property int sourceColorIndex: 1
                 property JsonObject palette: JsonObject {
                     property string type: "scheme-tonal-spot" // Allowed: scheme-content, scheme-expressive, scheme-fidelity, scheme-fruit-salad, scheme-monochrome, scheme-neutral, scheme-rainbow, scheme-tonal-spot
                 }

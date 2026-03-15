@@ -19,10 +19,11 @@ Singleton {
     }
     function fromWallpaper() {
         let palette = Config.options.appearance.palette.type;
+        let sourceColorIndex = Config.options.appearance.sourceColorIndex;
         let darkMode = Config.options.appearance.darkMode ? "dark" : "light";
         let wallpaperPath = Config.options.background.wallpaperPath.toString().replace("file://", "");
         const matugenPath = Directory.trimFileProtocol(Directory.cache + "/Skeleton-Shell/ConfigFolder/matugen/config.toml");
-        matugenProcess.command = ["matugen", "-c", matugenPath, "-t", palette, "-m", darkMode, "--source-color-index", 1, "image", wallpaperPath];
+        matugenProcess.command = ["matugen", "-c", matugenPath, "-t", palette, "-m", darkMode, "--source-color-index", sourceColorIndex, "image", wallpaperPath];
         matugenProcess.running = true;
         Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", `prefer-${darkMode}`]);
         WindowManagerUtils.setWM();

@@ -305,6 +305,36 @@ ColumnLayout {
             }
         }
         LucideIcon {
+            icon: "swatch-book"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.DemiBold
+            font.family: Variable.font.family.main
+            label: "Source Color Index"
+        }
+        Flow {
+            Layout.preferredWidth: root.width
+            spacing: Variable.margin.small
+            Repeater {
+                model: [0, 1, 2, 3]
+                delegate: ToggleButton {
+                    toggled: Config.options.appearance.sourceColorIndex === modelData
+                    label: modelData
+                    font.pixelSize: Variable.font.pixelSize.small
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
+                    toggleOpacity: true
+                    buttonRadius: Variable.radius.small
+                    TapHandler {
+                        onTapped: {
+                            Config.options.appearance.sourceColorIndex = modelData;
+                            Matugen.fromWallpaper();
+                        }
+                    }
+                }
+            }
+        }
+        LucideIcon {
             icon: "palette"
             color: Color.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
