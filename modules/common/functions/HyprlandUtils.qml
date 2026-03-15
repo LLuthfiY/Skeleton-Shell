@@ -49,6 +49,10 @@ Singleton {
         rounding = ${Config.options.windowManager.windowBorderRadius}
         active_opacity = ${Config.options.windowManager.activeOpacity}
         inactive_opacity = ${Config.options.windowManager.inactiveOpacity}
+        shadow {
+            enabled = ${Config.options.windowManager.shadow > 0 ? "true" : "false"}
+            range = ${Config.options.windowManager.shadow}
+        }
       }
 
       `;

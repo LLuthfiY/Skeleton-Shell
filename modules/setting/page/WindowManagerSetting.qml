@@ -110,7 +110,7 @@ ColumnLayout {
             step: 1
             onValueChanged: {
                 Config.options.windowManager.workspaces = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
             }
         }
     }
@@ -133,7 +133,7 @@ ColumnLayout {
             step: 1
             onValueChanged: {
                 Config.options.windowManager.gapsOut = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
             }
         }
     }
@@ -156,7 +156,7 @@ ColumnLayout {
             step: 1
             onValueChanged: {
                 Config.options.windowManager.gapsIn = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
             }
         }
     }
@@ -179,7 +179,7 @@ ColumnLayout {
             step: 0.1
             onValueChanged: {
                 Config.options.windowManager.activeOpacity = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
             }
         }
     }
@@ -202,7 +202,7 @@ ColumnLayout {
             step: 0.1
             onValueChanged: {
                 Config.options.windowManager.inactiveOpacity = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
             }
         }
     }
@@ -225,7 +225,7 @@ ColumnLayout {
             step: 1
             onValueChanged: {
                 Config.options.windowManager.windowBorderSize = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
             }
         }
     }
@@ -248,7 +248,30 @@ ColumnLayout {
             step: 1
             onValueChanged: {
                 Config.options.windowManager.windowBorderRadius = value;
-                WindowManagerUtils.setWM(100);
+                WindowManagerUtils.setWM();
+            }
+        }
+    }
+    RowLayout {
+        Layout.preferredWidth: root.width
+        Text {
+            text: "Shadow"
+            font.family: Variable.font.family.main
+            font.weight: Font.Normal
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.smaller
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledStepper {
+            value: Config.options.windowManager.shadow
+            min: 0
+            max: 10000
+            step: 1
+            onValueChanged: {
+                Config.options.windowManager.shadow = value;
+                WindowManagerUtils.setWM();
             }
         }
     }

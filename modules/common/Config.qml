@@ -131,6 +131,7 @@ Singleton {
                 property int applyConfigDelay: 1000
                 property string activeWindowBorderColor: "primary"
                 property string inactiveWindowBorderColor: "surface"
+                property int shadow: 4
             }
             property JsonObject notification: JsonObject {
                 property string position: "topRight"
