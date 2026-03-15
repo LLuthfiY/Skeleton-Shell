@@ -34,7 +34,7 @@ ColumnLayout {
     Rectangle {
         color: "transparent"
         radius: Variable.radius.normal
-        width: Variable.uiScale(500)
+        width: Variable.uiScale(450)
         height: Variable.uiScale(250)
         Rectangle {
             id: wallpaperWrapper
