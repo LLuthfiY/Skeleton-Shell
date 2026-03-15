@@ -10,7 +10,7 @@ import Quickshell.Io
 Singleton {
     id: root
 
-    property string wallapaperPath: Directory.configFolder + "/wallpaper"
+    property string wallapaperPath: Directory.configFolder + "/wallpaper.png"
 
     property bool overviewOpen: false
     property bool launcherOpen: false

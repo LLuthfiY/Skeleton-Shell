@@ -21,8 +21,23 @@ import qs.modules.ai
 import qs.modules.lockscreen
 import qs.modules.barMenu
 
+import qs.modules.common.functions
+
 ShellRoot {
     id: root
+
+    LazyLoader {
+        active: Config.ready
+        component: Item {
+            Component.onCompleted: {
+                if (Config.options.appearance.colorFromWallpaper) {
+                    Matugen.fromWallpaper();
+                } else {
+                    Matugen.fromJsonFile();
+                }
+            }
+        }
+    }
 
     LazyLoader {
         active: Config.ready && Config.options.modules.bar

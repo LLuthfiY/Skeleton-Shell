@@ -94,9 +94,12 @@ ColumnLayout {
                     title: "Select Wallpaper"
                     currentFolder: Directory.home
                     nameFilters: ["Images (*.png *.jpg *.jpeg)"]
+                    Process {
+                        id: cp
+                    }
                     onAccepted: {
                         Config.options.background.wallpaperPath = selectedFile;
-                        Quickshell.execDetached(["cp", Directory.trimFileProtocol(selectedFile.toString()), Directory.trimFileProtocol(Directory.configFolder + "/wallpaper")]);
+                        cp.command = ["mogrify", "-format", "png", "-path", Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png"), Directory.trimFileProtocol(selectedFile)];
                         if (Config.options.appearance.colorFromWallpaper) {
                             Matugen.fromWallpaper();
                         } else {
@@ -135,6 +138,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "eclipse"
+        visible: !Config.options.appearance.colorFromWallpaper
         color: Color.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
@@ -142,6 +146,7 @@ ColumnLayout {
         label: "System UI Interface"
     }
     RowLayout {
+        visible: !Config.options.appearance.colorFromWallpaper
         spacing: Variable.margin.small
         ToggleButton {
             label: "Prefer Dark"
