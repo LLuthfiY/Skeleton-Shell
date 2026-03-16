@@ -21,7 +21,7 @@ Singleton {
         let palette = Config.options.appearance.palette.type;
         let sourceColorIndex = Config.options.appearance.sourceColorIndex;
         let darkMode = Config.options.appearance.darkMode ? "dark" : "light";
-        let wallpaperPath = Directory.trimFileProtocol(Directory.configFolder + "/wallpaper");
+        let wallpaperPath = Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png");
         const matugenPath = Directory.trimFileProtocol(Directory.cache + "/Skeleton-Shell/ConfigFolder/matugen/config.toml");
         matugenProcess.command = ["matugen", "-c", matugenPath, "-t", palette, "-m", darkMode, "--source-color-index", sourceColorIndex, "image", wallpaperPath];
         matugenProcess.running = true;
@@ -122,10 +122,7 @@ Singleton {
     Process {
         id: matugenProcess
         stdout: StdioCollector {
-            onStreamFinished: {
-                console.log(matugenProcess.command);
-                console.log(this.text);
-            }
+            onStreamFinished: {}
         }
     }
 }

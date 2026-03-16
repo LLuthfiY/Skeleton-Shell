@@ -96,15 +96,24 @@ ColumnLayout {
                     nameFilters: ["Images (*.png *.jpg *.jpeg)"]
                     Process {
                         id: cp
+                        onExited: {
+                            if (Config.options.appearance.colorFromWallpaper) {
+                                Matugen.fromWallpaper();
+                            } else {
+                                GlobalState.themeReload();
+                            }
+                        }
                     }
                     onAccepted: {
                         Config.options.background.wallpaperPath = selectedFile;
-                        cp.command = ["mogrify", "-format", "png", "-path", Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png"), Directory.trimFileProtocol(selectedFile)];
-                        if (Config.options.appearance.colorFromWallpaper) {
-                            Matugen.fromWallpaper();
-                        } else {
-                            GlobalState.themeReload();
-                        }
+                        // cp.command = ["mogrify", "-format", '"png"', "-path", Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png"), Directory.trimFileProtocol(selectedFile.toString())];
+                        cp.command = ["convert", Directory.trimFileProtocol(selectedFile.toString()), Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png")];
+                        cp.running = true;
+                        // if (Config.options.appearance.colorFromWallpaper) {
+                        //     Matugen.fromWallpaper();
+                        // } else {
+                        //     GlobalState.themeReload();
+                        // }
                     }
                 }
             }
