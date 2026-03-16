@@ -33,6 +33,7 @@ ColumnLayout {
         font.family: Variable.font.family.main
         label: "Default Modules"
     }
+
     RowLayout {
         spacing: Variable.margin.small
         LucideIcon {
@@ -306,6 +307,40 @@ ColumnLayout {
                 WindowManagerUtils.setWM();
             }
         }
+    }
+    RowLayout {
+        spacing: Variable.margin.small
+        LucideIcon {
+            icon: "settings"
+            color: Color.colors.on_surface_variant
+            font.pixelSize: Variable.font.pixelSize.smaller
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            label: "Settings"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledSwitch {
+            checked: Config.options.modules.settings
+            implicitWidth: 40
+            implicitHeight: 20
+            Layout.preferredHeight: 20
+            height: 20
+            onCheckedChanged: {
+                Config.options.modules.settings = checked;
+                WindowManagerUtils.setWM();
+            }
+        }
+    }
+    Text {
+        text: "to enable settings, you need to edit .config/Skeleton-Shell/config.json \nor .cache/quickshell/Skeleton-Shell/ConfigFolder/config.json"
+        color: Color.colors.error
+        font.pixelSize: Variable.font.pixelSize.smaller
+        font.weight: Font.Normal
+        font.family: Variable.font.family.main
+        width: root.width
+        wrapMode: Text.Wrap
     }
     LucideIcon {
         icon: "package"

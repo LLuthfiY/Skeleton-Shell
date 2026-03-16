@@ -95,7 +95,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && GlobalState.settingsOpen
+        active: Config.ready && GlobalState.settingsOpen && Config.options.modules.settings
         component: Setting {}
     }
 
