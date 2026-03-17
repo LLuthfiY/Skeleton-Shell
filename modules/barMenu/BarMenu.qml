@@ -23,10 +23,10 @@ Scope {
         id: barMenuWindow
         visible: GlobalState.barMenuOpen
         property bool ready: init()
-        property string barPosition: Config.options.bar.position
-        property int barMargin: Config.options.bar.margin
-        property int gapsOut: Config.options.windowManager.gapsOut
-        property bool borderScreen: Config.options.bar.borderScreen
+        // property string barPosition: Config.options.bar.position
+        // property int barMargin: Config.options.bar.margin
+        // property int gapsOut: Config.options.windowManager.gapsOut
+        // property bool borderScreen: Config.options.bar.borderScreen
 
         implicitWidth: barMenu.width
         implicitHeight: barMenu.height
