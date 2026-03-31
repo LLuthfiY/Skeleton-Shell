@@ -1,9 +1,6 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
-import Quickshell.Hyprland
-import Quickshell.Widgets
 
 import qs.modules.common
 import qs.modules.common.widgets

@@ -16,13 +16,14 @@ import qs.services
 import Qt5Compat.GraphicalEffects
 
 Scope {
-    id: overviewRoot
+    id: root
     property int targetWorkspace: -1
+    property HyprlandMonitor monitor: Hyprland.focusedMonitor
+    property real scale: 0.15
     PanelWindow {
         id: overviewWindow
 
-        property real scale: 0.15
-        property HyprlandMonitor monitor: Hyprland.focusedMonitor
+        visible: Config.options.windowManager.layout !== "scrolling"
 
         WlrLayershell.namespace: "quickshell:overview"
         WlrLayershell.layer: WlrLayer.Overlay
@@ -38,7 +39,6 @@ Scope {
         implicitHeight: overviewGrid.implicitHeight + 32
         Rectangle {
             anchors.fill: parent
-
             color: Color.colors.surface
             radius: 24
         }
@@ -54,8 +54,8 @@ Scope {
                 model: Config.options.windowManager.workspaces
 
                 delegate: Rectangle {
-                    width: overviewWindow.monitor.width * overviewWindow.scale
-                    height: overviewWindow.monitor.height * overviewWindow.scale
+                    width: root.monitor.width * root.scale
+                    height: root.monitor.height * root.scale
                     color: Color.colors.surface_container
                     radius: 16
                     Text {
@@ -68,7 +68,7 @@ Scope {
                     }
                     DropArea {
                         anchors.fill: parent
-                        onEntered: overviewRoot.targetWorkspace = index + 1
+                        onEntered: root.targetWorkspace = index + 1
                     }
                 }
             }
@@ -91,18 +91,18 @@ Scope {
                     property var windowData: HyprlandData.windowByAddress[address]
 
                     visible: modelData.workspace.id > -1 && modelData.workspace.id < Config.options.windowManager.workspaces + 1
-                    property double initX: col * overviewWindow.monitor.width * overviewWindow.scale + col * 8 + windowData.at[0] * overviewWindow.scale
-                    property double initY: row * overviewWindow.monitor.height * overviewWindow.scale + row * 8 + windowData.at[1] * overviewWindow.scale
+                    property double initX: col * root.monitor.width * root.scale + col * 8 + windowData.at[0] * root.scale
+                    property double initY: row * root.monitor.height * root.scale + row * 8 + windowData.at[1] * root.scale
                     x: initX
                     y: initY
 
                     onWindowDataChanged: {
-                        x = col * overviewWindow.monitor.width * overviewWindow.scale + col * 8 + windowData.at[0] * overviewWindow.scale;
-                        y = row * overviewWindow.monitor.height * overviewWindow.scale + row * 8 + windowData.at[1] * overviewWindow.scale;
+                        x = col * root.monitor.width * root.scale + col * 8 + windowData.at[0] * root.scale;
+                        y = row * root.monitor.height * root.scale + row * 8 + windowData.at[1] * root.scale;
                     }
 
-                    width: windowData.size[0] * overviewWindow.scale
-                    height: windowData.size[1] * overviewWindow.scale
+                    width: windowData.size[0] * root.scale
+                    height: windowData.size[1] * root.scale
                     color: "transparent"
                     Behavior on x {
                         enabled: true
@@ -161,8 +161,8 @@ Scope {
                         repeat: false
                         running: false
                         onTriggered: {
-                            window.x = col * overviewWindow.monitor.width * overviewWindow.scale + col * 8 + windowData.at[0] * overviewWindow.scale;
-                            window.y = row * overviewWindow.monitor.height * overviewWindow.scale + row * 8 + windowData.at[1] * overviewWindow.scale;
+                            window.x = col * root.monitor.width * root.scale + col * 8 + windowData.at[0] * root.scale;
+                            window.y = row * root.monitor.height * root.scale + row * 8 + windowData.at[1] * root.scale;
                         }
                     }
                     TapHandler {
@@ -184,14 +184,184 @@ Scope {
                         target: parent
                         onActiveChanged: {
                             if (!active) {
-                                if (overviewRoot.targetWorkspace !== -1 && overviewRoot.targetWorkspace !== windowData?.workspace.id) {
-                                    Hyprland.dispatch(`movetoworkspacesilent ${overviewRoot.targetWorkspace}, address:${window.address}`);
+                                if (root.targetWorkspace !== -1 && root.targetWorkspace !== windowData?.workspace.id) {
+                                    Hyprland.dispatch(`movetoworkspacesilent ${root.targetWorkspace}, address:${window.address}`);
                                     updateWindowPosition.restart();
                                     HyprlandData.updateWindowList();
                                 } else {
                                     updateWindowPosition.restart();
                                     HyprlandData.updateWindowList();
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    PanelWindow {
+        id: overviewWindowScrolling
+
+        visible: Config.options.windowManager.layout === "scrolling"
+
+        anchors.top: true
+        anchors.left: true
+        anchors.right: true
+        anchors.bottom: true
+
+        property var windowMargin: Margin.windowMargin()
+
+        margins {
+            top: windowMargin.top
+            bottom: windowMargin.bottom
+            left: windowMargin.left
+            right: windowMargin.right
+        }
+
+        color: "transparent"
+        Rectangle {
+            anchors.fill: parent
+            color: Color.colors.surface
+            radius: Variable.radius.normal
+        }
+        Rectangle {
+            id: wrapper
+            anchors.fill: parent
+            anchors.margins: Variable.margin.normal
+            color: "transparent"
+            clip: true
+            property int monitorHeight: wrapper.height / Config.options.windowManager.workspaces
+            property int monitorWidth: monitorHeight * root.monitor.width / root.monitor.height
+            Column {
+                spacing: 0
+                Repeater {
+                    model: Config.options.windowManager.workspaces
+                    delegate: Rectangle {
+                        width: wrapper.width
+                        height: wrapper.height / Config.options.windowManager.workspaces
+                        color: "transparent"
+                        Text {
+                            anchors.centerIn: parent
+                            text: index + 1
+                            font.pixelSize: 32
+                            font.weight: 900
+                            font.family: Variable.font.family.main
+                            color: Color.colors.on_surface_variant
+                        }
+                        DropArea {
+                            anchors.fill: parent
+                            onEntered: root.targetWorkspace = index + 1
+                        }
+                    }
+                }
+            }
+            Item {
+                height: wrapper.height
+                width: wrapper.width
+                Repeater {
+                    model: ScriptModel {
+                        values: Hyprland.toplevels.values
+                    }
+                    delegate: Rectangle {
+                        id: window
+                        opacity: 0.7
+                        property bool pressed: false
+                        property string address: `0x${modelData.address}`
+                        property var windowData: HyprlandData.windowByAddress[address]
+                        property int workskpace: (modelData.workspace.id - 1)
+                        color: "transparent"
+
+                        height: windowData.size[1] / root.monitor.height * wrapper.monitorHeight
+                        width: windowData.size[0] / root.monitor.width * wrapper.monitorWidth
+                        x: windowData.at[0] / root.monitor.width * wrapper.monitorWidth + wrapper.width / 2 - wrapper.monitorWidth / 2
+                        y: windowData.at[1] / root.monitor.height * wrapper.monitorHeight + wrapper.monitorHeight * workskpace
+
+                        visible: modelData.workspace.id > -1 && modelData.workspace.id < Config.options.windowManager.workspaces + 1
+                        ScreencopyView {
+                            captureSource: (modelData && modelData.wayland) ? modelData.wayland : null
+                            // constraintSize: Qt.size(window.width, window.height)
+                            anchors.fill: parent
+                            live: true
+                            layer.enabled: true
+                            layer.effect: OpacityMask {
+                                maskSource: Rectangle {
+                                    width: window.width
+                                    height: window.height
+                                    radius: 8
+                                }
+                            }
+                            onStopped: {
+                                modelData.wayland.close();
+                            }
+                            onCaptureSourceChanged: {
+                                if (!captureSource) {
+                                    modelData.wayland.close();
+                                }
+                            }
+                        }
+                        TapHandler {
+                            acceptedButtons: Qt.RightButton
+                            onTapped: {
+                                screencopy.captureSource = null;
+                            }
+                        }
+                        TapHandler {
+                            acceptedButtons: Qt.LeftButton
+                            onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
+                        }
+                        Drag.active: dragHandler.active
+                        Drag.hotSpot.x: width / 2
+                        Drag.hotSpot.y: height / 2
+
+                        DragHandler {
+                            id: dragHandler
+                            target: parent
+                            onActiveChanged: {
+                                if (!active) {
+                                    if (root.targetWorkspace !== -1 && root.targetWorkspace !== windowData?.workspace.id) {
+                                        Hyprland.dispatch(`movetoworkspacesilent ${root.targetWorkspace}, address:${window.address}`);
+                                        updateWindowPositionScrolling.restart();
+                                        HyprlandData.updateWindowList();
+                                    } else {
+                                        updateWindowPositionScrolling.restart();
+                                        HyprlandData.updateWindowList();
+                                    }
+                                }
+                            }
+                        }
+                        Timer {
+                            id: updateWindowPositionScrolling
+                            interval: 100
+                            repeat: false
+                            running: false
+                            onTriggered: {
+                                window.x = windowData.at[0] / root.monitor.width * wrapper.monitorWidth + wrapper.width / 2 - wrapper.monitorWidth / 2;
+                                window.y = windowData.at[1] / root.monitor.height * wrapper.monitorHeight + wrapper.monitorHeight * workskpace;
+                            }
+                        }
+                        Behavior on x {
+                            NumberAnimation {
+                                duration: 100
+                                easing.type: Easing.OutQuad
+                            }
+                        }
+
+                        Behavior on y {
+                            NumberAnimation {
+                                duration: 100
+                                easing.type: Easing.OutQuad
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 200
+                                easing.type: Easing.OutQuad
+                            }
+                        }
+                        Behavior on height {
+                            NumberAnimation {
+                                duration: 200
+                                easing.type: Easing.OutQuad
                             }
                         }
                     }
