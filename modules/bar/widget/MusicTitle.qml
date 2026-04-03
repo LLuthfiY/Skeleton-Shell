@@ -11,6 +11,7 @@ Loader {
     // Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     visible: Mpris.players.values.length > 0
     property bool vertical: Config.options.bar.position === "left" || Config.options.bar.position === "right"
+    property int maxLength: 35
     sourceComponent: vertical ? verticalComp : horizontalComp
     TapHandler {
         onTapped: {
@@ -28,7 +29,7 @@ Loader {
                 Text {
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     required property MprisPlayer modelData
-                    text: modelData.trackTitle.length > 35 ? modelData.trackTitle.substring(0, 32) + "..." : modelData.trackTitle
+                    text: modelData.trackTitle.length > musicTitle.maxLength ? modelData.trackTitle.trim().substring(0, musicTitle.maxLength - 3) + "..." : modelData.trackTitle.trim()
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Medium
                     color: Color.colors[Config.options.bar.foreground]
@@ -58,7 +59,7 @@ Loader {
 
                     Text {
                         id: textItem
-                        text: modelData.trackTitle.length > 35 ? modelData.trackTitle.trim().substring(0, 32) + "..." : modelData.trackTitle.trim()
+                        text: modelData.trackTitle.length > musicTitle.maxLength ? modelData.trackTitle.trim().substring(0, musicTitle.maxLength - 3) + "..." : modelData.trackTitle.trim()
                         font.pixelSize: Variable.font.pixelSize.small
 
                         anchors.verticalCenter: parent.verticalCenter

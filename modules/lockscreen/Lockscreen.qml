@@ -38,7 +38,8 @@ Scope {
                 anchors.fill: parent
                 Image {
                     asynchronous: true
-                    source: Directory.trimFileProtocol(Directory.configFolder + "/wallpaper")
+                    anchors.centerIn: parent
+                    source: Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png")
                 }
                 Rectangle {
                     id: background

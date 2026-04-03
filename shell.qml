@@ -90,7 +90,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen || GlobalState.aiChatOpen || GlobalState.barMenuOpen) && Config.options.modules.popupCloser
+        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || (GlobalState.overviewOpen && Config.options.windowManager.layout !== "scrolling") || GlobalState.aiChatOpen || GlobalState.barMenuOpen) && Config.options.modules.popupCloser
         component: PopupCloser {}
     }
 

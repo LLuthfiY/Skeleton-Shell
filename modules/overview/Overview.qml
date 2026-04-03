@@ -22,6 +22,7 @@ Scope {
     property real scale: 0.15
     PanelWindow {
         id: overviewWindow
+        focusable: true
 
         visible: Config.options.windowManager.layout !== "scrolling"
 
@@ -83,7 +84,7 @@ Scope {
                 }
                 delegate: Rectangle {
                     id: window
-                    opacity: 0.7
+                    opacity: modelData.activated ? 1 : 0.7
                     property bool pressed: false
                     property int row: Math.floor((modelData.workspace.id - 1) / overviewGrid.columns)
                     property int col: (modelData.workspace.id - 1) % overviewGrid.columns
@@ -132,6 +133,13 @@ Scope {
                         }
                     }
 
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 100
+                            easing.type: Easing.OutQuad
+                        }
+                    }
+
                     ScreencopyView {
                         id: screencopy
                         captureSource: (modelData && modelData.wayland) ? modelData.wayland : null
@@ -168,7 +176,7 @@ Scope {
                     TapHandler {
                         acceptedButtons: Qt.RightButton
                         onTapped: {
-                            screencopy.captureSource = null;
+                            Hyprland.dispatch(`closewindow address:${windowData?.address}`);
                         }
                     }
                     TapHandler {
@@ -201,7 +209,7 @@ Scope {
     }
     PanelWindow {
         id: overviewWindowScrolling
-
+        focusable: true
         visible: Config.options.windowManager.layout === "scrolling"
 
         anchors.top: true
@@ -264,7 +272,7 @@ Scope {
                     }
                     delegate: Rectangle {
                         id: window
-                        opacity: 0.7
+                        opacity: modelData.activated ? 1 : 0.7
                         property bool pressed: false
                         property string address: `0x${modelData.address}`
                         property var windowData: HyprlandData.windowByAddress[address]
@@ -302,12 +310,13 @@ Scope {
                         TapHandler {
                             acceptedButtons: Qt.RightButton
                             onTapped: {
-                                screencopy.captureSource = null;
+                                Hyprland.dispatch(`closewindow address:${windowData?.address}`);
                             }
                         }
                         TapHandler {
                             acceptedButtons: Qt.LeftButton
-                            onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
+                            // onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
+                            onTapped: Hyprland.dispatch(`focuswindow address:${windowData?.address}`)
                         }
                         Drag.active: dragHandler.active
                         Drag.hotSpot.x: width / 2
@@ -361,6 +370,13 @@ Scope {
                         Behavior on height {
                             NumberAnimation {
                                 duration: 200
+                                easing.type: Easing.OutQuad
+                            }
+                        }
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 100
                                 easing.type: Easing.OutQuad
                             }
                         }
