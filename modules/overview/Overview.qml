@@ -278,6 +278,7 @@ Scope {
                         property var windowData: HyprlandData.windowByAddress[address]
                         property int workskpace: (modelData.workspace.id - 1)
                         color: "transparent"
+                        border.color: Color.colors.primary
 
                         height: windowData.size[1] / root.monitor.height * wrapper.monitorHeight
                         width: windowData.size[0] / root.monitor.width * wrapper.monitorWidth
@@ -289,6 +290,7 @@ Scope {
                             captureSource: (modelData && modelData.wayland) ? modelData.wayland : null
                             // constraintSize: Qt.size(window.width, window.height)
                             anchors.fill: parent
+                            anchors.margins: Variable.uiScale(2)
                             live: true
                             layer.enabled: true
                             layer.effect: OpacityMask {
@@ -306,6 +308,11 @@ Scope {
                                     modelData.wayland.close();
                                 }
                             }
+                        }
+                        IconImage {
+                            source: IconFromClass.iconPath(windowData.initialClass)
+                            implicitSize: window.height / 2
+                            anchors.centerIn: parent
                         }
                         TapHandler {
                             acceptedButtons: Qt.RightButton
