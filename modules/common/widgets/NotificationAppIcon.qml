@@ -53,6 +53,7 @@ Item {
             Layout.preferredWidth: Variable.size.notificationAppIconSize
             Layout.preferredHeight: Variable.size.notificationAppIconSize
             Layout.alignment: Qt.AlignVCenter
+            fillMode: Image.PreserveAspectCrop
         }
     }
 
