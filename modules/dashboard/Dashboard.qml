@@ -23,6 +23,13 @@ Scope {
         // exclusiveZone: 0
         exclusionMode: ExclusionMode.Normal
         implicitWidth: Variable.size.dashboardWidth
+        property var windowMargin: Margin.windowMargin()
+        margins {
+            top: windowMargin.top
+            bottom: windowMargin.bottom
+            left: windowMargin.left
+            right: windowMargin.right
+        }
         anchors.top: true
         anchors.right: Config.options.dashboard.position === "right"
         anchors.left: Config.options.dashboard.position === "left"
@@ -30,7 +37,6 @@ Scope {
         color: "transparent"
         Rectangle {
             anchors.fill: parent
-            anchors.margins: Config.options.windowManager.gapsOut + Config.options.bar.margin
             color: Color.colors.surface
             radius: Variable.radius.normal
             Rectangle {

@@ -75,8 +75,9 @@ ColumnLayout {
         spacing: Variable.margin.small
         property real lastY: 0
 
-        delegate: NotificationHistoryItem {
+        delegate: NotificationItem {
             notificationObject: modelData
+            isPopup: false
         }
     }
 }

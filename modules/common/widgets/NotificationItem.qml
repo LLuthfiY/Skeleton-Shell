@@ -15,11 +15,12 @@ Item {
     id: root
     property var notificationObject
     property bool pendingClose: notificationObject.pendingClose
-    width: Variable.size.notificationPopupWidth
-    implicitHeight: 0
+    property bool isPopup: true
+    width: isPopup ? Variable.size.notificationPopupWidth : Variable.size.dashboardWidth - Variable.margin.larger
+    implicitHeight: isPopup ? 0 : content.implicitHeight
     clip: true
 
-    opacity: 0
+    opacity: isPopup ? 0 : 1
     onPendingCloseChanged: {
         opacity = 0;
         implicitHeight = 0;
@@ -54,7 +55,7 @@ Item {
         id: background
         anchors.fill: parent
         color: Color.colors.surface
-        border.color: Color.colors.primary_container
+        border.color: root.isPopup ? Color.colors.primary_container : "transparent"
         border.width: Variable.uiScale(1)
         radius: Variable.radius.small
         TapHandler {
@@ -74,11 +75,10 @@ Item {
             id: appNameBackground
 
             color: "transparent"
-            Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
+            Layout.preferredWidth: root.width - Variable.margin.normal
             Layout.alignment: Qt.AlignTop
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
-            Layout.topMargin: Variable.margin.small
             radius: Variable.radius.normal
             Layout.preferredHeight: appName.implicitHeight + (Variable.uiScale(8))
             Text {
@@ -121,14 +121,14 @@ Item {
                     font.bold: true
                     color: Color.colors.on_surface
                     clip: true
-                    Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
+                    Layout.preferredWidth: root.width - Variable.margin.normal - appIcon.width - Variable.margin.larger
                     wrapMode: Text.Wrap
                 }
 
                 Label {
                     id: body
                     text: notificationObject.body
-                    Layout.preferredWidth: parent.width
+                    Layout.preferredWidth: root.width - Variable.margin.normal - appIcon.width - Variable.margin.larger
                     Layout.alignment: Qt.AlignVCenter
                     font.pixelSize: Variable.font.pixelSize.small
                     font.family: Variable.font.family.main
@@ -140,7 +140,7 @@ Item {
         Flow {
             id: actionsFlow
             Layout.fillWidth: true
-            Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
+            // Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
 
             Layout.margins: Variable.margin.small
             Layout.preferredHeight: childrenRect.height
@@ -152,13 +152,12 @@ Item {
             Repeater {
                 model: notificationObject.actions
                 delegate: Rectangle {
-
                     width: buttonText.implicitWidth + (Variable.uiScale(16))
                     height: buttonText.implicitHeight + (Variable.uiScale(8))
                     radius: Variable.radius.small
-                    color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
-                    border.color: Color.colors.primary_container
-                    border.width: Variable.uiScale(1)
+                    color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface_container
+                    // border.color: Color.colors.primary_container
+                    // border.width: Variable.uiScale(1)
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
