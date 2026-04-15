@@ -31,7 +31,11 @@ Item {
         id: closeTimer
         interval: 210
         onTriggered: {
-            notificationObject.popup = false;
+            if (root.isPopup) {
+                notificationObject.popup = false;
+            } else {
+                Notification.discardNotification(notificationObject.notificationId);
+            }
         }
     }
 
