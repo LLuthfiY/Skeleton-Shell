@@ -24,48 +24,13 @@ Item {
     Component {
         id: horizontalComp
         RowLayout {
-            spacing: Variable.margin.smallest
+            spacing: 0
             Repeater {
                 model: root.workspaces
-                Rectangle {
-                    id: buttonWorkspace
-                    property bool occupied: Hyprland.toplevels.values.some(toplevel => toplevel.workspace ? toplevel.workspace.id === modelData : false)
-                    color: occupied ? "#77" + Color.colors[Config.options.bar.foreground].substring(1) : "transparent"
-                    implicitWidth: Variable.size.large
-                    implicitHeight: Variable.size.large
-                    radius: Config.options.bar.borderRadius
-
-                    Rectangle {
-                        property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === modelData : false
-                        anchors.centerIn: parent
-                        color: Color.colors[Config.options.bar.foreground]
-                        implicitWidth: active ? Variable.size.normal : Variable.size.smallest
-                        implicitHeight: active ? Variable.size.normal : Variable.size.smallest
-                        radius: Config.options.bar.borderRadius
-
-                        Behavior on implicitWidth {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-
-                        Behavior on implicitHeight {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                    }
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-
-                    TapHandler {
-                        onTapped: {
-                            Hyprland.dispatch("workspace " + modelData);
-                        }
+                Loader {
+                    sourceComponent: buttonWorkspace
+                    onLoaded: {
+                        item.ind = modelData;
                     }
                 }
             }
@@ -75,47 +40,62 @@ Item {
     Component {
         id: verticalComp
         ColumnLayout {
+            spacing: 0
             Repeater {
                 model: root.workspaces
-                Rectangle {
-                    id: buttonWorkspace
-                    property bool occupied: Hyprland.toplevels.values.some(toplevel => toplevel.workspace ? toplevel.workspace.id === modelData : false)
-                    color: occupied ? "#77" + Color.colors[Config.options.bar.foreground].substring(1) : "transparent"
-                    implicitWidth: Variable.uiScale(24)
-                    implicitHeight: Variable.uiScale(24)
-                    radius: Config.options.bar.borderRadius
-
-                    Rectangle {
-                        property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === modelData : false
-                        anchors.centerIn: parent
-                        color: Color.colors[Config.options.bar.foreground]
-                        implicitWidth: active ? Variable.uiScale(14) : Variable.uiScale(6)
-                        implicitHeight: active ? Variable.uiScale(14) : Variable.uiScale(6)
-                        radius: Config.options.bar.borderRadius
-
-                        Behavior on implicitWidth {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                        Behavior on implicitHeight {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
+                Loader {
+                    sourceComponent: buttonWorkspace
+                    onLoaded: {
+                        item.ind = modelData;
                     }
+                }
+            }
+        }
+    }
+    Component {
+        id: buttonWorkspace
 
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
+        Rectangle {
+            id: buttonWorkspace
+            property int ind: -1
+            property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === ind : false
+            property bool occupied: Hyprland.toplevels.values.some(toplevel => toplevel.workspace ? toplevel.workspace.id === ind : false)
+            color: "transparent"
+            implicitWidth: Variable.size.large
+            implicitHeight: implicitWidth
+            radius: 999
 
-                    TapHandler {
-                        onTapped: {
-                            Hyprland.dispatch("workspace " + modelData);
-                        }
+            Rectangle {
+                property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === ind : false
+                anchors.centerIn: parent
+                color: occupied ? "#80" + Color.colors[Config.options.bar.foreground].substring(1) : Color.colors[Config.options.bar.background]
+                implicitWidth: active ? Variable.uiScale(24) : Variable.uiScale(12)
+                implicitHeight: active ? Variable.uiScale(24) : Variable.uiScale(12)
+                radius: 999
+                border.width: Variable.uiScale(2)
+                border.color: Color.colors[Config.options.bar.foreground]
+
+                Behavior on implicitWidth {
+                    NumberAnimation {
+                        duration: 200
                     }
+                }
+                Behavior on implicitHeight {
+                    NumberAnimation {
+                        duration: 200
+                    }
+                }
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
+
+            TapHandler {
+                onTapped: {
+                    Hyprland.dispatch("workspace " + ind);
                 }
             }
         }

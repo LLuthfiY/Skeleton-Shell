@@ -40,6 +40,7 @@ Scope {
                         anchors.fill: parent
                         source: GlobalState.wallapaperPath
                         fillMode: Image.PreserveAspectCrop
+                        smooth: true
                     }
                 }
                 Component {
