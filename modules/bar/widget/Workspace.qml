@@ -85,6 +85,11 @@ Item {
                         duration: 200
                     }
                 }
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
             }
 
             Behavior on color {
