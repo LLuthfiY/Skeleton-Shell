@@ -110,7 +110,7 @@ ColumnLayout {
             Menu {
                 id: wlm
                 implicitWidth: Variable.uiScale(200)
-                padding: Variable.margin.small
+                padding: Variable.margin.smallest
                 y: addButton.height + Variable.margin.small
                 background: Rectangle {
                     id: backgroundMenu

@@ -49,12 +49,12 @@ RowLayout {
             }
             Menu {
                 id: powerMenu
-                padding: Variable.margin.small
+                padding: Variable.margin.smallest
                 implicitWidth: Variable.uiScale(200)
                 y: powerButton.height + Variable.margin.small
                 background: Rectangle {
                     id: backgroundMenu
-                    radius: Variable.radius.normal
+                    radius: Variable.radius.small
                     color: Color.colors.surface_container
                 }
 
