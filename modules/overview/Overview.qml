@@ -41,7 +41,7 @@ Scope {
         Rectangle {
             anchors.fill: parent
             color: Color.colors.surface
-            radius: 24
+            radius: Variable.radius.small
         }
 
         GridLayout {
@@ -58,7 +58,7 @@ Scope {
                     width: root.monitor.width * root.scale
                     height: root.monitor.height * root.scale
                     color: Color.colors.surface_container
-                    radius: 16
+                    radius: Variable.radius.small
                     Text {
                         anchors.centerIn: parent
                         text: index + 1
