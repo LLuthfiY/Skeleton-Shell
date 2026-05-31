@@ -28,6 +28,8 @@ Scope {
         exclusiveZone: 0
         visible: Config.ready && Config.options.mediaPlayer.enable && Mpris.players.values.length > 0
 
+        property var windowMargin: Margin.windowMargin()
+
         anchors {
             top: false
             bottom: true
@@ -36,10 +38,10 @@ Scope {
         }
 
         margins {
-            top: (Config.options.bar.position === "top" ? 0 : Config.options.bar.margin) + Variable.margin.normal
-            bottom: (Config.options.bar.position === "bottom" ? 0 : Config.options.bar.margin) + Variable.margin.normal
-            left: (Config.options.bar.position === "left" ? 0 : Config.options.bar.margin) + Variable.margin.normal
-            right: (Config.options.bar.position === "right" ? 0 : Config.options.bar.margin) + Variable.margin.normal
+            top: windowMargin.top
+            bottom: windowMargin.bottom
+            left: windowMargin.left
+            right: windowMargin.right
         }
         Rectangle {
             anchors.fill: parent
