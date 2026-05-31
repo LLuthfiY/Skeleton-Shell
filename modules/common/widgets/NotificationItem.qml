@@ -77,12 +77,12 @@ Item {
         spacing: 0
         Rectangle {
             id: appNameBackground
-
             color: "transparent"
             Layout.preferredWidth: root.width - Variable.margin.normal
-            Layout.alignment: Qt.AlignTop
             radius: Variable.radius.normal
-            Layout.preferredHeight: appName.implicitHeight + (Variable.uiScale(8))
+            Layout.preferredHeight: appName.implicitHeight
+            Layout.bottomMargin: Variable.margin.small
+            Layout.topMargin: Variable.margin.small
             Text {
                 id: appName
                 text: notificationObject.appName ?? "System"
@@ -92,7 +92,7 @@ Item {
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                anchors.margins: Variable.margin.normal
+                anchors.leftMargin: Variable.margin.normal
             }
         }
 
@@ -101,6 +101,7 @@ Item {
             Layout.fillWidth: true
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
+            Layout.bottomMargin: Variable.margin.small
 
             NotificationAppIcon {
                 id: appIcon
@@ -144,9 +145,11 @@ Item {
             Layout.fillWidth: true
             // Layout.preferredWidth: Variable.size.notificationPopupWidth - (Variable.uiScale(16))
 
-            Layout.margins: Variable.margin.small
+            Layout.bottomMargin: notificationObject.actions.length > 0 ? Variable.margin.small : 0
+            Layout.leftMargin: Variable.margin.small
+            Layout.rightMargin: Variable.margin.small
             Layout.preferredHeight: childrenRect.height
-            spacing: Variable.margin.normal
+            spacing: Variable.margin.small
             clip: true
             onWidthChanged: {
                 actionsFlow.forceLayout();
