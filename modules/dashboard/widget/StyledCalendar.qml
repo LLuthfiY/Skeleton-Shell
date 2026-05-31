@@ -77,6 +77,13 @@ Rectangle {
                         font.pixelSize: Variable.font.pixelSize.normal
                     }
                 }
+                Text {
+                    text: "-- Next Days --"
+                    font.family: Variable.font.family.main
+                    color: Color.colors.on_surface
+                    font.pixelSize: Variable.font.pixelSize.smallest
+                    Layout.alignment: Qt.AlignHCenter
+                }
                 ColumnLayout {
                     Layout.alignment: Qt.AlignHCenter
                     Repeater {
