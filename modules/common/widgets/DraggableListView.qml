@@ -10,7 +10,7 @@ import qs.modules.common.widgets
 ListView {
     id: root
     width: parent.width
-    spacing: 0
+    spacing: 8
     height: contentHeight
     clip: true
     DropArea {
@@ -44,12 +44,12 @@ ListView {
         required property var modelData
         required property int index
         property int newIndex: 0
-        color: Color.colors.surface
+        color: Color.colors.surface_container
         height: text.height + Variable.uiScale(16)
         width: parent?.parent.width ?? 0
         border.width: Variable.uiScale(2)
         border.color: Color.colors.surface
-        radius: Variable.radius.smallest
+        radius: Variable.radius.small
         Behavior on border.color {
             ColorAnimation {
                 duration: 200
@@ -126,6 +126,7 @@ ListView {
                 StyledSwitch {
                     visible: root.fill
                     checked: modelData.includes("--fill--")
+                    backgroundColor: Color.colors.surface_container
                     onClicked: {
                         root.changeFill(index, checked);
                     }
@@ -133,7 +134,7 @@ ListView {
                 Rectangle {
                     height: text.implicitHeight + Variable.uiScale(8)
                     width: text.implicitHeight + Variable.uiScale(8)
-                    color: removeButtonHoverHandler.hovered ? Color.colors.error : Color.colors.surface
+                    color: removeButtonHoverHandler.hovered ? Color.colors.error : Color.colors.surface_container
                     radius: Variable.radius.small
 
                     LucideIcon {

@@ -58,9 +58,9 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: Color.colors.surface
-        border.color: root.isPopup ? Color.colors.primary_container : "transparent"
-        border.width: Variable.uiScale(1)
+        color: Color.colors.surface_container
+        // border.color: root.isPopup ? Color.colors.primary_container : "transparent"
+        // border.width: Variable.uiScale(1)
         radius: Variable.radius.small
         TapHandler {
             acceptedButtons: Qt.RightButton
@@ -81,15 +81,13 @@ Item {
             color: "transparent"
             Layout.preferredWidth: root.width - Variable.margin.normal
             Layout.alignment: Qt.AlignTop
-            Layout.leftMargin: Variable.margin.normal
-            Layout.rightMargin: Variable.margin.normal
             radius: Variable.radius.normal
             Layout.preferredHeight: appName.implicitHeight + (Variable.uiScale(8))
             Text {
                 id: appName
                 text: notificationObject.appName ?? "System"
                 color: Color.colors.on_surface
-                font.pixelSize: Variable.font.pixelSize.normal
+                font.pixelSize: Variable.font.pixelSize.smallest
                 font.family: Variable.font.family.main
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
@@ -120,7 +118,7 @@ Item {
                     text: notificationObject.summary
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: Variable.font.pixelSize.small
+                    font.pixelSize: Variable.font.pixelSize.smallest
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
@@ -134,7 +132,7 @@ Item {
                     text: notificationObject.body
                     Layout.preferredWidth: root.width - Variable.margin.normal - appIcon.width - Variable.margin.larger
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: Variable.font.pixelSize.small
+                    font.pixelSize: Variable.font.pixelSize.smallest
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
                     wrapMode: Text.Wrap
@@ -159,7 +157,7 @@ Item {
                     width: buttonText.implicitWidth + (Variable.uiScale(16))
                     height: buttonText.implicitHeight + (Variable.uiScale(8))
                     radius: Variable.radius.small
-                    color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface_container
+                    color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface_container_high
                     // border.color: Color.colors.primary_container
                     // border.width: Variable.uiScale(1)
                     Behavior on color {

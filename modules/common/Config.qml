@@ -169,6 +169,9 @@ Singleton {
                 property JsonObject systemMonitor: JsonObject {
                     property int interval: 1000
                 }
+                property JsonObject weather: JsonObject {
+                    property int interval: 60 * 60 * 1000
+                }
             }
         }
     }

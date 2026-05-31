@@ -158,19 +158,6 @@ ColumnLayout {
         visible: !Config.options.appearance.colorFromWallpaper
         spacing: Variable.margin.small
         ToggleButton {
-            label: "Prefer Dark"
-            font.pixelSize: Variable.font.pixelSize.small
-            font.weight: Font.Normal
-            font.family: Variable.font.family.main
-            toggled: Config.options.appearance.darkMode
-            TapHandler {
-                onTapped: {
-                    Config.options.appearance.darkMode = true;
-                    Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-dark"]);
-                }
-            }
-        }
-        ToggleButton {
             label: "Prefer Light"
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.Normal
@@ -180,6 +167,19 @@ ColumnLayout {
                 onTapped: {
                     Config.options.appearance.darkMode = false;
                     Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-light"]);
+                }
+            }
+        }
+        ToggleButton {
+            label: "Prefer Dark"
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            toggled: Config.options.appearance.darkMode
+            TapHandler {
+                onTapped: {
+                    Config.options.appearance.darkMode = true;
+                    Quickshell.execDetached(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-dark"]);
                 }
             }
         }
@@ -264,7 +264,7 @@ ColumnLayout {
                 radius: Variable.radius.small
                 color: "transparent"
                 Rectangle {
-                    width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 2
+                    width: !Config.options.appearance.darkMode ? parent.width : lightModeHoverHandler.hovered ? parent.width : 0
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter
@@ -313,7 +313,7 @@ ColumnLayout {
                 radius: Variable.radius.small
                 color: "transparent"
                 Rectangle {
-                    width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 2
+                    width: Config.options.appearance.darkMode ? parent.width : darkModeHoverHandler.hovered ? parent.width : 0
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter

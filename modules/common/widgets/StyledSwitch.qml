@@ -7,13 +7,15 @@ Switch {
     id: root
     width: Variable.uiScale(44)
     height: Variable.uiScale(22)
+    property string backgroundColor: Color.colors.surface
+    property string accentColor: Color.colors.primary
     implicitWidth: root.width
     implicitHeight: root.height
     property real scale: Config.options.appearance.uiScale
     background: Rectangle {
         id: backgroundSwitch
-        color: root.checked ? Color.colors.primary : Color.colors.surface
-        border.color: Color.colors.primary
+        color: root.checked ? root.accentColor : root.backgroundColor
+        border.color: root.accentColor
         border.width: 2 * root.scale
         radius: 9999
         width: root.width
@@ -31,7 +33,7 @@ Switch {
         height: root.height - (10 * root.scale)
         radius: 9999
         x: root.checked ? root.width - width - ((root.height - height) / 2) : (root.height - height) / 2
-        color: root.checked ? Color.colors.on_primary : Color.colors.primary
+        color: root.checked ? root.backgroundColor : root.accentColor
         anchors.verticalCenter: backgroundSwitch.verticalCenter
         Behavior on color {
             ColorAnimation {

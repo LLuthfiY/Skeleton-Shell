@@ -33,7 +33,7 @@ Singleton {
     size: QtObject {
         property int notificationPopupWidth: root.uiScale(400)
         property int notificationHistoryWidth: root.uiScale(200)
-        property int notificationAppIconSize: root.uiScale(48)
+        property int notificationAppIconSize: root.uiScale(42)
         property int dashboardWidth: root.uiScale(400)
         property int aiChatWidth: root.uiScale(600)
 

@@ -75,9 +75,9 @@ ColumnLayout {
             height: addIcon.height + Variable.uiScale(8)
             color: "transparent"
             Rectangle {
-                width: addHoverHandler.hovered ? parent.width : Variable.uiScale(2)
+                width: addHoverHandler.hovered ? parent.width : 0
                 height: parent.height
-                radius: Variable.radius.smallest
+                radius: Variable.radius.small
                 anchors.verticalCenter: parent.verticalCenter
                 color: addHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
                 Behavior on color {
