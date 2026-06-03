@@ -34,4 +34,5 @@ Singleton {
     readonly property string colorFile: cache + "/Skeleton-Shell/ConfigFolder/colors.json"
     readonly property string notificationsPath: trimFileProtocol(`${Directory.cache}/notifications/notifications.json`)
     readonly property string hyprlandConfig: trimFileProtocol(`${Directory.cache}/Skeleton-Shell/ConfigFolder/hyprland/config.conf`)
+    readonly property string hyprlandConfigLua: trimFileProtocol(`${Directory.cache}/Skeleton-Shell/ConfigFolder/hyprland/config.lua`)
 }

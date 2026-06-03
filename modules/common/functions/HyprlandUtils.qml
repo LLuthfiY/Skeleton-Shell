@@ -33,6 +33,11 @@ Singleton {
         path: Directory.hyprlandConfig
     }
 
+    FileView {
+        id: wmLuaFile
+        path: Directory.hyprlandConfigLua
+    }
+
     function setWM() {
         let gaps_out = `${topMargin + defaultMargin},${rightMargin + defaultMargin},${bottomMargin + defaultMargin},${leftMargin + defaultMargin}`;
         if (!(borderScreen & Config.options.modules.bar)) {
@@ -63,6 +68,40 @@ Singleton {
             config += `workspace = m[${screen.name}], gapsout:${defaultMargin}`;
         });
 
+        let gaps_out_lua = `{ top = ${topMargin + defaultMargin}, right = ${rightMargin + defaultMargin}, bottom = ${bottomMargin + defaultMargin}, left = ${leftMargin + defaultMargin} }`;
+        if (!(borderScreen & Config.options.modules.bar)) {
+            gaps_out_lua = `{ top = ${defaultMargin}, right = ${defaultMargin}, bottom = ${defaultMargin}, left = ${defaultMargin} }`;
+        }
+        let configLua = `
+        hl.config({
+          general = {
+            border_size = ${Config.options.windowManager.windowBorderSize},
+            gaps_in = ${Config.options.windowManager.gapsIn},
+            gaps_out = ${gaps_out_lua},
+            col = {
+              active_border = colors.${Config.options.windowManager.activeWindowBorderColor},
+              inactive_border = colors.${Config.options.windowManager.inactiveWindowBorderColor},
+            },
+            layout = "${layout}",
+          },
+          decoration = {
+            rounding = ${Config.options.windowManager.windowBorderRadius},
+            active_opacity = ${Config.options.windowManager.activeOpacity},
+            inactive_opacity = ${Config.options.windowManager.inactiveOpacity},
+            shadow = {
+              enabled = ${Config.options.windowManager.shadow > 0 ? "true" : "false"},
+              range = ${Config.options.windowManager.shadow},
+            },
+          },
+        })
+
+        `;
+
+        monitorsWithoutBar.forEach(screen => {
+            configLua += `hl.workspace_rule({workspace="m[${screen.name}]", gaps_out=${defaultMargin}})`;
+        });
+
+        wmLuaFile.setText(configLua);
         wmFile.setText(config);
     }
 
