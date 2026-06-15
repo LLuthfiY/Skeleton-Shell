@@ -41,7 +41,7 @@ Scope {
         Rectangle {
             anchors.fill: parent
             color: Color.colors.surface
-            radius: Variable.radius.small
+            radius: Config.options.bar.borderRadius
         }
         ColumnLayout {
             anchors.fill: parent

@@ -45,7 +45,7 @@ Rectangle {
         spacing: 0
         Rectangle {
             color: Color.colors.surface_container
-            radius: Variable.radius.small
+            radius: Variable.radius.normal
             width: weatherWrapper.width + Variable.margin.normal
             height: calendarWrapper.height
             ColumnLayout {
@@ -236,7 +236,7 @@ Rectangle {
                 width: monthGrid.width + 2 * Variable.margin.small
                 height: monthGrid.height + 2 * Variable.margin.small
                 color: Color.colors.surface_container
-                radius: Variable.radius.small
+                radius: Variable.radius.normal
                 MonthGrid {
                     id: monthGrid
                     width: root.buttonSize * 7
@@ -247,7 +247,7 @@ Rectangle {
                     delegate: Rectangle {
                         width: root.buttonSize
                         height: root.buttonSize
-                        radius: Variable.radius.smallest
+                        radius: Variable.radius.small
                         property bool isCurrentDay: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                         property bool isCurrentMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
                         color: isCurrentDay ? Color.colors.primary : "transparent"

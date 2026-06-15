@@ -14,7 +14,7 @@ ColumnLayout {
     Rectangle {
         anchors.fill: parent
         color: Color.colors.surface_container
-        radius: Variable.radius.small
+        radius: Variable.radius.normal
     }
     Rectangle {
         Layout.fillWidth: true

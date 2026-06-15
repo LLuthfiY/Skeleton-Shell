@@ -38,7 +38,7 @@ Scope {
         Rectangle {
             anchors.fill: parent
             color: Color.colors.surface
-            radius: Variable.radius.normal
+            radius: Config.options.bar.borderRadius
             Rectangle {
                 anchors.fill: parent
                 anchors.margins: Variable.margin.normal

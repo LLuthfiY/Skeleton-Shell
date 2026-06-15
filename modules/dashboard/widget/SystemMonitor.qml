@@ -25,7 +25,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
             color: Color.colors.surface_container
-            radius: Variable.radius.small
+            radius: Variable.radius.normal
 
             RowLayout {
                 anchors.fill: parent
@@ -64,7 +64,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
             color: Color.colors.surface_container
-            radius: Variable.radius.small
+            radius: Variable.radius.normal
             RowLayout {
                 anchors.fill: parent
                 spacing: Variable.margin.small
