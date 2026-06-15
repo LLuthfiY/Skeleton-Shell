@@ -16,7 +16,7 @@ Item {
     property var notificationObject
     property bool pendingClose: notificationObject.pendingClose
     property bool isPopup: true
-    width: isPopup ? Variable.size.notificationPopupWidth : Variable.size.dashboardWidth - Variable.margin.larger
+    width: isPopup ? Variable.size.notificationPopupWidth : Variable.size.dashboardWidth - 2 * Variable.margin.larger
     implicitHeight: isPopup ? 0 : content.implicitHeight
     clip: true
 
@@ -58,7 +58,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: Color.colors.surface_container
+        color: root.isPopup ? Color.colors.primary_container : Color.colors.surface_container_high
         // border.color: root.isPopup ? Color.colors.primary_container : "transparent"
         // border.width: Variable.uiScale(1)
         radius: Variable.radius.small

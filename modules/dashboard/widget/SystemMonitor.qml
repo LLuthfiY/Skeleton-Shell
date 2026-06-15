@@ -16,73 +16,85 @@ Rectangle {
     height: Variable.uiScale(82)
     radius: Variable.radius.small
     Layout.fillWidth: true
-    Rectangle {
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        width: Variable.uiScale(2)
-        height: parent.height / 2
-        color: Color.colors.primary_container
-        radius: Variable.radius.small
-    }
-    ColumnLayout {
-        id: col
-        anchors.fill: parent
-        anchors.margins: Variable.margin.normal
-        spacing: Variable.margin.small
 
-        RowLayout {
-            spacing: Variable.margin.small
-            LucideIcon {
-                icon: "cpu"
-                color: Color.colors.on_surface_variant
-                font.pixelSize: Variable.font.pixelSize.normal
-            }
-            Rectangle {
-                Layout.fillWidth: true
-                color: "transparent"
-                Layout.preferredHeight: Variable.size.normal
-                Rectangle {
-                    color: Color.colors.primary_container
-                    radius: Variable.radius.small
-                    width: parent.width
-                    height: Variable.uiScale(2)
-                    anchors.verticalCenter: parent.verticalCenter
+    RowLayout {
+        anchors.fill: parent
+        spacing: Variable.margin.normal
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: parent.height
+            color: Color.colors.surface_container
+            radius: Variable.radius.small
+
+            RowLayout {
+                anchors.fill: parent
+                spacing: Variable.margin.small
+                anchors.margins: Variable.margin.normal
+
+                CircularProgress {
+                    id: cpuUsage
+                    value: CPU.cpuUsage / 100
+                    colPrimary: Color.colors.primary
+                    colSecondary: Color.colors.primary_container
+                    enableAnimation: false
                 }
 
-                Rectangle {
-                    width: parent.width * CPU.cpuUsage / 100
-                    height: Variable.size.small
-                    color: Color.colors.primary
-                    radius: Variable.radius.small
-                    anchors.verticalCenter: parent.verticalCenter
+                ColumnLayout {
+                    spacing: Variable.margin.small
+                    LucideIcon {
+                        icon: "cpu"
+                        label: "CPU"
+                        font.pixelSize: Variable.font.pixelSize.normal
+                        color: Color.colors.on_surface
+                        font.weight: Font.Bold
+                        font.family: Variable.font.family.main
+                    }
+                    Text {
+                        text: CPU.cpuUsage + "%"
+                        font.pixelSize: Variable.font.pixelSize.small
+                        color: Color.colors.on_surface_variant
+                        font.weight: Font.Normal
+                        font.family: Variable.font.family.main
+                    }
                 }
             }
         }
-        RowLayout {
-            spacing: Variable.margin.small
-            LucideIcon {
-                icon: "memory-stick"
-                color: Color.colors.on_surface_variant
-                font.pixelSize: Variable.font.pixelSize.normal
-            }
-            Rectangle {
-                Layout.fillWidth: true
-                color: "transparent"
-                Layout.preferredHeight: Variable.size.small
-                Rectangle {
-                    color: Color.colors.primary_container
-                    radius: Variable.radius.small
-                    width: parent.width
-                    height: Variable.uiScale(2)
-                    anchors.verticalCenter: parent.verticalCenter
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: parent.height
+            color: Color.colors.surface_container
+            radius: Variable.radius.small
+            RowLayout {
+                anchors.fill: parent
+                spacing: Variable.margin.small
+                anchors.margins: Variable.margin.normal
+
+                CircularProgress {
+                    id: ramUsage
+                    value: RAM.ramUsage / 100
+                    colPrimary: Color.colors.primary
+                    colSecondary: Color.colors.primary_container
+                    enableAnimation: false
                 }
 
-                Rectangle {
-                    width: parent.width * RAM.ramUsage / 100
-                    height: Variable.size.small
-                    color: Color.colors.primary
-                    radius: Variable.radius.small
-                    anchors.verticalCenter: parent.verticalCenter
+                ColumnLayout {
+                    spacing: Variable.margin.small
+                    LucideIcon {
+                        icon: "memory-stick"
+                        label: "RAM"
+                        font.pixelSize: Variable.font.pixelSize.normal
+                        color: Color.colors.on_surface
+                        font.weight: Font.Bold
+                        font.family: Variable.font.family.main
+                    }
+                    Text {
+                        text: RAM.ramUsage + "%"
+                        font.pixelSize: Variable.font.pixelSize.small
+                        color: Color.colors.on_surface_variant
+                        font.weight: Font.Normal
+                        font.family: Variable.font.family.main
+                    }
                 }
             }
         }
