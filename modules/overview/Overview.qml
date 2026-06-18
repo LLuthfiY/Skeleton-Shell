@@ -41,7 +41,7 @@ Scope {
         Rectangle {
             anchors.fill: parent
             color: Color.colors.surface
-            radius: Config.options.bar.borderRadius
+            radius: Config.options.windowManager.windowBorderRadius
         }
 
         GridLayout {

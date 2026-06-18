@@ -10,6 +10,7 @@ import Quickshell.Wayland
 import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
+import qs.modules.common.functions
 
 Scope {
     id: root
@@ -36,14 +37,20 @@ Scope {
         anchors.left: Config.options.dashboard.position === "left"
         anchors.bottom: true
 
+        property var windowMargin: Margin.windowMargin()
+        margins {
+            top: windowMargin.top
+            bottom: windowMargin.bottom
+            left: windowMargin.left
+            right: windowMargin.right
+        }
+
         Rectangle {
             anchors.fill: parent
-            anchors.margins: Config.options.windowManager.gapsOut + Config.options.bar.margin
             color: Color.colors.surface
-            radius: Variable.radius.normal
+            radius: Config.options.windowManager.windowBorderRadius
             Rectangle {
                 anchors.fill: parent
-                anchors.margins: Variable.margin.normal
                 color: "transparent"
                 clip: true
                 ColumnLayout {
