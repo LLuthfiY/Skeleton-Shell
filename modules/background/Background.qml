@@ -27,6 +27,7 @@ Scope {
             required property ShellScreen modelData
             component: PanelWindow {
                 id: wallpaper
+                screen: modelData
                 anchors {
                     top: true
                     bottom: true
