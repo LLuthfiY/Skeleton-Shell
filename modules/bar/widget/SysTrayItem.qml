@@ -12,10 +12,13 @@ import qs.modules.common.functions
 Rectangle {
     id: trayItem
     required property SystemTrayItem modelData
-    color: "#77" + Color.colors[Config.options.bar.foreground].substring(1)
+    property int size: Variable.size.large * 1.1
+    color: "#80" + Color.colors[Config.options.bar.foreground].substring(1)
     radius: Variable.radius.small
-    width: Variable.size.large
-    height: Variable.size.large
+    width: size
+    height: size
+    border.width: Variable.size.smallest / 2
+    border.color: Color.colors[Config.options.bar.foreground]
 
     Component.onCompleted: BarMenuUtils.barWindow = barWindow
 
@@ -24,7 +27,7 @@ Rectangle {
         visible: true
         source: modelData.icon
         anchors.fill: parent
-        anchors.margins: Variable.size.large * 0.1
+        anchors.margins: Variable.size.large * 0.18
     }
 
     TapHandler {
