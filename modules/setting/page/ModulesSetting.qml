@@ -337,6 +337,31 @@ ColumnLayout {
     RowLayout {
         spacing: Variable.margin.small
         LucideIcon {
+            icon: "clipboard"
+            color: Color.colors.on_surface_variant
+            font.pixelSize: Variable.font.pixelSize.smaller
+            font.weight: Font.Normal
+            font.family: Variable.font.family.main
+            label: "Clipboard"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        StyledSwitch {
+            checked: Config.options.modules.clipboard
+            implicitWidth: 40
+            implicitHeight: 20
+            Layout.preferredHeight: 20
+            height: 20
+            onCheckedChanged: {
+                Config.options.modules.clipboard = checked;
+                WindowManagerUtils.setWM();
+            }
+        }
+    }
+    RowLayout {
+        spacing: Variable.margin.small
+        LucideIcon {
             icon: "settings"
             color: Color.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller

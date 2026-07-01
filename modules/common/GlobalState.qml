@@ -20,6 +20,7 @@ Singleton {
     property bool aiChatOpen: false
     property bool screenLocked: false
     property bool barMenuOpen: false
+    property bool clipboardOpen: false
 
     function themeReload() {
         themeReloader.running = true;
@@ -34,10 +35,19 @@ Singleton {
     }
 
     IpcHandler {
+        target: "clipboard"
+        function toggle() {
+            clipboardOpen = !clipboardOpen;
+            launcherOpen = false;
+        }
+    }
+
+    IpcHandler {
         target: "launcher"
 
         function toggle() {
             launcherOpen = !launcherOpen;
+            clipboardOpen = false;
         }
     }
 

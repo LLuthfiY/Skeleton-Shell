@@ -20,6 +20,7 @@ import qs.modules.launcher
 import qs.modules.ai
 import qs.modules.lockscreen
 import qs.modules.barMenu
+import qs.modules.clipboard
 
 import qs.modules.common.functions
 
@@ -102,6 +103,11 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && GlobalState.launcherOpen && Config.options.modules.launcher
         component: Launcher {}
+    }
+
+    LazyLoader {
+        active: Config.ready && GlobalState.clipboardOpen && Config.options.modules.clipboard
+        component: Clipboard {}
     }
 
     LazyLoader {

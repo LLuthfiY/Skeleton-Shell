@@ -119,6 +119,7 @@ Singleton {
                 property bool popupCloser: true
                 property bool lockscreen: true
                 property bool settings: true
+                property bool clipboard: true
             }
 
             property JsonObject windowManager: JsonObject {
