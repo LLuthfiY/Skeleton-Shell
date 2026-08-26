@@ -32,6 +32,19 @@ Scope {
         implicitHeight: Variable.uiScale(500)
         color: "transparent"
 
+        property var windowMargin: Margin.windowMargin()
+        margins {
+            top: windowMargin.top
+            bottom: windowMargin.bottom
+            left: windowMargin.left
+            right: windowMargin.right
+        }
+
+        anchors.top: Config.options.launcher.anchor.top
+        anchors.bottom: Config.options.launcher.anchor.bottom
+        anchors.left: Config.options.launcher.anchor.left
+        anchors.right: Config.options.launcher.anchor.right
+
         // HyprlandFocusGrab {
         //     id: grab
         //     active: true

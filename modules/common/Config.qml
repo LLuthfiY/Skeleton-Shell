@@ -174,6 +174,14 @@ Singleton {
                     property int interval: 60 * 60 * 1000
                 }
             }
+            property JsonObject launcher: JsonObject {
+                property JsonObject anchor: JsonObject {
+                    property bool top: false
+                    property bool bottom: true
+                    property bool left: false
+                    property bool right: false
+                }
+            }
         }
     }
 }
