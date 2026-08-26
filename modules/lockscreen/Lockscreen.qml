@@ -17,6 +17,8 @@ import qs.modules.common.widgets
 import qs.modules.bar.widget
 
 Scope {
+    id: root
+    property real lockScreenOpacity: 0
     SystemClock {
         id: systemClock
         precision: SystemClock.Minutes
@@ -24,28 +26,61 @@ Scope {
     LockContext {
         id: lockContext
         onUnlocked: {
-            GlobalState.screenLocked = false;
+            lockTimer.start();
+            root.lockScreenOpacity = 0;
+        }
+        Timer {
+            id: lockTimer
+            interval: 200
+            onTriggered: {
+                GlobalState.screenLocked = false;
+            }
         }
     }
     WlSessionLock {
         id: lock
         locked: GlobalState.screenLocked && Config.options.modules.lockscreen
-
         WlSessionLockSurface {
             color: Color.colors.surface
             Rectangle {
+                id: lockScreenBackground
                 color: Color.colors.surface
                 anchors.fill: parent
+                opacity: 0
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 200
+                    }
+                }
+
+                NumberAnimation on opacity {
+                    id: fadeIn
+                    from: 0.0
+                    to: 1.0
+                    duration: 200 // Duration in milliseconds (e.g., 0.5 seconds)
+                    running: true // Start the animation when the component is created
+                    easing.type: Easing.InOutCubic // A smooth easing curve
+                }
+
+                Component.onCompleted: {
+                    root.lockScreenOpacity = 1;
+                }
                 Image {
                     asynchronous: true
                     anchors.centerIn: parent
                     source: Directory.trimFileProtocol(Directory.configFolder + "/wallpaper.png")
+                    opacity: root.lockScreenOpacity
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 200
+                        }
+                    }
                 }
                 Rectangle {
                     id: background
                     anchors.fill: parent
                     color: ColorUtils.transparentize(Color.colors.background, Config.options.appearance.darkMode ? 0.90 : 0.85)
-
                     layer.enabled: true
 
                     layer.effect: MultiEffect {
@@ -77,7 +112,7 @@ Scope {
                         TextField {
                             id: password
                             Layout.alignment: Qt.AlignHCenter
-                            implicitWidth: Variable.uiScale(500)
+                            implicitWidth: Variable.uiScale(200)
                             font.pixelSize: Variable.font.pixelSize.large
                             font.letterSpacing: Variable.uiScale(4)
                             padding: 16
