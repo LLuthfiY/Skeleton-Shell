@@ -181,6 +181,11 @@ Singleton {
                     property bool left: false
                     property bool right: false
                 }
+                property JsonObject style: JsonObject {
+                    property bool bottomSearch: true
+                    property bool searchBackground: true
+                    property bool selectedBackground: true
+                }
             }
         }
     }
