@@ -176,12 +176,12 @@ Scope {
                     TapHandler {
                         acceptedButtons: Qt.RightButton
                         onTapped: {
-                            Hyprland.dispatch(`closewindow address:${windowData?.address}`);
+                            Hyprland.dispatch(`hl.dsp.close({ address = ${windowData?.address} })`);
                         }
                     }
                     TapHandler {
                         acceptedButtons: Qt.LeftButton
-                        onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
+                        onTapped: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${windowData?.workspace.id} })`)
                     }
                     Drag.active: dragHandler.active
                     Drag.hotSpot.x: width / 2
@@ -193,7 +193,7 @@ Scope {
                         onActiveChanged: {
                             if (!active) {
                                 if (root.targetWorkspace !== -1 && root.targetWorkspace !== windowData?.workspace.id) {
-                                    Hyprland.dispatch(`movetoworkspacesilent ${root.targetWorkspace}, address:${window.address}`);
+                                    Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${root.targetWorkspace}, address = ${window.address}, follow = false })`);
                                     updateWindowPosition.restart();
                                     HyprlandData.updateWindowList();
                                 } else {
@@ -317,13 +317,13 @@ Scope {
                         TapHandler {
                             acceptedButtons: Qt.RightButton
                             onTapped: {
-                                Hyprland.dispatch(`closewindow address:${windowData?.address}`);
+                                Hyprland.dispatch(`hl.dsp.close({ address = ${windowData?.address} })`);
                             }
                         }
                         TapHandler {
                             acceptedButtons: Qt.LeftButton
                             // onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
-                            onTapped: Hyprland.dispatch(`focuswindow address:${windowData?.address}`)
+                            onTapped: Hyprland.dispatch(`hl.dsp.focus({ address = ${windowData?.address} })`)
                         }
                         Drag.active: dragHandler.active
                         Drag.hotSpot.x: width / 2
@@ -335,7 +335,7 @@ Scope {
                             onActiveChanged: {
                                 if (!active) {
                                     if (root.targetWorkspace !== -1 && root.targetWorkspace !== windowData?.workspace.id) {
-                                        Hyprland.dispatch(`movetoworkspacesilent ${root.targetWorkspace}, address:${window.address}`);
+                                        Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${root.targetWorkspace}, address = ${window.address}, follow = false })`);
                                         updateWindowPositionScrolling.restart();
                                         HyprlandData.updateWindowList();
                                     } else {

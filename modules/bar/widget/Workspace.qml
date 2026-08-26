@@ -100,7 +100,7 @@ Item {
 
             TapHandler {
                 onTapped: {
-                    Hyprland.dispatch("workspace " + ind);
+                    Hyprland.dispatch(`hl.dsp.focus({ workspace = ${ind} })`);
                 }
             }
         }
