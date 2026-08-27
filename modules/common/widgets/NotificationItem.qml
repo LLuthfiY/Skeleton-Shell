@@ -41,7 +41,7 @@ Item {
 
     Component.onCompleted: {
         opacity = 1;
-        implicitHeight = content.implicitHeight;
+        // implicitHeight = content.implicitHeight;
     }
 
     Behavior on opacity {
@@ -75,26 +75,34 @@ Item {
     ColumnLayout {
         id: content
         spacing: 0
-        Rectangle {
-            id: appNameBackground
-            color: "transparent"
-            Layout.preferredWidth: root.width - Variable.margin.normal
-            radius: Variable.radius.normal
-            Layout.preferredHeight: appName.implicitHeight
-            Layout.bottomMargin: Variable.margin.small
-            Layout.topMargin: Variable.margin.small
-            Text {
-                id: appName
-                text: notificationObject.appName ?? "System"
-                color: Color.colors.on_surface
-                font.pixelSize: Variable.font.pixelSize.smallest
-                font.family: Variable.font.family.main
-                font.bold: true
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: Variable.margin.normal
-            }
+
+        HoverHandler {
+            id: contentHoverHandler
         }
+
+        onImplicitHeightChanged: {
+            console.log("implicitHeight: " + implicitHeight);
+        }
+        // Rectangle {
+        //     id: appNameBackground
+        //     color: "transparent"
+        //     Layout.preferredWidth: root.width - Variable.margin.normal
+        //     radius: Variable.radius.normal
+        //     Layout.preferredHeight: appName.implicitHeight
+        //     Layout.bottomMargin: Variable.margin.small
+        //     Layout.topMargin: Variable.margin.small
+        //     Text {
+        //         id: appName
+        //         text: notificationObject.appName ?? "System"
+        //         color: Color.colors.on_surface
+        //         font.pixelSize: Variable.font.pixelSize.smallest
+        //         font.family: Variable.font.family.main
+        //         font.bold: true
+        //         anchors.verticalCenter: parent.verticalCenter
+        //         anchors.left: parent.left
+        //         anchors.leftMargin: Variable.margin.normal
+        //     }
+        // }
 
         RowLayout {
             spacing: Variable.margin.normal
@@ -102,6 +110,7 @@ Item {
             Layout.leftMargin: Variable.margin.normal
             Layout.rightMargin: Variable.margin.normal
             Layout.bottomMargin: Variable.margin.small
+            Layout.topMargin: Variable.margin.small
 
             NotificationAppIcon {
                 id: appIcon
@@ -116,7 +125,7 @@ Item {
 
                 Label {
                     id: summary
-                    text: notificationObject.summary
+                    text: notificationObject.appName + ": " + notificationObject.summary
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
                     font.pixelSize: Variable.font.pixelSize.smallest
@@ -136,7 +145,8 @@ Item {
                     font.pixelSize: Variable.font.pixelSize.smallest
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
-                    wrapMode: Text.Wrap
+                    wrapMode: contentHoverHandler.hovered ? Text.Wrap : Text.NoWrap
+                    elide: Text.ElideRight
                 }
             }
         }

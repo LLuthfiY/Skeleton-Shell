@@ -41,6 +41,7 @@ Item {
         Loader {
             id: iconLoader
             anchors.fill: parent
+            anchors.margins: Variable.margin.smallest
             sourceComponent: hasImage ? imageComponent : hasAppIcon ? appIconComponent : emptyComponent
         }
     }
@@ -78,7 +79,7 @@ Item {
                 id: icon
                 icon: "message-circle"
                 color: Color.colors.primary
-                font.pixelSize: Variable.font.pixelSize.huge
+                font.pixelSize: Variable.size.notificationAppIconSize - Variable.margin.normal
                 anchors.centerIn: parent
             }
         }
