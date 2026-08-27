@@ -42,6 +42,9 @@ Item {
     Component.onCompleted: {
         opacity = 1;
         // implicitHeight = content.implicitHeight;
+        if (root.isPopup) {
+            implicitHeight = content.implicitHeight;
+        }
     }
 
     Behavior on opacity {
@@ -81,7 +84,9 @@ Item {
         }
 
         onImplicitHeightChanged: {
-            console.log("implicitHeight: " + implicitHeight);
+            if (root.isPopup) {
+                root.implicitHeight = implicitHeight;
+            }
         }
         // Rectangle {
         //     id: appNameBackground

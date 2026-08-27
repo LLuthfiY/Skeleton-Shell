@@ -16,6 +16,7 @@ import qs.modules.common
  */
 Singleton {
     id: root
+    property bool keepNotificationWithAction: true
     component Notif: QtObject {
         id: wrapper
         required property int notificationId // Could just be `id` but it conflicts with the default prop in QtObject
@@ -64,6 +65,14 @@ Singleton {
         interval: 5000
         running: true
         onTriggered: () => {
+            if (root.keepNotificationWithAction) {
+                let index = root.list.findIndex(notif => notif.notificationId === notificationId);
+                if (root.list[index] != null) {
+                    if (root.list[index].actions.length > 0) {
+                        return;
+                    }
+                }
+            }
             root.timeoutNotification(notificationId);
             destroy();
         }
