@@ -134,7 +134,8 @@ Item {
                     color: Color.colors.on_surface
                     clip: true
                     Layout.preferredWidth: root.width - Variable.margin.normal - appIcon.width - Variable.margin.larger
-                    wrapMode: Text.Wrap
+                    wrapMode: contentHoverHandler.hovered ? Text.Wrap : Text.NoWrap
+                    elide: Text.ElideRight
                 }
 
                 Label {
