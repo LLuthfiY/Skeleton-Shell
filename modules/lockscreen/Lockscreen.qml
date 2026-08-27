@@ -112,7 +112,7 @@ Scope {
                         TextField {
                             id: password
                             Layout.alignment: Qt.AlignHCenter
-                            implicitWidth: Variable.uiScale(200)
+                            implicitWidth: Variable.uiScale(500)
                             font.pixelSize: Variable.font.pixelSize.large
                             font.letterSpacing: Variable.uiScale(4)
                             padding: 16
