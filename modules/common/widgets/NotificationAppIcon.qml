@@ -11,8 +11,10 @@ import qs.modules.common.widgets
 Item {
     id: root
     property var notificationObject
-    property bool hasAppIcon: notificationObject.appIcon !== ""
-    property bool hasImage: notificationObject.image !== ""
+    // property bool hasAppIcon: notificationObject.appIcon !== ""
+    // property bool hasImage: notificationObject.image !== ""
+    property bool hasImage: Quickshell.iconPath(notificationObject.image, true) !== ""
+    property bool hasAppIcon: Quickshell.iconPath(notificationObject.appIcon, true) !== ""
 
     function resolveIcon(icon) {
         if (!icon || icon === "")
@@ -42,7 +44,7 @@ Item {
             id: iconLoader
             anchors.fill: parent
             anchors.margins: Variable.margin.smallest
-            sourceComponent: hasImage ? imageComponent : hasAppIcon ? appIconComponent : emptyComponent
+            sourceComponent: root.hasImage ? imageComponent : root.hasAppIcon ? appIconComponent : emptyComponent
         }
     }
 
