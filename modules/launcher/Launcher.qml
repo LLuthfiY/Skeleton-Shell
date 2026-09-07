@@ -90,6 +90,7 @@ Scope {
                         if (event.key === Qt.Key_Tab) {
                             if (launcherList.currentIndex + 1 >= launcherList.count) {
                                 launcherList.currentIndex = 0;
+                                launcherList.positionViewAtBeginning();
                             } else {
                                 launcherList.currentIndex += 1;
                             }
@@ -97,6 +98,7 @@ Scope {
                         if (event.key === Qt.Key_Backtab) {
                             if (launcherList.currentIndex - 1 < 0) {
                                 launcherList.currentIndex = launcherList.count - 1;
+                                launcherList.positionViewAtEnd();
                             } else {
                                 launcherList.currentIndex -= 1;
                             }

@@ -42,11 +42,11 @@ Scope {
         locked: GlobalState.screenLocked && Config.options.modules.lockscreen
         WlSessionLockSurface {
             color: Color.colors.surface
-            Rectangle {
+            Item {
                 id: lockScreenBackground
-                color: Color.colors.surface
+                // color: Color.colors.surface
                 anchors.fill: parent
-                opacity: 0
+                opacity: root.lockScreenOpacity
 
                 Behavior on opacity {
                     NumberAnimation {
