@@ -66,6 +66,7 @@ Scope {
                 Component.onCompleted: {
                     root.lockScreenOpacity = 1;
                 }
+
                 Image {
                     asynchronous: true
                     anchors.centerIn: parent
@@ -98,7 +99,6 @@ Scope {
 
                     layer.enabled: true
                     visible: false
-                    // Black rectangle — this defines the "hole" area
                     ColumnLayout {
                         anchors.centerIn: parent
                         Text {
@@ -153,15 +153,13 @@ Scope {
                         }
                     }
                 }
-                Rectangle {
+                Item {
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: Variable.margin.normal
                     anchors.horizontalCenter: parent.horizontalCenter
                     height: mediaPlayer.height
                     width: mediaPlayer.width
-                    color: "transparent"
                     clip: true
-                    radius: Variable.radius.normal
                     Behavior on width {
                         NumberAnimation {
                             duration: 200
