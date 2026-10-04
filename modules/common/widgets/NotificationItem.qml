@@ -22,9 +22,11 @@ Item {
 
     opacity: isPopup ? 0 : 1
     onPendingCloseChanged: {
-        opacity = 0;
-        implicitHeight = 0;
-        closeTimer.start();
+        if (root.isPopup) {
+            opacity = 0;
+            implicitHeight = 0;
+            closeTimer.start();
+        }
     }
 
     Timer {
