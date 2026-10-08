@@ -41,10 +41,10 @@ Scope {
         id: lock
         locked: GlobalState.screenLocked && Config.options.modules.lockscreen
         WlSessionLockSurface {
-            color: Color.colors.surface
+            color: Colors.colors.surface
             Item {
                 id: lockScreenBackground
-                // color: Color.colors.surface
+                // color: Colors.colors.surface
                 anchors.fill: parent
                 opacity: root.lockScreenOpacity
 
@@ -81,7 +81,7 @@ Scope {
                 Rectangle {
                     id: background
                     anchors.fill: parent
-                    color: ColorUtils.transparentize(Color.colors.background, Config.options.appearance.darkMode ? 0.90 : 0.85)
+                    color: ColorUtils.transparentize(Colors.colors.background, Config.options.appearance.darkMode ? 0.90 : 0.85)
                     layer.enabled: true
 
                     layer.effect: MultiEffect {
@@ -102,7 +102,7 @@ Scope {
                     ColumnLayout {
                         anchors.centerIn: parent
                         Text {
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                             text: Qt.formatTime(systemClock.date, "hh:mm")
                             font.weight: Font.Bold
                             font.pixelSize: Variable.uiScale(120)
@@ -202,14 +202,14 @@ Scope {
                                     font.pixelSize: Variable.font.pixelSize.large
                                     Layout.alignment: Qt.AlignHCenter
                                     font.family: Variable.font.family.main
-                                    color: Color.colors.on_surface
+                                    color: Colors.colors.on_surface
                                 }
                                 Text {
                                     text: modelData.trackArtist
                                     font.pixelSize: Variable.font.pixelSize.small
                                     Layout.alignment: Qt.AlignHCenter
                                     font.family: Variable.font.family.main
-                                    color: Color.colors.on_surface
+                                    color: Colors.colors.on_surface
                                 }
                                 RowLayout {
                                     spacing: Variable.margin.small
@@ -221,7 +221,7 @@ Scope {
                                         implicitHeight: Variable.size.larger
                                         visible: modelData.canPlay
                                         radius: Variable.radius.small
-                                        color: playHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                                        color: playHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                                         Behavior on color {
                                             ColorAnimation {
                                                 duration: 200
@@ -231,7 +231,7 @@ Scope {
                                             id: playIcon
                                             anchors.centerIn: parent
                                             icon: modelData.isPlaying ? "pause" : "play"
-                                            color: playHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                                            color: playHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.primary
                                         }
                                         TapHandler {
                                             onTapped: {
@@ -287,7 +287,7 @@ Scope {
                                             id: previousIcon
                                             anchors.centerIn: parent
                                             icon: "skip-back"
-                                            color: previousHoverHandler.hovered ? Color.colors.on_surface_variant : Color.colors.on_surface
+                                            color: previousHoverHandler.hovered ? Colors.colors.on_surface_variant : Colors.colors.on_surface
                                         }
                                     }
                                     Rectangle {
@@ -307,7 +307,7 @@ Scope {
                                             id: nextIcon
                                             anchors.centerIn: parent
                                             icon: "skip-forward"
-                                            color: nextHoverHandler.hovered ? Color.colors.on_surface_variant : Color.colors.on_surface
+                                            color: nextHoverHandler.hovered ? Colors.colors.on_surface_variant : Colors.colors.on_surface
                                         }
                                         HoverHandler {
                                             id: nextHoverHandler
@@ -335,9 +335,9 @@ Scope {
                     anchors.leftMargin: Variable.margin.normal
 
                     // border.width: Variable.uiScale(2)
-                    // border.color: powerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                    // border.color: powerHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                     radius: Variable.radius.small
-                    color: powerHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface
+                    color: powerHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
@@ -360,8 +360,8 @@ Scope {
                         id: powerIcon
                         anchors.centerIn: parent
                         icon: "power"
-                        // color: powerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
-                        color: Color.colors.primary
+                        // color: powerHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.primary
+                        color: Colors.colors.primary
                     }
                     Menu {
                         id: powerMenu
@@ -371,7 +371,7 @@ Scope {
                         background: Rectangle {
                             id: backgroundMenu
                             radius: Variable.radius.normal
-                            color: Color.colors.surface
+                            color: Colors.colors.surface
                         }
 
                         Instantiator {
@@ -417,7 +417,7 @@ Scope {
                             delegate: MenuItem {
                                 background: Rectangle {
                                     radius: Variable.radius.small
-                                    color: menuHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                                    color: menuHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
                                     Behavior on color {
                                         ColorAnimation {
                                             duration: 200
@@ -436,7 +436,7 @@ Scope {
                                         Layout.fillWidth: true
                                         icon: modelData.icon
                                         label: modelData.text
-                                        color: Color.colors.on_surface
+                                        color: Colors.colors.on_surface
                                     }
                                 }
                                 onTriggered: modelData.action()

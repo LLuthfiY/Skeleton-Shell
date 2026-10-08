@@ -13,7 +13,7 @@ Rectangle {
     property real step: 1
     property bool editable: true
 
-    color: Color.colors.surface
+    color: Colors.colors.surface
     radius: Variable.radius.small
     width: wrapper.width
     height: wrapper.height
@@ -26,7 +26,7 @@ Rectangle {
             width: Variable.size.large
             height: Variable.size.large
             radius: Variable.radius.small
-            color: minHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+            color: minHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
             TapHandler {
                 onTapped: {
                     root.value = Math.max((root.value - root.step).toFixed(10), root.min);
@@ -42,8 +42,8 @@ Rectangle {
             }
             LucideIcon {
                 icon: "minus"
-                // color: minHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                color: Color.colors.on_surface
+                // color: minHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
+                color: Colors.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }
@@ -52,7 +52,7 @@ Rectangle {
             text: root.value
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             horizontalAlignment: Text.AlignHCenter
             Layout.preferredWidth: 80 * root.scale
@@ -70,8 +70,8 @@ Rectangle {
             width: Variable.size.large
             height: Variable.size.large
             radius: Variable.radius.small
-            // color: plusHoverHandler.hovered ? Color.colors.primary : "transparent"
-            color: plusHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+            // color: plusHoverHandler.hovered ? Colors.colors.primary : "transparent"
+            color: plusHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
             TapHandler {
                 onTapped: {
                     root.value = Math.min((root.value + root.step).toFixed(10), root.max);
@@ -87,8 +87,8 @@ Rectangle {
             }
             LucideIcon {
                 icon: "plus"
-                // color: plusHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                color: Color.colors.on_surface
+                // color: plusHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
+                color: Colors.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }

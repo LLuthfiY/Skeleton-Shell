@@ -44,11 +44,11 @@ ListView {
         required property var modelData
         required property int index
         property int newIndex: 0
-        color: Color.colors.surface_container
+        color: Colors.colors.surface_container
         height: text.height + Variable.uiScale(16)
         width: parent?.parent.width ?? 0
         border.width: Variable.uiScale(2)
-        border.color: Color.colors.surface
+        border.color: Colors.colors.surface
         radius: Variable.radius.small
         Behavior on border.color {
             ColorAnimation {
@@ -60,7 +60,7 @@ ListView {
         //     height: parent.height * 0.6
         //     radius: Variable.radius.smallest
         //     anchors.verticalCenter: parent.verticalCenter
-        //     color: Color.colors.primary_container
+        //     color: Colors.colors.primary_container
         //     anchors.left: parent.left
         //     anchors.leftMargin: Variable.margin.small
         // }
@@ -83,10 +83,10 @@ ListView {
                         onActiveChanged: {
                             if (active) {
                                 itemRoot.z = 99999;
-                                itemRoot.border.color = Color.colors.primary;
+                                itemRoot.border.color = Colors.colors.primary;
                             } else {
                                 itemRoot.z = 0;
-                                itemRoot.border.color = Color.colors.surface;
+                                itemRoot.border.color = Colors.colors.surface;
                                 root.moveItem(itemRoot.index, itemRoot.newIndex);
                             }
                         }
@@ -97,7 +97,7 @@ ListView {
                     }
                     LucideIcon {
                         icon: "grip-vertical"
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.pixelSize: Variable.font.pixelSize.small
                         anchors.centerIn: parent
                         anchors.margins: Variable.margin.normal
@@ -108,7 +108,7 @@ ListView {
                     text: modelData.replace("user--", "").replace("--fill--", "")
                     font.family: Variable.font.family.main
                     font.weight: Font.Normal
-                    color: Color.colors.on_surface
+                    color: Colors.colors.on_surface
                     font.pixelSize: Variable.font.pixelSize.small
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
                 }
@@ -120,13 +120,13 @@ ListView {
                     text: "fill"
                     font.family: Variable.font.family.main
                     font.weight: Font.Normal
-                    color: Color.colors.on_surface
+                    color: Colors.colors.on_surface
                     font.pixelSize: Variable.font.pixelSize.small
                 }
                 StyledSwitch {
                     visible: root.fill
                     checked: modelData.includes("--fill--")
-                    backgroundColor: Color.colors.surface_container
+                    backgroundColor: Colors.colors.surface_container
                     onClicked: {
                         root.changeFill(index, checked);
                     }
@@ -134,13 +134,13 @@ ListView {
                 Rectangle {
                     height: text.implicitHeight + Variable.uiScale(8)
                     width: text.implicitHeight + Variable.uiScale(8)
-                    color: removeButtonHoverHandler.hovered ? Color.colors.error : Color.colors.surface_container
+                    color: removeButtonHoverHandler.hovered ? Colors.colors.error : Colors.colors.surface_container
                     radius: Variable.radius.small
 
                     LucideIcon {
                         id: removeButton
                         icon: "trash"
-                        color: removeButtonHoverHandler.hovered ? Color.colors.on_error : Color.colors.error
+                        color: removeButtonHoverHandler.hovered ? Colors.colors.on_error : Colors.colors.error
                         font.pixelSize: Variable.font.pixelSize.small
                         anchors.centerIn: parent
                         anchors.margins: Variable.margin.normal

@@ -36,7 +36,7 @@ Item {
 
     Rectangle {
         id: background
-        color: Color.colors.primary_container
+        color: Colors.colors.primary_container
         width: Variable.size.notificationAppIconSize
         height: Variable.size.notificationAppIconSize
         radius: 100
@@ -80,7 +80,7 @@ Item {
             LucideIcon {
                 id: icon
                 icon: "message-circle"
-                color: Color.colors.primary
+                color: Colors.colors.primary
                 font.pixelSize: Variable.size.notificationAppIconSize - Variable.margin.normal
                 anchors.centerIn: parent
             }

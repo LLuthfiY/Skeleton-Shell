@@ -63,8 +63,8 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: root.isPopup ? Color.colors.surface_container : Color.colors.surface_container_high
-        // border.color: root.isPopup ? Color.colors.primary_container : "transparent"
+        color: root.isPopup ? Colors.colors.surface_container : Colors.colors.surface_container_high
+        // border.color: root.isPopup ? Colors.colors.primary_container : "transparent"
         // border.width: Variable.uiScale(1)
         radius: Variable.radius.small
         TapHandler {
@@ -101,7 +101,7 @@ Item {
         //     Text {
         //         id: appName
         //         text: notificationObject.appName ?? "System"
-        //         color: Color.colors.on_surface
+        //         color: Colors.colors.on_surface
         //         font.pixelSize: Variable.font.pixelSize.smallest
         //         font.family: Variable.font.family.main
         //         font.bold: true
@@ -138,7 +138,7 @@ Item {
                     font.pixelSize: Variable.font.pixelSize.smallest
                     font.family: Variable.font.family.main
                     font.bold: true
-                    color: Color.colors.on_surface
+                    color: Colors.colors.on_surface
                     clip: true
                     Layout.preferredWidth: root.width - Variable.margin.normal - appIcon.width - Variable.margin.larger
                     wrapMode: contentHoverHandler.hovered ? Text.Wrap : Text.NoWrap
@@ -152,7 +152,7 @@ Item {
                     Layout.alignment: Qt.AlignVCenter
                     font.pixelSize: Variable.font.pixelSize.smallest
                     font.family: Variable.font.family.main
-                    color: Color.colors.on_surface_variant
+                    color: Colors.colors.on_surface_variant
                     wrapMode: contentHoverHandler.hovered ? Text.Wrap : Text.NoWrap
                     elide: Text.ElideRight
                 }
@@ -178,8 +178,8 @@ Item {
                     width: buttonText.implicitWidth + (Variable.uiScale(16))
                     height: buttonText.implicitHeight + (Variable.uiScale(8))
                     radius: Variable.radius.small
-                    color: hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface_container_high
-                    // border.color: Color.colors.primary_container
+                    color: hoverHandler.hovered ? Colors.colors.primary_container : Colors.colors.surface_container_high
+                    // border.color: Colors.colors.primary_container
                     // border.width: Variable.uiScale(1)
                     Behavior on color {
                         ColorAnimation {
@@ -189,7 +189,7 @@ Item {
                     Text {
                         id: buttonText
                         text: modelData.text
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.pixelSize: Variable.font.pixelSize.smallest
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal

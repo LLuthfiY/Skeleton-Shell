@@ -19,7 +19,7 @@ ColumnLayout {
     // height: parent.height
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -27,7 +27,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -57,7 +57,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -86,7 +86,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -115,7 +115,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -127,7 +127,7 @@ ColumnLayout {
             text: "Full Width"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -151,7 +151,7 @@ ColumnLayout {
             text: "Border Screen"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -175,7 +175,7 @@ ColumnLayout {
             text: "Minimal Width"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -198,7 +198,7 @@ ColumnLayout {
             text: "Margin"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -221,7 +221,7 @@ ColumnLayout {
             text: "Border"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -244,7 +244,7 @@ ColumnLayout {
             text: "Border Radius"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -263,7 +263,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -274,7 +274,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "layout-panel-left"
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.DemiBold
             font.family: Variable.font.family.main
@@ -295,7 +295,7 @@ ColumnLayout {
         }
         LucideIcon {
             icon: "layout-panel-left"
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.DemiBold
             font.family: Variable.font.family.main
@@ -316,7 +316,7 @@ ColumnLayout {
         }
         LucideIcon {
             icon: "layout-panel-left"
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.DemiBold
             font.family: Variable.font.family.main

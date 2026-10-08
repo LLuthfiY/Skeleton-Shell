@@ -159,7 +159,7 @@ Singleton {
             messages: [
                 {
                     role: "user",
-                    // content: "Respond using HTML Formatting not markdown, if you need to show image use link from internet as source not base64, also all background color become " + Color.colors.surface
+                    // content: "Respond using HTML Formatting not markdown, if you need to show image use link from internet as source not base64, also all background color become " + Colors.colors.surface
                     content: "respond in Markdown format, if you need to show image show it as link not image. show image with width not more than 500"
                 },
                 ...chatHistory.slice(1, root.numChats).reverse().map(c => {

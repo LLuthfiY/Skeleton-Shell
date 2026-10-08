@@ -25,7 +25,7 @@ ColumnLayout {
     spacing: Variable.margin.small
     LucideIcon {
         icon: "paint-roller"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -39,7 +39,7 @@ ColumnLayout {
         Rectangle {
             id: wallpaperWrapper
             anchors.fill: parent
-            color: Color.colors.surface_container
+            color: Colors.colors.surface_container
             radius: Variable.radius.normal
             clip: true
             Image {
@@ -65,7 +65,7 @@ ColumnLayout {
                 radius: Variable.radius.small
                 width: selectWallpaperIcon.width + Variable.size.normal
                 height: selectWallpaperIcon.height + Variable.size.small
-                color: selectWallpaperHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
+                color: selectWallpaperHoverHandler.hovered ? Colors.colors.primary : Colors.colors.surface
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
@@ -82,7 +82,7 @@ ColumnLayout {
                 LucideIcon {
                     id: selectWallpaperIcon
                     icon: "image"
-                    color: selectWallpaperHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                    color: selectWallpaperHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
                     anchors.centerIn: parent
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
@@ -123,7 +123,7 @@ ColumnLayout {
         Layout.preferredWidth: root.width
         LucideIcon {
             icon: "palette"
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.DemiBold
             font.family: Variable.font.family.main
@@ -148,7 +148,7 @@ ColumnLayout {
     LucideIcon {
         icon: "eclipse"
         visible: !Config.options.appearance.colorFromWallpaper
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -204,12 +204,12 @@ ColumnLayout {
         TextField {
             id: searchColor
             placeholderText: "Search Color ..."
-            placeholderTextColor: ColorUtils.transparentize(Color.colors.on_surface, 0.5)
+            placeholderTextColor: ColorUtils.transparentize(Colors.colors.on_surface, 0.5)
             Layout.fillWidth: true
             background: Rectangle {
-                color: Color.colors.surface_container
+                color: Colors.colors.surface_container
                 radius: Variable.radius.small
-                border.color: searchColor.focus ? Color.colors.primary : Color.colors.surface_variant
+                border.color: searchColor.focus ? Colors.colors.primary : Colors.colors.surface_variant
                 border.width: 1
             }
         }
@@ -220,7 +220,7 @@ ColumnLayout {
             delegate: Rectangle {
                 width: root.width
                 height: colorName.height + Variable.size.small
-                color: modelData === Config.options.appearance.colorPath || colorHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                color: modelData === Config.options.appearance.colorPath || colorHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
                 radius: Variable.radius.small
                 Behavior on color {
                     ColorAnimation {
@@ -241,7 +241,7 @@ ColumnLayout {
                 Text {
                     id: colorName
                     text: modelData.split("/").pop().replace(".json", "")
-                    color: Color.colors.on_surface
+                    color: Colors.colors.on_surface
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Normal
                     font.family: Variable.font.family.main
@@ -268,7 +268,7 @@ ColumnLayout {
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter
-                    color: !Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                    color: !Config.options.appearance.darkMode ? Colors.colors.primary : Colors.colors.primary_container
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
@@ -283,7 +283,7 @@ ColumnLayout {
                 LucideIcon {
                     id: lightModeIcon
                     icon: "sun"
-                    color: !Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
+                    color: !Config.options.appearance.darkMode ? Colors.colors.on_primary : Colors.colors.on_surface
                     anchors.centerIn: parent
                     label: "Light Mode"
                     font.weight: Font.Normal
@@ -317,7 +317,7 @@ ColumnLayout {
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter
-                    color: Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                    color: Config.options.appearance.darkMode ? Colors.colors.primary : Colors.colors.primary_container
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
@@ -332,7 +332,7 @@ ColumnLayout {
                 LucideIcon {
                     id: darkModeIcon
                     icon: "moon"
-                    color: Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
+                    color: Config.options.appearance.darkMode ? Colors.colors.on_primary : Colors.colors.on_surface
                     anchors.centerIn: parent
                     label: "Dark Mode"
                     font.weight: Font.Normal
@@ -357,7 +357,7 @@ ColumnLayout {
         }
         LucideIcon {
             icon: "swatch-book"
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.DemiBold
             font.family: Variable.font.family.main
@@ -387,7 +387,7 @@ ColumnLayout {
         }
         LucideIcon {
             icon: "palette"
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.small
             font.weight: Font.DemiBold
             font.family: Variable.font.family.main

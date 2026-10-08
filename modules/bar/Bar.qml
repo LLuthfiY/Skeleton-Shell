@@ -45,6 +45,12 @@ Scope {
                 property bool is_attached: mg == 0 && !fw
                 property var hyprlandData: HyprlandData
 
+                Component.onCompleted: {
+                    for (let i in Color) {
+                        console.log(i, Color[i]);
+                    }
+                }
+
                 WlrLayershell.namespace: "quickshell:bar"
 
                 anchors {
@@ -69,7 +75,7 @@ Scope {
                 Rectangle {
                     id: contentBorder
                     anchors.fill: parent
-                    color: Color.colors[Config.options.bar.foreground]
+                    color: Colors.colors[Config.options.bar.foreground]
                     visible: barWindow.bw > 0
 
                     topLeftRadius: barWindow.is_attached && (barWindow.pos === "top" || barWindow.pos === "left") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0) ? 0 : barWindow.br + barWindow.bw
@@ -115,7 +121,7 @@ Scope {
                 Rectangle {
                     id: contentBackground
                     anchors.fill: parent
-                    color: Color.colors[Config.options.bar.background]
+                    color: Colors.colors[Config.options.bar.background]
 
                     anchors.topMargin: (is_attached && barWindow.pos === "top") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "top" || barWindow.ver)) ? 0 : barWindow.bw
                     anchors.leftMargin: (is_attached && barWindow.pos === "left") || barWindow.borderScreen || (barWindow.fw && barWindow.mg === 0 && (barWindow.pos === "left" || !barWindow.ver)) ? 0 : barWindow.bw

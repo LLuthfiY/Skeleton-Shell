@@ -28,7 +28,7 @@ RowLayout {
             pixelSize: Variable.font.pixelSize.normal,
             weight: Font.Normal
         })
-    property string color: Color.colors.on_surface
+    property string color: Colors.colors.on_surface
     property string iconSymbol: String.fromCharCode(parseInt(Variable.lucideJson[icon].encodedCode.slice(1), 16))
     // text: String.fromCharCode(parseInt(Variable.lucideJson[icon].encodedCode.slice(1), 16))
     Text {

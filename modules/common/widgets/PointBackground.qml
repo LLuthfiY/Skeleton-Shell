@@ -19,7 +19,7 @@ Rectangle {
             //
             for (var y = root.dotRadius; y < height; y += root.dotSpacing) {
                 for (var x = root.dotRadius; x < width; x += root.dotSpacing) {
-                    ctx.fillStyle = Color.colors.primary;
+                    ctx.fillStyle = Colors.colors.primary;
                     ctx.beginPath();
                     ctx.arc(x, y, root.dotRadius, 0, 2 * Math.PI);
                     ctx.fill();

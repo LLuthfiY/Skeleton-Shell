@@ -19,7 +19,7 @@ ColumnLayout {
     width: stackWrapper.width - 24
     LucideIcon {
         icon: "component"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -27,7 +27,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "package"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -38,7 +38,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "dock"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -63,7 +63,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "square-menu"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -88,7 +88,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "rocket"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -114,7 +114,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "message-circle"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -139,7 +139,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "image"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -164,7 +164,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "message-circle"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -189,7 +189,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "music"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -214,7 +214,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "monitor"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -239,7 +239,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "circle-x"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -264,7 +264,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "layout-dashboard"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -289,7 +289,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "lock"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -313,7 +313,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "brain"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -338,7 +338,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "clipboard"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -363,7 +363,7 @@ ColumnLayout {
         spacing: Variable.margin.small
         LucideIcon {
             icon: "settings"
-            color: Color.colors.on_surface_variant
+            color: Colors.colors.on_surface_variant
             font.pixelSize: Variable.font.pixelSize.smaller
             font.weight: Font.Normal
             font.family: Variable.font.family.main
@@ -386,7 +386,7 @@ ColumnLayout {
     }
     Text {
         text: "to enable settings, you need to edit .config/Skeleton-Shell/config.json \nor .cache/quickshell/Skeleton-Shell/ConfigFolder/config.json"
-        color: Color.colors.error
+        color: Colors.colors.error
         font.pixelSize: Variable.font.pixelSize.smaller
         font.weight: Font.Normal
         font.family: Variable.font.family.main
@@ -395,7 +395,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "package"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main

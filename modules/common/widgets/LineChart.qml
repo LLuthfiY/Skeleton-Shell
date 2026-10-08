@@ -9,12 +9,12 @@ Canvas { // Visualizer
     property list<int> points
     property real maxValue: 100
     property bool live: true
-    property color color: Color.colors.primary
+    property color color: Colors.colors.primary
     property int lineWidth: 1
     property bool drawBottomLine: true
     property bool fill: false
-    property color fillColor: Color.colors.primary
-    property color outlineColor: Color.colors.surface_container
+    property color fillColor: Colors.colors.primary
+    property color outlineColor: Colors.colors.surface_container
     property bool outline: true
 
     onPointsChanged: () => {

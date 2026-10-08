@@ -40,7 +40,7 @@ Item {
                     height: modelData * spectrumRoot.scale
                     Layout.alignment: Qt.AlignVCenter
                     radius: Variable.radius.smallest
-                    color: Color.colors[Config.options.bar.foreground]
+                    color: Colors.colors[Config.options.bar.foreground]
                 }
             }
         }
@@ -58,7 +58,7 @@ Item {
                     height: Variable.size.smallest / 2
                     Layout.alignment: Qt.AlignHCenter
                     radius: Variable.radius.smallest
-                    color: Color.colors[Config.options.bar.foreground]
+                    color: Colors.colors[Config.options.bar.foreground]
                 }
             }
         }

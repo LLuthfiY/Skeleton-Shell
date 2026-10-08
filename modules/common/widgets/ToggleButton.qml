@@ -12,7 +12,7 @@ Rectangle {
     })
     property bool toggleOpacity: false
     property bool toggleSize: false
-    property string textColor: Color.colors.on_surface_variant
+    property string textColor: Colors.colors.on_surface_variant
     property string label: "Toggle"
     property string icon: ""
     radius: Variable.radius.smallest
@@ -27,7 +27,7 @@ Rectangle {
         opacity: root.toggleOpacity ? root.toggled ? 1 : hoverHandler.hovered ? 1 : 0.6 : 1
         width: loader.width + Variable.size.normal
         height: loader.height + Variable.size.small
-        color: toggled ? Color.colors.primary : hoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
+        color: toggled ? Colors.colors.primary : hoverHandler.hovered ? Colors.colors.primary_container : Colors.colors.surface
         radius: root.buttonRadius
         anchors.centerIn: parent
         Behavior on color {
@@ -61,7 +61,7 @@ Rectangle {
         LucideIcon {
             icon: root.icon
             label: root.label
-            color: root.toggled ? Color.colors.on_primary : root.textColor
+            color: root.toggled ? Colors.colors.on_primary : root.textColor
             font.family: root.font.family
             font.pixelSize: !root.toggleSize ? root.font.pixelSize : root.toggled ? root.font.pixelSize : root.font.pixelSize - Math.round(root.font.pixelSize / 6)
             font.weight: Font.Normal
@@ -71,7 +71,7 @@ Rectangle {
         id: text
         Text {
             text: root.label
-            color: root.toggled ? Color.colors.on_primary : root.textColor
+            color: root.toggled ? Colors.colors.on_primary : root.textColor
             font.family: root.font.family
             font.pixelSize: !root.toggleSize ? root.font.pixelSize : root.toggled ? root.font.pixelSize : root.font.pixelSize - Math.round(root.font.pixelSize / 6)
             font.weight: Font.Normal

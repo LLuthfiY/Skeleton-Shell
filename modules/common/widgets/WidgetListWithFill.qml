@@ -79,7 +79,7 @@ ColumnLayout {
                 height: parent.height
                 radius: Variable.radius.small
                 anchors.verticalCenter: parent.verticalCenter
-                color: addHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                color: addHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                 Behavior on color {
                     ColorAnimation {
                         duration: 200
@@ -100,7 +100,7 @@ ColumnLayout {
             LucideIcon {
                 id: addIcon
                 icon: "plus"
-                color: addHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                color: addHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
                 font.pixelSize: Variable.font.pixelSize.small
                 font.weight: Font.DemiBold
                 font.family: Variable.font.family.main
@@ -115,7 +115,7 @@ ColumnLayout {
                 background: Rectangle {
                     id: backgroundMenu
                     radius: Variable.radius.small
-                    color: Color.colors.surface_container
+                    color: Colors.colors.surface_container
                 }
                 Instantiator {
                     model: root.widgetList
@@ -129,7 +129,7 @@ ColumnLayout {
                         background: Rectangle {
                             radius: Variable.radius.small
                             property bool isHovered: false
-                            color: isHovered ? Color.colors.primary : "transparent"
+                            color: isHovered ? Colors.colors.primary : "transparent"
                             Behavior on color {
                                 ColorAnimation {
                                     duration: 200
@@ -152,7 +152,7 @@ ColumnLayout {
                             font.family: Variable.font.family.main
                             font.weight: Font.Normal
                             font.pixelSize: Variable.font.pixelSize.smaller
-                            color: background.isHovered ? Color.colors.on_primary : Color.colors.on_surface
+                            color: background.isHovered ? Colors.colors.on_primary : Colors.colors.on_surface
                         }
                         onTriggered: {
                             root.items.push(modelData);

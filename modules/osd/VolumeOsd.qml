@@ -58,7 +58,7 @@ Scope {
             Rectangle {
                 anchors.fill: parent
                 radius: Config.options.windowManager.windowBorderRadius
-                color: Color.colors.surface
+                color: Colors.colors.surface
             }
             // An empty click mask prevents the window from blocking mouse events.
             mask: Region {}
@@ -72,7 +72,7 @@ Scope {
                 inside: LucideIcon {
                     icon: root.muted ? "volume-off" : root.percentage > 50 ? "volume-2" : root.percentage > 0 ? "volume-1" : "volume-x"
                     font.pixelSize: Variable.uiScale(48)
-                    color: Color.colors.primary
+                    color: Colors.colors.primary
                 }
             }
         }

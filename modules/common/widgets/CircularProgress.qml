@@ -10,8 +10,8 @@ Item {
     property int implicitSize: 40
     property int lineWidth: 5
     property real value: 0.0                // 0.0 to 1.0
-    property color colPrimary: Color.colors.primary
-    property color colSecondary: ColorUtils.transparentize(Color.colors.primary, 0.5)
+    property color colPrimary: Colors.colors.primary
+    property color colSecondary: ColorUtils.transparentize(Colors.colors.primary, 0.5)
     property bool enableAnimation: true
     property int animationDuration: 800
     property var easingType: Easing.OutCubic

@@ -7,8 +7,8 @@ Switch {
     id: root
     width: Variable.uiScale(44)
     height: Variable.uiScale(22)
-    property string backgroundColor: Color.colors.surface
-    property string accentColor: Color.colors.primary
+    property string backgroundColor: Colors.colors.surface
+    property string accentColor: Colors.colors.primary
     implicitWidth: root.width
     implicitHeight: root.height
     property real scale: Config.options.appearance.uiScale

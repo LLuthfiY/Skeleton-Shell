@@ -19,9 +19,9 @@ RowLayout {
             implicitWidth: Variable.size.larger
             implicitHeight: Variable.size.larger
             // border.width: Variable.uiScale(2)
-            // border.color: powerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+            // border.color: powerHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
             radius: Variable.radius.small
-            color: powerHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+            color: powerHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -44,8 +44,8 @@ RowLayout {
                 id: powerIcon
                 anchors.centerIn: parent
                 icon: "power"
-                // color: powerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
-                color: Color.colors.on_surface
+                // color: powerHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.primary
+                color: Colors.colors.on_surface
             }
             Menu {
                 id: powerMenu
@@ -55,7 +55,7 @@ RowLayout {
                 background: Rectangle {
                     id: backgroundMenu
                     radius: Variable.radius.small
-                    color: Color.colors.surface_container
+                    color: Colors.colors.surface_container
                 }
 
                 Instantiator {
@@ -111,7 +111,7 @@ RowLayout {
                     delegate: MenuItem {
                         background: Rectangle {
                             radius: Variable.radius.small
-                            color: menuHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                            color: menuHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
                             Behavior on color {
                                 ColorAnimation {
                                     duration: 200
@@ -130,8 +130,8 @@ RowLayout {
                                 Layout.fillWidth: true
                                 icon: modelData.icon
                                 label: modelData.text
-                                // color: menuHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                                color: Color.colors.on_surface
+                                // color: menuHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
+                                color: Colors.colors.on_surface
                             }
                         }
                         onTriggered: modelData.action()
@@ -145,8 +145,8 @@ RowLayout {
             implicitHeight: Variable.size.larger
 
             radius: Variable.radius.small
-            color: settingsHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
-            // border.color: settingsHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+            color: settingsHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
+            // border.color: settingsHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
             // border.width: Variable.uiScale(2)
             Behavior on color {
                 ColorAnimation {
@@ -162,8 +162,8 @@ RowLayout {
                 id: settingsIcon
                 anchors.centerIn: parent
                 icon: "settings"
-                // color: settingsHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
-                color: Color.colors.on_surface
+                // color: settingsHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.primary
+                color: Colors.colors.on_surface
             }
             TapHandler {
                 onTapped: {
@@ -182,7 +182,7 @@ RowLayout {
             id: timeText
             // text: Qt.formatTime(systemClock.date, "hh:mm  ")
             text: root.uptime
-            color: Color.colors.on_surface ?? "#FFFFFF"
+            color: Colors.colors.on_surface ?? "#FFFFFF"
             Layout.alignment: Qt.AlignRight
             horizontalAlignment: Text.AlignRight
             font.weight: Font.Bold

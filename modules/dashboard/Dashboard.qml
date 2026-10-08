@@ -37,7 +37,7 @@ Scope {
         color: "transparent"
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Config.options.windowManager.windowBorderRadius
             Rectangle {
                 anchors.fill: parent

@@ -52,7 +52,7 @@ Scope {
 
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Config.options.bar.borderRadius
         }
 

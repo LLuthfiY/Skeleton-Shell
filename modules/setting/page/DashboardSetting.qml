@@ -18,7 +18,7 @@ ColumnLayout {
     width: stackWrapper.width - 24
     LucideIcon {
         icon: "layout-dashboard"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -26,7 +26,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -46,7 +46,7 @@ ColumnLayout {
                     height: parent.height
                     radius: Variable.radius.smallest
                     anchors.verticalCenter: parent.verticalCenter
-                    color: Config.options.dashboard.position === modelData ? Color.colors.primary : Color.colors.primary_container
+                    color: Config.options.dashboard.position === modelData ? Colors.colors.primary : Colors.colors.primary_container
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
@@ -74,7 +74,7 @@ ColumnLayout {
                     font.family: Variable.font.family.main
                     font.weight: Font.Normal
                     font.pixelSize: Variable.font.pixelSize.normal
-                    color: Config.options.dashboard.position === modelData ? Color.colors.on_primary : Color.colors.on_surface
+                    color: Config.options.dashboard.position === modelData ? Colors.colors.on_primary : Colors.colors.on_surface
                 }
             }
         }

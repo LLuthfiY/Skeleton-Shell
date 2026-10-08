@@ -40,7 +40,7 @@ Scope {
         implicitHeight: overviewGrid.implicitHeight + 32
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Config.options.windowManager.windowBorderRadius
         }
 
@@ -57,7 +57,7 @@ Scope {
                 delegate: Rectangle {
                     width: root.monitor.width * root.scale
                     height: root.monitor.height * root.scale
-                    color: Color.colors.surface_container
+                    color: Colors.colors.surface_container
                     radius: Variable.radius.small
                     Text {
                         anchors.centerIn: parent
@@ -65,7 +65,7 @@ Scope {
                         font.pixelSize: 32
                         font.weight: 900
                         font.family: Variable.font.family.main
-                        color: Color.colors.on_surface_variant
+                        color: Colors.colors.on_surface_variant
                     }
                     DropArea {
                         anchors.fill: parent
@@ -229,7 +229,7 @@ Scope {
         color: "transparent"
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Variable.radius.normal
         }
         Rectangle {
@@ -254,7 +254,7 @@ Scope {
                             font.pixelSize: 32
                             font.weight: 900
                             font.family: Variable.font.family.main
-                            color: Color.colors.on_surface_variant
+                            color: Colors.colors.on_surface_variant
                         }
                         DropArea {
                             anchors.fill: parent
@@ -278,7 +278,7 @@ Scope {
                         property var windowData: HyprlandData.windowByAddress[address]
                         property int workskpace: (modelData.workspace.id - 1)
                         color: "transparent"
-                        border.color: Color.colors.primary
+                        border.color: Colors.colors.primary
 
                         height: windowData.size[1] / root.monitor.height * wrapper.monitorHeight
                         width: windowData.size[0] / root.monitor.width * wrapper.monitorWidth

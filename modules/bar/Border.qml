@@ -59,7 +59,7 @@ Scope {
                     Rectangle {
                         id: backgroundContent
                         anchors.fill: parent
-                        color: Color.colors[Config.options.bar.background]
+                        color: Colors.colors[Config.options.bar.background]
 
                         layer.enabled: true
 
@@ -73,7 +73,7 @@ Scope {
                         }
                         Rectangle {
                             anchors.fill: parent
-                            color: Color.colors[Config.options.bar.foreground]
+                            color: Colors.colors[Config.options.bar.foreground]
                             radius: borderWindow.borderRadius + borderWidth
                             anchors.topMargin: borderWindow.topMargin
                             anchors.bottomMargin: borderWindow.bottomMargin

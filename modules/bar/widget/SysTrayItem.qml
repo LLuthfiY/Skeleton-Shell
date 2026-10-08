@@ -13,12 +13,12 @@ Rectangle {
     id: trayItem
     required property SystemTrayItem modelData
     property int size: Variable.size.large * 1.1
-    color: "#80" + Color.colors[Config.options.bar.foreground].substring(1)
+    color: "#80" + Colors.colors[Config.options.bar.foreground].substring(1)
     radius: Variable.radius.small
     width: size
     height: size
     border.width: Variable.size.smallest / 2
-    border.color: Color.colors[Config.options.bar.foreground]
+    border.color: Colors.colors[Config.options.bar.foreground]
 
     Component.onCompleted: BarMenuUtils.barWindow = barWindow
 
@@ -78,7 +78,7 @@ Rectangle {
                     HoverHandler {
                         id: menuItemHover
                     }
-                    color: modelData.isSeparator ? Color.colors.surface_container_high : menuItemHover.hovered ? Color.colors.surface_container : Color.colors.surface
+                    color: modelData.isSeparator ? Colors.colors.surface_container_high : menuItemHover.hovered ? Colors.colors.surface_container : Colors.colors.surface
                     radius: Variable.radius.small
                     Behavior on color {
                         ColorAnimation {
@@ -114,7 +114,7 @@ Rectangle {
                         }
                         Text {
                             text: modelData.text
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                             font.pixelSize: Variable.font.pixelSize.small
                             font.family: Variable.font.family.main
                             font.weight: Font.Normal

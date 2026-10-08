@@ -52,7 +52,7 @@ Scope {
 
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Config.options.windowManager.windowBorderRadius
         }
         ColumnLayout {
@@ -74,10 +74,10 @@ Scope {
                     font.weight: Font.Normal
                     focus: true
                     background: Rectangle {
-                        color: Color.colors.surface
+                        color: Colors.colors.surface
                         radius: Variable.radius.small
                     }
-                    color: Color.colors.on_surface_variant
+                    color: Colors.colors.on_surface_variant
 
                     onAccepted: {
                         launcherList.currentItem.execute();
@@ -127,7 +127,7 @@ Scope {
                         width: Variable.uiScale(2)
                         height: parent.height / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: launcherList.currentIndex === index || hoverHandler.hovered ? Color.colors.primary : "transparent"
+                        color: launcherList.currentIndex === index || hoverHandler.hovered ? Colors.colors.primary : "transparent"
                         Behavior on color {
                             ColorAnimation {
                                 duration: 200
@@ -146,7 +146,7 @@ Scope {
                             Layout.leftMargin: Variable.margin.small
                             font.family: Variable.font.family.main
                             font.weight: Font.Normal
-                            color: ListView.isCurrentItem ? Color.colors.on_primary : Color.colors.on_surface
+                            color: ListView.isCurrentItem ? Colors.colors.on_primary : Colors.colors.on_surface
                         }
                     }
                     TapHandler {

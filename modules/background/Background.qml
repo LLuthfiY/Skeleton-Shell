@@ -34,7 +34,7 @@ Scope {
                     left: true
                     right: true
                 }
-                color: Color.colors.background
+                color: Colors.colors.background
                 Component {
                     id: image
                     Image {

@@ -13,7 +13,7 @@ ColumnLayout {
     spacing: Variable.margin.small
     Rectangle {
         anchors.fill: parent
-        color: Color.colors.surface_container
+        color: Colors.colors.surface_container
         radius: Variable.radius.normal
     }
     Rectangle {
@@ -29,7 +29,7 @@ ColumnLayout {
             Text {
                 text: "Notifications"
                 font.pixelSize: Variable.font.pixelSize.normal
-                color: Color.colors.on_surface
+                color: Colors.colors.on_surface
                 font.weight: Font.Bold
                 font.family: Variable.font.family.main
             }
@@ -41,8 +41,8 @@ ColumnLayout {
                 width: Variable.size.larger
                 height: Variable.size.larger
                 radius: Variable.radius.small
-                color: hoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
-                // border.color: hoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                color: hoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
+                // border.color: hoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                 // border.width: Variable.uiScale(2)
                 Behavior on color {
                     ColorAnimation {
@@ -64,8 +64,8 @@ ColumnLayout {
                 }
                 LucideIcon {
                     icon: "trash"
-                    // color: hoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
-                    color: Color.colors.error
+                    // color: hoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.primary
+                    color: Colors.colors.error
                     anchors.centerIn: parent
                 }
             }

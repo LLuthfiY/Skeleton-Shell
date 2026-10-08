@@ -22,7 +22,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "download"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -30,7 +30,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "package"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -40,19 +40,19 @@ ColumnLayout {
         TextField {
             id: importConfigTextField
             Layout.fillWidth: true
-            placeholderTextColor: Color.colors.on_surface_variant
-            color: Color.colors.on_surface
+            placeholderTextColor: Colors.colors.on_surface_variant
+            color: Colors.colors.on_surface
             background: Rectangle {
-                color: Color.colors.surface
+                color: Colors.colors.surface
                 radius: Variable.radius.small
-                border.color: importConfigTextField.focus ? Color.colors.primary : Color.colors.surface_container
+                border.color: importConfigTextField.focus ? Colors.colors.primary : Colors.colors.surface_container
                 border.width: 2
             }
         }
         Rectangle {
             Layout.preferredHeight: importConfigButtonIcon.implicitHeight + Variable.margin.small
             Layout.preferredWidth: importConfigButtonIcon.implicitWidth + Variable.margin.normal
-            color: importConfigButtonHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface
+            color: importConfigButtonHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface
             radius: Variable.radius.small
             Behavior on color {
                 ColorAnimation {
@@ -69,7 +69,7 @@ ColumnLayout {
                 font.family: Variable.font.family.main
                 font.weight: Font.Normal
                 font.pixelSize: Variable.font.pixelSize.small
-                color: Color.colors.on_surface
+                color: Colors.colors.on_surface
                 icon: "download"
                 label: "Import"
             }
@@ -91,7 +91,7 @@ ColumnLayout {
             id: itemLocal
             Layout.fillWidth: true
             Layout.preferredHeight: columnLayoutLocal.implicitHeight + Variable.margin.small * 2
-            color: Color.colors.surface_container
+            color: Colors.colors.surface_container
             radius: Variable.radius.small
             ColumnLayout {
                 id: columnLayoutLocal
@@ -103,7 +103,7 @@ ColumnLayout {
                     spacing: 0
                     LucideIcon {
                         icon: "folder"
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.pixelSize: Variable.font.pixelSize.normal
                         font.weight: Font.Bold
                         font.family: Variable.font.family.main
@@ -113,7 +113,7 @@ ColumnLayout {
                     Text {
                         id: textLocal
                         text: Directory.trimFileProtocol(Directory.config) + "/Skeleton-Shell"
-                        color: Color.colors.on_surface_variant
+                        color: Colors.colors.on_surface_variant
                         font.pixelSize: Variable.font.pixelSize.smaller
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
@@ -135,13 +135,13 @@ ColumnLayout {
                         radius: Variable.radius.small
                         Layout.preferredHeight: applyIconLocal.implicitHeight + Variable.margin.small
                         Layout.preferredWidth: applyIconLocal.implicitWidth + Variable.margin.normal
-                        color: applyHoverHandlerLocal.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                        color: applyHoverHandlerLocal.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
                         LucideIcon {
                             id: applyIconLocal
                             anchors.centerIn: parent
                             icon: "check"
                             label: MasterConfig.options.defaultConfig ? "Applied" : "Apply"
-                            color: Color.colors.primary
+                            color: Colors.colors.primary
                             font.pixelSize: Variable.font.pixelSize.small
                             font.weight: Font.DemiBold
                             font.family: Variable.font.family.main
@@ -165,7 +165,7 @@ ColumnLayout {
                 id: item
                 Layout.fillWidth: true
                 Layout.preferredHeight: columnLayout.implicitHeight + Variable.margin.small * 2
-                color: Color.colors.surface_container
+                color: Colors.colors.surface_container
                 radius: Variable.radius.small
                 property list<string> splittedData: modelData.split("/")
                 ColumnLayout {
@@ -178,7 +178,7 @@ ColumnLayout {
                         spacing: 0
                         LucideIcon {
                             icon: modelData.includes("github.com") ? "github" : modelData.includes("gitlab.com") ? "gitlab" : "git-branch"
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                             font.pixelSize: Variable.font.pixelSize.normal
                             font.weight: Font.Bold
                             font.family: Variable.font.family.main
@@ -187,7 +187,7 @@ ColumnLayout {
                         }
                         Text {
                             text: splittedData[splittedData.length - 2] + "/"
-                            color: Color.colors.on_surface_variant
+                            color: Colors.colors.on_surface_variant
                             font.pixelSize: Variable.font.pixelSize.smaller
                             font.weight: Font.Normal
                             font.family: Variable.font.family.main
@@ -195,7 +195,7 @@ ColumnLayout {
                         }
                         Text {
                             text: splittedData[splittedData.length - 1]
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                             font.pixelSize: Variable.font.pixelSize.smaller
                             font.weight: Font.Bold
                             font.family: Variable.font.family.main
@@ -206,7 +206,7 @@ ColumnLayout {
                         }
                         Text {
                             text: splittedData[splittedData.length - 3]
-                            color: Color.colors.on_surface_variant
+                            color: Colors.colors.on_surface_variant
                             font.pixelSize: Variable.font.pixelSize.smaller
                             font.weight: Font.Normal
                             font.family: Variable.font.family.main
@@ -228,13 +228,13 @@ ColumnLayout {
                             radius: Variable.radius.small
                             Layout.preferredHeight: applyIcon.implicitHeight + Variable.margin.small
                             Layout.preferredWidth: applyIcon.implicitWidth + Variable.margin.small * 2
-                            color: applyHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                            color: applyHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
                             LucideIcon {
                                 id: applyIcon
                                 anchors.centerIn: parent
                                 icon: "check"
                                 label: modelData === readLinkCommand.link ? "Applied" : "Apply"
-                                color: Color.colors.primary
+                                color: Colors.colors.primary
                                 font.pixelSize: Variable.font.pixelSize.small
                                 font.weight: Font.DemiBold
                                 font.family: Variable.font.family.main
@@ -256,7 +256,7 @@ ColumnLayout {
                             id: deleteButton
                             Layout.preferredHeight: applyIcon.implicitHeight + Variable.margin.small
                             Layout.preferredWidth: applyIcon.implicitWidth + Variable.margin.small * 2
-                            color: deleteButtonHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                            color: deleteButtonHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
                             radius: Variable.radius.small
                             Behavior on color {
                                 ColorAnimation {
@@ -273,7 +273,7 @@ ColumnLayout {
                                 anchors.centerIn: parent
                                 icon: "trash"
                                 label: "Delete"
-                                color: Color.colors.error
+                                color: Colors.colors.error
                                 font.pixelSize: Variable.font.pixelSize.small
                                 font.weight: Font.DemiBold
                                 font.family: Variable.font.family.main

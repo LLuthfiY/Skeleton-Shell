@@ -40,7 +40,7 @@ Rectangle {
                 font.family: Variable.font.family.main
                 font.weight: Font.Normal
                 font.pixelSize: Variable.font.pixelSize.smaller
-                color: root.text === "Thinking..." ? "#777777" : Color.colors.on_surface_variant
+                color: root.text === "Thinking..." ? "#777777" : Colors.colors.on_surface_variant
                 textFormat: Text.MarkdownText
                 wrapMode: Text.Wrap
                 onLinkActivated: Qt.openUrlExternally(link)
@@ -51,10 +51,10 @@ Rectangle {
             spacing: 0
             Rectangle {
                 anchors.fill: parent
-                color: Color.colors.surface_container
+                color: Colors.colors.surface_container
                 radius: Variable.radius.small
                 // border.width: 1
-                // border.color: Color.colors.primary_container
+                // border.color: Colors.colors.primary_container
                 clip: true
             }
             RowLayout {
@@ -80,7 +80,7 @@ Rectangle {
                     delegate: Rectangle {
                         width: buttonIcon.width + Variable.margin.normal
                         height: buttonIcon.height + Variable.margin.normal
-                        color: buttonHoverHandler.hovered ? Color.colors.primary : "transparent"
+                        color: buttonHoverHandler.hovered ? Colors.colors.primary : "transparent"
                         radius: Variable.radius.small
                         clip: true
                         Layout.margins: Variable.margin.smallest
@@ -106,7 +106,7 @@ Rectangle {
                         LucideIcon {
                             id: buttonIcon
                             icon: modelData.icon
-                            color: buttonHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                            color: buttonHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
                             anchors.centerIn: parent
                             Behavior on color {
                                 ColorAnimation {
@@ -122,7 +122,7 @@ Rectangle {
                 font.weight: Font.Normal
                 font.pixelSize: Variable.font.pixelSize.smaller
                 text: root.isUser ? "by: You " : "by: " + root.model
-                color: Color.colors.on_surface_variant
+                color: Colors.colors.on_surface_variant
             }
             Item {
                 Layout.fillWidth: true
@@ -133,7 +133,7 @@ Rectangle {
                 font.weight: Font.Normal
                 font.pixelSize: Variable.font.pixelSize.smaller
                 text: "Thinking..."
-                color: Color.colors.on_surface_variant
+                color: Colors.colors.on_surface_variant
                 Layout.rightMargin: Variable.margin.normal
             }
         }
@@ -146,6 +146,6 @@ Rectangle {
     //     width: Variable.uiScale(2)
     //     height: parent.height / 2
     //     radius: width / 2
-    //     color: Color.colors.primary_container
+    //     color: Colors.colors.primary_container
     // }
 }

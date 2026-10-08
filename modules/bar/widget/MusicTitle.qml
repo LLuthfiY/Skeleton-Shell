@@ -32,7 +32,7 @@ Loader {
                     text: modelData.trackTitle.length > musicTitle.maxLength ? modelData.trackTitle.trim().substring(0, musicTitle.maxLength - 3) + "..." : modelData.trackTitle.trim()
                     font.pixelSize: Variable.font.pixelSize.small
                     font.weight: Font.Medium
-                    color: Color.colors[Config.options.bar.foreground]
+                    color: Colors.colors[Config.options.bar.foreground]
                     visible: modelData.isPlaying
                 }
             }
@@ -65,7 +65,7 @@ Loader {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.centerIn: parent
                         font.weight: Font.Medium
-                        color: Color.colors[Config.options.bar.foreground]
+                        color: Colors.colors[Config.options.bar.foreground]
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                         // The rotation property rotates around the center by default

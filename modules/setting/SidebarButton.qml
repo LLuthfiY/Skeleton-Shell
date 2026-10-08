@@ -17,7 +17,7 @@ Rectangle {
         anchors.left: parent.left
         // width: root.section === index ? parent.width : hoverHandler.hovered ? parent.width : 2
         width: parent.width
-        color: root.section === index ? Color.colors.primary : sidebarHoverHandler.hovered ? Color.colors.primary_container : Color.colors.surface
+        color: root.section === index ? Colors.colors.primary : sidebarHoverHandler.hovered ? Colors.colors.primary_container : Colors.colors.surface
         HoverHandler {
             id: sidebarHoverHandler
         }
@@ -37,7 +37,7 @@ Rectangle {
 
     LucideIcon {
         icon: modelData.icon
-        color: root.section === index ? Color.colors.on_primary : Color.colors.on_surface
+        color: root.section === index ? Colors.colors.on_primary : Colors.colors.on_surface
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.margins: Variable.margin.small

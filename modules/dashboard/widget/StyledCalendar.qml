@@ -44,7 +44,7 @@ Rectangle {
         width: parent.width
         spacing: 0
         Rectangle {
-            color: Color.colors.surface_container
+            color: Colors.colors.surface_container
             radius: Variable.radius.normal
             width: weatherWrapper.width + Variable.margin.normal
             height: calendarWrapper.height
@@ -64,7 +64,7 @@ Rectangle {
                             anchors.centerIn: parent
                             icon: root.icon
                             font.pixelSize: Variable.uiScale(54)
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                         }
                     }
                     Text {
@@ -73,14 +73,14 @@ Rectangle {
                         Layout.alignment: Qt.AlignHCenter
                         font.family: Variable.font.family.main
                         font.weight: Font.Bold
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.pixelSize: Variable.font.pixelSize.normal
                     }
                 }
                 Text {
                     text: "-- Next Days --"
                     font.family: Variable.font.family.main
-                    color: Color.colors.on_surface
+                    color: Colors.colors.on_surface
                     font.pixelSize: Variable.font.pixelSize.smallest
                     Layout.alignment: Qt.AlignHCenter
                 }
@@ -91,19 +91,19 @@ Rectangle {
                         delegate: RowLayout {
                             LucideIcon {
                                 icon: Weather.getIcon(modelData.weatherCode)
-                                color: Color.colors.on_surface
+                                color: Colors.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.small
                             }
                             Text {
                                 text: modelData.temperature_2m_min + "\n" + modelData.temperature_2m_max
                                 font.family: Variable.font.family.main
-                                color: Color.colors.on_surface
+                                color: Colors.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.smallest
                             }
                             Text {
                                 text: "°C"
                                 font.family: Variable.font.family.main
-                                color: Color.colors.on_surface
+                                color: Colors.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.smallest
                             }
                         }
@@ -126,10 +126,10 @@ Rectangle {
                     Layout.preferredWidth: root.buttonSize
                     Layout.preferredHeight: root.buttonSize
                     radius: Variable.radius.normal
-                    color: prevMonthHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                    color: prevMonthHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
                     LucideIcon {
                         icon: "chevron-left"
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         anchors.centerIn: parent
                     }
 
@@ -153,14 +153,14 @@ Rectangle {
                     Layout.preferredHeight: root.buttonSize
                     Layout.preferredWidth: calendarWrapper.implicitWidth - prevMonthButton.width - nextMonthButton.width - 2 * Variable.margin.normal
                     radius: Variable.radius.normal
-                    color: currentMonthHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                    color: currentMonthHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
 
                     Text {
                         id: currentMonthText
                         text: Qt.formatDate(root.date, "MMMM yyyy")
                         font.family: Variable.font.family.main
                         font.weight: Font.Bold
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         anchors.centerIn: parent
                         font.pixelSize: Variable.font.pixelSize.small
                     }
@@ -186,10 +186,10 @@ Rectangle {
                     Layout.preferredWidth: root.buttonSize
                     Layout.preferredHeight: root.buttonSize
                     radius: Variable.radius.normal
-                    color: nextMonthHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                    color: nextMonthHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
                     LucideIcon {
                         icon: "chevron-right"
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         anchors.centerIn: parent
                     }
 
@@ -224,7 +224,7 @@ Rectangle {
                     Text {
                         text: model.shortName
                         font.pixelSize: Variable.font.pixelSize.smallest
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
                         anchors.centerIn: parent
@@ -235,7 +235,7 @@ Rectangle {
                 id: calendarDaysWrapper
                 width: monthGrid.width + 2 * Variable.margin.small
                 height: monthGrid.height + 2 * Variable.margin.small
-                color: Color.colors.surface_container
+                color: Colors.colors.surface_container
                 radius: Variable.radius.normal
                 MonthGrid {
                     id: monthGrid
@@ -250,11 +250,11 @@ Rectangle {
                         radius: Variable.radius.small
                         property bool isCurrentDay: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                         property bool isCurrentMonth: model.month === root.date.getMonth() && model.year === root.date.getFullYear()
-                        color: isCurrentDay ? Color.colors.primary : "transparent"
+                        color: isCurrentDay ? Colors.colors.primary : "transparent"
                         Text {
                             text: model.day
                             font.pixelSize: isCurrentMonth ? Variable.font.pixelSize.small : Variable.font.pixelSize.smallest
-                            color: isCurrentDay ? Color.colors.on_primary : isCurrentMonth ? Color.colors.on_surface : "#777777"
+                            color: isCurrentDay ? Colors.colors.on_primary : isCurrentMonth ? Colors.colors.on_surface : "#777777"
                             font.weight: Font.Normal
                             font.family: Variable.font.family.main
                             anchors.centerIn: parent

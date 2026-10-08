@@ -10,7 +10,7 @@ import qs.services
 Rectangle {
     id: root
     color: "transparent"
-    // border.color: Color.colors.primary_container
+    // border.color: Colors.colors.primary_container
     // border.width: 2
     width: parent.width
     height: Variable.uiScale(82)
@@ -24,7 +24,7 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
-            color: Color.colors.surface_container
+            color: Colors.colors.surface_container
             radius: Variable.radius.normal
 
             RowLayout {
@@ -35,8 +35,8 @@ Rectangle {
                 CircularProgress {
                     id: cpuUsage
                     value: CPU.cpuUsage / 100
-                    colPrimary: Color.colors.primary
-                    colSecondary: Color.colors.primary_container
+                    colPrimary: Colors.colors.primary
+                    colSecondary: Colors.colors.primary_container
                     enableAnimation: false
                 }
 
@@ -46,14 +46,14 @@ Rectangle {
                         icon: "cpu"
                         label: "CPU"
                         font.pixelSize: Variable.font.pixelSize.normal
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.weight: Font.Bold
                         font.family: Variable.font.family.main
                     }
                     Text {
                         text: CPU.cpuUsage + "%"
                         font.pixelSize: Variable.font.pixelSize.small
-                        color: Color.colors.on_surface_variant
+                        color: Colors.colors.on_surface_variant
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
                     }
@@ -63,7 +63,7 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
-            color: Color.colors.surface_container
+            color: Colors.colors.surface_container
             radius: Variable.radius.normal
             RowLayout {
                 anchors.fill: parent
@@ -73,8 +73,8 @@ Rectangle {
                 CircularProgress {
                     id: ramUsage
                     value: RAM.ramUsage / 100
-                    colPrimary: Color.colors.primary
-                    colSecondary: Color.colors.primary_container
+                    colPrimary: Colors.colors.primary
+                    colSecondary: Colors.colors.primary_container
                     enableAnimation: false
                 }
 
@@ -84,14 +84,14 @@ Rectangle {
                         icon: "memory-stick"
                         label: "RAM"
                         font.pixelSize: Variable.font.pixelSize.normal
-                        color: Color.colors.on_surface
+                        color: Colors.colors.on_surface
                         font.weight: Font.Bold
                         font.family: Variable.font.family.main
                     }
                     Text {
                         text: RAM.ramUsage + "%"
                         font.pixelSize: Variable.font.pixelSize.small
-                        color: Color.colors.on_surface_variant
+                        color: Colors.colors.on_surface_variant
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
                     }

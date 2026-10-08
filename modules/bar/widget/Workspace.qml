@@ -68,12 +68,12 @@ Item {
             Rectangle {
                 property bool active: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === ind : false
                 anchors.centerIn: parent
-                color: occupied ? "#80" + Color.colors[Config.options.bar.foreground].substring(1) : Color.colors[Config.options.bar.background]
+                color: occupied ? "#80" + Colors.colors[Config.options.bar.foreground].substring(1) : Colors.colors[Config.options.bar.background]
                 implicitWidth: active ? Variable.uiScale(24) : Variable.uiScale(12)
                 implicitHeight: active ? Variable.uiScale(24) : Variable.uiScale(12)
                 radius: 999
                 border.width: Variable.uiScale(2)
-                border.color: Color.colors[Config.options.bar.foreground]
+                border.color: Colors.colors[Config.options.bar.foreground]
 
                 Behavior on implicitWidth {
                     NumberAnimation {

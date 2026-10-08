@@ -45,19 +45,19 @@ Scope {
         }
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Config.options.windowManager.windowBorderRadius
             // Loader {
             //     active: Config.options.mediaPlayer.enable
             //     anchors.fill: parent
             //     LineChart {
-            //         color: Color.colors.primary
+            //         color: Colors.colors.primary
             //         anchors.fill: parent
             //         points: Cava.values
             //         drawBottomLine: true
             //         fill: true
             //         maxValue: 10
-            //         fillColor: "#55" + Color.colors.primary.replace("#", "")
+            //         fillColor: "#55" + Colors.colors.primary.replace("#", "")
             //     }
             // }
         }
@@ -86,7 +86,7 @@ Scope {
                         id: art
                         width: Variable.uiScale(92)
                         height: Variable.uiScale(92)
-                        color: Color.colors.primary_container
+                        color: Colors.colors.primary_container
 
                         radius: Variable.radius.normal
                         Image {
@@ -103,7 +103,7 @@ Scope {
                             }
                             Rectangle {
                                 anchors.fill: parent
-                                color: artHoverHandler.hovered ? ColorUtils.transparentize(Color.colors.surface, 0.5) : "transparent"
+                                color: artHoverHandler.hovered ? ColorUtils.transparentize(Colors.colors.surface, 0.5) : "transparent"
                                 radius: Variable.radius.normal
                                 Behavior on color {
                                     ColorAnimation {
@@ -124,7 +124,7 @@ Scope {
                                     anchors.centerIn: parent
                                     icon: "x"
                                     font.pixelSize: Variable.uiScale(48)
-                                    color: Color.colors.on_surface
+                                    color: Colors.colors.on_surface
                                     visible: artHoverHandler.hovered
                                 }
                             }
@@ -143,7 +143,7 @@ Scope {
 
                             font.family: Variable.font.family.main
                             font.weight: Font.Medium
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                             onTextChanged: {
                                 if (!afterOpen) {
                                     needUpdate = true;
@@ -160,7 +160,7 @@ Scope {
                             Layout.maximumWidth: Variable.uiScale(340)
 
                             font.weight: Font.Medium
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                         }
                         RowLayout {
                             spacing: Variable.margin.small
@@ -170,7 +170,7 @@ Scope {
                                 implicitHeight: Variable.size.larger
                                 visible: modelData.canPlay
                                 radius: Variable.radius.small
-                                color: playHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                                color: playHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                                 Behavior on color {
                                     ColorAnimation {
                                         duration: 200
@@ -180,7 +180,7 @@ Scope {
                                     id: playIcon
                                     anchors.centerIn: parent
                                     icon: modelData.isPlaying ? "pause" : "play"
-                                    color: playHoverHandler.hovered ? Color.colors.on_primary : Color.colors.primary
+                                    color: playHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.primary
                                 }
                                 TapHandler {
                                     onTapped: {
@@ -237,7 +237,7 @@ Scope {
                                     id: previousIcon
                                     anchors.centerIn: parent
                                     icon: "skip-back"
-                                    color: previousHoverHandler.hovered ? Color.colors.on_surface_variant : Color.colors.on_surface
+                                    color: previousHoverHandler.hovered ? Colors.colors.on_surface_variant : Colors.colors.on_surface
                                 }
                             }
                             Rectangle {
@@ -257,7 +257,7 @@ Scope {
                                     id: nextIcon
                                     anchors.centerIn: parent
                                     icon: "skip-forward"
-                                    color: nextHoverHandler.hovered ? Color.colors.on_surface_variant : Color.colors.on_surface
+                                    color: nextHoverHandler.hovered ? Colors.colors.on_surface_variant : Colors.colors.on_surface
                                 }
                                 HoverHandler {
                                     id: nextHoverHandler
@@ -296,7 +296,7 @@ Scope {
                         //
                         //         Rectangle {
                         //             id: activeProgress
-                        //             color: Color.colors.primary
+                        //             color: Colors.colors.primary
                         //             width: modelData.position / modelData.length * parent.width - 10
                         //             height: 8
                         //             radius: 4
@@ -305,7 +305,7 @@ Scope {
                         //
                         //         Rectangle {
                         //             id: inactiveProgress
-                        //             color: Color.colors.primary_container
+                        //             color: Colors.colors.primary_container
                         //             width: parent.width - activeProgress.width - 20
                         //             height: 4
                         //             radius: Variable.radius.normal
@@ -314,7 +314,7 @@ Scope {
                         //         }
                         //     }
                         //     handle: Rectangle {
-                        //         color: Color.colors.primary
+                        //         color: Colors.colors.primary
                         //         radius: 4
                         //         width: 4
                         //         height: 16

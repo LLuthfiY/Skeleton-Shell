@@ -47,7 +47,7 @@ Scope {
 
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
             radius: Config.options.windowManager.windowBorderRadius
             Rectangle {
                 anchors.fill: parent
@@ -61,13 +61,13 @@ Scope {
                         spacing: Variable.margin.normal
                         Rectangle {
                             id: providerButton
-                            // border.color: providerHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                            // border.color: providerHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                             // border.width: Variable.uiScale(0)
                             radius: Variable.radius.small
                             width: providerIcon.width + Variable.margin.normal
                             height: providerIcon.height + Variable.margin.normal
-                            // color: providerHoverHandler.hovered ? Color.colors.primary : "transparent"
-                            color: providerHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
+                            // color: providerHoverHandler.hovered ? Colors.colors.primary : "transparent"
+                            color: providerHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
                             HoverHandler {
                                 id: providerHoverHandler
                             }
@@ -84,7 +84,7 @@ Scope {
                             LucideIcon {
                                 id: providerIcon
                                 icon: root.provider.active ? "brain" : "circle-slash"
-                                // color: providerHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                // color: providerHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
                                 label: Config.options.services.ai.provider
                                 anchors.centerIn: parent
                                 Behavior on color {
@@ -107,7 +107,7 @@ Scope {
                                 background: Rectangle {
                                     id: backgroundMenu
                                     radius: Variable.radius.small
-                                    color: Color.colors.surface_container
+                                    color: Colors.colors.surface_container
                                 }
                                 Instantiator {
                                     model: root.providerList
@@ -121,7 +121,7 @@ Scope {
                                         background: Rectangle {
                                             radius: Variable.radius.small
                                             property bool isHovered: false
-                                            color: isHovered ? Color.colors.primary : Color.colors.surface_container
+                                            color: isHovered ? Colors.colors.primary : Colors.colors.surface_container
                                             Behavior on color {
                                                 ColorAnimation {
                                                     duration: 200
@@ -144,7 +144,7 @@ Scope {
                                             font.family: Variable.font.family.main
                                             font.weight: Font.Normal
                                             font.pixelSize: Variable.font.pixelSize.smaller
-                                            color: background.isHovered ? Color.colors.on_primary : Color.colors.on_surface
+                                            color: background.isHovered ? Colors.colors.on_primary : Colors.colors.on_surface
                                         }
                                         onTriggered: {
                                             Config.options.services.ai.provider = modelData;
@@ -158,13 +158,13 @@ Scope {
                         }
                         Rectangle {
                             id: modelButton
-                            // border.color: modelHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                            // border.color: modelHoverHandler.hovered ? Colors.colors.primary : Colors.colors.primary_container
                             // border.width: Variable.uiScale(0)
                             radius: Variable.radius.small
                             width: modelIcon.width + Variable.margin.normal
                             height: modelIcon.height + Variable.margin.normal
-                            color: modelHoverHandler.hovered ? Color.colors.surface_container : Color.colors.surface
-                            // color: modelHoverHandler.hovered ? Color.colors.primary : "transparent"
+                            color: modelHoverHandler.hovered ? Colors.colors.surface_container : Colors.colors.surface
+                            // color: modelHoverHandler.hovered ? Colors.colors.primary : "transparent"
                             HoverHandler {
                                 id: modelHoverHandler
                             }
@@ -187,8 +187,8 @@ Scope {
                             LucideIcon {
                                 id: modelIcon
                                 icon: "package"
-                                // color: modelHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
-                                color: Color.colors.on_surface
+                                // color: modelHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
+                                color: Colors.colors.on_surface
                                 label: Config.options.services.ai[Config.options.services.ai.provider].model
                                 anchors.centerIn: parent
                                 Behavior on color {
@@ -204,7 +204,7 @@ Scope {
                                 background: Rectangle {
                                     id: backgroundMenuModel
                                     radius: Variable.radius.small
-                                    color: Color.colors.surface_container
+                                    color: Colors.colors.surface_container
                                 }
                                 y: modelButton.height + Variable.margin.small
 
@@ -220,7 +220,7 @@ Scope {
                                         background: Rectangle {
                                             radius: Variable.radius.small
                                             property bool isHovered: false
-                                            color: isHovered ? Color.colors.primary : "transparent"
+                                            color: isHovered ? Colors.colors.primary : "transparent"
                                             Behavior on color {
                                                 ColorAnimation {
                                                     duration: 200
@@ -243,7 +243,7 @@ Scope {
                                             font.family: Variable.font.family.main
                                             font.weight: Font.Normal
                                             font.pixelSize: Variable.font.pixelSize.smaller
-                                            color: background.isHovered ? Color.colors.on_primary : Color.colors.on_surface
+                                            color: background.isHovered ? Colors.colors.on_primary : Colors.colors.on_surface
                                         }
                                         onTriggered: {
                                             Config.options.services.ai[Config.options.services.ai.provider].model = modelData;
@@ -279,7 +279,7 @@ Scope {
                             visible: listView.count < 2
                             LucideIcon {
                                 icon: "brain"
-                                color: Color.colors.on_surface_variant
+                                color: Colors.colors.on_surface_variant
                                 anchors.centerIn: parent
                                 font.pixelSize: Variable.uiScale(100)
                             }
@@ -291,10 +291,10 @@ Scope {
                     }
                     Rectangle {
                         property bool active: false
-                        // border.color: active ? Color.colors.primary : Color.colors.primary_container
+                        // border.color: active ? Colors.colors.primary : Colors.colors.primary_container
                         // border.width: Variable.uiScale(2)
                         radius: Variable.radius.small
-                        color: Color.colors.surface_container
+                        color: Colors.colors.surface_container
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: inputField.contentHeight + buttonLayout.height + Variable.margin.normal * 2
                         TextArea {
@@ -304,14 +304,14 @@ Scope {
                             font.family: Variable.font.family.main
                             font.weight: Font.Normal
                             font.pixelSize: Variable.font.pixelSize.normal
-                            color: Color.colors.on_surface
+                            color: Colors.colors.on_surface
                             placeholderText: "Ask me anything..."
                             placeholderTextColor: "#888888"
                             selectByMouse: true
                             wrapMode: TextEdit.Wrap
                             focus: true
                             background: Rectangle {
-                                color: Color.colors.surface_container
+                                color: Colors.colors.surface_container
                                 radius: Variable.radius.small
                             }
                             Keys.onReturnPressed: {
@@ -341,7 +341,7 @@ Scope {
                                 visible: false
                                 width: addItemIcon.width + Variable.margin.normal
                                 height: addItemIcon.height + Variable.margin.normal
-                                color: addItemHoverHandler.hovered ? Color.colors.primary : "transparent"
+                                color: addItemHoverHandler.hovered ? Colors.colors.primary : "transparent"
                                 radius: Variable.radius.small
 
                                 Behavior on color {
@@ -356,7 +356,7 @@ Scope {
                                 LucideIcon {
                                     id: addItemIcon
                                     icon: "plus"
-                                    color: addItemHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                    color: addItemHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
                                     anchors.centerIn: parent
                                     Behavior on color {
                                         ColorAnimation {
@@ -372,7 +372,7 @@ Scope {
                                 id: sendButton
                                 width: sendIcon.width + Variable.margin.normal
                                 height: sendIcon.height + Variable.margin.normal
-                                color: sendHoverHandler.hovered ? Color.colors.primary : "transparent"
+                                color: sendHoverHandler.hovered ? Colors.colors.primary : "transparent"
                                 radius: Variable.radius.small
                                 Behavior on color {
                                     ColorAnimation {
@@ -386,7 +386,7 @@ Scope {
                                 LucideIcon {
                                     id: sendIcon
                                     icon: provider.onTask ? "square" : "send"
-                                    color: sendHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
+                                    color: sendHoverHandler.hovered ? Colors.colors.on_primary : Colors.colors.on_surface
                                     anchors.centerIn: parent
                                     Behavior on color {
                                         ColorAnimation {

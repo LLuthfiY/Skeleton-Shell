@@ -32,7 +32,7 @@ Scope {
 
         Rectangle {
             anchors.fill: parent
-            color: Color.colors.surface
+            color: Colors.colors.surface
         }
 
         RowLayout {
@@ -43,7 +43,7 @@ Scope {
             Rectangle {
                 implicitWidth: Variable.uiScale(200)
                 Layout.fillHeight: true
-                color: Color.colors.surface
+                color: Colors.colors.surface
                 radius: Variable.radius.small
                 ScrollView {
                     clip: true
@@ -71,13 +71,13 @@ Scope {
                                 }
                             }
                             radius: Variable.radius.small
-                            color: reloadHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                            color: reloadHoverHandler.hovered ? Colors.colors.surface_container_high : Colors.colors.surface_container
                             LucideIcon {
                                 id: reloadIcon
                                 anchors.centerIn: parent
                                 icon: "rotate-ccw"
                                 label: "Reload"
-                                color: Color.colors.on_surface
+                                color: Colors.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.normal
                                 font.weight: Font.Bold
                                 font.family: Variable.font.family.main
@@ -127,7 +127,7 @@ Scope {
                 }
             }
             Rectangle {
-                color: Color.colors.surface_container_high
+                color: Colors.colors.surface_container_high
                 width: 1
                 Layout.fillHeight: true
             }

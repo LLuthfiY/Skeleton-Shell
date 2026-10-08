@@ -18,7 +18,7 @@ ColumnLayout {
     width: stackWrapper.width - 24
     LucideIcon {
         icon: "app-window"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.title
         font.weight: Font.Bold
         font.family: Variable.font.family.main
@@ -26,7 +26,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-dashboard"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -55,7 +55,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "paintbrush"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -84,7 +84,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "paintbrush"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -113,7 +113,7 @@ ColumnLayout {
     }
     LucideIcon {
         icon: "layout-panel-left"
-        color: Color.colors.on_surface
+        color: Colors.colors.on_surface
         font.pixelSize: Variable.font.pixelSize.small
         font.weight: Font.DemiBold
         font.family: Variable.font.family.main
@@ -126,7 +126,7 @@ ColumnLayout {
             text: "Workspaces"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -149,7 +149,7 @@ ColumnLayout {
             text: "Gaps Out"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -172,7 +172,7 @@ ColumnLayout {
             text: "Gaps In"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -195,7 +195,7 @@ ColumnLayout {
             text: "Active Opacity"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -218,7 +218,7 @@ ColumnLayout {
             text: "Inactive Opacity"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -241,7 +241,7 @@ ColumnLayout {
             text: "Window Border Size"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -264,7 +264,7 @@ ColumnLayout {
             text: "Window Border Radius"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
@@ -287,7 +287,7 @@ ColumnLayout {
             text: "Shadow"
             font.family: Variable.font.family.main
             font.weight: Font.Normal
-            color: Color.colors.on_surface
+            color: Colors.colors.on_surface
             font.pixelSize: Variable.font.pixelSize.smaller
         }
         Item {
