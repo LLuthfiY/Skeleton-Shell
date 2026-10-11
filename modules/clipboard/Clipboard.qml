@@ -50,6 +50,16 @@ Scope {
             }
         }
 
+        HyprlandFocusGrab {
+            active: true
+            windows: [launcherWindow]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.clipboardOpen = false;
+                }
+            }
+        }
+
         Rectangle {
             anchors.fill: parent
             color: Colors.colors.surface
