@@ -24,7 +24,7 @@ Scope {
         // screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
 
         WlrLayershell.namespace: "quickshell:launcher"
-        WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+        // WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
         // WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
@@ -46,11 +46,16 @@ Scope {
         anchors.left: Config.options.launcher.anchor.left
         anchors.right: Config.options.launcher.anchor.right
 
-        // HyprlandFocusGrab {
-        //     id: grab
-        //     active: true
-        //     windows: [launcherWindow]
-        // }
+        HyprlandFocusGrab {
+            id: grab
+            active: true
+            windows: [launcherWindow]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.launcherOpen = false;
+                }
+            }
+        }
         Component {
             id: launcherSearch
             RowLayout {

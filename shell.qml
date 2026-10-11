@@ -90,10 +90,10 @@ ShellRoot {
         component: Dashboard {}
     }
 
-    LazyLoader {
-        active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || (GlobalState.overviewOpen && Config.options.windowManager.layout !== "scrolling") || GlobalState.aiChatOpen || GlobalState.barMenuOpen) && Config.options.modules.popupCloser
-        component: PopupCloser {}
-    }
+    // LazyLoader {
+    //     active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || (GlobalState.overviewOpen && Config.options.windowManager.layout !== "scrolling") || GlobalState.aiChatOpen || GlobalState.barMenuOpen) && Config.options.modules.popupCloser
+    //     component: PopupCloser {}
+    // }
 
     LazyLoader {
         active: Config.ready && GlobalState.settingsOpen && Config.options.modules.settings

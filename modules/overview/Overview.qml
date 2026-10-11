@@ -36,6 +36,16 @@ Scope {
             top: 64
         }
 
+        HyprlandFocusGrab {
+            active: true
+            windows: [overviewWindow]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.overviewOpen = false;
+                }
+            }
+        }
+
         implicitWidth: overviewGrid.implicitWidth + 32
         implicitHeight: overviewGrid.implicitHeight + 32
         Rectangle {
@@ -232,6 +242,16 @@ Scope {
             anchors.fill: parent
             color: Colors.colors.surface
             radius: Variable.radius.normal
+        }
+
+        HyprlandFocusGrab {
+            active: true
+            windows: [overviewWindowScrolling]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.overviewOpen = false;
+                }
+            }
         }
         Rectangle {
             id: wrapper

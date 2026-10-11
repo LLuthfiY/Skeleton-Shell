@@ -35,6 +35,17 @@ Scope {
         anchors.left: Config.options.dashboard.position === "left"
         anchors.bottom: true
         color: "transparent"
+
+        HyprlandFocusGrab {
+            id: grab
+            active: true
+            windows: [dashboardWindow]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.dashboardOpen = false;
+                }
+            }
+        }
         Rectangle {
             anchors.fill: parent
             color: Colors.colors.surface

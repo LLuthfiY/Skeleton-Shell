@@ -45,6 +45,17 @@ Scope {
             right: windowMargin.right
         }
 
+        HyprlandFocusGrab {
+            id: grab
+            active: true
+            windows: [chatWindow]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.aiChatOpen = false;
+                }
+            }
+        }
+
         Rectangle {
             anchors.fill: parent
             color: Colors.colors.surface
