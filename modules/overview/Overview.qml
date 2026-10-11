@@ -176,12 +176,13 @@ Scope {
                     TapHandler {
                         acceptedButtons: Qt.RightButton
                         onTapped: {
-                            Hyprland.dispatch(`hl.dsp.close({ address = ${windowData?.address} })`);
+                            console.log(windowData?.address);
+                            Hyprland.dispatch(`hl.dsp.window.close({ window = 'address:${window.address}' })`);
                         }
                     }
                     TapHandler {
                         acceptedButtons: Qt.LeftButton
-                        onTapped: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${windowData?.workspace.id} })`)
+                        onTapped: Hyprland.dispatch(`hl.dsp.focus({ window = 'address:${window.address}' })`)
                     }
                     Drag.active: dragHandler.active
                     Drag.hotSpot.x: width / 2
@@ -193,7 +194,7 @@ Scope {
                         onActiveChanged: {
                             if (!active) {
                                 if (root.targetWorkspace !== -1 && root.targetWorkspace !== windowData?.workspace.id) {
-                                    Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${root.targetWorkspace}, address = ${window.address}, follow = false })`);
+                                    Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${root.targetWorkspace}, window = 'address:${window.address}', follow = false })`);
                                     updateWindowPosition.restart();
                                     HyprlandData.updateWindowList();
                                 } else {
@@ -317,13 +318,13 @@ Scope {
                         TapHandler {
                             acceptedButtons: Qt.RightButton
                             onTapped: {
-                                Hyprland.dispatch(`hl.dsp.close({ address = ${windowData?.address} })`);
+                                Hyprland.dispatch(`hl.dsp.window.close({ window = 'address:${window.address}' })`);
                             }
                         }
                         TapHandler {
                             acceptedButtons: Qt.LeftButton
                             // onTapped: Hyprland.dispatch(`workspace ${windowData?.workspace.id}`)
-                            onTapped: Hyprland.dispatch(`hl.dsp.focus({ address = ${windowData?.address} })`)
+                            onTapped: Hyprland.dispatch(`hl.dsp.focus({ window = 'address:${windowData?.address}' })`)
                         }
                         Drag.active: dragHandler.active
                         Drag.hotSpot.x: width / 2
@@ -335,7 +336,7 @@ Scope {
                             onActiveChanged: {
                                 if (!active) {
                                     if (root.targetWorkspace !== -1 && root.targetWorkspace !== windowData?.workspace.id) {
-                                        Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${root.targetWorkspace}, address = ${window.address}, follow = false })`);
+                                        Hyprland.dispatch(`hl.dsp.window.move({ workspace = ${root.targetWorkspace}, window = 'address:${window.address}', follow = false })`);
                                         updateWindowPositionScrolling.restart();
                                         HyprlandData.updateWindowList();
                                     } else {
