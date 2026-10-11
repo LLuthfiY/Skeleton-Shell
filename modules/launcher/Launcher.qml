@@ -151,7 +151,8 @@ Scope {
                     function execute() {
                         GlobalState.launcherOpen = false;
                         if (modelData.runInTerminal) {
-                            Quickshell.execDetached(["kitty", "-d", Directory.home.replace("file://"), "bash", "-c", modelData.execString]);
+                            // Quickshell.execDetached(["kitty", "-d", Directory.home.replace("file://"), "bash", "-c", modelData.execString]);
+                            Quickshell.execDetached(["ghostty", "--working-directory=" + Directory.home.replace("file://"), "-e", "bash", "-c", modelData.execString]);
                         } else {
                             modelData.execute();
                         }

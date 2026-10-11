@@ -112,6 +112,7 @@ Singleton {
             wallapaperPath = "";
             wallapaperPath = temp;
             Kitty.reload();
+            Ghostty.reload();
         }
     }
 }
