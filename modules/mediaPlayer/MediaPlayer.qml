@@ -16,7 +16,7 @@ import Qt5Compat.GraphicalEffects
 
 Scope {
     id: mediaPlayerRoot
-    property var players: Mpris.players.values
+    property var players: Mpris.players.values.filter(player => player.trackTitle !== "" || player.trackArtist !== "")
     PanelWindow {
         id: root
 
@@ -26,7 +26,7 @@ Scope {
         WlrLayershell.namespace: "quickshell:mediaPlayer"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
-        visible: Config.ready && Config.options.mediaPlayer.enable && Mpris.players.values.length > 0
+        visible: Config.ready && Config.options.mediaPlayer.enable && mediaPlayerRoot.players.length > 0
 
         property var windowMargin: Margin.windowMargin()
 

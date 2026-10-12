@@ -175,10 +175,10 @@ Scope {
                         anchors.centerIn: parent
                         padding: Variable.margin.normal
                         orientation: Qt.Vertical
-                        currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
+                        currentIndex: Mpris.players.values.filter(player => player.trackTitle !== "" || player.trackArtist !== "").reduce((a, b, i) => b.isPlaying ? i : a, 0)
                         Repeater {
                             model: ScriptModel {
-                                values: Mpris.players.values
+                                values: Mpris.players.values.filter(player => player.trackTitle !== "" || player.trackArtist !== "")
                             }
                             delegate: ColumnLayout {
                                 opacity: mediaPlayer.currentIndex == index ? 1 : 0
