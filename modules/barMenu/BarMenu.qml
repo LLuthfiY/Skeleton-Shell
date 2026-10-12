@@ -22,6 +22,12 @@ Scope {
     PanelWindow {
         id: barMenuWindow
         visible: GlobalState.barMenuOpen
+
+        onVisibleChanged: {
+            if (visible) {
+                focusGrab.active = true;
+            }
+        }
         property bool ready: init()
         // property string barPosition: Config.options.bar.position
         // property int barMargin: Config.options.bar.margin
@@ -54,6 +60,17 @@ Scope {
             anchors.fill: parent
             color: Colors.colors.surface
             radius: Config.options.bar.borderRadius
+        }
+
+        HyprlandFocusGrab {
+            id: focusGrab
+            active: true
+            windows: [barMenuWindow]
+            onActiveChanged: {
+                if (!active) {
+                    GlobalState.barMenuOpen = false;
+                }
+            }
         }
 
         ColumnLayout {
