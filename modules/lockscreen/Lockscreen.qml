@@ -327,6 +327,7 @@ Scope {
                                     }
                                 }
                                 WavySlider {
+                                    id: wavySlider
                                     from: 0
                                     to: modelData.length
                                     Layout.alignment: Qt.AlignHCenter

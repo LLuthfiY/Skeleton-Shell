@@ -66,15 +66,16 @@ Scope {
                             Layout.alignment: Qt.AlignTop
                             Layout.fillHeight: modelData.includes("--fill--")
                             property bool isFirst: index === 0
-                            Layout.preferredHeight: ("active" in item) ? item.active ? (implicitHeight || height) : 0 : (implicitHeight || height)
+                            // Layout.preferredHeight: ("active" in item) ? item.active ? (implicitHeight || height) : 0 : (implicitHeight || height)
+                            Layout.preferredHeight: height
                             Layout.topMargin: isFirst ? 0 : ("active" in item) ? item.active ? Variable.margin.normal : 0 : Variable.margin.normal
                             clip: true
                             property string folder: modelData.startsWith("user--") ? "widget/user/" : "widget/"
-                            Behavior on Layout.preferredHeight {
-                                NumberAnimation {
-                                    duration: 200
-                                }
-                            }
+                            // Behavior on Layout.preferredHeight {
+                            //     NumberAnimation {
+                            //         duration: 200
+                            //     }
+                            // }
                             Behavior on Layout.topMargin {
                                 NumberAnimation {
                                     duration: 200
