@@ -54,6 +54,12 @@ Scope {
                     }
                 }
 
+                TapHandler {
+                    onTapped: {
+                        password.focus = true;
+                    }
+                }
+
                 NumberAnimation on opacity {
                     id: fadeIn
                     from: 0.0
@@ -317,6 +323,32 @@ Scope {
                                                 modelData.next();
                                                 modelData.position = 0;
                                             }
+                                        }
+                                    }
+                                }
+                                WavySlider {
+                                    from: 0
+                                    to: modelData.length
+                                    Layout.alignment: Qt.AlignHCenter
+                                    stepSize: 1
+                                    onMoved: {
+                                        modelData.position = value;
+                                    }
+                                    Timer {
+                                        interval: 100
+                                        running: modelData.isPlaying
+                                        repeat: true
+                                        triggeredOnStart: true
+                                        onTriggered: {
+                                            modelData.positionChanged();
+                                            wavySlider.value = modelData.position;
+                                            // if (wavySlider.to != modelData.length) {
+                                            //     wavySlider.to = modelData.length;
+                                            // }
+                                            // if (needUpdate) {
+                                            //     needUpdate = false;
+                                            //     // modelData.position = 0;
+                                            // }
                                         }
                                     }
                                 }

@@ -21,8 +21,8 @@ Scope {
         id: root
 
         color: "transparent"
-        implicitWidth: Variable.uiScale(476)
-        implicitHeight: Variable.uiScale(112)
+        implicitWidth: Variable.uiScale(506)
+        implicitHeight: Variable.uiScale(162)
         WlrLayershell.namespace: "quickshell:mediaPlayer"
         WlrLayershell.layer: WlrLayer.Overlay
         exclusiveZone: 0
@@ -65,13 +65,13 @@ Scope {
             id: controls
             anchors.centerIn: parent
             // currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
-            currentIndex: Mpris.players.values.reduce((a, b, i) => b.isPlaying ? i : a, 0)
+            currentIndex: mediaPlayerRoot.players.reduce((a, b, i) => b.isPlaying ? i : a, 0)
             // currentIndex: 0
             Repeater {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 model: ScriptModel {
-                    values: Mpris.players.values
+                    values: mediaPlayerRoot.players
                 }
                 delegate: RowLayout {
                     opacity: controls.currentIndex == index ? 1 : 0.2
@@ -270,6 +270,35 @@ Scope {
                                 }
                             }
                         }
+                        WavySlider {
+                            id: wavySlider
+                            visible: true
+                            from: 0
+                            to: modelData.length
+                            Layout.fillWidth: true
+                            stepSize: 1
+                            onMoved: {
+                                modelData.position = value;
+                            }
+                            Timer {
+                                interval: 100
+                                running: modelData.isPlaying
+                                repeat: true
+                                triggeredOnStart: true
+                                onTriggered: {
+                                    modelData.positionChanged();
+                                    wavySlider.value = modelData.position;
+                                    // if (wavySlider.to != modelData.length) {
+                                    //     wavySlider.to = modelData.length;
+                                    // }
+                                    // if (needUpdate) {
+                                    //     needUpdate = false;
+                                    //     // modelData.position = 0;
+                                    // }
+                                }
+                            }
+                        }
+
                         // Slider {
                         //     id: slider
                         //     visible: modelData.canSeek
