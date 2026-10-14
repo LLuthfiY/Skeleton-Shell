@@ -44,7 +44,7 @@ Slider {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
             height: slider.waveLineWidth
-            width: parent.width - slider.handleSize / 1.5 - (slider.value / slider.to) * parent.width
+            width: Math.max(0, parent.width - slider.handleSize / 1.5 - (slider.value / slider.to) * parent.width)
             color: slider.trackColor
             radius: 99
         }
@@ -52,18 +52,18 @@ Slider {
         Rectangle {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            width: slider.visualPosition * parent.width - slider.handleSize / 1.2
+            // Guard against negative widths during initialization or boundary states
+            width: Math.max(1, slider.visualPosition * parent.width - slider.handleSize / 1.2)
             height: slider.trackHeight
             radius: slider.trackRadius
             color: "transparent"
-            // Removed clip: true so rounded caps are not hard-clipped at the edge
 
             Canvas {
                 id: wave
-                // Expand canvas slightly to give lineCap room to render rounded edges
                 x: -slider.waveLineWidth
                 y: 0
-                width: parent.width + slider.waveLineWidth * 2
+                // Ensure width is always positive to prevent single-line collapse
+                width: Math.max(1, parent.width + slider.waveLineWidth * 2)
                 height: parent.height
 
                 property real phase: 0
@@ -76,7 +76,7 @@ Slider {
                     const ctx = getContext("2d");
                     ctx.clearRect(0, 0, width, height);
 
-                    if (width <= 0)
+                    if (width <= slider.waveLineWidth * 2)
                         return;
 
                     const mid = height / 2;
@@ -84,7 +84,6 @@ Slider {
                     const period = Math.max(10, slider.waveLength);
                     const k = 2 * Math.PI / period;
 
-                    // Offset drawing start to match canvas translation offset
                     const startX = slider.waveLineWidth;
                     const drawWidth = width - slider.waveLineWidth * 2;
 
