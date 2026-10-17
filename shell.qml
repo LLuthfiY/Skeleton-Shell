@@ -13,7 +13,7 @@ import qs.modules.common.widgets
 import qs.modules.osd
 import qs.modules.overview
 import qs.modules.mediaPlayer
-import qs.modules.popupCloser
+// import qs.modules.popupCloser
 import qs.modules.dashboard
 import qs.modules.setting
 import qs.modules.launcher
