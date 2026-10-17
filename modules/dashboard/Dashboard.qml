@@ -19,7 +19,8 @@ Scope {
         // screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
         WlrLayershell.namespace: "quickshell:dashboard"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-        WlrLayershell.layer: WlrLayer.Overlay
+        // WlrLayershell.layer: WlrLayer.Overlay
+        aboveWindows: true
         // exclusiveZone: 0
         exclusionMode: ExclusionMode.Normal
         implicitWidth: Variable.size.dashboardWidth

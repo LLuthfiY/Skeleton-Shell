@@ -27,7 +27,8 @@ Scope {
         visible: Config.options.windowManager.layout !== "scrolling"
 
         WlrLayershell.namespace: "quickshell:overview"
-        WlrLayershell.layer: WlrLayer.Overlay
+        // WlrLayershell.layer: WlrLayer.Overlay
+        aboveWindows: true
         color: "transparent"
         exclusionMode: ExclusionMode.Ignore
 

@@ -21,7 +21,8 @@ Scope {
         WlrLayershell.namespace: "quickshell:launcher"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
         // WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-        WlrLayershell.layer: WlrLayer.Overlay
+        // WlrLayershell.layer: WlrLayer.Overlay
+        aboveWindows: true
         exclusiveZone: 0
 
         implicitWidth: Variable.uiScale(800)
