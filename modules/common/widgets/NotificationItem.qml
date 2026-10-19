@@ -173,7 +173,7 @@ Item {
                 actionsFlow.forceLayout();
             }
             Repeater {
-                model: notificationObject.actions
+                model: notificationObject.actions.filter(action => action.text !== "")
                 delegate: Rectangle {
                     width: buttonText.implicitWidth + (Variable.uiScale(16))
                     height: buttonText.implicitHeight + (Variable.uiScale(8))

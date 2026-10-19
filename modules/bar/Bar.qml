@@ -45,12 +45,6 @@ Scope {
                 property bool is_attached: mg == 0 && !fw
                 property var hyprlandData: HyprlandData
 
-                Component.onCompleted: {
-                    for (let i in Color) {
-                        console.log(i, Color[i]);
-                    }
-                }
-
                 WlrLayershell.namespace: "quickshell:bar"
 
                 anchors {

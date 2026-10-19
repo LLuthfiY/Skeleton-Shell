@@ -68,7 +68,7 @@ Singleton {
             if (root.keepNotificationWithAction) {
                 let index = root.list.findIndex(notif => notif.notificationId === notificationId);
                 if (root.list[index] != null) {
-                    if (root.list[index].actions.length > 0) {
+                    if (root.list[index].actions.filter(action => action.text !== "").length > 0) {
                         return;
                     }
                 }
