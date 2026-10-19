@@ -148,6 +148,9 @@ Singleton {
                     property bool fasterTouchpadScroll: false
                 }
             }
+            property JsonObject font: JsonObject {
+                property string family: "Nato Sans"
+            }
             property JsonObject services: JsonObject {
                 property JsonObject geoLocation: JsonObject {
                     property string latitude: "-6.5944"

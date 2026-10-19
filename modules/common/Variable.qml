@@ -47,7 +47,7 @@ Singleton {
     }
     font: QtObject {
         property QtObject family: QtObject {
-            property string main: "Noto Sans"
+            property string main: Config.options.font.family
             property string iconLucide: lucide.font.family
         }
         property QtObject pixelSize: QtObject {
